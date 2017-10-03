@@ -7,20 +7,27 @@
 #include <inttypes.h>
 #include "task.h"
 
-static TASK_CALLBACK_T _task_callback;         // Task callback function pointer
-static volatile uint8_t _task_trigger_count;
+static volatile task_s * _tasks[MAX_TASKS];
+static volatile uint8_t _task_count;
 
-static uint8_t  _task_get_ticks_per_trigger(void);
+static volatile uint16_t _task_trigger_count;
+static volatile uint16_t _task_trigger_last_count;
+
+static volatile uint8_t _timer_value;
+static volatile uint8_t _timer_clock_source;
+
 static void     _task_enable_trigger_isr(void);
 static void     _task_disable_trigger_isr(void);
 static bool     _task_is_trigger_isr_enabled(void);
 
-uint8_t task_triggered(void)
+uint8_t _tasks_calculate_counter(uint8_t * ocr2_val, uint8_t * timer2_clock_sel, double time_interval_sec);
+
+uint8_t tasks_triggered(void)
 {
     return _task_trigger_count;
 }
 
-void task_init(void)
+void tasks_init(double time_interval_sec)
 {
 	// Timer 2 Setup
 	/*
@@ -29,15 +36,20 @@ void task_init(void)
 	 * OCR: 0x8F (100Hz INT rate desired OCR2 = f_clk/(prescale*f_desired) - 1)
 	 */
 	TCCR2 = _BV(FOC2) | _BV(WGM21)  | _BV(COM21) | _BV(COM20);
-	OCR2 = 0x8F;
 
-    task_disable();
-    _task_callback = NULL;
+    tasks_disable();
+
+    _tasks_calculate_counter(&_timer_value, &_timer_clock_source, time_interval_sec);
+
+    _task_count = 0;
+    for(uint8_t i = 0; i < MAX_TASKS; i++)
+    	_tasks[i] = NULL;
 }
 
-void task_enable(void)
+void tasks_enable(void)
 {
     _task_trigger_count = 0;
+    _task_trigger_last_count = 0;
 
     TCNT2 = 0;                      // reset counter
     _task_enable_trigger_isr();     // enable output compare interrupt
@@ -47,17 +59,12 @@ void task_enable(void)
     TCCR2 |= _BV(CS22) | _BV(CS21) | _BV(CS20);               // Start timer (connect clock source)
 }
 
-void task_disable(void)
+void tasks_disable(void)
 {
     _task_disable_trigger_isr();    // disable output compare interrupt
     TCCR2 &= ~(_BV(CS22) | _BV(CS21) | _BV(CS20));  // Stop timer (disconnect clock source)
 
     _task_trigger_count = 0;
-}
-
-uint8_t _task_get_ticks_per_trigger(void)
-{
-    return OCR2;
 }
 
 void _task_enable_trigger_isr(void)
@@ -75,62 +82,94 @@ bool _task_is_trigger_isr_enabled(void)
     return bit_is_set(TIMSK, OCIE2);
 }
 
-bool task_is_enabled(void)
+bool tasks_is_enabled(void)
 {
     return _task_is_trigger_isr_enabled();
 }
 
-void task_set(TASK_CALLBACK_T func)
+uint8_t tasks_add(task_s * task)
 {
-    _task_callback = func;
-}
-
-TASK_CALLBACK_T task_get(void)
-{
-    return _task_callback;
-}
-
-uint16_t task_get_ticks(void)
-{
-    uint8_t ticks_per_trigger = _task_get_ticks_per_trigger();
-    uint8_t trigger_count, ticks_since_last_trigger;
-
-    // Synchronise read of trigger count and timer count if trigger isr enabled
-    bool trigger_was_enabled    = _task_is_trigger_isr_enabled();
-    if (trigger_was_enabled) _task_disable_trigger_isr();
-    trigger_count               = _task_trigger_count;
-    ticks_since_last_trigger    = TCNT2;
-    if (trigger_was_enabled) _task_enable_trigger_isr();
-
-    return (ticks_per_trigger*trigger_count + ticks_since_last_trigger);
-}
-
-void task_run(void)
-{
-    if (_task_callback)
+    if (_task_count + 1 < MAX_TASKS)
     {
-        _task_trigger_count = 0;
-        uint16_t tardiness = task_get_ticks(); // It's a real word (http://www.dictionary.com/browse/tardiness)
-        _task_callback();
-        uint16_t total = task_get_ticks();
-        
-        if (_task_trigger_count) // Check if the trigger occurred during the task
-        {
-            // If we get here, the task took longer than the timer period
-            task_disable();
-            uint16_t duration = total - tardiness;
-            uint8_t ticks_per_trigger = _task_get_ticks_per_trigger();
-            printf_P(PSTR("*** Task incomplete before next trigger! [tar/dur/max: %" PRIu16 "/%" PRIu16 "/%" PRIu8 "] ***\n"), tardiness, duration, ticks_per_trigger);
-        }
+    	_tasks[_task_count++] = task;
+    	return _task_count;
     }
     else
     {
-        task_disable();
-        printf_P(PSTR("*** Task called with NULL callback! ***\n"));
+    	return MAX_TASKS;
     }
 }
 
-void task_trigger_isr(void)
+task_s* tasks_get_at(uint8_t index)
+{
+    return (index < MAX_TASKS && index < _task_count) ? _tasks[index] : NULL;
+}
+
+uint8_t tasks_remove_at(uint8_t index)
+{
+	if (index < _task_count)
+	{
+		for(int i = index + 1; i < MAX_TASKS; i++)
+		{
+			_tasks[i-1] = _tasks[i];
+		}
+		_tasks[_task_count--] = NULL;
+		return 0;
+	}
+	else
+		return -1;
+}
+
+void tasks_run(void)
+{
+    if (_task_count > 0)
+    {
+    	if (_task_trigger_count > _task_trigger_last_count)
+    	{
+    		for(uint8_t i = 0; i < _task_count; i++)
+    		{
+    			if (_task_trigger_count % _tasks[i]->frequency == 0)
+    				_tasks[i]->callback();
+    		}
+
+    		/* TODO: Check timer interval length
+			if (_tasks_) // Check if the trigger occurred during the task
+			{
+				// If we get here, the task took longer than the timer period
+				tasks_disable();
+				uint8_t ticks_per_trigger = _task_get_ticks_per_trigger();
+				printf_P(PSTR("*** Task incomplete before next trigger! [tar/dur/max: %" PRIu16 "/%" PRIu16 "/%" PRIu8 "] ***\n"), tardiness, duration, ticks_per_trigger);
+			}*/
+
+    		if (_task_trigger_count > 50000)
+    			_task_trigger_count = _task_trigger_last_count = 0;
+    		else
+    			_task_trigger_last_count = _task_trigger_count;
+    	}
+    }
+}
+
+void tasks_trigger_isr(void)
 {
     ++_task_trigger_count;
+}
+
+uint8_t _tasks_calculate_counter(uint8_t * ocr2_val, uint8_t * timer2_clock_sel, double time_interval_sec)
+{
+	const uint16_t prescaler_values[] = {1, 8, 64, 256, 1024};
+	const uint8_t clock_select_values[] = {(_BV(CS10)), (_BV(CS11)), (_BV(CS10) | _BV(CS11)), (_BV(CS12)), (_BV(CS10) | _BV(CS12))};
+
+	for (uint8_t i = 0; i < 5; i++)
+	{
+		uint16_t tmp_val;
+		tmp_val = F_CPU/(prescaler_values[i]/time_interval_sec - 1);
+		if (tmp_val < 255)
+		{
+			*ocr2_val = tmp_val & 0x00FF;
+			*timer2_clock_sel = clock_select_values[i];
+			return 0;
+		}
+	}
+	return -1;
+
 }

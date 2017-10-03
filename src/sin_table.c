@@ -13,6 +13,10 @@
 
 static uint32_t _n_samples;
 static float _time, _amplitude, _frequency;
+static uint8_t sin_table_task_id;
+static task_s sin_table_task = {
+		10, &sin_table_task_callback
+};
 
 CMD_STATUS sin_table_cmd(int argc, const char *argv[])
 {
@@ -28,17 +32,21 @@ CMD_STATUS sin_table_cmd(int argc, const char *argv[])
 
     printf_P(PSTR("Time [sec],Value\n"));
 
-    task_set(sin_table_task);
-    task_enable();
+    sin_table_task_id = tasks_add(&sin_table_task);
     return CMD_OK;
 }
 
-void sin_table_task(void)
+void sin_table_task_callback(void)
 {
     float y = _amplitude*sin(2*M_PI*_frequency*_time);
     printf_P(PSTR("%.2f,%g\n"), _time, y);
     _time += 0.01f;
     --_n_samples;
 
-    if (_n_samples == 0) task_disable();
+    if (_n_samples == 0) tasks_remove_at(sin_table_task_id);
+}
+
+task_s * sin_table_get_task(void)
+{
+	return &sin_table_task;
 }

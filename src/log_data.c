@@ -53,7 +53,7 @@ CMD_STATUS log_cmd(int argc, const char *argv[])
     }
 
     task_set(log_task);
-    task_enable();
+    tasks_enable();
     return CMD_OK;
 }
 
@@ -74,5 +74,5 @@ void log_task(void)
     _time += 0.01f;
     --_n_samples;
 
-    if (_n_samples == 0) task_disable();
+    if (_n_samples == 0) tasks_disable();
 }

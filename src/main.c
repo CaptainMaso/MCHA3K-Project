@@ -14,7 +14,7 @@ int main(void)
 {
     // Initialise modules
     uart_init();
-    task_init();
+    tasks_init();
     
     // Enable global interrupts
     sei();      
@@ -28,9 +28,9 @@ int main(void)
 
     for(;/*ever*/;)
     {
-        if (task_triggered())
+        if (tasks_triggered())
         {
-            task_run();
+            tasks_run();
         }
         else
         {
