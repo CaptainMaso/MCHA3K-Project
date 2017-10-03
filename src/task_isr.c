@@ -3,5 +3,5 @@
 
 ISR(TIMER2_COMP_vect)
 {
-    task_trigger_isr();
+    tasks_trigger_isr();
 }

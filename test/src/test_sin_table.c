@@ -8,12 +8,12 @@ TEST_GROUP(SinTable);
 
 TEST_SETUP(SinTable)
 {
-    task_init();
+    tasks_init(0.001);
 }
 
 TEST_TEAR_DOWN(SinTable)
 {
-    task_init(); // Undo side effects of sin_table
+    tasks_init(0.001); // Undo side effects of sin_table
 }
 
 TEST(SinTable, TaskEnabled)
@@ -28,11 +28,11 @@ TEST(SinTable, TaskEnabled)
     iospy_pop_out_str(out, sizeof(out));
     iospy_unhook_out();
 
-    TEST_ASSERT_EQUAL_PTR(sin_table_task, task_get());
-    TEST_ASSERT_TRUE(task_is_enabled());
+    TEST_ASSERT_EQUAL_PTR(sin_table_get_task(), task_get_at(0));
+    TEST_ASSERT_TRUE(tasks_is_enabled());
 }
 
-TEST(SinTable, TaskDisabled)
+TEST(SinTable, TaskRemovedOnFinish)
 {
     char out[80];
 
@@ -41,11 +41,11 @@ TEST(SinTable, TaskDisabled)
 
     iospy_hook_out();
     sin_table_cmd(argc, argv);
-    sin_table_task();
+    sin_table_task_callback();
     iospy_pop_out_str(out, sizeof(out));
     iospy_unhook_out();
 
-    TEST_ASSERT_FALSE(task_is_enabled());
+    TEST_ASSERT_NULL(tasks_get_at(0));
 }
 
 TEST(SinTable, Header)
@@ -73,7 +73,7 @@ TEST(SinTable, DataFormat)
     iospy_hook();
     sin_table_cmd(argc, argv);
     iospy_pop_out_str(out, sizeof(out)); // Ignore header
-    sin_table_task();
+    sin_table_task_callback();
     iospy_pop_out_str(out, sizeof(out));
     iospy_unhook();
 
@@ -107,7 +107,7 @@ TEST(SinTable, Example)
     iospy_pop_out_str(&out[0][0], 80); // Ignore header
     for (size_t i = 0; i < N_DATA; ++i)
     {
-        sin_table_task();
+        sin_table_task_callback();
         iospy_pop_out_str(&out[i][0], 80);
     }
     iospy_unhook();
@@ -132,7 +132,7 @@ TEST(SinTable, Example)
 TEST_GROUP_RUNNER(SinTable)
 {
     RUN_TEST_CASE(SinTable, TaskEnabled);
-    RUN_TEST_CASE(SinTable, TaskDisabled);
+    RUN_TEST_CASE(SinTable, TaskRemovedOnFinish);
     RUN_TEST_CASE(SinTable, Header);
     RUN_TEST_CASE(SinTable, DataFormat);
     RUN_TEST_CASE(SinTable, Example);

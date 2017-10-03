@@ -4,20 +4,27 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-typedef void (*TASK_CALLBACK_T)(void);
+#define MAX_TASKS 10
 
-void            task_init(void);
+typedef struct _task_s
+{
+	uint8_t frequency;
+	void (*callback)(void);
+} task_s;
 
-void            task_set(TASK_CALLBACK_T);
-TASK_CALLBACK_T task_get(void);
-void            task_run(void);
+void            tasks_init(double);
 
-uint8_t         task_triggered(void);
+uint8_t         tasks_add(task_s*);
+task_s*		 	tasks_get_at(uint8_t);
+uint8_t		 	tasks_remove_at(uint8_t);
+void            tasks_run(void);
 
-void            task_enable(void);
-void            task_disable(void);
-bool            task_is_enabled(void);
+uint8_t         tasks_triggered(void);
 
-void            task_trigger_isr(void);
+void            tasks_enable(void);
+void            tasks_disable(void);
+bool            tasks_is_enabled(void);
+
+void            tasks_trigger_isr(void);
 
 #endif

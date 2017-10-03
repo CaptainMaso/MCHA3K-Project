@@ -7,7 +7,7 @@ TEST_GROUP(Task);
 
 TEST_SETUP(Task)
 {
-    task_init();
+    tasks_init(0.001);
 }
 
 TEST_TEAR_DOWN(Task)
@@ -16,26 +16,26 @@ TEST_TEAR_DOWN(Task)
 
 TEST(Task, InitNullCallback)
 {
-    TEST_ASSERT_NULL(task_get());
+    TEST_ASSERT_NULL(task_get_at(0));
 }
 
 TEST(Task, InitDisabled)
 {
-    TEST_ASSERT_FALSE(task_is_enabled());
+    TEST_ASSERT_FALSE(tasks_is_enabled());
 }
 
 TEST(Task, Enable)
 {
-    task_disable();
-    task_enable();
-    TEST_ASSERT_TRUE(task_is_enabled());
+    tasks_disable();
+    tasks_enable();
+    TEST_ASSERT_TRUE(tasks_is_enabled());
 }
 
 TEST(Task, Disable)
 {
-    task_enable();
-    task_disable();
-    TEST_ASSERT_FALSE(task_is_enabled());
+    tasks_enable();
+    tasks_disable();
+    TEST_ASSERT_FALSE(tasks_is_enabled());
 }
 
 static void _dummy(void) { }
@@ -53,25 +53,25 @@ TEST(Task, RunCallback)
 {
     _call_count = 0;
     task_set(_stub);
-    task_run();
+    tasks_run();
     TEST_ASSERT_EQUAL_UINT32_MESSAGE(1, _call_count, "Expected event callback to be called once.");
 }
 
 TEST(Task, TriggerIncr)
 {
-    task_trigger_isr();
-    TEST_ASSERT_EQUAL_UINT8(1, task_triggered());
-    task_trigger_isr();
-    TEST_ASSERT_EQUAL_UINT8(2, task_triggered());
+    tasks_trigger_isr();
+    TEST_ASSERT_EQUAL_UINT8(1, tasks_triggered());
+    tasks_trigger_isr();
+    TEST_ASSERT_EQUAL_UINT8(2, tasks_triggered());
 }
 
 TEST(Task, RunClearsTrigger)
 {
     task_set(_stub);
-    task_trigger_isr();
-    TEST_ASSERT_EQUAL_UINT8(1, task_triggered());
-    task_run();
-    TEST_ASSERT_EQUAL_UINT8(0, task_triggered());
+    tasks_trigger_isr();
+    TEST_ASSERT_EQUAL_UINT8(1, tasks_triggered());
+    tasks_run();
+    TEST_ASSERT_EQUAL_UINT8(0, tasks_triggered());
 }
 
 #include "iospy.h"
@@ -79,22 +79,22 @@ TEST(Task, RunClearsTrigger)
 TEST(Task, RunNull)
 {
     task_set(NULL);
-    task_enable();
+    tasks_enable();
     iospy_hook_out();
-    task_run();
+    tasks_run();
     iospy_unhook_out();
-    TEST_ASSERT_FALSE(task_is_enabled());
+    TEST_ASSERT_FALSE(tasks_is_enabled());
 }
 
-static void _stub2(void) { task_trigger_isr(); }
+static void _stub2(void) { tasks_trigger_isr(); }
 
 TEST(Task, DisableAfterTimeout)
 {
     task_set(_stub2);
     iospy_hook_out();
-    task_run();
+    tasks_run();
     iospy_unhook_out();
-    TEST_ASSERT_FALSE(task_is_enabled());
+    TEST_ASSERT_FALSE(tasks_is_enabled());
 }
 
 TEST_GROUP_RUNNER(Task)
