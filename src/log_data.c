@@ -61,11 +61,6 @@ CMD_STATUS log_cmd(int argc, const char *argv[])
 			return CMD_REPORTEDERR;
 		}
 
-<<<<<<< HEAD
-    task_set(log_task);
-    tasks_enable();
-    return CMD_OK;
-=======
 		_log_task_id = tasks_add(&_log_task);
 		if (_log_task_id != 255)
 		{
@@ -82,7 +77,6 @@ CMD_STATUS log_cmd(int argc, const char *argv[])
 		printf("log: already running\n");
 		return CMD_REPORTEDERR;
 	}
->>>>>>> TaskScheduler
 }
 
 void log_task_function(void)
@@ -102,12 +96,8 @@ void log_task_function(void)
     _time += 0.01f;
     --_n_samples;
 
-<<<<<<< HEAD
-    if (_n_samples == 0) tasks_disable();
-=======
     if (_n_samples == 0){
     	tasks_remove_at(_log_task_id);
     	_log_task_id = 255;
     }
->>>>>>> TaskScheduler
 }

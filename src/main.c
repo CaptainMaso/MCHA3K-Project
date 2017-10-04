@@ -22,11 +22,7 @@ int main(void)
 {
     // Initialise modules
     uart_init();
-<<<<<<< HEAD
-    tasks_init();
-=======
     tasks_init(0.001);
->>>>>>> TaskScheduler
     
     // Enable global interrupts
 	sei();
@@ -45,15 +41,9 @@ int main(void)
 
     for(;/*ever*/;)
     {
-<<<<<<< HEAD
-        if (tasks_triggered())
-        {
-            tasks_run();
-=======
         if (tasks_ready())
         {
         	tasks_run();
->>>>>>> TaskScheduler
         }
         else
         {

@@ -46,11 +46,7 @@ TEST(Task, FrequencyCheck10ms)
 
 TEST(Task, InitNullCallback)
 {
-<<<<<<< HEAD
-    TEST_ASSERT_NULL(task_get_at(0));
-=======
     TEST_ASSERT_NULL(tasks_get_at(0));
->>>>>>> TaskScheduler
 }
 
 TEST(Task, InitDisabled)
@@ -63,10 +59,7 @@ TEST(Task, Enable)
     tasks_disable();
     tasks_enable();
     TEST_ASSERT_TRUE(tasks_is_enabled());
-<<<<<<< HEAD
-=======
     TEST_ASSERT_BITS(0b00000111, 0b00000100, mock_tccr2);
->>>>>>> TaskScheduler
 }
 
 TEST(Task, Disable)
@@ -74,10 +67,7 @@ TEST(Task, Disable)
     tasks_enable();
     tasks_disable();
     TEST_ASSERT_FALSE(tasks_is_enabled());
-<<<<<<< HEAD
-=======
     TEST_ASSERT_BITS_LOW(0b00000111, mock_tccr2);
->>>>>>> TaskScheduler
 }
 
 static void _dummy(void) { }
@@ -103,12 +93,8 @@ static task_s _stub_task = { 1, &_stub };
 TEST(Task, RunCallback)
 {
     _call_count = 0;
-<<<<<<< HEAD
-    task_set(_stub);
-=======
     tasks_add(&_stub_task);
     tasks_trigger_isr();
->>>>>>> TaskScheduler
     tasks_run();
     TEST_ASSERT_EQUAL_UINT32_MESSAGE(1, _call_count, "Expected event callback to be called once.");
 }
@@ -119,42 +105,13 @@ TEST(Task, TriggerIncr)
     TEST_ASSERT_EQUAL_UINT8(1, tasks_triggered());
     tasks_trigger_isr();
     TEST_ASSERT_EQUAL_UINT8(2, tasks_triggered());
-<<<<<<< HEAD
-}
-
-TEST(Task, RunClearsTrigger)
-{
-    task_set(_stub);
-    tasks_trigger_isr();
-    TEST_ASSERT_EQUAL_UINT8(1, tasks_triggered());
-    tasks_run();
-    TEST_ASSERT_EQUAL_UINT8(0, tasks_triggered());
-=======
->>>>>>> TaskScheduler
 }
 
 #include "iospy.h"
 
 TEST(Task, RunNull)
 {
-<<<<<<< HEAD
-    task_set(NULL);
-    tasks_enable();
-    iospy_hook_out();
-    tasks_run();
-    iospy_unhook_out();
-    TEST_ASSERT_FALSE(tasks_is_enabled());
-}
-
-static void _stub2(void) { tasks_trigger_isr(); }
-
-TEST(Task, DisableAfterTimeout)
-{
-    task_set(_stub2);
-=======
     tasks_add(NULL);
-
->>>>>>> TaskScheduler
     iospy_hook_out();
     tasks_run();
     iospy_unhook_out();
@@ -173,8 +130,4 @@ TEST_GROUP_RUNNER(Task)
     RUN_TEST_CASE(Task, RunCallback);
     RUN_TEST_CASE(Task, TriggerIncr);
     RUN_TEST_CASE(Task, RunNull);
-<<<<<<< HEAD
-    RUN_TEST_CASE(Task, DisableAfterTimeout);
-=======
->>>>>>> TaskScheduler
 }
