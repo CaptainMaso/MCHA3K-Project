@@ -25,6 +25,14 @@ static CMD_STATUS get_cmd(int argc, const char* argv[]);
 static CMD_STATUS mulxy_cmd(int argc, const char* argv[]);
 static CMD_STATUS ctrl_cmd(int argc, const char* argv[]);
 
+static CMD_STATUS timercount_cmd(int argc, const char* argv[])
+{
+	UNUSED(argc);
+	UNUSED(argv);
+	printf_P(PSTR("triggered: %"PRIu16), tasks_triggered());
+	return CMD_OK;
+}
+
 static float _x = 0.0f;
 static float _y = 0.0f;
 
@@ -43,6 +51,7 @@ static const command_s command_list[] =
 		{"ctrl", &ctrl_cmd, "ctrl TODO"},
 		{"sin", &sin_table_cmd, "sin <samples> <amplitude> <frequency>"},
 		{"log", &log_cmd, "log [pot|enc] <samples>"},
+		{"timercount", &timercount_cmd, "log [pot|enc] <samples>"}
 };
 
 #ifdef NO_LD_WRAP

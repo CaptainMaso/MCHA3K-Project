@@ -7,43 +7,56 @@
 #include <inttypes.h>
 #include "task.h"
 
-static volatile task_s * _tasks[MAX_TASKS];
+static task_s * _tasks[MAX_TASKS];
 static volatile uint8_t _task_count;
 
-static volatile uint16_t _task_trigger_count;
-static volatile uint16_t _task_trigger_last_count;
+static uint16_t _task_trigger_count;
+static uint16_t _task_trigger_last_count;
 
-static volatile uint8_t _timer_value;
-static volatile uint8_t _timer_clock_source;
+uint8_t _timer_value;
+uint8_t _timer_clock_source;
 
 static void     _task_enable_trigger_isr(void);
 static void     _task_disable_trigger_isr(void);
 static bool     _task_is_trigger_isr_enabled(void);
-
-uint8_t _tasks_calculate_counter(uint8_t * ocr2_val, uint8_t * timer2_clock_sel, double time_interval_sec);
 
 uint8_t tasks_triggered(void)
 {
     return _task_trigger_count;
 }
 
+bool tasks_ready(void)
+{
+	if (_task_trigger_count > _task_trigger_last_count)
+	{
+		return true;
+	}
+	return false;
+}
+
 void tasks_init(double time_interval_sec)
 {
 	// Timer 2 Setup
 	/*
-	 * WGM:	Waveform Gen Mode: CTC
+	 * WGM:		Waveform Gen Mode: CTC
 	 * COM2: 	Set OC2 on match
-	 * OCR: 0x8F (100Hz INT rate desired OCR2 = f_clk/(prescale*f_desired) - 1)
+	 * OCR: 	(INT rate desired OCR2 = f_clk/(prescale*f_desired) - 1)
 	 */
 	TCCR2 = _BV(FOC2) | _BV(WGM21)  | _BV(COM21) | _BV(COM20);
+	DDRD |= _BV(PD7);
+    if (tasks_calculate_counter(&_timer_value, &_timer_clock_source, time_interval_sec) != 255)
+    {
+    	OCR2 = _timer_value;
+		_task_count = 0;
+		for(uint8_t i = 0; i < MAX_TASKS; i++)
+			_tasks[i] = NULL;
+    }
+    else
+    {
+    	printf("Timer interval too large");
+    }
 
     tasks_disable();
-
-    _tasks_calculate_counter(&_timer_value, &_timer_clock_source, time_interval_sec);
-
-    _task_count = 0;
-    for(uint8_t i = 0; i < MAX_TASKS; i++)
-    	_tasks[i] = NULL;
 }
 
 void tasks_enable(void)
@@ -54,15 +67,15 @@ void tasks_enable(void)
     TCNT2 = 0;                      // reset counter
     _task_enable_trigger_isr();     // enable output compare interrupt
     /*
-     * CS:	1024x Prescale value
+     * CS:	Desired Clock Source
      */
-    TCCR2 |= _BV(CS22) | _BV(CS21) | _BV(CS20);               // Start timer (connect clock source)
+    TCCR2 |= _timer_clock_source;               // Start timer (connect clock source)
 }
 
 void tasks_disable(void)
 {
     _task_disable_trigger_isr();    // disable output compare interrupt
-    TCCR2 &= ~(_BV(CS22) | _BV(CS21) | _BV(CS20));  // Stop timer (disconnect clock source)
+    TCCR2 &= ~(_timer_clock_source);  // Stop timer (disconnect clock source)
 
     _task_trigger_count = 0;
 }
@@ -91,12 +104,12 @@ uint8_t tasks_add(task_s * task)
 {
     if (_task_count + 1 < MAX_TASKS)
     {
-    	_tasks[_task_count++] = task;
-    	return _task_count;
+    	_tasks[_task_count] = task;
+    	return _task_count++;
     }
     else
     {
-    	return MAX_TASKS;
+    	return 255;
     }
 }
 
@@ -154,7 +167,7 @@ void tasks_trigger_isr(void)
     ++_task_trigger_count;
 }
 
-uint8_t _tasks_calculate_counter(uint8_t * ocr2_val, uint8_t * timer2_clock_sel, double time_interval_sec)
+uint8_t tasks_calculate_counter(uint8_t * ocr2_val, uint8_t * timer2_clock_sel, double time_interval_sec)
 {
 	const uint16_t prescaler_values[] = {1, 8, 64, 256, 1024};
 	const uint8_t clock_select_values[] = {(_BV(CS10)), (_BV(CS11)), (_BV(CS10) | _BV(CS11)), (_BV(CS12)), (_BV(CS10) | _BV(CS12))};
@@ -162,7 +175,7 @@ uint8_t _tasks_calculate_counter(uint8_t * ocr2_val, uint8_t * timer2_clock_sel,
 	for (uint8_t i = 0; i < 5; i++)
 	{
 		uint16_t tmp_val;
-		tmp_val = F_CPU/(prescaler_values[i]/time_interval_sec - 1);
+		tmp_val = round(F_CPU/(prescaler_values[i]/(4.0*time_interval_sec) - 1.0f));
 		if (tmp_val < 255)
 		{
 			*ocr2_val = tmp_val & 0x00FF;
