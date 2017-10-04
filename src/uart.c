@@ -80,7 +80,7 @@ void uart_rxc_isr(void)
 		if (isdigit(c) || isalpha(c) || c == '\b' || c == ' ' || c == '-' || c == '.' || c == '\n' || c == '\r')
 		{
 			cb_queue(&rx_buf, c);
-			//printf_P(PSTR("%c"), c);
+			printf_P(PSTR("%c"), c);
 		}
 		else if (c == '\177')
 		{

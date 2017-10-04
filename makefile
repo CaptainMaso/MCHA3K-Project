@@ -15,7 +15,7 @@ endif
 
 F_CPU = 14745600
 
-UNITY_ROOT = ../Unity
+UNITY_ROOT = Unity
 
 TARGET_BASE = Project
 TARGET_ELF = bin/$(TARGET_BASE).elf
@@ -118,7 +118,7 @@ INC_AVR = \
 	$(INC_COMMON)
 	
 DTREXE = \
-	../DTR/dtr.exe
+	dtr.exe
 	
 PORT = \
 	COM6

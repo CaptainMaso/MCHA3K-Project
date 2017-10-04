@@ -28,7 +28,12 @@ TEST(SinTable, TaskEnabled)
     iospy_pop_out_str(out, sizeof(out));
     iospy_unhook_out();
 
+<<<<<<< HEAD
     TEST_ASSERT_EQUAL_PTR(sin_table_get_task(), task_get_at(0));
+=======
+    TEST_ASSERT_EQUAL_PTR(sin_table_get_task(), tasks_get_at(0));
+    tasks_enable();
+>>>>>>> TaskScheduler
     TEST_ASSERT_TRUE(tasks_is_enabled());
 }
 

@@ -8,7 +8,11 @@
 
 typedef struct _task_s
 {
+<<<<<<< HEAD
 	uint8_t frequency;
+=======
+	uint16_t frequency;
+>>>>>>> TaskScheduler
 	void (*callback)(void);
 } task_s;
 
@@ -20,11 +24,20 @@ uint8_t		 	tasks_remove_at(uint8_t);
 void            tasks_run(void);
 
 uint8_t         tasks_triggered(void);
+<<<<<<< HEAD
+=======
+bool			tasks_ready(void);
+>>>>>>> TaskScheduler
 
 void            tasks_enable(void);
 void            tasks_disable(void);
 bool            tasks_is_enabled(void);
 
 void            tasks_trigger_isr(void);
+<<<<<<< HEAD
+=======
+
+uint8_t tasks_calculate_counter(uint8_t * ocr2_val, uint8_t * timer2_clock_sel, double time_interval_sec);
+>>>>>>> TaskScheduler
 
 #endif

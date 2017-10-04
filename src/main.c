@@ -10,27 +10,50 @@
 
 CLB_CREATE_STATIC(clb, 80);
 
+void led_task_callback(void);
+void led_task2_callback(void);
+
+static uint8_t _led_task_id;
+static task_s _led_task = {
+		500, &led_task_callback
+};
+
 int main(void)
 {
     // Initialise modules
     uart_init();
+<<<<<<< HEAD
     tasks_init();
+=======
+    tasks_init(0.001);
+>>>>>>> TaskScheduler
     
     // Enable global interrupts
-    sei();      
+	sei();
 
     // Wait a second at startup
 
     // Send initial string
-    printf_P(PSTR("%c"), (char)0x05);
+    printf_P(PSTR("Program Started\n"));
 
+    DDRA |= _BV(PA7);
 
+    _led_task_id = tasks_add(&_led_task);
+
+	if (_led_task_id != 255)
+		tasks_enable();
 
     for(;/*ever*/;)
     {
+<<<<<<< HEAD
         if (tasks_triggered())
         {
             tasks_run();
+=======
+        if (tasks_ready())
+        {
+        	tasks_run();
+>>>>>>> TaskScheduler
         }
         else
         {
@@ -38,13 +61,16 @@ int main(void)
         }
     }
     return 0;
-	/*DDRA |= _BV(PA7);
+}
 
-	for(;/*ever*//*;)
+void led_task_callback(void)
+{
+	if(bit_is_set(PORTA, PA7))
+	{
+		PORTA &= ~(_BV(PA7));
+	}
+	else
 	{
 		PORTA |= _BV(PA7);
-		_delay_ms(250);
-		PORTA &= ~(_BV(PA7));
-		_delay_ms(250);
-	}*/
+	}
 }
