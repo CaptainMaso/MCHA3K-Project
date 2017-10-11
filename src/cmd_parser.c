@@ -4,54 +4,39 @@
 #include <string.h>
 #include <inttypes.h> // For PRIxx and SCNxx macros
 #include <avr/pgmspace.h>
+#include <util/atomic.h>
+
+
+#include "encoders.h"
+#include "motor.h"
 #include "cmd_line_buffer.h"
-#include "potentiometer.h"
-#include "encoder.h"
-#include "led.h"
 #include "cmd_parser.h"
 #include "controller.h"
-#include "sin_table.h"
 #include "log_data.h"
+#include "mpu6050.h"
+#include "sysid.h"
 
 #define UNUSED(x) (void)(x)
 
 static CMD_STATUS _cmd_help(int argc, const char* argv[]);
 static CMD_STATUS _print_chip_pinout(int argc, const char* argv[]);
-//static CMD_STATUS pot_cmd(int argc, const char* argv[]);
-//static CMD_STATUS enc_cmd(int argc, const char* argv[]);
-//static CMD_STATUS led_cmd(int argc, const char* argv[]);
 static CMD_STATUS set_cmd(int argc, const char* argv[]);
 static CMD_STATUS get_cmd(int argc, const char* argv[]);
-static CMD_STATUS mulxy_cmd(int argc, const char* argv[]);
 static CMD_STATUS ctrl_cmd(int argc, const char* argv[]);
-
-static CMD_STATUS timercount_cmd(int argc, const char* argv[])
-{
-	UNUSED(argc);
-	UNUSED(argv);
-	printf_P(PSTR("triggered: %"PRIu16), tasks_triggered());
-	return CMD_OK;
-}
-
-static float _x = 0.0f;
-static float _y = 0.0f;
+static CMD_STATUS imu_cmd(int argc, const char* argv[]);
 
 float vref, theta, v = 0.0f;
 
 static const command_s command_list[] =
 {
-		{"help", &_cmd_help, "help [cmd]		Prints the help string of [cmd], else all functions and help string"},
-		{"pinout", &_print_chip_pinout, "pinout [pin]		Prints the pinout of the ATMEGA32P, [pin] prints the specific functions of each pin"},
-		/*{"pot", &pot_cmd, "pot		Prints the current ADC reading of the potentiometer"},
-		{"enc", &enc_cmd, "enc [reset]		Prints the current reading of the encoder, or resets the encoder count to 0"},
-		{"led", &led_cmd, "led [on|off|<value>]		Returns the current LED value, or changes the current value"},*/
-		{"set", &set_cmd, "set TODO"},
-		{"get", &get_cmd, "get TODO"},
-		{"mulxy", &mulxy_cmd, "mulxy TODO"},
-		{"ctrl", &ctrl_cmd, "ctrl TODO"},
-		{"sin", &sin_table_cmd, "sin <samples> <amplitude> <frequency>"},
-		{"log", &log_cmd, "log [pot|enc] <samples>"},
-		{"timercount", &timercount_cmd, "log [pot|enc] <samples>"}
+		{"help", _cmd_help, "help [cmd]		Prints the help string of [cmd], else all functions and help string"},
+		{"pinout", _print_chip_pinout, "pinout [pin]		Prints the pinout of the ATMEGA32P, [pin] prints the specific functions of each pin"},
+		{"set", set_cmd, "set <CUR_ML|CUR_MR|ENC_ML|ENC_MR|IMU|ML|MR>"},
+		{"get", get_cmd, "get <CUR_ML|CUR_MR|ENC_ML|ENC_MR|IMU|ML|MR>"},
+		{"ctrl", ctrl_cmd, "ctrl TODO"},
+		{"log", log_cmd, "log <samples> <frequency> [CUR_ML|CUR_MR|ENC_ML|ENC_MR|IMU]"},
+		{"imu", imu_cmd, "imu"},
+		{"motsysid", sysid_motor_cmd, "motsysid <side> <sin freq> <sin gain> <sin bias> <sample frequency> <time (s)>"}
 };
 
 #ifdef NO_LD_WRAP
@@ -135,7 +120,7 @@ CMD_STATUS _print_chip_pinout(int argc, const char* argv[])
         "MotLeft Dir:  (OC0/AIN1)PB3 <--|4    A   37|<-- PA3(ADC3)  : ML CurSns\n"
         "           :       (!SS)PB4 <->|5    T   36|<-> PA4(ADC4)  :\n"
         "                  (MOSI)PB5 <->|6    M   35|<-> PA5(ADC5)  :\n"
-        "                  (MIS.O)PB6 <->|7    E   34|<-> PA6(ADC6)  :\n"
+        "                  (MISO)PB6 <->|7    E   34|<-> PA6(ADC6)  :\n"
         "                   (SCK)PB7 <->|8    L   33|--> PA7(ADC7)  : Active LED Flash\n"
         "                     !RESET -->|9        32|<-- AREF\n"
         "                        VCC ---|10   A   31|--- GND\n"
@@ -154,94 +139,34 @@ CMD_STATUS _print_chip_pinout(int argc, const char* argv[])
     return CMD_OK;
 }
 
-
-/*CMD_STATUS pot_cmd(int argc, const char* argv[])
-{
-	UNUSED(argv);
-	if (argc == 0)
-	{
-		printf_P(PSTR("Potentiometer ADC value is %" PRIu16 "\n"), pot_get_value());
-		return CMD_OK;
-	}
-	else
-		return CMD_INVALIDPARAM;
-}
-
-static CMD_STATUS enc_cmd(int argc, const char* argv[])
-{
-	if (argc == 0)
-	{
-		printf_P(PSTR("Encoder count is %" PRId32 "\n"), encoder_get_count());
-		return CMD_OK;
-	}
-	else if (argc == 1)
-	{
-		if (!strcmp(argv[0], "reset"))
-		{
-			encoder_set_count(0);
-			printf_P(PSTR("Encoder count reset to 0\n"));
-			return CMD_OK;
-		}
-		else
-		{
-			return CMD_INVALIDPARAM;
-		}
-	}
-	else return CMD_INVALIDPARAM;
-}
-
-static CMD_STATUS led_cmd(int argc, const char* argv[])
-{
-	if (argc == 0)
-	{
-		printf_P(PSTR("LED brightness is %" PRIu8 "\n"), led_get_brightness());
-		return CMD_OK;
-	}
-	else if (argc == 1)
-	{
-		if (!strcmp_P(argv[0], PSTR("on")))
-		{
-			led_on();
-			printf_P(PSTR("LED is on\n"));
-			return CMD_OK;
-		}
-		else if (!strcmp_P(argv[0], PSTR("off")))
-		{
-			led_off();
-			printf_P(PSTR("LED is off\n"));
-			return CMD_OK;
-		}
-		else
-		{
-			char* end;
-			int32_t val = strtol(argv[0], &end, 10);
-			uint8_t led  = (val > 255) ? 255 : ((val < 0) ? 0 : val);
-			if (*end != '\0')
-				return CMD_INVALIDPARAM;
-			else
-			{
-				led_set_brightness(led);
-				printf_P(PSTR("LED brightness set to %" PRIu8 "\n"), led);
-				return CMD_OK;
-			}
-		}
-	}
-	else
-		return CMD_INVALIDPARAM;
-}
-*/
 static CMD_STATUS set_cmd(int argc, const char* argv[])
 {
 	if (argc == 2)
 	{
-		if (!strcmp_P(argv[0], PSTR("x")))
+		if (!strcmp_P(argv[0], PSTR("IMU")))
 		{
-			_x = atof(argv[1]);
+			//IMU device
+			printf_P(PSTR("IMU not implemented yet\n"));
 		}
-		else if (!strcmp_P(argv[0], PSTR("y")))
+		else if(!strcmp_P(argv[0], PSTR("ENC_ML")))
 		{
-			_y = atof(argv[1]);
+			//Encoder devices
 		}
+		else if(!strcmp_P(argv[0], PSTR("ENC_MR")))
+		{
+			//Encoder devices
+		}
+		else if (!strcmp_P(argv[0], PSTR("ML")))
+		{
+			int32_t tmp = atol(argv[1]);
+			motors_set_pwm(MOTOR_LEFT, tmp);
+		}
+		else if (!strcmp_P(argv[0], PSTR("MR")))
+		{
+			int32_t tmp = atol(argv[1]);
+			motors_set_pwm(MOTOR_RIGHT, tmp);
+		}
+		//Other items
 		else if (!strcmp_P(argv[0], PSTR("vref")))
 		{
 			vref = atof(argv[1]);
@@ -266,14 +191,32 @@ static CMD_STATUS get_cmd(int argc, const char* argv[])
 {
 	if (argc == 1)
 	{
-		if (!strcmp_P(argv[0], PSTR("x")))
+		if (!strcmp_P(argv[0], PSTR("IMU")))
 		{
-			printf_P(PSTR("x is %g\n"), _x);
+			//IMU device
+			printf_P(PSTR("IMU not implemented yet\n"));
 		}
-		else if (!strcmp_P(argv[0], PSTR("y")))
+		else if(!strcmp_P(argv[0], PSTR("ENC_ML")))
 		{
-			printf_P(PSTR("y is %g\n"), _y);
+			//Encoder devices
+			printf_P(PSTR("ENC_ML: %"PRId32"\n"), encoder_get_count(MOTOR_LEFT));
 		}
+		else if(!strcmp_P(argv[0], PSTR("ENC_MR")))
+		{
+			//Encoder devices
+			printf_P(PSTR("ENC_MR: %"PRId32"\n"), encoder_get_count(MOTOR_RIGHT));
+		}
+		else if (!strcmp_P(argv[0], PSTR("CUR_ML")))
+		{
+			//Current Sensing devices
+			printf_P(PSTR("CUR_ML: %"PRId16"\n"), motors_get_adc_reading(MOTOR_LEFT));
+		}
+		else if (!strcmp_P(argv[0], PSTR("CUR_MR")))
+		{
+			//Current Sensing devices
+			printf_P(PSTR("CUR_MR: %"PRId16"\n"), motors_get_adc_reading(MOTOR_LEFT));
+		}
+		//Other items
 		else if (!strcmp_P(argv[0], PSTR("vref")))
 		{
 			printf_P(PSTR("vref is %g\n"), vref);
@@ -294,18 +237,6 @@ static CMD_STATUS get_cmd(int argc, const char* argv[])
 		return CMD_INVALIDPARAM;
 }
 
-static CMD_STATUS mulxy_cmd(int argc, const char* argv[])
-{
-	UNUSED(argv);
-	if (argc == 0)
-	{
-		printf_P(PSTR("%g\n"), _x*_y);
-		return CMD_OK;
-	}
-	else
-		return CMD_INVALIDPARAM;
-}
-
 static CMD_STATUS ctrl_cmd(int argc, const char* argv[])
 {
 	UNUSED(argv);
@@ -318,4 +249,21 @@ static CMD_STATUS ctrl_cmd(int argc, const char* argv[])
 	}
 	else
 		return CMD_INVALIDPARAM;
+}
+
+static CMD_STATUS imu_cmd(int argc, const char* argv[])
+{
+	UNUSED(argv);
+	UNUSED(argc);
+	double ax, ay, az, gx, gy, gz;
+
+	ATOMIC_BLOCK(ATOMIC_FORCEON)
+	{
+		//mpu6050_getRawData(&ax, &ay, &az, &gx, &gy, &gz);
+		mpu6050_getConvData(&ax, &ay, &az, &gx, &gy, &gz);
+	}
+
+	//printf_P(PSTR("\nMPU: ax: %"PRIu16", ay: %"PRIu16", az: %"PRIu16", gx: %"PRIu16", gy: %"PRIu16", gz: %"PRIu16"\n"), ax, ay, az, gx, gy, gz);
+	printf_P(PSTR("\nMPU: ax: %g, ay: %g, az: %g, gx: %g, gy: %g, gz: %g\n"), ax, ay, az, gx, gy, gz);
+	return CMD_OK;
 }

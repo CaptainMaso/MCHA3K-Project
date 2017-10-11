@@ -14,6 +14,42 @@
 #define DDRC mock_ddrc
 #define DDRD mock_ddrd
 
+#define DDA0 0
+#define DDA1 1
+#define DDA2 2
+#define DDA3 3
+#define DDA4 4
+#define DDA5 5
+#define DDA6 6
+#define DDA7 7
+
+#define DDB0 0
+#define DDB1 1
+#define DDB2 2
+#define DDB3 3
+#define DDB4 4
+#define DDB5 5
+#define DDB6 6
+#define DDB7 7
+
+#define DDC0 0
+#define DDC1 1
+#define DDC2 2
+#define DDC3 3
+#define DDC4 4
+#define DDC5 5
+#define DDC6 6
+#define DDC7 7
+
+#define DDD0 0
+#define DDD1 1
+#define DDD2 2
+#define DDD3 3
+#define DDD4 4
+#define DDD5 5
+#define DDD6 6
+#define DDD7 7
+
 // Note: We define PINx and PORTx to the same virtual register to emulate the hardware behaviour
 #define PINA mock_porta
 #define PINB mock_portb
@@ -104,6 +140,25 @@
 #define MCUCSR mock_mcucsr
 #define ISC2 6
 
+#define SFIOR mock_sfior
+#define PSR10 0
+#define PSR2 1
+#define PUD 2
+#define ACME 3
+#define ADTS0 5
+#define ADTS1 6
+#define ADTS2 7
+
+#define TIFR mock_tifr
+#define TOV0 0
+#define OCF0 1
+#define TOV1 2
+#define OCF1B 3
+#define OCF1A 4
+#define ICF1 5
+#define TOV2 6
+#define OCF2 7
+
 #define TCCR0 mock_tccr0
 #define CS00 0
 #define CS01 1
@@ -145,16 +200,23 @@
 #define FOC2 7
 
 #define TCNT0 mock_tcnt0
-#define TCNT1H mock_tcnt0h
-#define TCNT1L mock_tcnt0l
+#define TCNT1H (mock_tcnt1.h)
+#define TCNT1L (mock_tcnt1.l)
+#define TCNT1 (mock_tcnt1.w)
 #define TCNT2 mock_tcnt2
 
 #define OCR0 mock_ocr0
-#define OCR1AH mock_ocr1ah
-#define OCR1AL mock_ocr1al
-#define OCR1BH mock_ocr1bh
-#define OCR1BL mock_ocr1bl
+#define OCR1AH (mock_ocr1a.h)
+#define OCR1AL (mock_ocr1a.l)
+#define OCR1A (mock_ocr1a.w)
+#define OCR1BH (mock_ocr1b.h)
+#define OCR1BL (mock_ocr1b.l)
+#define OCR1B (mock_ocr1b.w)
 #define OCR2 mock_ocr2
+
+#define ICR1H (mock_icr1.h)
+#define ICR1L (mock_icr1.l)
+#define ICR1 (mock_icr1.w)
 
 #define TIMSK mock_timsk
 #define TOIE0 0
@@ -166,5 +228,18 @@
 #define TOIE2 6
 #define OCIE2 7
 
+#define SREG mock_sreg
+#define SREG_C 0
+#define SREG_Z 1
+#define SREG_N 2
+#define SREG_V 3
+#define SREG_S 4
+#define SREG_H 5
+#define SREG_T 6
+#define SREG_I 7
+
+#define TWSR mock_TWSR;
+#define TWCR mock_TWCR;
+#define TWDR mock_TWDR;
 
 #endif

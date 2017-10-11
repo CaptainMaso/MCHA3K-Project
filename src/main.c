@@ -7,23 +7,32 @@
 #include "cmd_line_buffer.h"
 #include "cmd_parser.h"
 #include "task.h"
+#include "encoders.h"
+#include "motor.h"
+#include "i2cmaster.h"
+//#include "imu.h"
+#include "mpu6050.h"
 
 CLB_CREATE_STATIC(clb, 80);
 
 void led_task_callback(void);
-void led_task2_callback(void);
 
-static uint8_t _led_task_id;
 static task_s _led_task = {
-		500, &led_task_callback
+		.interval = 500,
+		.callback = &led_task_callback,
+		.id = 255
 };
 
 int main(void)
 {
     // Initialise modules
     uart_init();
+    i2c_init();
+    motors_init();
+    encoder_init();
+    mpu6050_init();
     tasks_init(0.001);
-    
+
     // Enable global interrupts
 	sei();
 
@@ -32,11 +41,17 @@ int main(void)
     // Send initial string
     printf_P(PSTR("Program Started\n"));
 
+    if (mpu6050_testConnection())
+		printf_P(PSTR("I AM THE MPU6050\n"));
+	else
+		printf_P(PSTR("I AM NOT THE MPU6050\n"));
+    //motors_set_pwm(MOTOR_RIGHT, 30000);
+
     DDRA |= _BV(PA7);
+    _led_task.interval = tasks_time_interval_to_task_interval(0.5);
+    tasks_add(&_led_task);
 
-    _led_task_id = tasks_add(&_led_task);
-
-	if (_led_task_id != 255)
+	if (_led_task.id != 255)
 		tasks_enable();
 
     for(;/*ever*/;)

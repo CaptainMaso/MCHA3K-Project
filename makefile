@@ -78,9 +78,13 @@ SRC_COMMON = \
 	src/cmd_parser.c \
 	src/controller.c \
 	src/task.c \
-	src/sin_table.c \
-	src/log_data.c
-
+	src/log_data.c \
+	src/encoders.c \
+	src/mpu6050.c \
+	src/twimaster.c \
+	src/sysid.c \
+	src/motor.c
+	
 SRC_TEST = \
 	$(UNITY_ROOT)/src/unity.c \
 	$(UNITY_ROOT)/extras/fixture/src/unity_fixture.c \
@@ -96,14 +100,17 @@ SRC_TEST = \
 	test/src/test_controller.c \
 	test/src/test_cmd_controller.c \
 	test/src/test_task.c \
-	test/src/test_sin_table.c
+	test/src/test_motor.c
+#	test/src/test_encoders.c
 
 SRC_AVR = \
 	$(SRC_COMMON) \
 	src/main.c \
 	src/uart.c \
 	src/uart_isr.c\
-	src/task_isr.c
+	src/task_isr.c \
+	src/encoders_isr.c \
+	src/motor_isr.c
 
 INC_COMMON = \
 	-Isrc
@@ -121,7 +128,7 @@ DTREXE = \
 	dtr.exe
 	
 PORT = \
-	COM6
+	COM1
 
 SYMBOLS =
 
@@ -132,29 +139,32 @@ else
 	MISC_TEST += -DNO_LD_WRAP
 endif
 
-all: clean default
+clean_avr:
+	rm -f $(TARGET_ELF) $(TARGET_HEX)
 
-test: clean_test test_only
+avr: clean_avr
+	avr-gcc -g -Os -mmcu=atmega32 $(CFLAGS) $(INC_AVR) $(SRC_AVR) -o $(TARGET_ELF) $(LDFLAGS_AVR)
+	avr-size $(TARGET_ELF)
+	avr-objcopy -j .text -j .data -O ihex $(TARGET_ELF) $(TARGET_HEX)
+	
+program: reboot
+	avrdude -p atmega32 -c avr109 -P $(PORT) -b 115200 -u -U flash:w:$(TARGET_HEX)
+	
+reboot:
+	./$(DTREXE) $(PORT) LOW 10
 
-test_only:
+test:
 	gcc $(CFLAGS) $(INC_TEST) $(SYMBOLS) $(SRC_TEST) -o $(TARGET_TEST) $(MISC_TEST)
 	- ./$(TARGET_TEST) -v
 
 clean_test:
 	rm -f $(TARGET_TEST)
 
+clean: clean_test clean_avr
+	
 default:
 	gcc $(CFLAGS) $(INC_TEST) $(SYMBOLS) $(SRC_TEST) -o $(TARGET_TEST) $(MISC_TEST)
-	avr-gcc -g -Os -mmcu=atmega32 $(CFLAGS) $(INC_AVR) $(SRC_AVR) -o $(TARGET_ELF) $(LDFLAGS_AVR)
-	avr-size $(TARGET_ELF)
-	avr-objcopy -j .text -j .data -O ihex $(TARGET_ELF) $(TARGET_HEX)
 	- ./$(TARGET_TEST)
-
-clean_avr:
-	rm -f $(TARGET_ELF) $(TARGET_HEX)
-
-clean: clean_test clean_avr
-
-program: 
-	./$(DTREXE) $(PORT) LOW 10
-	avrdude -p atmega32 -c avr109 -P $(PORT) -b 115200 -u -U flash:w:$(TARGET_HEX)
+	make avr_only
+	
+all: clean default

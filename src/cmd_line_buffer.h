@@ -38,6 +38,9 @@ char *       clb_gets_at(CLB_T *, CLB_INDEX_T);
 char *       clb_gets(CLB_T *);
 CLB_INDEX_T  clb_capacity(const CLB_T *);
 void         clb_process(CLB_T *);
-int 	 clb_tokenise(char** argv[], CLB_T *clb);
+int 	 	 clb_tokenise(const char* argv[], CLB_T *clb);
+void		 clb_enable(void);
+void		 clb_disable(void);
+bool 		 clb_isenabled(void);
 
 #endif

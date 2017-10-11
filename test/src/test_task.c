@@ -71,14 +71,14 @@ TEST(Task, Disable)
 }
 
 static void _dummy(void) { }
-static task_s _dummy_task = { 1, &_dummy };
+static task_s _dummy_task = { 1, &_dummy, 255 };
 
 TEST(Task, SetGetCallback)
 {
-    uint8_t id = tasks_add(&_dummy_task);
-    if (id != 255)
+    tasks_add(&_dummy_task);
+    if (_dummy_task.id != 255)
     {
-    	TEST_ASSERT_EQUAL_PTR(&_dummy_task, tasks_get_at(id));
+    	TEST_ASSERT_EQUAL_PTR(&_dummy_task, tasks_get_at(_dummy_task.id));
     }
     else
     {
@@ -88,7 +88,7 @@ TEST(Task, SetGetCallback)
 
 static uint32_t _call_count;
 static void _stub(void) { ++_call_count; }
-static task_s _stub_task = { 1, &_stub };
+static task_s _stub_task = { 1, &_stub, 255 };
 
 TEST(Task, RunCallback)
 {

@@ -4,11 +4,12 @@
 #include <stdio.h>
 #include "cmd_line_buffer.h"
 
+static bool _clb_enabled = true;
+
 void clb_init(CLB_T *clb)
 {
     clb->count = 0;
     clb->buffer[clb->count] = '\0';
-    //printf("> ");
 }
 
 bool clb_is_empty(const CLB_T *clb)
@@ -106,50 +107,61 @@ CLB_INDEX_T clb_capacity(const CLB_T *clb)
 
 void clb_process(CLB_T *clb)
 {
-    int c;
-    while ((c = getchar()) != EOF)
-    {
-        switch (clb_consume_char(clb, c))
-        {
-            case CLB_BUFFER_FULL:
-                printf_P(PSTR("*** Max command length exceeded ***\n"));
-                clb_init(clb);
-                break;
-            case CLB_CMD_READY:
-            {
-            	char** argv;
-            	int argc = clb_tokenise(&argv, clb);
-                cmd_parse(argc, (const char**)argv);
-                free(argv);
-                clb_init(clb);
-                break;
-            }
-            case CLB_SUCCESS:
-            default:
-                break;
-        }
-    }
-}
-
-int clb_tokenise(char** argv[], CLB_T *clb)
-{
-	(*argv) = malloc(clb_capacity(clb)*sizeof(char*)/2);
-	if ((*argv) != NULL)
+	if (_clb_enabled)
 	{
-		int count = 0;
-		char* c = clb_gets(clb);
-
-		while(*c != '\0')
+		int c;
+		while ((c = getchar()) != EOF)
 		{
-			while(*c == ' ' && *c != '\0') { *(c++) = '\0';}
-			if (*c != '\0')
+			switch (clb_consume_char(clb, c))
 			{
-				(*argv)[count++] = c;
-				while(*(c) != ' ' && *(c) != '\0') { c++; }
+				case CLB_BUFFER_FULL:
+					printf_P(PSTR("*** Max command length exceeded ***\n"));
+					clb_init(clb);
+					break;
+				case CLB_CMD_READY:
+				{
+					const char* argv[32];
+					int argc = clb_tokenise(argv, clb);
+					cmd_parse(argc, argv);
+					clb_init(clb);
+					break;
+				}
+				case CLB_SUCCESS:
+				default:
+					break;
 			}
 		}
-		return count;
 	}
-	else
-		return 0;
+}
+
+int clb_tokenise(const char* argv[], CLB_T *clb)
+{
+	int count = 0;
+	char* c = clb_gets(clb);
+
+	while(*c != '\0')
+	{
+		while(*c == ' ' && *c != '\0') { *(c++) = '\0';}
+		if (*c != '\0')
+		{
+			argv[count++] = c;
+			while(*(c) != ' ' && *(c) != '\0') { c++; }
+		}
+	}
+	return count;
+}
+
+void		 clb_enable(void)
+{
+	_clb_enabled = true;
+}
+
+void		 clb_disable(void)
+{
+	_clb_enabled = false;
+}
+
+bool 		 clb_isenabled(void)
+{
+	return _clb_enabled;
 }

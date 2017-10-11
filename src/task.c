@@ -16,6 +16,8 @@ static uint16_t _task_trigger_last_count;
 uint8_t _timer_value;
 uint8_t _timer_clock_source;
 
+static double _timer_interval;
+
 static void     _task_enable_trigger_isr(void);
 static void     _task_disable_trigger_isr(void);
 static bool     _task_is_trigger_isr_enabled(void);
@@ -44,12 +46,14 @@ void tasks_init(double time_interval_sec)
 	 */
 	TCCR2 = _BV(FOC2) | _BV(WGM21)  | _BV(COM21) | _BV(COM20);
 	DDRD |= _BV(PD7);
-    if (tasks_calculate_counter(&_timer_value, &_timer_clock_source, time_interval_sec) != 255)
+
+	if (tasks_calculate_counter(&_timer_value, &_timer_clock_source, time_interval_sec) != 255)
     {
     	OCR2 = _timer_value;
 		_task_count = 0;
 		for(uint8_t i = 0; i < MAX_TASKS; i++)
 			_tasks[i] = NULL;
+		_timer_interval = time_interval_sec;
     }
     else
     {
@@ -102,15 +106,22 @@ bool tasks_is_enabled(void)
 
 uint8_t tasks_add(task_s * task)
 {
-    if (_task_count + 1 < MAX_TASKS)
-    {
-    	_tasks[_task_count] = task;
-    	return _task_count++;
-    }
-    else
-    {
-    	return 255;
-    }
+	if (task != NULL)
+	{
+		if (_task_count + 1 < MAX_TASKS)
+		{
+			_tasks[_task_count] = task;
+			task->id = _task_count;
+			return _task_count++;
+		}
+		else
+		{
+			task->id = 255;
+			return 255;
+		}
+	}
+	else
+		return 255;
 }
 
 task_s* tasks_get_at(uint8_t index)
@@ -122,6 +133,7 @@ uint8_t tasks_remove_at(uint8_t index)
 {
 	if (index < _task_count)
 	{
+		_tasks[index]->id = 255;
 		for(int i = index + 1; i < MAX_TASKS; i++)
 		{
 			_tasks[i-1] = _tasks[i];
@@ -130,7 +142,13 @@ uint8_t tasks_remove_at(uint8_t index)
 		return 0;
 	}
 	else
-		return -1;
+		return 255;
+}
+
+uint8_t tasks_remove(task_s * toRemove)
+{
+	uint8_t index = toRemove->id;
+	return tasks_remove_at(index);
 }
 
 void tasks_run(void)
@@ -141,7 +159,7 @@ void tasks_run(void)
     	{
     		for(uint8_t i = 0; i < _task_count; i++)
     		{
-    			if (_task_trigger_count % _tasks[i]->frequency == 0)
+    			if (_task_trigger_count % _tasks[i]->interval == 0)
     				_tasks[i]->callback();
     		}
 
@@ -184,5 +202,19 @@ uint8_t tasks_calculate_counter(uint8_t * ocr2_val, uint8_t * timer2_clock_sel, 
 		}
 	}
 	return -1;
+}
 
+double tasks_get_task_interval(task_s *task)
+{
+	return task->interval*_timer_interval;
+}
+
+uint16_t tasks_time_interval_to_task_interval(double interval)
+{
+	return round(interval/_timer_interval);
+}
+
+double tasks_task_interval_to_time_interval(uint16_t interval)
+{
+	return _timer_interval*interval;
 }

@@ -3,9 +3,7 @@
 static void RunAllTests(void)
 {
     /* Lab 2 */
-    //RUN_TEST_GROUP(LED);
     //RUN_TEST_GROUP(Encoder);
-    //RUN_TEST_GROUP(Potentiometer);
 
     /* Lab 3 */
     RUN_TEST_GROUP(CircBuffer);
@@ -13,9 +11,7 @@ static void RunAllTests(void)
     RUN_TEST_GROUP(IOSpy);
     RUN_TEST_GROUP(CmdParse);
     RUN_TEST_GROUP(CmdProcess);
-    //RUN_TEST_GROUP(CmdLED);
     //RUN_TEST_GROUP(CmdEnc);
-    //RUN_TEST_GROUP(CmdPot);
 
     /* Lab 4 */
     //RUN_TEST_GROUP(CmdXY);
@@ -24,7 +20,9 @@ static void RunAllTests(void)
 
     /* Lab 5 */
     RUN_TEST_GROUP(Task);
-    RUN_TEST_GROUP(SinTable);
+
+    /* Custom Tests */
+    RUN_TEST_GROUP(Motor)
 }
 
 int main(int argc, const char * argv[])

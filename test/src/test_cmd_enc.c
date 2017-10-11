@@ -1,9 +1,9 @@
+#include <encoders.h>
 #include "unity_fixture.h"
 #include "iospy.h"
 
 #include <string.h>
 #include "cmd_line_buffer.h"
-#include "encoder.h"
 
 CLB_CREATE_STATIC(clb, 80);
 

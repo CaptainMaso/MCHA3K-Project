@@ -1,9 +1,12 @@
 #include <avr/io.h>
+#include <avr/iom32.h>
 #include <avr/pgmspace.h>
 #include <stdio.h>
+#include <stdbool.h>
 #include <ctype.h>
 #include "uart.h"
 #include "circ_buffer.h"
+//#define UART_DOUBLESPEED
 
 CB_CREATE_STATIC(rx_buf, 64);
 
@@ -14,6 +17,8 @@ static int _uart_putchar(char c, FILE *);
 static int _uart_getchar(FILE *);
 // Declare and initialise stream used for stdio functions
 static FILE _uart_str = FDEV_SETUP_STREAM(_uart_putchar, _uart_getchar, _FDEV_SETUP_RW);
+
+//TODO: Fix uart so it makes sense
 
 int _uart_receive(void);
 
@@ -77,10 +82,10 @@ void uart_rxc_isr(void)
     uint8_t c;
 	if ((uint8_t)(c = _uart_receive()) != (uint8_t)EOF)
 	{
-		if (isdigit(c) || isalpha(c) || c == '\b' || c == ' ' || c == '-' || c == '.' || c == '\n' || c == '\r')
+		if (isdigit(c) || isalpha(c) || c == '\b' || c == ' ' || c == '-' || c == '.' || c == '\n' || c == '\r' || c == '_')
 		{
 			cb_queue(&rx_buf, c);
-			printf_P(PSTR("%c"), c);
+			//printf_P(PSTR("%c"), c);
 		}
 		else if (c == '\177')
 		{

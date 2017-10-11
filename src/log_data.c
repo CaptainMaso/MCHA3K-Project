@@ -1,103 +1,216 @@
 #include <stdint.h>
 #include <inttypes.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #include <string.h>
 #include <stdio.h>
 #include <avr/pgmspace.h>
+#include <util/atomic.h>
 #include "task.h"
-//#include "potentiometer.h"
-//#include "encoder.h"
+#include "motor.h"
+#include "encoders.h"
+#include "mpu6050.h"
 #include "log_data.h"
+#include "cmd_line_buffer.h"
 
 void log_task_function(void);
 
 typedef enum {
-    LOG_POT,
-    LOG_ENC
+    LOG_CUR_ML	= 0,
+	LOG_CUR_MR	= 1,
+    LOG_ENC_ML	= 2,
+	LOG_ENC_MR	= 3,
+	LOG_IMU		= 4
 } LOG_DEVICE_T;
 
 static uint32_t _n_samples;
-static LOG_DEVICE_T _device;
+static double _time_interval;
+static bool _devices_active[MAX_DEVICES] = {false};
 static float _time;
 
-static uint8_t _log_task_id;
 static task_s _log_task = {
-		10, &log_task_function
+		.interval = 10,
+		.callback = &log_task_function,
+		.id = 255
 };
 
 CMD_STATUS log_cmd(int argc, const char *argv[])
 {
-	if (_log_task_id != 255)
+	if (_log_task.id == 255)
 	{
-		if (argc != 2)
+		int n = atoi(argv[0]);
+		if (n <= 0)
 		{
-			return CMD_INVALIDPARAM;
-		}
-
-		int n = atoi(argv[1]);
-		if (n < 0)
-		{
-			printf_P(PSTR("pot: expecting positive number of samples\n"));
+			printf_P(PSTR("log: expecting positive number of samples\n"));
 			return CMD_REPORTEDERR;
 		}
 		_n_samples = n;
-		_time = 0.0f;
 
-		/*if (!strcmp_P(argv[0], PSTR("pot")))
+		double interval = 1.0/atof(argv[1]);
+		if (interval <= 0.0)
 		{
-			_device = LOG_POT;
-			pot_init();
-			printf_P(PSTR("Time [sec],Potentiometer [V]\n"));
-		}
-		else if (!strcmp_P(argv[0], PSTR("enc")))
-		{
-			_device = LOG_ENC;
-			encoder_init();
-			printf_P(PSTR("Time [sec],Encoder [-]\n"));
-		}
-		else*/
-		{
-			printf_P(PSTR("log: unknown device \"%s\", syntax is: %s [pot|enc] <samples>\n"), argv[1], argv[0]);
+			printf_P(PSTR("log: expecting frequency\n"));
 			return CMD_REPORTEDERR;
 		}
+		_time_interval = interval;
 
-		_log_task_id = tasks_add(&_log_task);
-		if (_log_task_id != 255)
+		_log_task.interval = tasks_time_interval_to_task_interval(interval);
+
+		int curArg = 2;
+
+		for (uint8_t i = 0; i < MAX_DEVICES; i++)
 		{
+			_devices_active[i] = false;
+		}
+
+		while(curArg < argc)
+		{
+			if (!strcmp_P(argv[curArg], PSTR("IMU")))
+			{
+				//IMU device
+				_devices_active[LOG_IMU] = true;
+				//printf_P(PSTR("Logging IMU\n"));
+			}
+			else if(!strcmp_P(argv[curArg], PSTR("ENC_ML")))
+			{
+				//Encoder devices
+				_devices_active[LOG_ENC_ML] = true;
+			}
+			else if(!strcmp_P(argv[curArg], PSTR("ENC_MR")))
+			{
+				//Encoder devices
+				_devices_active[LOG_ENC_MR] = true;
+			}
+			else if (!strcmp_P(argv[curArg], PSTR("CUR_ML")))
+			{
+				//Current Sensing devices
+				_devices_active[LOG_CUR_ML] = true;
+			}
+			else if (!strcmp_P(argv[curArg], PSTR("CUR_MR")))
+			{
+				//Current Sensing devices
+				_devices_active[LOG_CUR_MR] = true;
+			}
+			else
+			{
+				//Fail out 'cause of invalid argument
+				for (uint8_t i = 0; i < MAX_DEVICES; i++)
+				{
+					_devices_active[i] = false;
+				}
+				_time_interval = 0.0;
+				_n_samples = 0;
+				return CMD_INVALIDPARAM;
+			}
+			curArg++;
+		}
+
+		_time = 0.0f;
+
+		tasks_add(&_log_task);
+
+		if (_log_task.id != 255)
+		{
+			clb_disable();
+			printf_P(PSTR("Time (s)"));
+			for(uint8_t i = 0; i < MAX_DEVICES; i++)
+			{
+				if (_devices_active[i])
+				{
+					printf(",");
+					switch (i)
+					{
+					case LOG_IMU:
+						printf_P(PSTR("ax (g), ay (g), az (g), gx (d/s), gy(d/s), gz(d/s)"));
+						break;
+					case LOG_ENC_ML:
+						printf_P(PSTR("ENCODER_LEFT"));
+						break;
+					case LOG_ENC_MR:
+						printf_P(PSTR("ENCODER_RIGHT"));
+						break;
+					case LOG_CUR_ML:
+						printf_P(PSTR("CURRENT_LEFT"));
+						break;
+					case LOG_CUR_MR:
+						printf_P(PSTR("CURRENT_RIGHT"));
+						break;
+					default:
+						break;
+					}
+				}
+			}
+			printf_P(PSTR("\n"));
 			return CMD_OK;
 		}
 		else
 		{
-			printf("log: too many tasks already running\n");
+			//Fail out 'cause of invalid argument
+			for (uint8_t i = 0; i < MAX_DEVICES; i++)
+			{
+				_devices_active[i] = false;
+			}
+			_time_interval = 0.0;
+			_n_samples = 0;
+			printf_P(PSTR("log: too many tasks already running\n"));
 			return CMD_REPORTEDERR;
 		}
 	}
 	else
 	{
-		printf("log: already running\n");
+		printf_P(PSTR("log: already running\n"));
 		return CMD_REPORTEDERR;
 	}
 }
 
 void log_task_function(void)
 {
-    switch (_device)
-    {
-    /*case LOG_POT:
-        printf_P(PSTR("%.2f,%g\n"), _time, (float)pot_get_value()*5.0f/POT_FULL_SCALE);
-        break;
-    case LOG_ENC:
-        printf_P(PSTR("%.2f,%" PRId32 "\n"), _time, encoder_get_count());
-        break;*/
-    default:
-    	break;
-    }
+	printf_P(PSTR("%.3g"), _time);
+	for (LOG_DEVICE_T i = 0; i < MAX_DEVICES; i++)
+	{
+		if (_devices_active[i])
+		{
+			printf_P(PSTR(","));
+			switch (i)
+			{
+			case LOG_IMU:
+			{
+				double ax, ay, az, gx, gy, gz;
 
-    _time += 0.01f;
+					ATOMIC_BLOCK(ATOMIC_FORCEON)
+					{
+						//mpu6050_getRawData(&ax, &ay, &az, &gx, &gy, &gz);
+						mpu6050_getConvData(&ax, &ay, &az, &gx, &gy, &gz);
+					}
+
+					//printf_P(PSTR("\nMPU: ax: %"PRIu16", ay: %"PRIu16", az: %"PRIu16", gx: %"PRIu16", gy: %"PRIu16", gz: %"PRIu16"\n"), ax, ay, az, gx, gy, gz);
+					printf_P(PSTR("%g,%g,%g,%g, %g,%g"), ax, ay, az, gx, gy, gz);
+			}	break;
+			case LOG_ENC_ML:
+				printf_P(PSTR("%"PRId32""), encoder_get_count(MOTOR_LEFT));
+				break;
+			case LOG_ENC_MR:
+				printf_P(PSTR("%"PRId32""), encoder_get_count(MOTOR_RIGHT));
+				break;
+			case LOG_CUR_ML:
+				printf_P(PSTR("%"PRId16""), motors_get_adc_reading(MOTOR_LEFT));
+				break;
+			case LOG_CUR_MR:
+				printf_P(PSTR("%"PRId16""), motors_get_adc_reading(MOTOR_RIGHT));
+				break;
+			default:
+				break;
+			}
+		}
+	}
+	printf_P(PSTR("\n"));
+
+    _time += _time_interval;
     --_n_samples;
 
     if (_n_samples == 0){
-    	tasks_remove_at(_log_task_id);
-    	_log_task_id = 255;
+    	tasks_remove(&_log_task);
+    	//printf_P(PSTR("\x0D \0A\n"));
+    	clb_enable();
     }
 }

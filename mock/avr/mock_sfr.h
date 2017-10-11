@@ -1,6 +1,8 @@
 #ifndef MOCK_SFR_H
 #define MOCK_SFR_H
 
+#include <stdint.h>
+
 typedef struct {
     union {
         uint16_t w;
@@ -30,23 +32,31 @@ extern uint8_t mock_gifr;
 extern uint8_t mock_mcucr;
 extern uint8_t mock_mcucsr;
 
+extern uint8_t mock_sfior;
+extern uint8_t mock_tifr;
+
 extern uint8_t mock_tccr0;
 extern uint8_t mock_tccr1a;
 extern uint8_t mock_tccr1b;
 extern uint8_t mock_tccr2;
 
 extern uint8_t mock_tcnt0;
-extern uint8_t mock_tcnt0h;
-extern uint8_t mock_tcnt0l;
+extern MOCK_SFR16_T mock_tcnt1;
 extern uint8_t mock_tcnt2;
 
 extern uint8_t mock_ocr0;
-extern uint8_t mock_ocr1ah;
-extern uint8_t mock_ocr1al;
-extern uint8_t mock_ocr1bh;
-extern uint8_t mock_ocr1bl;
+extern MOCK_SFR16_T mock_ocr1a;
+extern MOCK_SFR16_T mock_ocr1b;
 extern uint8_t mock_ocr2;
 
+extern MOCK_SFR16_T mock_icr1;
+
 extern uint8_t mock_timsk;
+
+extern uint8_t mock_sreg;
+
+extern uint8_t mock_TWSR;
+extern uint8_t mock_TWCR;
+extern uint8_t mock_TWDR;
 
 #endif
