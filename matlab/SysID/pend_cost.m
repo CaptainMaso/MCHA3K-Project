@@ -7,7 +7,6 @@ function cost = pend_cost(I, c, t, theta, dtheta)
         [tsim, y] = ode45(pend_odet, t_tmp, ic);
         thetasim = y(:, 1);
         tcost(:, i) = theta(:, i) - thetasim;
-        meansqr(
     end
     cost = meansqr(tcost);
 end

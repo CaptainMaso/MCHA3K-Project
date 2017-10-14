@@ -1,32 +1,10 @@
-function motor_freerun()
-    clc;
-    clear;
-    %% Input Data
-    Motor_LEFT =   ['Motor - Free Run/LEFT_1.csv'; 'Motor - Free Run/LEFT_2.csv'];
-    Motor_RIGHT = ['Motor - Free Run/RIGHT_1.csv'; 'Motor - Free Run/RIGHT_2.csv'];
+function motor_plot_load(data, Title)
+    global T CPR ADC_GAIN ADC_MAX ADC_VREF ADC_RESISTOR Vmax GearRatio;
 
-    SysID(Motor_LEFT, 'LEFT');
-    
-end
-function [R, Llsq, K] = SysID(data, Title)
-    %% Params
-    global T N Vmax GearRatio;
-    
-    T = 1/100;
-    N = 23;
-
-    Vmax = 12;
-    DutyMax = 65535;
-    CPM = 330;
-    ADC_GAIN = 10;
-    ADC_MAX  = 512;
-    ADC_VREF = 5;
-    ADC_RESISTOR = 0.1;
-
-    GearRatio = 30;
+    N = 17;
 
     LOWDATA = 200;
-    HIGHDATA = 4000;
+    HIGHDATA = 300;
 
     t = zeros(HIGHDATA - LOWDATA - 2*N + 1, size(data,1));
     
@@ -38,14 +16,15 @@ function [R, Llsq, K] = SysID(data, Title)
 
     CURRENT = zeros(HIGHDATA - LOWDATA - 2*N + 1, size(data,1));
     DCURRENT = zeros(HIGHDATA - LOWDATA - 2*N + 1, size(data,1));
-    
+
     for i = 1:size(data,1)
         %% Get Data
-        [t_tmp,v_tmp,ENC,ADC] = import_motor_free(data(i, :), LOWDATA, HIGHDATA);
+        [t_tmp, h_tmp,v_tmp,ENC,ADC] = import_motor_load(data(i, :), LOWDATA, HIGHDATA);
 
         %% Format Data
-        theta_tmp = ENC * 2 * pi/CPM;
-        cur_tmp = ADC*ADC_VREF/ADC_GAIN/ADC_MAX/ADC_RESISTOR;
+        theta_tmp = ENC * 2 * pi/CPR;
+        cur_tmp = ADC*ADC_VREF/ADC_GAIN/ADC_MAX/ADC_RESISTOR/2;
+        v_tmp = Vmax.*sqrt(abs(v_tmp/Vmax)).*sign(v_tmp);
 
         %% Get Derivatives
         [theta_tmp, dtheta_tmp, ddtheta_tmp] = quadraticSavitzkyGolay(theta_tmp',T,N);  
@@ -62,16 +41,6 @@ function [R, Llsq, K] = SysID(data, Title)
         t(:, i) = t(:, i) - t(1, i);
     end
 
-    %% Parameter Estimation
-    for i = 1:size(data, 2)
-        [Llsq(i), Rlsq(i), Klsq(i)] = motor_free_lsqf(V(:, i), CURRENT(:, i), DCURRENT(:, i), DTHETA(:, i));
-    end
-    
-    L0 = harmmean(Llsq);
-    R0 = harmmean(Rlsq);
-    K0 = harmmean(Klsq);
-    
-    %% Save Data
     figure;
     subplot(6,1,1);
     plot(t, V);
@@ -80,28 +49,35 @@ function [R, Llsq, K] = SysID(data, Title)
     xlim([0 max(t(:))]);
     grid on;
 
-    subplot(6, 1,3);
+    subplot(6, 1,2);
     plot(t, THETA);
     title([Title, ': Position']);
     ylabel('Position (rads)');
     xlim([0 max(t(:))]);
     grid on;
 
-    subplot(3,2,4);
+    subplot(5,1,2);
     plot(t, DTHETA);
     title([Title, ': Velocity']);
-    ylabel('Position (rads/s)');
+    ylabel('Velocity (rads/s)');
+    xlim([0 max(t(:))]);
+    grid on;
+    
+    subplot(5,1,3);
+    plot(t, DDTHETA);
+    title([Title, ': Acceleration']);
+    ylabel('Acceleration (rads/s^2)');
     xlim([0 max(t(:))]);
     grid on;
 
-    subplot(3,2,5);
+    subplot(5,1,4);
     plot(t, CURRENT*10^3);
     title([Title, ': Current']);
     ylabel('Current (mA)');
     xlim([0 max(t(:))]);
     grid on;
 
-    subplot(3,2,6);
+    subplot(5,1,5);
     plot(t, DCURRENT);
     title([Title, ': Current/s']);
     ylabel('Current (A/s)');

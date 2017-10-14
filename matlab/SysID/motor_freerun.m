@@ -1,31 +1,10 @@
-function motor_freerun()
-    clc;
-    clear;
-    %% Input Data
-    Motor_LEFT =   ['Motor - Free Run/LEFT_3.csv'];% 'Motor - Free Run/LEFT_2.csv'];
-    Motor_RIGHT = ['Motor - Free Run/RIGHT_1.csv'; 'Motor - Free Run/RIGHT_2.csv'];
-
-    SysID(Motor_LEFT, 'LEFT');
-    
-end
-function [R, Llsq, K] = SysID(data, Title)
+function [R, L, K] = motor_freerun(data)
     %% Params
-    global T N Vmax GearRatio;
+    global T CPR ADC_GAIN ADC_MAX ADC_VREF ADC_RESISTOR Vmax;
     
-    T = 1/100;
-    N = 23;
+    N = 17;
 
-    Vmax = 12;
-    DutyMax = 65535;
-    CPM = 330;
-    ADC_GAIN = 10;
-    ADC_MAX  = 512;
-    ADC_VREF = 5;
-    ADC_RESISTOR = 0.1;
-
-    GearRatio = 1/30;
-
-    LOWDATA = 200;
+    LOWDATA = 100;
     HIGHDATA = 4000;
 
     t = zeros(HIGHDATA - LOWDATA - 2*N + 1, size(data,1));
@@ -41,11 +20,12 @@ function [R, Llsq, K] = SysID(data, Title)
     
     for i = 1:size(data,1)
         %% Get Data
-        [t_tmp,v_tmp,ENC,ADC] = import_motor_free(data(i, :), LOWDATA, HIGHDATA);
+        [t_tmp,v_tmp,ENC,ADC] = import_motor_free(data{i}, LOWDATA, HIGHDATA);
 
         %% Format Data
-        theta_tmp = ENC * 2 * pi/CPM;
-        cur_tmp = ADC*ADC_VREF/ADC_GAIN/ADC_MAX/ADC_RESISTOR;
+        theta_tmp = ENC * 2 * pi/CPR;
+        cur_tmp = ADC*ADC_VREF/ADC_GAIN/ADC_MAX/ADC_RESISTOR/2;
+        v_tmp = Vmax.*sqrt(abs(v_tmp/Vmax)).*sign(v_tmp);
 
         %% Get Derivatives
         [theta_tmp, dtheta_tmp, ddtheta_tmp] = quadraticSavitzkyGolay(theta_tmp',T,N);  
@@ -64,56 +44,75 @@ function [R, Llsq, K] = SysID(data, Title)
 
     %% Parameter Estimation
     for i = 1:size(data, 1)
-        [Llsq(i), Rlsq(i), Klsq(i)] = motor_free_lsqf(V(:, i), CURRENT(:, i), DCURRENT(:, i), DTHETA(:, i), DDTHETA(:, i));
+        [Rlsq(i), Llsq(i), Klsq(i)] = motor_free_lsqf(V(:, i), CURRENT(:, i), DCURRENT(:, i), DTHETA(:, i));
     end
     
-    L0 = mean(Llsq)
-    R0 = mean(Rlsq)
-    K0 = mean(Klsq)
+    L = mean(Llsq);
+    R = mean(Rlsq);
+    K = mean(Klsq);
     
-    
-    
-    %% Save Data
-    figure;
-    subplot(6,1,1);
-    plot(t, V);
-    title([Title, ': V_{RMS}']);
-    ylabel('Voltage (V)');
-    xlim([0 max(t(:))]);
-    grid on;
+    if (L < 0 && R < 0 && K < 0)
+        L = L*-1;
+        R = R*-1;
+        K = K*-1;
+    end
+%     %% Save Data
+%     figure;
+%     subplot(6,1,1);
+%     plot(t, V);
+%     title([Title, ': V_{RMS}']);
+%     ylabel('Voltage (V)');
+%     xlim([0 max(t(:))]);
+%     grid on;
+% 
+% %     subplot(6, 1,2);
+% %     plot(t, THETA);
+% %     title([Title, ': Position']);
+% %     ylabel('Position (rads)');
+% %     xlim([0 max(t(:))]);
+% %     grid on;
+% 
+%     subplot(5,1,2);
+%     plot(t, DTHETA);
+%     title([Title, ': Velocity']);
+%     ylabel('Velocity (rads/s)');
+%     xlim([0 max(t(:))]);
+%     grid on;
+%     
+%     subplot(5,1,3);
+%     plot(t, DDTHETA);
+%     title([Title, ': Acceleration']);
+%     ylabel('Acceleration (rads/s^2)');
+%     xlim([0 max(t(:))]);
+%     grid on;
+% 
+%     subplot(5,1,4);
+%     plot(t, CURRENT*10^3);
+%     title([Title, ': Current']);
+%     ylabel('Current (mA)');
+%     xlim([0 max(t(:))]);
+%     grid on;
+% 
+%     subplot(5,1,5);
+%     plot(t, DCURRENT);
+%     title([Title, ': Current/s']);
+%     ylabel('Current (A/s)');
+%     xlim([0 max(t(:))]);
+%     grid on;
+end
 
-    subplot(6, 1,2);
-    plot(t, THETA);
-    title([Title, ': Position']);
-    ylabel('Position (rads)');
-    xlim([0 max(t(:))]);
-    grid on;
+function [R, L, K] = motor_free_lsqf(V, i, di, w, d)
+    global GearRatio;
+    %% KVL equation LSQR
+    % V = R*i + L *di + K*N*w
+    % di = (V - R*i -K*N*w)/L
 
-    subplot(6,1,3);
-    plot(t, DTHETA);
-    title([Title, ': Velocity']);
-    ylabel('Velocity (rads/s)');
-    xlim([0 max(t(:))]);
-    grid on;
-    
-    subplot(6,1,4);
-    plot(t, DDTHETA);
-    title([Title, ': Acceleration']);
-    ylabel('Acceleration (rads/s^2)');
-    xlim([0 max(t(:))]);
-    grid on;
+    Y = V;
+    Phi = [i, di, GearRatio*w];
+    % Theta = [1/L; R/L; K/L]
 
-    subplot(6,1,5);
-    plot(t, CURRENT*10^3);
-    title([Title, ': Current']);
-    ylabel('Current (mA)');
-    xlim([0 max(t(:))]);
-    grid on;
-
-    subplot(6,1,6);
-    plot(t, DCURRENT);
-    title([Title, ': Current/s']);
-    ylabel('Current (A/s)');
-    xlim([0 max(t(:))]);
-    grid on;
+    Theta = lsqr(Phi, Y);
+    R = Theta(1);
+    L = Theta(2);
+    K = Theta(3);
 end

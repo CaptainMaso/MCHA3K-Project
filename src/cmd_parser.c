@@ -36,7 +36,8 @@ static const command_s command_list[] =
 		{"ctrl", ctrl_cmd, "ctrl TODO"},
 		{"log", log_cmd, "log <samples> <frequency> [CUR_ML|CUR_MR|ENC_ML|ENC_MR|IMU]"},
 		{"imu", imu_cmd, "imu"},
-		{"motsysid", sysid_motor_cmd, "motsysid <side> <sin freq> <sin gain> <sin bias> <sample frequency> <time (s)>"}
+		{"motsysid_free", sysid_motor_free_cmd, "motsysid_free <side> <sample frequency> <time (s)>  <sin freq> <sin gain> <sin bias>"},
+		{"motsysid_load", sysid_motor_load_cmd, "motsysid_load <side> <sample frequency> <length (m)> <radius (m)> <voltage>"}
 };
 
 #ifdef NO_LD_WRAP

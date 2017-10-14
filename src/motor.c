@@ -149,6 +149,12 @@ void motor_adc_isr(void)
 		adc_left = ((int16_t)ADCW) >> 6;
 		if (adc_left > 512)
 			adc_left = 0;
+		/*
+		 * This is done because the sense resistor is the output to the L298,
+		 * so we only get the magnitude of the current, not the direction.
+		 * As such, we assume that the current measured is flowing in the direction
+		 * that the voltage is being applied (which will almost always be the case)
+		 */
 		if (!!(PORTB &_BV(PB3)))
 			adc_left *= -1;
 	}

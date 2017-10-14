@@ -15,7 +15,8 @@
 #define ENC_ML_B !!(PINB & _BV(PB1))
 #define ENC_MR_A !!(PIND & _BV(PD2))
 #define ENC_MR_B !!(PINB & _BV(PB0))
-#define CPR 330
+
+#define CPR 660
 
 void    encoder_init(void);
 void    encoder_edge_ML_isr(void);
