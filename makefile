@@ -76,13 +76,13 @@ SRC_COMMON = \
 	src/circ_buffer.c \
 	src/cmd_line_buffer.c \
 	src/cmd_parser.c \
-	src/controller.c \
 	src/task.c \
 	src/log_data.c \
 	src/encoders.c \
 	src/mpu6050.c \
 	src/twimaster.c \
 	src/sysid.c \
+	src/imu.c \
 	src/motor.c
 	
 SRC_TEST = \

@@ -9,19 +9,11 @@
 #include "task.h"
 #include "motor.h"
 #include "encoders.h"
-#include "mpu6050.h"
+#include "imu.h"
 #include "log_data.h"
 #include "cmd_line_buffer.h"
 
 void log_task_function(void);
-
-typedef enum {
-    LOG_CUR_ML	= 0,
-	LOG_CUR_MR	= 1,
-    LOG_ENC_ML	= 2,
-	LOG_ENC_MR	= 3,
-	LOG_IMU		= 4
-} LOG_DEVICE_T;
 
 static uint32_t _n_samples;
 static double _time_interval;
@@ -65,10 +57,40 @@ CMD_STATUS log_cmd(int argc, const char *argv[])
 
 		while(curArg < argc)
 		{
-			if (!strcmp_P(argv[curArg], PSTR("IMU")))
+			if (!strcmp_P(argv[curArg], PSTR("IMU_AX")))
 			{
-				//IMU device
-				_devices_active[LOG_IMU] = true;
+				//IMU device - AX
+				_devices_active[LOG_IMU_AX] = true;
+				//printf_P(PSTR("Logging IMU\n"));
+			}
+			else if (!strcmp_P(argv[curArg], PSTR("IMU_AY")))
+			{
+				//IMU device - AY
+				_devices_active[LOG_IMU_AY] = true;
+				//printf_P(PSTR("Logging IMU\n"));
+			}
+			else if (!strcmp_P(argv[curArg], PSTR("IMU_AZ")))
+			{
+				//IMU device - AZ
+				_devices_active[LOG_IMU_AZ] = true;
+				//printf_P(PSTR("Logging IMU\n"));
+			}
+			else if (!strcmp_P(argv[curArg], PSTR("IMU_GX")))
+			{
+				//IMU device - GX
+				_devices_active[LOG_IMU_GX] = true;
+				//printf_P(PSTR("Logging IMU\n"));
+			}
+			else if (!strcmp_P(argv[curArg], PSTR("IMU_GY")))
+			{
+				//IMU device - GY
+				_devices_active[LOG_IMU_GY] = true;
+				//printf_P(PSTR("Logging IMU\n"));
+			}
+			else if (!strcmp_P(argv[curArg], PSTR("IMU_GZ")))
+			{
+				//IMU device - GZ
+				_devices_active[LOG_IMU_GZ] = true;
 				//printf_P(PSTR("Logging IMU\n"));
 			}
 			else if(!strcmp_P(argv[curArg], PSTR("ENC_ML")))
@@ -120,8 +142,23 @@ CMD_STATUS log_cmd(int argc, const char *argv[])
 					printf(",");
 					switch (i)
 					{
-					case LOG_IMU:
-						printf_P(PSTR("ax (g), ay (g), az (g), gx (d/s), gy(d/s), gz(d/s)"));
+					case LOG_IMU_AX:
+						printf_P(PSTR("ax (g)"));
+						break;
+					case LOG_IMU_AY:
+						printf_P(PSTR("ay (g)"));
+						break;
+					case LOG_IMU_AZ:
+						printf_P(PSTR("az (g)"));
+						break;
+					case LOG_IMU_GX:
+						printf_P(PSTR("gx (d/s)"));
+						break;
+					case LOG_IMU_GY:
+						printf_P(PSTR("gy (d/s)"));
+						break;
+					case LOG_IMU_GZ:
+						printf_P(PSTR("gz (d/s)"));
 						break;
 					case LOG_ENC_ML:
 						printf_P(PSTR("ENCODER_LEFT"));
@@ -173,19 +210,24 @@ void log_task_function(void)
 			printf_P(PSTR(","));
 			switch (i)
 			{
-			case LOG_IMU:
-			{
-				double ax, ay, az, gx, gy, gz;
-
-					ATOMIC_BLOCK(ATOMIC_FORCEON)
-					{
-						//mpu6050_getRawData(&ax, &ay, &az, &gx, &gy, &gz);
-						mpu6050_getConvData(&ax, &ay, &az, &gx, &gy, &gz);
-					}
-
-					//printf_P(PSTR("\nMPU: ax: %"PRIu16", ay: %"PRIu16", az: %"PRIu16", gx: %"PRIu16", gy: %"PRIu16", gz: %"PRIu16"\n"), ax, ay, az, gx, gy, gz);
-					printf_P(PSTR("%g,%g,%g,%g, %g,%g"), ax, ay, az, gx, gy, gz);
-			}	break;
+			case LOG_IMU_AX:
+				printf_P(PSTR("%"PRId16""), imu_get_ax());
+				break;
+			case LOG_IMU_AY:
+				printf_P(PSTR("%"PRId16""), imu_get_ay());
+				break;
+			case LOG_IMU_AZ:
+				printf_P(PSTR("%"PRId16""), imu_get_az());
+				break;
+			case LOG_IMU_GX:
+				printf_P(PSTR("%"PRId16""), imu_get_gx());
+				break;
+			case LOG_IMU_GY:
+				printf_P(PSTR("%"PRId16""), imu_get_gy());
+				break;
+			case LOG_IMU_GZ:
+				printf_P(PSTR("%"PRId16""), imu_get_gz());
+				break;
 			case LOG_ENC_ML:
 				printf_P(PSTR("%"PRId32""), encoder_get_count(MOTOR_LEFT));
 				break;

@@ -11,33 +11,33 @@
 #include "motor.h"
 #include "cmd_line_buffer.h"
 #include "cmd_parser.h"
-#include "controller.h"
+//#include "controller.h"
 #include "log_data.h"
 #include "mpu6050.h"
 #include "sysid.h"
 
 #define UNUSED(x) (void)(x)
 
-static CMD_STATUS _cmd_help(int argc, const char* argv[]);
+//static CMD_STATUS _cmd_help(int argc, const char* argv[]);
 static CMD_STATUS _print_chip_pinout(int argc, const char* argv[]);
 static CMD_STATUS set_cmd(int argc, const char* argv[]);
 static CMD_STATUS get_cmd(int argc, const char* argv[]);
-static CMD_STATUS ctrl_cmd(int argc, const char* argv[]);
+//static CMD_STATUS ctrl_cmd(int argc, const char* argv[]);
 static CMD_STATUS imu_cmd(int argc, const char* argv[]);
 
 float vref, theta, v = 0.0f;
 
 static const command_s command_list[] =
 {
-		{"help", _cmd_help, "help [cmd]		Prints the help string of [cmd], else all functions and help string"},
-		{"pinout", _print_chip_pinout, "pinout [pin]		Prints the pinout of the ATMEGA32P, [pin] prints the specific functions of each pin"},
-		{"set", set_cmd, "set <CUR_ML|CUR_MR|ENC_ML|ENC_MR|IMU|ML|MR>"},
-		{"get", get_cmd, "get <CUR_ML|CUR_MR|ENC_ML|ENC_MR|IMU|ML|MR>"},
-		{"ctrl", ctrl_cmd, "ctrl TODO"},
-		{"log", log_cmd, "log <samples> <frequency> [CUR_ML|CUR_MR|ENC_ML|ENC_MR|IMU]"},
-		{"imu", imu_cmd, "imu"},
-		{"motsysid_free", sysid_motor_free_cmd, "motsysid_free <side> <sample frequency> <time (s)>  <sin freq> <sin gain> <sin bias>"},
-		{"motsysid_load", sysid_motor_load_cmd, "motsysid_load <side> <sample frequency> <length (m)> <radius (m)> <voltage>"}
+		//{"help", _cmd_help},//"help [cmd]		Prints the help string of [cmd], else all functions and help string"},
+		{"pinout", _print_chip_pinout}, //"pinout [pin]		Prints the pinout of the ATMEGA32P, [pin] prints the specific functions of each pin"},
+		{"set", set_cmd},//"set <CUR_ML|CUR_MR|ENC_ML|ENC_MR|IMU|ML|MR>"},
+		{"get", get_cmd},//"get <CUR_ML|CUR_MR|ENC_ML|ENC_MR|IMU|ML|MR>"},
+		//{"ctrl", ctrl_cmd, "ctrl TODO"},
+		{"log", log_cmd},//"log <samples> <frequency> [CUR_ML|CUR_MR|ENC_ML|ENC_MR|IMU_AX|IMU_AY|IMU_AZ|IMU_GX|IMU_GY|IMU_GZ]"},
+		{"imu", imu_cmd},
+		//{"motsysid_free", sysid_motor_free_cmd,"smf"},// "motsysid_free <side> <sample frequency> <time (s)>  <sin freq> <sin gain> <sin bias>"},
+		//{"motsysid_load", sysid_motor_load_cmd, "sm"}//"motsysid_load <side> <sample frequency> <length (m)> <radius (m)> <voltage>"}
 };
 
 #ifdef NO_LD_WRAP
@@ -79,7 +79,7 @@ void cmd_parse(int argc, const char* argv[])
 	}
 }
 
-CMD_STATUS _cmd_help(int argc, const char* argv[])
+/*CMD_STATUS _cmd_help(int argc, const char* argv[])
 {
     // Describe argument syntax using POSIX.1-2008 convention
     // see http://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap12.html
@@ -105,7 +105,7 @@ CMD_STATUS _cmd_help(int argc, const char* argv[])
 		return CMD_INVALIDPARAM;
 	}
 
-}
+}*/
 
 CMD_STATUS _print_chip_pinout(int argc, const char* argv[])
 {
@@ -238,7 +238,7 @@ static CMD_STATUS get_cmd(int argc, const char* argv[])
 		return CMD_INVALIDPARAM;
 }
 
-static CMD_STATUS ctrl_cmd(int argc, const char* argv[])
+/*static CMD_STATUS ctrl_cmd(int argc, const char* argv[])
 {
 	UNUSED(argv);
 	if (argc == 0)
@@ -250,7 +250,7 @@ static CMD_STATUS ctrl_cmd(int argc, const char* argv[])
 	}
 	else
 		return CMD_INVALIDPARAM;
-}
+}*/
 
 static CMD_STATUS imu_cmd(int argc, const char* argv[])
 {

@@ -11,7 +11,7 @@ typedef enum{
 typedef struct {
 	const char * cmd_string;
 	CMD_STATUS (*cmd_function)(int argc, const char* argv[]);
-	const char * help_string;
+	//const char * help_string;
 } command_s;
 
 void cmd_parse(int argc, const char* argv[]);

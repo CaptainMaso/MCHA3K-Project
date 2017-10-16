@@ -155,27 +155,24 @@ void tasks_run(void)
 {
     if (_task_count > 0)
     {
-    	if (_task_trigger_count > _task_trigger_last_count)
+    	uint16_t _task_trigger_count_tmp = _task_trigger_count;
+    	if (_task_trigger_count_tmp >= _task_trigger_last_count + 1)
     	{
     		for(uint8_t i = 0; i < _task_count; i++)
     		{
-    			if (_task_trigger_count % _tasks[i]->interval == 0)
+    			if (_task_trigger_count_tmp % _tasks[i]->interval == 0)
     				_tasks[i]->callback();
     		}
 
-    		/* TODO: Check timer interval length
-			if (_tasks_) // Check if the trigger occurred during the task
-			{
-				// If we get here, the task took longer than the timer period
-				tasks_disable();
-				uint8_t ticks_per_trigger = _task_get_ticks_per_trigger();
-				printf_P(PSTR("*** Task incomplete before next trigger! [tar/dur/max: %" PRIu16 "/%" PRIu16 "/%" PRIu8 "] ***\n"), tardiness, duration, ticks_per_trigger);
-			}*/
-
-    		if (_task_trigger_count > 50000)
+    		if (_task_trigger_count_tmp > 50000)
     			_task_trigger_count = _task_trigger_last_count = 0;
     		else
-    			_task_trigger_last_count = _task_trigger_count;
+    			_task_trigger_last_count = _task_trigger_count_tmp;
+    	}
+    	else if (_task_trigger_count_tmp > _task_trigger_last_count + 5)
+    	{
+    		printf_P(PSTR("ERROR: TASKS RAN TOO LONG, DISABLING TASKS\n"));
+    		tasks_disable();
     	}
     }
 }

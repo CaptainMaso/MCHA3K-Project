@@ -1,41 +1,94 @@
-function [Theta, dTheta, Bias] = IMUKalmanFilter(Gyro, Ap, Ar)
-global T pb pw;
-persistent P_last Theta_last dTheta_last Bias_last;
-
-if isempty(Theta_last)
-   Theta_last = 0;
-   dTheta_last = 0;
-   Bias_last = 0.001;
-   P_last = [T*pw, 0.5*T^2*pw, 0; 0.5*T^2*pw, T^3*pw/3, 0; 0, 0, T*pb];
+function [Theta, dTheta, Bias, P] = IMUKalmanFilter(Theta, dTheta, Bias, P, Gyro, Ap, Ar)
+    global T pb pw rw rt;
+    [Theta, dTheta, Bias, P] = TimeUpdate(Theta, dTheta, Bias, P);
+    GyroUpdate(Theta_last, dTheta, Bias, P, 
 end
 
-TimeUpdate(Theta_last, dTheta_last, Bias_last);
-end
-
-function [Theta, dTheta, Bias, P] = TimeUpdate(Theta_prior, dTheta_prior, Bias_prior, P_prior)
+function [Theta, dTheta, Bias, P] = TimeUpdate(Theta_p, dTheta_p, Bias_p, P_p)
     global T qw qb;
     
     % State Update
-    dTheta = dTheta_prior;
-    Theta  = T*dTheta_prior + Theta_prior;
-    Bias = Bias_prior;
+    dTheta = dTheta_p;
+    Theta  = T*dTheta_p + Theta_p;
+    Bias = Bias_p;
     
     % Covariance Update
-    Pbb_prior = P_prior(3,3);
-    Ptb_prior = P_prior(2,3);
-    Ptt_prior = P_prior(2,2);
-    Pwb_prior = P_prior(1,3);
-    Pwt_prior = P_prior(1,2);
-    Pww_prior = P_prior(1,1);
+    Pbb_p = P_p(3,3);
+    Ptb_p = P_p(2,3);
+    Ptt_p = P_p(2,2);
+    Pwb_p = P_p(1,3);
+    Pwt_p = P_p(1,2);
+    Pww_p = P_p(1,1);
     
-    Pbb = Pbb_prior + T*qb;
-    Ptb = T*Pwb_prior+Ptb_prior;
-    Ptt = Ptt_prior + T^2*Pww_prior + 2*T*Pwt_prior + T^3*qw/3;
-    Pwb = Pwb_prior;
-    Pwt = T*Pww_prior + Pwt_prior + 1/2*T^2*qw;
-    Pww = Pww_prior + T*qw;
+    Pbb = Pbb_p + T*qb;
+    Ptb = T*Pwb_p+Ptb_p;
+    Ptt = Ptt_p + T^2*Pww_p + 2*T*Pwt_p + T^3*qw/3;
+    Pwb = Pwb_p;
+    Pwt = T*Pww_p + Pwt_p + 1/2*T^2*qw;
+    Pww = Pww_p + T*qw;
     
     P = [Pww, Pwt, Pwb; Pwt, Ptt, Ptb; Pwb, Ptb, Pbb];
 end
 
-function GyroCorrection(Theta_p, dTheta_p, Bias_p, P_p
+function [Theta, dTheta, Bias, P] = GyroCorrection(Theta_p, dTheta_p, Bias_p, P_p, yw)
+    global T rw;
+    Pbb_p = P_p(3,3);
+    Ptb_p = P_p(2,3);
+    Ptt_p = P_p(2,2);
+    Pwb_p = P_p(1,3);
+    Pwt_p = P_p(1,2);
+    Pww_p = P_p(1,1);    
+
+    %% Kalman Gain Update
+    k = [Pww_p + Pwb_p; Pwt_p + Ptb_p; Pwb_p + Pbb_p]/(Pww_p + 2*Pwb_p + Pbb_p + rw/T);
+    kw = k(1);
+    kt = k(2);
+    kb = k(3);
+    
+    %% State Update
+    dTheta = dTheta_p + kw*(yw-dTheta_p-Bias_p);
+    Theta =  Theta_p  + kt*(yw-dTheta_p-Bias_p);
+    Bias =   Bias_p + kb*(yw-dTheta_p-Bias_p);
+    
+    %% Covariance Update
+    Pww = (kw - 1)^2*Pww_p + (2*kw*(kw - 1))*Pwb_p + kw^2*Pbb_p + (kw^2*rw)/T;
+    Pwt = (kt*(kw - 1))*Pww_p + (1 - kw)*Pwt_p + (kt*kw + kt*(kw - 1))*Pwb_p + (-kw)*Ptb_p + (kt*kw)*Pbb_p + (kt*kw*rw)/T;
+    Pwb = (kb*(kw - 1))*Pww_p + (kb*kw + (kb - 1)*(kw - 1))*Pwb_p + (kw*(kb - 1))*Pbb_p + (kb*kw*rw)/T;
+    Ptt = kt^2*Pww_p + (-2*kt)*Pwt_p + (2*kt^2)*Pwb_p + Ptt_p + (-2*kt)*Ptb_p + kt^2*Pbb_p + (kt^2*rw)/T;
+    Ptb = (kb*kt)*Pww_p + (-kb)*Pwt_p + (kb*kt + kt*(kb - 1))*Pwb_p + (1 - kb)*Ptb_p + (kt*(kb - 1))*Pbb_p + (kb*kt*rw)/T;
+    Pbb = kb^2*Pww_p + (2*kb*(kb - 1))*Pwb_p + (kb - 1)^2*Pbb_p + (kb^2*rw)/T;
+    
+    P = [Pww, Pwt, Pwb; Pwt, Ptt, Ptb; Pwb, Ptb, Pbb];
+end
+
+function [Theta, dTheta, Bias, P] = AccCorrection(Theta_p, dTheta_p, Bias_p, P_p, at, ar)
+    global T rt;
+    Pbb_p = P_p(3,3);
+    Ptb_p = P_p(2,3);
+    Ptt_p = P_p(2,2);
+    Pwb_p = P_p(1,3);
+    Pwt_p = P_p(1,2);
+    Pww_p = P_p(1,1);    
+
+    %% Kalman Gain Update
+    k = [Pwt_p; Ptt_p; Ptb_p]/(Ptt_p + rt/T);
+    kw = k(1);
+    kt = k(2);
+    kb = k(3);
+    
+    %% State Update
+    yt = atan2(at, ar);
+    dTheta = dTheta_p + kw*(yt-Theta_p);
+    Theta =  Theta_p  + kt*(yt-Theta_p);
+    Bias =   Bias_p   + kb*(yt-Theta_p);
+    
+    %% Covariance Update
+    Pww = Pww_p + (-2*kw)*Pwt_p + kw^2*Ptt_p + (kw^2*rt)/T;
+    Pwt = (1 - kt)*Pwt_p + (kw*(kt - 1))*Ptt_p + (kt*kw*rt)/T;
+    Pwb = (-kb)*Pww_p + (kb*kw)*Pwt_p + (1 - kb)*Pwb_p + (kw*(kb - 1))*Ptb_p + (kb*kw*rt)/T;
+    Ptt = (kt - 1)^2*Ptt_p + (kt^2*rt)/T;
+    Ptb = (kb*(kt - 1))*Pwt_p + ((kb - 1)*(kt - 1))*Ptb_p + (kb*kt*rt)/T;
+    Pbb = kb^2*Pww_p + (2*kb*(kb - 1))*Pwb_p + (kb - 1)^2*Pbb_p + (kb^2*rt)/T;
+    
+    P = [Pww, Pwt, Pwb; Pwt, Ptt, Ptb; Pwb, Ptb, Pbb];
+end

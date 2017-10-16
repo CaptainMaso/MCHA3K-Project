@@ -10,7 +10,7 @@
 #include "encoders.h"
 #include "motor.h"
 #include "i2cmaster.h"
-//#include "imu.h"
+#include "imu.h"
 #include "mpu6050.h"
 
 CLB_CREATE_STATIC(clb, 80);
@@ -29,14 +29,12 @@ int main(void)
     uart_init();
     i2c_init();
     motors_init();
-    encoder_init();
-    mpu6050_init();
     tasks_init(0.001);
+    encoder_init();
+    imu_init();
 
     // Enable global interrupts
 	sei();
-
-    // Wait a second at startup
 
     // Send initial string
     printf_P(PSTR("Program Started\n"));
@@ -53,6 +51,8 @@ int main(void)
 
 	if (_led_task.id != 255)
 		tasks_enable();
+	else
+		printf_P(PSTR("Could not start tasks\n"));
 
     for(;/*ever*/;)
     {

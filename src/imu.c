@@ -2,71 +2,108 @@
 #include <stdio.h>
 #include <avr/io.h>
 #include <avr/pgmspace.h>
+#include <util/atomic.h>
+
+#include "task.h"
 
 #include "imu.h"
+#include "mpu6050.h"
+
+void imu_update(void);
+
+static task_s _imu_update_task = {
+		.interval = 10,
+		.callback = imu_update,
+		.id = 255
+};
+
+static int16_t _ax = 0;
+static int16_t _ay = 0;
+static int16_t _az = 0;
+static int16_t _gx = 0;
+static int16_t _gy = 0;
+static int16_t _gz = 0;
+
+/*
+ * ar = az
+ * at = ax
+ * dTheta = gy
+ */
 
 void imu_init(void)
 {
+	//Initialise MPU6050
+	mpu6050_init();
 
+	//Set up IMU task regularly update data
+	_imu_update_task.interval = tasks_time_interval_to_task_interval(0.1);
+
+	tasks_add(&_imu_update_task);
 }
 
-void imu_whoami(void)
+void imu_update(void)
 {
-	uint8_t whoami = imu_read_reg8(IMU_REG_WHO_AM_I);
-	if (whoami == IMU_ADDRESS)
-			printf_P(PSTR("I AM THE MPU6050\n"));
-		else
-			printf_P(PSTR("I AM NOT THE MPU6050\n"));
+	mpu6050_getRawData(&_ax, &_ay, &_az, &_gx, &_gy, &_gz);
 }
 
-
-uint8_t imu_read_reg8(uint8_t reg)
+int16_t imu_get_ax(void)
 {
-	uint8_t data;
-	printf_P(PSTR("Sending Start\n"));
-	i2c_start_wait(0b1000000 | IMU_ADDRESS);
-	printf_P(PSTR("Writing Desired Register\n"));
-	i2c_write(reg);
-	printf_P(PSTR("Sending repeated start\n"));
-	i2c_rep_start(IMU_ADDRESS | 0x00);
-	printf_P(PSTR("Reading and returning Nack\n"));
-	data = i2c_readNak();
-	printf_P(PSTR("Sending stop\n"));
-	i2c_stop();
-	printf_P(PSTR("Done\n"));
-	return data;
+	int16_t tmp;
+	ATOMIC_BLOCK(ATOMIC_FORCEON)
+	{
+		tmp = _ax;
+	}
+
+	return tmp;
+}
+int16_t imu_get_ay(void)
+{
+	int16_t tmp;
+	ATOMIC_BLOCK(ATOMIC_FORCEON)
+	{
+		tmp = _ay;
+	}
+
+	return tmp;
+}
+int16_t imu_get_az(void)
+{
+	int16_t tmp;
+	ATOMIC_BLOCK(ATOMIC_FORCEON)
+	{
+		tmp = _az;
+	}
+
+	return tmp;
+}
+int16_t imu_get_gx(void)
+{
+	int16_t tmp;
+	ATOMIC_BLOCK(ATOMIC_FORCEON)
+	{
+		tmp = _gx;
+	}
+
+	return tmp;
+}
+int16_t imu_get_gy(void)
+{
+	int16_t tmp;
+	ATOMIC_BLOCK(ATOMIC_FORCEON)
+	{
+		tmp = _gy;
+	}
+
+	return tmp;
+}
+int16_t imu_get_gz(void)
+{
+	int16_t tmp;
+	ATOMIC_BLOCK(ATOMIC_FORCEON)
+	{
+		tmp = _gz;
+	}
+
+	return tmp;
 }
 
-uint16_t imu_read_reg16(uint8_t reg)
-{
-	uint8_t dataH;
-	uint8_t dataL;
-	i2c_start_wait(IMU_ADDRESS | 0x00);
-	i2c_write(reg);
-	i2c_rep_start(IMU_ADDRESS | 0x01);
-	dataH = i2c_readAck();
-	dataL = i2c_readNak();
-	i2c_stop();
-	return (uint16_t)((dataH << 8) | dataL);
-}
-
-uint8_t imu_write_reg8(uint8_t reg, uint8_t data)
-{
-	i2c_start_wait(IMU_ADDRESS | 0x00);
-	i2c_write(reg);
-	i2c_write(data);
-	i2c_stop();
-	return 0;
-}
-
-uint8_t imu_write_reg16(uint8_t reg, uint16_t data)
-{
-	uint8_t dataH = (uint8_t)((data & 0xFF00) >> 8);
-	uint8_t dataL = (uint8_t)(data & 0x00FF);
-	i2c_start_wait(IMU_ADDRESS | 0x00);
-	i2c_write(reg);
-	i2c_write(dataH);
-	i2c_write(dataL);
-	i2c_stop();
-	return 0;
-}
