@@ -17,7 +17,7 @@ ML_L       = 0.5973;    % Inductance of DC Motor (H)
 ML_K       = 0.0109;   % Motor Constant (N.m/A)
 ML_N       = 30;       % Gearbox Ratio
 ML_Eta    = 0.7243;  %0.588;   % Gearbox Efficiency (%/100)
-ML_Tm      = 0.000022;        % Friction Torque (N.m)
+ML_Tm      = 0.00022;        % Friction Torque (N.m)
 
 % Programmable Parameters
 T_motor = 1/1000;
@@ -100,7 +100,7 @@ chassis_controllability = rank(chassis_co);
 
 Chassis_Q = Chassis_Cc'*Chassis_Cc;
 
-Chassis_R = 2;
+Chassis_R = 1;
 
 Chassis_Kc = lqr(Chassis_Ac, Chassis_Bc, Chassis_Q, Chassis_R);
 

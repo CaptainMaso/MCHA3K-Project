@@ -1,11 +1,11 @@
-function [Theta, dTheta, Bias, P] = IMUKalmanFilter(Theta, dTheta, Bias, P, Gyro, Ap, Ar)
-    global T pb pw rw rt;
-    [Theta, dTheta, Bias, P] = TimeUpdate(Theta, dTheta, Bias, P);
-    GyroUpdate(Theta_last, dTheta, Bias, P, 
+function [Theta, dTheta, Bias, P] = IMUKalmanFilter(Theta, dTheta, Bias, P, Gyro, At, Ar, qw, qb, rw, rt)
+    [Theta, dTheta, Bias, P] = TimeUpdate(Theta, dTheta, Bias, P, qw, qb);
+    [Theta, dTheta, Bias, P] = GyroCorrection(Theta, dTheta, Bias, P, Gyro, rw);
+    [Theta, dTheta, Bias, P] = AccCorrection(Theta, dTheta, Bias, P, At, Ar, rt);
 end
 
-function [Theta, dTheta, Bias, P] = TimeUpdate(Theta_p, dTheta_p, Bias_p, P_p)
-    global T qw qb;
+function [Theta, dTheta, Bias, P] = TimeUpdate(Theta_p, dTheta_p, Bias_p, P_p, qw, qb)
+    global T;
     
     % State Update
     dTheta = dTheta_p;
@@ -30,8 +30,8 @@ function [Theta, dTheta, Bias, P] = TimeUpdate(Theta_p, dTheta_p, Bias_p, P_p)
     P = [Pww, Pwt, Pwb; Pwt, Ptt, Ptb; Pwb, Ptb, Pbb];
 end
 
-function [Theta, dTheta, Bias, P] = GyroCorrection(Theta_p, dTheta_p, Bias_p, P_p, yw)
-    global T rw;
+function [Theta, dTheta, Bias, P] = GyroCorrection(Theta_p, dTheta_p, Bias_p, P_p, yw, rw)
+    global T;
     Pbb_p = P_p(3,3);
     Ptb_p = P_p(2,3);
     Ptt_p = P_p(2,2);
@@ -61,8 +61,8 @@ function [Theta, dTheta, Bias, P] = GyroCorrection(Theta_p, dTheta_p, Bias_p, P_
     P = [Pww, Pwt, Pwb; Pwt, Ptt, Ptb; Pwb, Ptb, Pbb];
 end
 
-function [Theta, dTheta, Bias, P] = AccCorrection(Theta_p, dTheta_p, Bias_p, P_p, at, ar)
-    global T rt;
+function [Theta, dTheta, Bias, P] = AccCorrection(Theta_p, dTheta_p, Bias_p, P_p, at, ar, rt)
+    global T;
     Pbb_p = P_p(3,3);
     Ptb_p = P_p(2,3);
     Ptt_p = P_p(2,2);
@@ -77,7 +77,7 @@ function [Theta, dTheta, Bias, P] = AccCorrection(Theta_p, dTheta_p, Bias_p, P_p
     kb = k(3);
     
     %% State Update
-    yt = atan2(at, ar);
+    yt = atan2(at, -ar);
     dTheta = dTheta_p + kw*(yt-Theta_p);
     Theta =  Theta_p  + kt*(yt-Theta_p);
     Bias =   Bias_p   + kb*(yt-Theta_p);
