@@ -79,10 +79,10 @@ SRC_COMMON = \
 	src/task.c \
 	src/log_data.c \
 	src/encoders.c \
-	src/mpu6050.c \
-	src/twimaster.c \
 	src/sysid.c \
 	src/imu.c \
+	src/mpu6050.c \
+	src/twimaster.c \
 	src/motor.c
 	
 SRC_TEST = \
@@ -97,11 +97,9 @@ SRC_TEST = \
 	test/src/test_iospy.c \
 	test/src/test_cmd_parse.c \
 	test/src/test_cmd_process.c \
-	test/src/test_controller.c \
-	test/src/test_cmd_controller.c \
 	test/src/test_task.c \
+	test/src/test_encoders.c \
 	test/src/test_motor.c
-#	test/src/test_encoders.c
 
 SRC_AVR = \
 	$(SRC_COMMON) \
@@ -110,7 +108,7 @@ SRC_AVR = \
 	src/uart_isr.c\
 	src/task_isr.c \
 	src/encoders_isr.c \
-	src/motor_isr.c
+	src/motor_isr.c 
 
 INC_COMMON = \
 	-Isrc
@@ -153,9 +151,9 @@ program: reboot
 reboot:
 	./$(DTREXE) $(PORT) LOW 10
 
-test:
+test: clean_test
 	gcc $(CFLAGS) $(INC_TEST) $(SYMBOLS) $(SRC_TEST) -o $(TARGET_TEST) $(MISC_TEST)
-	- ./$(TARGET_TEST) -v
+	- ./$(TARGET_TEST)
 
 clean_test:
 	rm -f $(TARGET_TEST)

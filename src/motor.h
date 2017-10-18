@@ -30,5 +30,6 @@ int16_t motors_get_adc_reading(MOTOR_SIDE);
 
 void motor_adc_isr(void);
 
+void motor_set_torque(MOTOR_SIDE, int32_t);
 
 #endif /* SRC_MOTORS_H_ */

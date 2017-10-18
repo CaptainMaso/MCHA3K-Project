@@ -9,7 +9,7 @@
 #define ISR_BLOCK
 #define ISR_NOBLOCK
 
-#define EMPTY_INTERRUPT(vector)
+//#define EMPTY_INTERRUPT(vector)
 
 #define EMPTY_INTERRUPT(vector) \
     void vector (void); \

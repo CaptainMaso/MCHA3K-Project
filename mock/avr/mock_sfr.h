@@ -55,8 +55,10 @@ extern uint8_t mock_timsk;
 
 extern uint8_t mock_sreg;
 
-extern uint8_t mock_TWSR;
-extern uint8_t mock_TWCR;
-extern uint8_t mock_TWDR;
+extern uint8_t mock_twsr;
+extern uint8_t mock_twcr;
+extern uint8_t mock_twbr;
+extern uint8_t mock_twdr;
+extern uint8_t mock_twar;
 
 #endif

@@ -23,8 +23,6 @@ static CMD_STATUS _print_chip_pinout(int argc, const char* argv[]);
 static CMD_STATUS set_cmd(int argc, const char* argv[]);
 static CMD_STATUS get_cmd(int argc, const char* argv[]);
 //static CMD_STATUS ctrl_cmd(int argc, const char* argv[]);
-static CMD_STATUS imu_cmd(int argc, const char* argv[]);
-
 float vref, theta, v = 0.0f;
 
 static const command_s command_list[] =
@@ -35,7 +33,6 @@ static const command_s command_list[] =
 		{"get", get_cmd},//"get <CUR_ML|CUR_MR|ENC_ML|ENC_MR|IMU|ML|MR>"},
 		//{"ctrl", ctrl_cmd, "ctrl TODO"},
 		{"log", log_cmd},//"log <samples> <frequency> [CUR_ML|CUR_MR|ENC_ML|ENC_MR|IMU_AX|IMU_AY|IMU_AZ|IMU_GX|IMU_GY|IMU_GZ]"},
-		{"imu", imu_cmd},
 		//{"motsysid_free", sysid_motor_free_cmd,"smf"},// "motsysid_free <side> <sample frequency> <time (s)>  <sin freq> <sin gain> <sin bias>"},
 		//{"motsysid_load", sysid_motor_load_cmd, "sm"}//"motsysid_load <side> <sample frequency> <length (m)> <radius (m)> <voltage>"}
 };
@@ -251,20 +248,3 @@ static CMD_STATUS get_cmd(int argc, const char* argv[])
 	else
 		return CMD_INVALIDPARAM;
 }*/
-
-static CMD_STATUS imu_cmd(int argc, const char* argv[])
-{
-	UNUSED(argv);
-	UNUSED(argc);
-	double ax, ay, az, gx, gy, gz;
-
-	ATOMIC_BLOCK(ATOMIC_FORCEON)
-	{
-		//mpu6050_getRawData(&ax, &ay, &az, &gx, &gy, &gz);
-		mpu6050_getConvData(&ax, &ay, &az, &gx, &gy, &gz);
-	}
-
-	//printf_P(PSTR("\nMPU: ax: %"PRIu16", ay: %"PRIu16", az: %"PRIu16", gx: %"PRIu16", gy: %"PRIu16", gz: %"PRIu16"\n"), ax, ay, az, gx, gy, gz);
-	printf_P(PSTR("\nMPU: ax: %g, ay: %g, az: %g, gx: %g, gy: %g, gz: %g\n"), ax, ay, az, gx, gy, gz);
-	return CMD_OK;
-}

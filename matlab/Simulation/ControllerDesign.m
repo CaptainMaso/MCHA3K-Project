@@ -8,7 +8,7 @@ b = 0;%0.001;          % Damping on chassis (N.s/m)
 c = 0;%0.005;          % Damping between wheel and chassis (N.m.s/rad)
 ML_J = 3.22*10^-6;     % Wheel Moment of Inertia
 J = ML_J;
-I = 0.007361487;   % Chassis Moment of Inertia
+I = 0.007361487 - M*l^2;   % Chassis Moment of Inertia
 r = 82*10^-3/2;       % Wheel Radius
 
 % DC Motor Parameters
@@ -16,8 +16,8 @@ ML_R       = 7.9821;    % Armature Resistance (Ohms)
 ML_L       = 0.5973;    % Inductance of DC Motor (H)
 ML_K       = 0.0109;   % Motor Constant (N.m/A)
 ML_N       = 30;       % Gearbox Ratio
-ML_Eta    = 0.7243;  %0.588;   % Gearbox Efficiency (%/100)
-ML_Tm      = 0.00022;        % Friction Torque (N.m)
+ML_Eta    = 0.4;  %0.588;   % Gearbox Efficiency (%/100)
+ML_Tm      = 0.000022;        % Friction Torque (N.m)
 
 % Programmable Parameters
 T_motor = 1/1000;
@@ -41,19 +41,19 @@ g = 9.81;           % Acceleration due to gravity (m/s/s)
 alpha = 0*pi/180;   % Ground slope (rad = deg*pi/180)
 
 % Initial Conditions & other sim params
-theta0 = 46 * pi/180;    % Initial Theta
+theta0 = 30 * pi/180;    % Initial Theta
 
 tsim = 40;              % Simulation Time (s)
-vref_step_point = 1200e-3;  % Set point of vref (m/s)
+vref_step_point = 1000e-3;  % Set point of vref (m/s)
 inpdist_step_point = 0.05;
 
 %% Chassis SS Formulation
-Mdiff = [ML_J+(M+m)*r^2 + M*l*r*cos(alpha), ML_J+(M+m)*r^2;
-         ML_J+(M+m)*r^2 + 2*M*l*r*cos(alpha) + M*l^2 + I, ML_J+(M+m)*r^2 + M*l*r*cos(alpha)];
+Mdiff = [ML_J+(M+m)*r^2 + 2*M*l*r + M*l^2 + I,   ML_J+(M+m)*r^2 + M*l*r;
+         ML_J+(M+m)*r^2 + M*l*r,                 ML_J+(M+m)*r^2];
      
-Bdiff = [0 0; b c];
-Cdiff = [0, 0; -M*g*l, 0];
-Udiff = [1;0];
+Bdiff = [b c; 0 0];
+Cdiff = [-M*g*l, 0; 0, 0];
+Udiff = [0;1];
 
 Bss = -Mdiff \ Bdiff;
 Css = -Mdiff \ Cdiff;
@@ -66,11 +66,14 @@ A_chassis = [0 0 1 0;
 
 B_chassis = [0;0;Uss(1);Uss(2)];
 
-C_chassis = [0 0 1 0; 0 1 0 0];
+C_chassis = [1 0 0 0; 0 0 r r];
 
 D_chassis = [0;0];
 
-poles = eig(A_chassis)
+chassis_poles = eig(A_chassis)
+ss_chassis = ss(A_chassis, B_chassis, C_chassis, D_chassis);
+chassis_zeros = tzero(ss_chassis)
+tf(ss_chassis)
 
 %% DC Motor SSM
 ML_A = -ML_R/ML_L;
@@ -100,7 +103,7 @@ chassis_controllability = rank(chassis_co);
 
 Chassis_Q = Chassis_Cc'*Chassis_Cc;
 
-Chassis_R = 1;
+Chassis_R = 1.5;
 
 Chassis_Kc = lqr(Chassis_Ac, Chassis_Bc, Chassis_Q, Chassis_R);
 
@@ -114,8 +117,8 @@ Chassis_Bcl = Chassis_Bc;
 Chassis_Ccl = Chassis_Cc;
 Chassis_Dcl = Chassis_Dc;
 
-% DC motor control
-ML_Tau = 5e-3;
+%% DC motor control
+ML_Tau = 2e-2;
 Kp = 2*ML_L/ML_Tau - ML_R;
 Ti = ML_L/ML_Tau^2;
 
@@ -129,31 +132,31 @@ h = gcf;
 clf(gcf);
 hold on;
 subplot(4,2,1);
-plot(time, theta*180/pi, 'b-', time, theta_est*180/pi, 'g--');
+plot(time, theta*180/pi, 'b-');
 xlabel('Time (s)', 'FontSize', 11);
 ylabel('\theta (\circ)', 'FontSize', 14);
-legend('Actual', 'Estimator');
+legend('Actual');
 grid on;
 
 subplot(4,2,3);
-plot(time, dtheta*180/pi, time, dtheta_est*180/pi, 'g--');
+plot(time, dtheta*180/pi);
 xlabel('Time (s)', 'FontSize', 11);
 ylabel('d\theta/dt (\circ)', 'FontSize', 14);
-legend('Actual', 'Estimator');
+legend('Actual');
 grid on;
 
 subplot(4,2,5);
-plot(time, (phi + theta) * r, time, (phi_est + theta_est) * r, 'g--');
+plot(time, (phi + theta) * r);
 xlabel('Time (s)', 'FontSize', 11);
 ylabel('x (m)', 'FontSize', 14);
-legend('Actual', 'Estimator');
+legend('Actual');
 grid on;
 
 subplot(4,2,7);
-plot(time, (dphi + dtheta) .* r, 'b-', time, vref, 'r--', time, (dphi_est + dtheta_est) * r, 'g--');
+plot(time, (dphi + dtheta) .* r, 'b-', time, vref, 'r--');
 xlabel('Time (s)', 'FontSize', 11);
 ylabel('dx/dt (m/s)', 'FontSize', 14);
-legend('Actual', 'Demanded', 'Estimator');
+legend('Actual', 'Demanded');
 grid on;
 
 subplot(4,2,2);

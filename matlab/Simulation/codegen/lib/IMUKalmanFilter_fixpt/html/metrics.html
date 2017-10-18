@@ -1,0 +1,5028 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>
+Static Code Metrics Report
+</title>
+
+</head>
+<body>
+<h1>
+Static Code Metrics Report
+</h1>
+<div>
+<p>
+The static code metrics report provides statistics of the generated code. Metrics are estimated from static analysis of the generated code using the C data types specified in the <b>Hardware</b>: <b>char</b> 8, <b>short</b> 16, <b>int</b> 32, <b>long</b> 32, <b>float</b> 32, <b>double</b> 64, <b>pointer</b> 64 bits. Actual object code metrics might differ due to target specific compiler and platform settings.
+</p>
+
+</div>
+<div>
+<h3>
+Table of Contents
+</h3>
+<ol>
+<li>
+<a href="#sec_File_Information" onclick="top.rtwTableExpand(window.document, window.document.getElementById('rtwIdCodeMetrics_table_001_control'), 'rtwIdCodeMetrics_table_001')">
+File Information
+</a>
+
+</li>
+<li>
+<a href="#sec_Global_Variables" onclick="top.rtwTableExpand(window.document, window.document.getElementById('rtwIdCodeMetrics_table_002_control'), 'rtwIdCodeMetrics_table_002')">
+Global Variables
+</a>
+
+</li>
+<li>
+<a href="#sec_Function_Information" onclick="top.rtwTableExpand(window.document, window.document.getElementById('rtwIdCodeMetrics_table_060_control'), 'rtwIdCodeMetrics_table_060')">
+Function Information
+</a>
+
+</li>
+
+</ol>
+
+</div>
+<h3 name="sec_File_Information" id="sec_File_Information">
+1. File Information <span title="Click to shrink or expand section" style="cursor:pointer;font-weight:normal;" id="rtwIdCodeMetrics_table_001_control" onclick ="if (top) if (top.rtwTableShrink) top.rtwTableShrink(window.document, this, 'rtwIdCodeMetrics_table_001', false)"><span class="shrink-button">[<u>hide</u>]</span></span>
+</h3>
+<table width="100%" name="rtwIdCodeMetrics_table_001" id="rtwIdCodeMetrics_table_001" border="0">
+<tr>
+<td align="left" valign="top">
+<table width="100%" border="0">
+<tr>
+<td align="left" valign="top">
+<p>
+<span name="button_fileInfo_summary_table" id="button_fileInfo_summary_table" title="Click to shrink or expand tree" style="cursor:pointer;font-family:monospace;font-weight:normal;" onclick ="if (top) if (top.rtwTableShrink) top.rtwTableShrink(window.document, this, 'fileInfo_summary_table', true)"><span class="shrink-button">[-]</span></span> Summary
+</p>
+<table width="50%" cellpadding="0" name="fileInfo_summary_table" id="fileInfo_summary_table" border="0">
+<tr>
+<td width="4%" align="left" valign="top">
+<span style="white-space:nowrap" title="Number of source files.">Number of .c files</span>
+</td>
+<td width="4%" align="left" valign="top">
+:
+</td>
+<td width="4%" align="right" valign="top">
+6
+</td>
+<td width="86%" align="right" valign="top">
+&#160;
+</td>
+
+</tr>
+<tr>
+<td width="4%" align="left" valign="top">
+<span style="white-space:nowrap" title="Number of header files.">Number of .h files</span>
+</td>
+<td width="4%" align="left" valign="top">
+:
+</td>
+<td width="4%" align="right" valign="top">
+8
+</td>
+<td width="86%" align="right" valign="top">
+&#160;
+</td>
+
+</tr>
+<tr>
+<td width="4%" align="left" valign="top">
+<span title="Lines of code excluding comments and blank lines.">Lines of code</span>
+</td>
+<td width="4%" align="left" valign="top">
+:
+</td>
+<td width="4%" align="right" valign="top">
+3,055
+</td>
+<td width="86%" align="right" valign="top">
+&#160;
+</td>
+
+</tr>
+<tr>
+<td width="4%" align="left" valign="top">
+<span style="white-space:nowrap" title="Lines including source code, comments, and blank lines.">Lines</span>
+</td>
+<td width="4%" align="left" valign="top">
+:
+</td>
+<td width="4%" align="right" valign="top">
+4,025
+</td>
+<td width="86%" align="right" valign="top">
+&#160;
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<p>
+<span name="button_fileInfo_detail_table" id="button_fileInfo_detail_table" title="Click to shrink or expand tree" style="cursor:pointer;font-family:monospace;font-weight:normal;" onclick ="if (top) if (top.rtwTableShrink) top.rtwTableShrink(window.document, this, 'fileInfo_detail_table', true)"><span class="shrink-button">[-]</span></span> File details
+</p>
+<table width="100%" cellpadding="2" name="fileInfo_detail_table" id="fileInfo_detail_table" border="1">
+<tr style="background-color: #eeeeff">
+<td width="33%" align="left" valign="top" style="border-style: none">
+<b>
+<span style="white-space:nowrap" title="Files sorted in descending order by number of lines of code. ">File Name</span>
+</b>
+
+</td>
+<td width="22%" align="right" valign="top" style="border-style: none">
+<b>
+<span title="Lines of code excluding comments and blank lines.">Lines of Code</span>
+</b>
+
+</td>
+<td width="22%" align="right" valign="top" style="border-style: none">
+<b>
+<span style="white-space:nowrap" title="Lines including source code, comments, and blank lines.">Lines</span>
+</b>
+
+</td>
+<td width="22%" align="right" valign="top" style="border-style: none">
+<b>
+<span style="white-space:nowrap" title="Timestamp of the file">Generated On</span>
+</b>
+
+</td>
+
+</tr>
+<tr style="background-color: #ffffff">
+<td width="33%" align="left" valign="top" style="border-style: none">
+<a href="IMUKalmanFilter_fixpt_c.html" class="code2code">
+IMUKalmanFilter_fixpt.c
+</a>
+
+</td>
+<td width="22%" align="right" valign="top" style="border-style: none">
+2,637
+</td>
+<td width="22%" align="right" valign="top" style="border-style: none">
+3,167
+</td>
+<td width="22%" align="right" valign="top" style="border-style: none">
+10/18/2017  3:29 PM
+</td>
+
+</tr>
+<tr style="background-color: #eeeeff">
+<td width="33%" align="left" valign="top" style="border-style: none">
+<a href="rtGetInf_c.html" class="code2code">
+rtGetInf.c
+</a>
+
+</td>
+<td width="22%" align="right" valign="top" style="border-style: none">
+92
+</td>
+<td width="22%" align="right" valign="top" style="border-style: none">
+145
+</td>
+<td width="22%" align="right" valign="top" style="border-style: none">
+10/18/2017  3:29 PM
+</td>
+
+</tr>
+<tr style="background-color: #ffffff">
+<td width="33%" align="left" valign="top" style="border-style: none">
+<a href="rtwtypes_h.html" class="code2code">
+rtwtypes.h
+</a>
+
+</td>
+<td width="22%" align="right" valign="top" style="border-style: none">
+80
+</td>
+<td width="22%" align="right" valign="top" style="border-style: none">
+148
+</td>
+<td width="22%" align="right" valign="top" style="border-style: none">
+10/18/2017  3:29 PM
+</td>
+
+</tr>
+<tr style="background-color: #eeeeff">
+<td width="33%" align="left" valign="top" style="border-style: none">
+<a href="rtGetNaN_c.html" class="code2code">
+rtGetNaN.c
+</a>
+
+</td>
+<td width="22%" align="right" valign="top" style="border-style: none">
+63
+</td>
+<td width="22%" align="right" valign="top" style="border-style: none">
+103
+</td>
+<td width="22%" align="right" valign="top" style="border-style: none">
+10/18/2017  3:29 PM
+</td>
+
+</tr>
+<tr style="background-color: #ffffff">
+<td width="33%" align="left" valign="top" style="border-style: none">
+<a href="IMUKalmanFilter_fixpt_types_h.html" class="code2code">
+IMUKalmanFilter_fixpt_types.h
+</a>
+
+</td>
+<td width="22%" align="right" valign="top" style="border-style: none">
+46
+</td>
+<td width="22%" align="right" valign="top" style="border-style: none">
+87
+</td>
+<td width="22%" align="right" valign="top" style="border-style: none">
+10/18/2017  3:29 PM
+</td>
+
+</tr>
+<tr style="background-color: #eeeeff">
+<td width="33%" align="left" valign="top" style="border-style: none">
+<a href="rt_nonfinite_c.html" class="code2code">
+rt_nonfinite.c
+</a>
+
+</td>
+<td width="22%" align="right" valign="top" style="border-style: none">
+43
+</td>
+<td width="22%" align="right" valign="top" style="border-style: none">
+104
+</td>
+<td width="22%" align="right" valign="top" style="border-style: none">
+10/18/2017  3:29 PM
+</td>
+
+</tr>
+<tr style="background-color: #ffffff">
+<td width="33%" align="left" valign="top" style="border-style: none">
+<a href="rt_nonfinite_h.html" class="code2code">
+rt_nonfinite.h
+</a>
+
+</td>
+<td width="22%" align="right" valign="top" style="border-style: none">
+37
+</td>
+<td width="22%" align="right" valign="top" style="border-style: none">
+59
+</td>
+<td width="22%" align="right" valign="top" style="border-style: none">
+10/18/2017  3:29 PM
+</td>
+
+</tr>
+<tr style="background-color: #eeeeff">
+<td width="33%" align="left" valign="top" style="border-style: none">
+<a href="IMUKalmanFilter_fixpt_h.html" class="code2code">
+IMUKalmanFilter_fixpt.h
+</a>
+
+</td>
+<td width="22%" align="right" valign="top" style="border-style: none">
+10
+</td>
+<td width="22%" align="right" valign="top" style="border-style: none">
+32
+</td>
+<td width="22%" align="right" valign="top" style="border-style: none">
+10/18/2017  3:29 PM
+</td>
+
+</tr>
+<tr style="background-color: #ffffff">
+<td width="33%" align="left" valign="top" style="border-style: none">
+<a href="rtGetInf_h.html" class="code2code">
+rtGetInf.h
+</a>
+
+</td>
+<td width="22%" align="right" valign="top" style="border-style: none">
+10
+</td>
+<td width="22%" align="right" valign="top" style="border-style: none">
+29
+</td>
+<td width="22%" align="right" valign="top" style="border-style: none">
+10/18/2017  3:29 PM
+</td>
+
+</tr>
+<tr style="background-color: #eeeeff">
+<td width="33%" align="left" valign="top" style="border-style: none">
+<a href="IMUKalmanFilter_fixpt_initialize_h.html" class="code2code">
+IMUKalmanFilter_fixpt_initialize.h
+</a>
+
+</td>
+<td width="22%" align="right" valign="top" style="border-style: none">
+8
+</td>
+<td width="22%" align="right" valign="top" style="border-style: none">
+30
+</td>
+<td width="22%" align="right" valign="top" style="border-style: none">
+10/18/2017  3:29 PM
+</td>
+
+</tr>
+<tr style="background-color: #ffffff">
+<td width="33%" align="left" valign="top" style="border-style: none">
+<a href="IMUKalmanFilter_fixpt_terminate_h.html" class="code2code">
+IMUKalmanFilter_fixpt_terminate.h
+</a>
+
+</td>
+<td width="22%" align="right" valign="top" style="border-style: none">
+8
+</td>
+<td width="22%" align="right" valign="top" style="border-style: none">
+30
+</td>
+<td width="22%" align="right" valign="top" style="border-style: none">
+10/18/2017  3:29 PM
+</td>
+
+</tr>
+<tr style="background-color: #eeeeff">
+<td width="33%" align="left" valign="top" style="border-style: none">
+<a href="rtGetNaN_h.html" class="code2code">
+rtGetNaN.h
+</a>
+
+</td>
+<td width="22%" align="right" valign="top" style="border-style: none">
+8
+</td>
+<td width="22%" align="right" valign="top" style="border-style: none">
+27
+</td>
+<td width="22%" align="right" valign="top" style="border-style: none">
+10/18/2017  3:29 PM
+</td>
+
+</tr>
+<tr style="background-color: #ffffff">
+<td width="33%" align="left" valign="top" style="border-style: none">
+<a href="IMUKalmanFilter_fixpt_initialize_c.html" class="code2code">
+IMUKalmanFilter_fixpt_initialize.c
+</a>
+
+</td>
+<td width="22%" align="right" valign="top" style="border-style: none">
+7
+</td>
+<td width="22%" align="right" valign="top" style="border-style: none">
+32
+</td>
+<td width="22%" align="right" valign="top" style="border-style: none">
+10/18/2017  3:29 PM
+</td>
+
+</tr>
+<tr style="background-color: #eeeeff">
+<td width="33%" align="left" valign="top" style="border-style: none">
+<a href="IMUKalmanFilter_fixpt_terminate_c.html" class="code2code">
+IMUKalmanFilter_fixpt_terminate.c
+</a>
+
+</td>
+<td width="22%" align="right" valign="top" style="border-style: none">
+6
+</td>
+<td width="22%" align="right" valign="top" style="border-style: none">
+32
+</td>
+<td width="22%" align="right" valign="top" style="border-style: none">
+10/18/2017  3:29 PM
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+<h3 name="sec_Global_Variables" id="sec_Global_Variables">
+2. Global Variables <span title="Click to shrink or expand section" style="cursor:pointer;font-weight:normal;" id="rtwIdCodeMetrics_table_002_control" onclick ="if (top) if (top.rtwTableShrink) top.rtwTableShrink(window.document, this, 'rtwIdCodeMetrics_table_002', false)"><span class="shrink-button">[<u>hide</u>]</span></span>
+</h3>
+<table width="100%" name="rtwIdCodeMetrics_table_002" id="rtwIdCodeMetrics_table_002" border="0">
+<tr>
+<td align="left" valign="top">
+Global variables defined in the generated code.
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<table width="100%" cellpadding="0" cellspacing="0" name="globalvarInfo_table" id="globalvarInfo_table" border="1">
+<tr style="background-color: #ffffff">
+<td width="100%" align="left" valign="top" style="border-style: none">
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr>
+<td align="left" valign="top">
+<table width="100%" cellpadding="2" border="0">
+<tr style="background-color: #eeeeff">
+<td width="33%" align="left" valign="top" style="border-style: none">
+<b>
+<span title="Global variables sorted by the maximum size in bytes.">Global Variable</span>
+</b>
+
+</td>
+<td width="22%" align="right" valign="top" style="border-style: none">
+<b>
+<span title="Global variable size in bytes.">Size (bytes)</span>
+</b>
+
+</td>
+<td width="22%" align="right" valign="top" style="border-style: none">
+<b>
+<span title="Total number of potential reads and writes for this global variable">Reads / Writes</span>
+</b>
+
+</td>
+<td width="22%" align="right" valign="top" style="border-style: none">
+<b>
+<span title="Maximum number of potential reads and writes in a function">Reads / Writes in a Function</span>
+</b>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<table width="100%" cellpadding="2" border="0">
+<tr style="background-color: #ffffff">
+<td width="33%" align="left" valign="top" style="border-style: none">
+<span style="white-space:nowrap">&#160;<span style="font-family:monospace">&#160;&#160;</span>&#160; <a href="rt_nonfinite_c.html#var_rtInf" class="code2code">
+rtInf
+</a>
+</span>
+</td>
+<td width="22%" align="right" valign="top" style="border-style: none">
+8
+</td>
+<td width="22%" align="right" valign="top" style="border-style: none">
+2<span style="font-family:Courier">&#160;</span>
+</td>
+<td width="22%" align="right" valign="top" style="border-style: none">
+1<span style="font-family:Courier">&#160;</span>
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<table width="100%" cellpadding="2" border="0">
+<tr style="background-color: #eeeeff">
+<td width="33%" align="left" valign="top" style="border-style: none">
+<span style="white-space:nowrap">&#160;<span style="font-family:monospace">&#160;&#160;</span>&#160; <a href="rt_nonfinite_c.html#var_rtMinusInf" class="code2code">
+rtMinusInf
+</a>
+</span>
+</td>
+<td width="22%" align="right" valign="top" style="border-style: none">
+8
+</td>
+<td width="22%" align="right" valign="top" style="border-style: none">
+2<span style="font-family:Courier">&#160;</span>
+</td>
+<td width="22%" align="right" valign="top" style="border-style: none">
+1<span style="font-family:Courier">&#160;</span>
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<table width="100%" cellpadding="2" border="0">
+<tr style="background-color: #ffffff">
+<td width="33%" align="left" valign="top" style="border-style: none">
+<span style="white-space:nowrap">&#160;<span style="font-family:monospace">&#160;&#160;</span>&#160; <a href="rt_nonfinite_c.html#var_rtNaN" class="code2code">
+rtNaN
+</a>
+</span>
+</td>
+<td width="22%" align="right" valign="top" style="border-style: none">
+8
+</td>
+<td width="22%" align="right" valign="top" style="border-style: none">
+1<span style="font-family:Courier">&#160;</span>
+</td>
+<td width="22%" align="right" valign="top" style="border-style: none">
+1<span style="font-family:Courier">&#160;</span>
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<table width="100%" cellpadding="2" border="0">
+<tr style="background-color: #eeeeff">
+<td width="33%" align="left" valign="top" style="border-style: none">
+<span style="white-space:nowrap">&#160;<span style="font-family:monospace">&#160;&#160;</span>&#160; <a href="rt_nonfinite_c.html#var_rtInfF" class="code2code">
+rtInfF
+</a>
+</span>
+</td>
+<td width="22%" align="right" valign="top" style="border-style: none">
+4
+</td>
+<td width="22%" align="right" valign="top" style="border-style: none">
+2<span style="font-family:Courier">&#160;</span>
+</td>
+<td width="22%" align="right" valign="top" style="border-style: none">
+1<span style="font-family:Courier">&#160;</span>
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<table width="100%" cellpadding="2" border="0">
+<tr style="background-color: #ffffff">
+<td width="33%" align="left" valign="top" style="border-style: none">
+<span style="white-space:nowrap">&#160;<span style="font-family:monospace">&#160;&#160;</span>&#160; <a href="rt_nonfinite_c.html#var_rtMinusInfF" class="code2code">
+rtMinusInfF
+</a>
+</span>
+</td>
+<td width="22%" align="right" valign="top" style="border-style: none">
+4
+</td>
+<td width="22%" align="right" valign="top" style="border-style: none">
+2<span style="font-family:Courier">&#160;</span>
+</td>
+<td width="22%" align="right" valign="top" style="border-style: none">
+1<span style="font-family:Courier">&#160;</span>
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<table width="100%" cellpadding="2" border="0">
+<tr style="background-color: #eeeeff">
+<td width="33%" align="left" valign="top" style="border-style: none">
+<span style="white-space:nowrap">&#160;<span style="font-family:monospace">&#160;&#160;</span>&#160; <a href="rt_nonfinite_c.html#var_rtNaNF" class="code2code">
+rtNaNF
+</a>
+</span>
+</td>
+<td width="22%" align="right" valign="top" style="border-style: none">
+4
+</td>
+<td width="22%" align="right" valign="top" style="border-style: none">
+1<span style="font-family:Courier">&#160;</span>
+</td>
+<td width="22%" align="right" valign="top" style="border-style: none">
+1<span style="font-family:Courier">&#160;</span>
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<table width="100%" cellpadding="2" border="0">
+<tr style="background-color: #ffffff">
+<td width="33%" align="left" valign="top" style="border-style: none">
+<b>Total</b>
+</td>
+<td width="22%" align="right" valign="top" style="border-style: none">
+<b>36</b>
+</td>
+<td width="22%" align="right" valign="top" style="border-style: none">
+<b>10<span style="font-family:Courier">&#160;</span></b>
+</td>
+<td width="22%" align="right" valign="top" style="border-style: none">
+ 
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+<h3 name="sec_Function_Information" id="sec_Function_Information">
+3. Function Information <span title="Click to shrink or expand section" style="cursor:pointer;font-weight:normal;" id="rtwIdCodeMetrics_table_060_control" onclick ="if (top) if (top.rtwTableShrink) top.rtwTableShrink(window.document, this, 'rtwIdCodeMetrics_table_060', false)"><span class="shrink-button">[<u>hide</u>]</span></span>
+</h3>
+<table width="100%" name="rtwIdCodeMetrics_table_060" id="rtwIdCodeMetrics_table_060" border="0">
+<tr>
+<td align="left" valign="top">
+View function metrics in a call tree format or table format. Accumulated stack numbers include the estimated stack size of the function plus the maximum of the accumulated stack size of the subroutines that the function calls.
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr>
+<td align="left" valign="top">
+<table width="100%" cellpadding="0" cellspacing="0" name="fcnInfo_calltree" id="fcnInfo_calltree" border="0">
+<tr>
+<td align="left" valign="top">
+View:Call Tree | <a href="javascript:if (top) if (top.rtwSwitchView) top.rtwSwitchView(window.document,'fcnInfo_calltree', 'fcnInfo_table')" title="List of functions in alphabetical order. The second column includes the callers of the functions.">
+Table
+</a>
+
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<table width="100%" cellpadding="0" cellspacing="0" border="1">
+<tr style="background-color: #ffffff">
+<td width="100%" align="left" valign="top" style="border-style: none">
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr>
+<td align="left" valign="top">
+<table width="100%" cellpadding="2" border="0">
+<tr style="background-color: #eeeeff">
+<td width="37%" align="left" valign="top" style="border-style: none">
+<b>
+<span title="Function name sorted by the maximum accumulated stack size.">Function Name</span>
+</b>
+
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+<b>
+<span title="Estimated stack size of the function plus the maximum of the accumulated stack size of its subroutines.">Accumulated Stack Size (bytes)</span>
+</b>
+
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+<b>
+<span title="Size of local variables in the function.">Self Stack Size (bytes)</span>
+</b>
+
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+<b>
+<span title="Lines of code excluding comments and blank lines.">Lines of Code</span>
+</b>
+
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+<b>
+<span style="white-space:nowrap" title="Lines including source code, comments, and blank lines.">Lines</span>
+</b>
+
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+<b>
+<span style="white-space:nowrap" title="Cyclomatic complexity">Complexity</span>
+</b>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<table style="border-style: none" width="100%" cellpadding="0" cellspacing="0" name="" id="" border="0">
+<tr>
+<td align="left" valign="top">
+<table width="100%" cellpadding="2" border="0">
+<tr style="background-color: #ffffff">
+<td width="37%" align="left" valign="top" style="border-style: none">
+<span style="white-space:nowrap"><span name="button_3" id="button_3" title="Click to shrink or expand tree" style="cursor:pointer;font-family:monospace;font-weight:normal;" onclick ="if (top) if (top.rtwTableShrink) top.rtwTableShrink(window.document, this, '3', true)"><span class="shrink-button">[+]</span></span>&#160;<b><a href="IMUKalmanFilter_fixpt_c.html#fcn_IMUKalmanFilter_fixpt" class="code2code">
+IMUKalmanFilter_fixpt
+</a>
+</b></span>
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+1,546
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+1,452
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+1,525
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+1,648
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+98
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<table style="display: none; border-style: none" width="100%" cellpadding="0" cellspacing="0" name="3" id="3" border="0">
+<tr>
+<td align="left" valign="top">
+<table width="100%" cellpadding="2" border="0">
+<tr style="background-color: #eeeeff">
+<td width="37%" align="left" valign="top" style="border-style: none">
+<span style="white-space:nowrap">&#160;&#160;&#160;&#160;&#160;&#160;<span name="button_4" id="button_4" title="Click to shrink or expand tree" style="cursor:pointer;font-family:monospace;font-weight:normal;" onclick ="if (top) if (top.rtwTableShrink) top.rtwTableShrink(window.document, this, '4', true)"><span class="shrink-button">[+]</span></span>&#160;<a href="IMUKalmanFilter_fixpt_c.html#fcn_sMultiWordDivZero" class="code2code" title="sMultiWordDivZero is a static function in IMUKalmanFilter_fixpt.c.">
+sMultiWordDivZero
+</a>
+</span>
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+94
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+2
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+25
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+32
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+6
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<table style="display: none; border-style: none" width="100%" cellpadding="0" cellspacing="0" name="4" id="4" border="0">
+<tr>
+<td align="left" valign="top">
+<table width="100%" cellpadding="2" border="0">
+<tr style="background-color: #ffffff">
+<td width="37%" align="left" valign="top" style="border-style: none">
+<span style="white-space:nowrap">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="font-family:monospace">&#160;&#160;</span>&#160;&#160;<a href="IMUKalmanFilter_fixpt_c.html#fcn_uMultiWordDiv" class="code2code" title="uMultiWordDiv is a static function in IMUKalmanFilter_fixpt.c.">
+uMultiWordDiv
+</a>
+</span>
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+92
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+92
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+255
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+305
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+43
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<table style="display: none; border-style: none" width="100%" cellpadding="0" cellspacing="0" name="4" id="4" border="0">
+<tr>
+<td align="left" valign="top">
+<table width="100%" cellpadding="2" border="0">
+<tr style="background-color: #eeeeff">
+<td width="37%" align="left" valign="top" style="border-style: none">
+<span style="white-space:nowrap">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="font-family:monospace">&#160;&#160;</span>&#160;&#160;<a href="IMUKalmanFilter_fixpt_c.html#fcn_sMultiWord2MultiWord" class="code2code" title="sMultiWord2MultiWord is a static function in IMUKalmanFilter_fixpt.c.">
+sMultiWord2MultiWord
+</a>
+</span>
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+12
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+12
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+21
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+28
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+6
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<table style="display: none; border-style: none" width="100%" cellpadding="0" cellspacing="0" name="4" id="4" border="0">
+<tr>
+<td align="left" valign="top">
+<table width="100%" cellpadding="2" border="0">
+<tr style="background-color: #ffffff">
+<td width="37%" align="left" valign="top" style="border-style: none">
+<span style="white-space:nowrap">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="font-family:monospace">&#160;&#160;</span>&#160;&#160;<a href="IMUKalmanFilter_fixpt_c.html#fcn_MultiWordNeg" class="code2code" title="MultiWordNeg is a static function in IMUKalmanFilter_fixpt.c.">
+MultiWordNeg
+</a>
+</span>
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+12
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+12
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+8
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+11
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+2
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<table style="display: none; border-style: none" width="100%" cellpadding="0" cellspacing="0" name="4" id="4" border="0">
+<tr>
+<td align="left" valign="top">
+<table width="100%" cellpadding="2" border="0">
+<tr style="background-color: #eeeeff">
+<td width="37%" align="left" valign="top" style="border-style: none">
+<span style="white-space:nowrap">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="font-family:monospace">&#160;&#160;</span>&#160;&#160;<a href="IMUKalmanFilter_fixpt_c.html#fcn_MultiWordSetSignedMax" class="code2code" title="MultiWordSetSignedMax is a static function in IMUKalmanFilter_fixpt.c.">
+MultiWordSetSignedMax
+</a>
+</span>
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+8
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+8
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+7
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+11
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+2
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<table style="display: none; border-style: none" width="100%" cellpadding="0" cellspacing="0" name="4" id="4" border="0">
+<tr>
+<td align="left" valign="top">
+<table width="100%" cellpadding="2" border="0">
+<tr style="background-color: #ffffff">
+<td width="37%" align="left" valign="top" style="border-style: none">
+<span style="white-space:nowrap">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="font-family:monospace">&#160;&#160;</span>&#160;&#160;<a href="IMUKalmanFilter_fixpt_c.html#fcn_MultiWordSetSignedMin" class="code2code" title="MultiWordSetSignedMin is a static function in IMUKalmanFilter_fixpt.c.">
+MultiWordSetSignedMin
+</a>
+</span>
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+8
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+8
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+7
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+11
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+2
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<table style="display: none; border-style: none" width="100%" cellpadding="0" cellspacing="0" name="3" id="3" border="0">
+<tr>
+<td align="left" valign="top">
+<table width="100%" cellpadding="2" border="0">
+<tr style="background-color: #eeeeff">
+<td width="37%" align="left" valign="top" style="border-style: none">
+<span style="white-space:nowrap">&#160;&#160;&#160;&#160;&#160;&#160;<span name="button_10" id="button_10" title="Click to shrink or expand tree" style="cursor:pointer;font-family:monospace;font-weight:normal;" onclick ="if (top) if (top.rtwTableShrink) top.rtwTableShrink(window.document, this, '10', true)"><span class="shrink-button">[+]</span></span>&#160;<a href="IMUKalmanFilter_fixpt_c.html#fcn_sMultiWordDivFloor" class="code2code" title="sMultiWordDivFloor is a static function in IMUKalmanFilter_fixpt.c.">
+sMultiWordDivFloor
+</a>
+</span>
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+94
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+2
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+28
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+36
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+7
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<table style="display: none; border-style: none" width="100%" cellpadding="0" cellspacing="0" name="10" id="10" border="0">
+<tr>
+<td align="left" valign="top">
+<table width="100%" cellpadding="2" border="0">
+<tr style="background-color: #ffffff">
+<td width="37%" align="left" valign="top" style="border-style: none">
+<span style="white-space:nowrap">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="font-family:monospace">&#160;&#160;</span>&#160;&#160;<a href="IMUKalmanFilter_fixpt_c.html#fcn_uMultiWordDiv" class="code2code" title="uMultiWordDiv is a static function in IMUKalmanFilter_fixpt.c.">
+uMultiWordDiv
+</a>
+</span>
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+92
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+92
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+255
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+305
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+43
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<table style="display: none; border-style: none" width="100%" cellpadding="0" cellspacing="0" name="10" id="10" border="0">
+<tr>
+<td align="left" valign="top">
+<table width="100%" cellpadding="2" border="0">
+<tr style="background-color: #eeeeff">
+<td width="37%" align="left" valign="top" style="border-style: none">
+<span style="white-space:nowrap">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="font-family:monospace">&#160;&#160;</span>&#160;&#160;<a href="IMUKalmanFilter_fixpt_c.html#fcn_sMultiWord2MultiWord" class="code2code" title="sMultiWord2MultiWord is a static function in IMUKalmanFilter_fixpt.c.">
+sMultiWord2MultiWord
+</a>
+</span>
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+12
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+12
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+21
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+28
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+6
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<table style="display: none; border-style: none" width="100%" cellpadding="0" cellspacing="0" name="10" id="10" border="0">
+<tr>
+<td align="left" valign="top">
+<table width="100%" cellpadding="2" border="0">
+<tr style="background-color: #ffffff">
+<td width="37%" align="left" valign="top" style="border-style: none">
+<span style="white-space:nowrap">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="font-family:monospace">&#160;&#160;</span>&#160;&#160;<a href="IMUKalmanFilter_fixpt_c.html#fcn_MultiWordNeg" class="code2code" title="MultiWordNeg is a static function in IMUKalmanFilter_fixpt.c.">
+MultiWordNeg
+</a>
+</span>
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+12
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+12
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+8
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+11
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+2
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<table style="display: none; border-style: none" width="100%" cellpadding="0" cellspacing="0" name="10" id="10" border="0">
+<tr>
+<td align="left" valign="top">
+<table width="100%" cellpadding="2" border="0">
+<tr style="background-color: #eeeeff">
+<td width="37%" align="left" valign="top" style="border-style: none">
+<span style="white-space:nowrap">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="font-family:monospace">&#160;&#160;</span>&#160;&#160;<a href="IMUKalmanFilter_fixpt_c.html#fcn_uMultiWordInc" class="code2code" title="uMultiWordInc is a static function in IMUKalmanFilter_fixpt.c.">
+uMultiWordInc
+</a>
+</span>
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+12
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+12
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+8
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+11
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+2
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<table style="display: none; border-style: none" width="100%" cellpadding="0" cellspacing="0" name="10" id="10" border="0">
+<tr>
+<td align="left" valign="top">
+<table width="100%" cellpadding="2" border="0">
+<tr style="background-color: #ffffff">
+<td width="37%" align="left" valign="top" style="border-style: none">
+<span style="white-space:nowrap">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="font-family:monospace">&#160;&#160;</span>&#160;&#160;<a href="IMUKalmanFilter_fixpt_c.html#fcn_MultiWordSetSignedMax" class="code2code" title="MultiWordSetSignedMax is a static function in IMUKalmanFilter_fixpt.c.">
+MultiWordSetSignedMax
+</a>
+</span>
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+8
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+8
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+7
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+11
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+2
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<table style="display: none; border-style: none" width="100%" cellpadding="0" cellspacing="0" name="10" id="10" border="0">
+<tr>
+<td align="left" valign="top">
+<table width="100%" cellpadding="2" border="0">
+<tr style="background-color: #eeeeff">
+<td width="37%" align="left" valign="top" style="border-style: none">
+<span style="white-space:nowrap">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="font-family:monospace">&#160;&#160;</span>&#160;&#160;<a href="IMUKalmanFilter_fixpt_c.html#fcn_MultiWordSetSignedMin" class="code2code" title="MultiWordSetSignedMin is a static function in IMUKalmanFilter_fixpt.c.">
+MultiWordSetSignedMin
+</a>
+</span>
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+8
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+8
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+7
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+11
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+2
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<table style="display: none; border-style: none" width="100%" cellpadding="0" cellspacing="0" name="10" id="10" border="0">
+<tr>
+<td align="left" valign="top">
+<table width="100%" cellpadding="2" border="0">
+<tr style="background-color: #ffffff">
+<td width="37%" align="left" valign="top" style="border-style: none">
+<span style="white-space:nowrap">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="font-family:monospace">&#160;&#160;</span>&#160;&#160;<a href="IMUKalmanFilter_fixpt_c.html#fcn_MultiWord2Bool" class="code2code" title="MultiWord2Bool is a static function in IMUKalmanFilter_fixpt.c.">
+MultiWord2Bool
+</a>
+</span>
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+5
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+5
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+11
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+16
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+3
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<table style="display: none; border-style: none" width="100%" cellpadding="0" cellspacing="0" name="3" id="3" border="0">
+<tr>
+<td align="left" valign="top">
+<table width="100%" cellpadding="2" border="0">
+<tr style="background-color: #eeeeff">
+<td width="37%" align="left" valign="top" style="border-style: none">
+<span style="white-space:nowrap">&#160;&#160;&#160;&#160;&#160;&#160;<span name="button_18" id="button_18" title="Click to shrink or expand tree" style="cursor:pointer;font-family:monospace;font-weight:normal;" onclick ="if (top) if (top.rtwTableShrink) top.rtwTableShrink(window.document, this, '18', true)"><span class="shrink-button">[+]</span></span>&#160;<a href="IMUKalmanFilter_fixpt_c.html#fcn_uMultiWordDivZero" class="code2code" title="uMultiWordDivZero is a static function in IMUKalmanFilter_fixpt.c.">
+uMultiWordDivZero
+</a>
+</span>
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+92
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+0
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+5
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+10
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+2
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<table style="display: none; border-style: none" width="100%" cellpadding="0" cellspacing="0" name="18" id="18" border="0">
+<tr>
+<td align="left" valign="top">
+<table width="100%" cellpadding="2" border="0">
+<tr style="background-color: #ffffff">
+<td width="37%" align="left" valign="top" style="border-style: none">
+<span style="white-space:nowrap">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="font-family:monospace">&#160;&#160;</span>&#160;&#160;<a href="IMUKalmanFilter_fixpt_c.html#fcn_uMultiWordDiv" class="code2code" title="uMultiWordDiv is a static function in IMUKalmanFilter_fixpt.c.">
+uMultiWordDiv
+</a>
+</span>
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+92
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+92
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+255
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+305
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+43
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<table style="display: none; border-style: none" width="100%" cellpadding="0" cellspacing="0" name="18" id="18" border="0">
+<tr>
+<td align="left" valign="top">
+<table width="100%" cellpadding="2" border="0">
+<tr style="background-color: #eeeeff">
+<td width="37%" align="left" valign="top" style="border-style: none">
+<span style="white-space:nowrap">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="font-family:monospace">&#160;&#160;</span>&#160;&#160;<a href="IMUKalmanFilter_fixpt_c.html#fcn_uMultiWord2MultiWord" class="code2code" title="uMultiWord2MultiWord is a static function in IMUKalmanFilter_fixpt.c.">
+uMultiWord2MultiWord
+</a>
+</span>
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+8
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+8
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+15
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+21
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+5
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<table style="display: none; border-style: none" width="100%" cellpadding="0" cellspacing="0" name="18" id="18" border="0">
+<tr>
+<td align="left" valign="top">
+<table width="100%" cellpadding="2" border="0">
+<tr style="background-color: #ffffff">
+<td width="37%" align="left" valign="top" style="border-style: none">
+<span style="white-space:nowrap">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="font-family:monospace">&#160;&#160;</span>&#160;&#160;<a href="IMUKalmanFilter_fixpt_c.html#fcn_MultiWordSetUnsignedMax" class="code2code" title="MultiWordSetUnsignedMax is a static function in IMUKalmanFilter_fixpt.c.">
+MultiWordSetUnsignedMax
+</a>
+</span>
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+4
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+4
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+4
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+7
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+2
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<table style="display: none; border-style: none" width="100%" cellpadding="0" cellspacing="0" name="3" id="3" border="0">
+<tr>
+<td align="left" valign="top">
+<table width="100%" cellpadding="2" border="0">
+<tr style="background-color: #eeeeff">
+<td width="37%" align="left" valign="top" style="border-style: none">
+<span style="white-space:nowrap">&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="font-family:monospace">&#160;&#160;</span>&#160;&#160;<a href="IMUKalmanFilter_fixpt_c.html#fcn_sMultiWordMul" class="code2code" title="sMultiWordMul is a static function in IMUKalmanFilter_fixpt.c.">
+sMultiWordMul
+</a>
+</span>
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+62
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+62
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+80
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+93
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+10
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<table style="display: none; border-style: none" width="100%" cellpadding="0" cellspacing="0" name="3" id="3" border="0">
+<tr>
+<td align="left" valign="top">
+<table width="100%" cellpadding="2" border="0">
+<tr style="background-color: #ffffff">
+<td width="37%" align="left" valign="top" style="border-style: none">
+<span style="white-space:nowrap">&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="font-family:monospace">&#160;&#160;</span>&#160;&#160;<a href="IMUKalmanFilter_fixpt_c.html#fcn_ssuMultiWordMul" class="code2code" title="ssuMultiWordMul is a static function in IMUKalmanFilter_fixpt.c.">
+ssuMultiWordMul
+</a>
+</span>
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+57
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+57
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+72
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+84
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+9
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<table style="display: none; border-style: none" width="100%" cellpadding="0" cellspacing="0" name="3" id="3" border="0">
+<tr>
+<td align="left" valign="top">
+<table width="100%" cellpadding="2" border="0">
+<tr style="background-color: #eeeeff">
+<td width="37%" align="left" valign="top" style="border-style: none">
+<span style="white-space:nowrap">&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="font-family:monospace">&#160;&#160;</span>&#160;&#160;<a href="IMUKalmanFilter_fixpt_c.html#fcn_uMultiWordMul" class="code2code" title="uMultiWordMul is a static function in IMUKalmanFilter_fixpt.c.">
+uMultiWordMul
+</a>
+</span>
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+52
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+52
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+56
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+65
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+6
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<table style="display: none; border-style: none" width="100%" cellpadding="0" cellspacing="0" name="3" id="3" border="0">
+<tr>
+<td align="left" valign="top">
+<table width="100%" cellpadding="2" border="0">
+<tr style="background-color: #ffffff">
+<td width="37%" align="left" valign="top" style="border-style: none">
+<span style="white-space:nowrap">&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="font-family:monospace">&#160;&#160;</span>&#160;&#160;<a href="IMUKalmanFilter_fixpt_c.html#fcn_sMultiWordShr" class="code2code" title="sMultiWordShr is a static function in IMUKalmanFilter_fixpt.c.">
+sMultiWordShr
+</a>
+</span>
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+36
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+36
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+50
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+59
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+9
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<table style="display: none; border-style: none" width="100%" cellpadding="0" cellspacing="0" name="3" id="3" border="0">
+<tr>
+<td align="left" valign="top">
+<table width="100%" cellpadding="2" border="0">
+<tr style="background-color: #eeeeff">
+<td width="37%" align="left" valign="top" style="border-style: none">
+<span style="white-space:nowrap">&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="font-family:monospace">&#160;&#160;</span>&#160;&#160;<a href="IMUKalmanFilter_fixpt_c.html#fcn_uMultiWordShl" class="code2code" title="uMultiWordShl is a static function in IMUKalmanFilter_fixpt.c.">
+uMultiWordShl
+</a>
+</span>
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+32
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+32
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+53
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+63
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+11
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<table style="display: none; border-style: none" width="100%" cellpadding="0" cellspacing="0" name="3" id="3" border="0">
+<tr>
+<td align="left" valign="top">
+<table width="100%" cellpadding="2" border="0">
+<tr style="background-color: #ffffff">
+<td width="37%" align="left" valign="top" style="border-style: none">
+<span style="white-space:nowrap">&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="font-family:monospace">&#160;&#160;</span>&#160;&#160;<a href="IMUKalmanFilter_fixpt_c.html#fcn_uMultiWordShr" class="code2code" title="uMultiWordShr is a static function in IMUKalmanFilter_fixpt.c.">
+uMultiWordShr
+</a>
+</span>
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+32
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+32
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+42
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+50
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+8
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<table style="display: none; border-style: none" width="100%" cellpadding="0" cellspacing="0" name="3" id="3" border="0">
+<tr>
+<td align="left" valign="top">
+<table width="100%" cellpadding="2" border="0">
+<tr style="background-color: #eeeeff">
+<td width="37%" align="left" valign="top" style="border-style: none">
+<span style="white-space:nowrap">&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="font-family:monospace">&#160;&#160;</span>&#160;&#160;<a href="IMUKalmanFilter_fixpt_c.html#fcn_sMultiWordShl" class="code2code" title="sMultiWordShl is a static function in IMUKalmanFilter_fixpt.c.">
+sMultiWordShl
+</a>
+</span>
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+32
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+32
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+53
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+63
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+11
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<table style="display: none; border-style: none" width="100%" cellpadding="0" cellspacing="0" name="3" id="3" border="0">
+<tr>
+<td align="left" valign="top">
+<table width="100%" cellpadding="2" border="0">
+<tr style="background-color: #ffffff">
+<td width="37%" align="left" valign="top" style="border-style: none">
+<span style="white-space:nowrap">&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="font-family:monospace">&#160;&#160;</span>&#160;&#160;<a href="IMUKalmanFilter_fixpt_c.html#fcn_MultiWordAdd" class="code2code" title="MultiWordAdd is a static function in IMUKalmanFilter_fixpt.c.">
+MultiWordAdd
+</a>
+</span>
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+24
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+24
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+18
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+22
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+3
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<table style="display: none; border-style: none" width="100%" cellpadding="0" cellspacing="0" name="3" id="3" border="0">
+<tr>
+<td align="left" valign="top">
+<table width="100%" cellpadding="2" border="0">
+<tr style="background-color: #eeeeff">
+<td width="37%" align="left" valign="top" style="border-style: none">
+<span style="white-space:nowrap">&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="font-family:monospace">&#160;&#160;</span>&#160;&#160;<a href="IMUKalmanFilter_fixpt_c.html#fcn_MultiWordSub" class="code2code" title="MultiWordSub is a static function in IMUKalmanFilter_fixpt.c.">
+MultiWordSub
+</a>
+</span>
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+24
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+24
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+18
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+22
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+3
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<table style="display: none; border-style: none" width="100%" cellpadding="0" cellspacing="0" name="3" id="3" border="0">
+<tr>
+<td align="left" valign="top">
+<table width="100%" cellpadding="2" border="0">
+<tr style="background-color: #ffffff">
+<td width="37%" align="left" valign="top" style="border-style: none">
+<span style="white-space:nowrap">&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="font-family:monospace">&#160;&#160;</span>&#160;&#160;<a href="IMUKalmanFilter_fixpt_c.html#fcn_MultiWordSignedWrap" class="code2code" title="MultiWordSignedWrap is a static function in IMUKalmanFilter_fixpt.c.">
+MultiWordSignedWrap
+</a>
+</span>
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+20
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+20
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+18
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+24
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+3
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<table style="display: none; border-style: none" width="100%" cellpadding="0" cellspacing="0" name="3" id="3" border="0">
+<tr>
+<td align="left" valign="top">
+<table width="100%" cellpadding="2" border="0">
+<tr style="background-color: #eeeeff">
+<td width="37%" align="left" valign="top" style="border-style: none">
+<span style="white-space:nowrap">&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="font-family:monospace">&#160;&#160;</span>&#160;&#160;<a href="IMUKalmanFilter_fixpt_c.html#fcn_MultiWordUnsignedWrap" class="code2code" title="MultiWordUnsignedWrap is a static function in IMUKalmanFilter_fixpt.c.">
+MultiWordUnsignedWrap
+</a>
+</span>
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+16
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+16
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+11
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+16
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+2
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<table style="display: none; border-style: none" width="100%" cellpadding="0" cellspacing="0" name="3" id="3" border="0">
+<tr>
+<td align="left" valign="top">
+<table width="100%" cellpadding="2" border="0">
+<tr style="background-color: #ffffff">
+<td width="37%" align="left" valign="top" style="border-style: none">
+<span style="white-space:nowrap">&#160;&#160;&#160;&#160;&#160;&#160;<span name="button_33" id="button_33" title="Click to shrink or expand tree" style="cursor:pointer;font-family:monospace;font-weight:normal;" onclick ="if (top) if (top.rtwTableShrink) top.rtwTableShrink(window.document, this, '33', true)"><span class="shrink-button">[+]</span></span>&#160;<a href="IMUKalmanFilter_fixpt_c.html#fcn_sMultiWordEq" class="code2code" title="sMultiWordEq is a static function in IMUKalmanFilter_fixpt.c.">
+sMultiWordEq
+</a>
+</span>
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+16
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+0
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+1
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+5
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+1
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<table style="display: none; border-style: none" width="100%" cellpadding="0" cellspacing="0" name="33" id="33" border="0">
+<tr>
+<td align="left" valign="top">
+<table width="100%" cellpadding="2" border="0">
+<tr style="background-color: #eeeeff">
+<td width="37%" align="left" valign="top" style="border-style: none">
+<span style="white-space:nowrap">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="font-family:monospace">&#160;&#160;</span>&#160;&#160;<a href="IMUKalmanFilter_fixpt_c.html#fcn_sMultiWordCmp" class="code2code" title="sMultiWordCmp is a static function in IMUKalmanFilter_fixpt.c.">
+sMultiWordCmp
+</a>
+</span>
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+16
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+16
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+29
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+34
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+6
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<table style="display: none; border-style: none" width="100%" cellpadding="0" cellspacing="0" name="3" id="3" border="0">
+<tr>
+<td align="left" valign="top">
+<table width="100%" cellpadding="2" border="0">
+<tr style="background-color: #ffffff">
+<td width="37%" align="left" valign="top" style="border-style: none">
+<span style="white-space:nowrap">&#160;&#160;&#160;&#160;&#160;&#160;<span name="button_35" id="button_35" title="Click to shrink or expand tree" style="cursor:pointer;font-family:monospace;font-weight:normal;" onclick ="if (top) if (top.rtwTableShrink) top.rtwTableShrink(window.document, this, '35', true)"><span class="shrink-button">[+]</span></span>&#160;<a href="IMUKalmanFilter_fixpt_c.html#fcn_sMultiWordGe" class="code2code" title="sMultiWordGe is a static function in IMUKalmanFilter_fixpt.c.">
+sMultiWordGe
+</a>
+</span>
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+16
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+0
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+1
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+5
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+1
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<table style="display: none; border-style: none" width="100%" cellpadding="0" cellspacing="0" name="35" id="35" border="0">
+<tr>
+<td align="left" valign="top">
+<table width="100%" cellpadding="2" border="0">
+<tr style="background-color: #eeeeff">
+<td width="37%" align="left" valign="top" style="border-style: none">
+<span style="white-space:nowrap">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="font-family:monospace">&#160;&#160;</span>&#160;&#160;<a href="IMUKalmanFilter_fixpt_c.html#fcn_sMultiWordCmp" class="code2code" title="sMultiWordCmp is a static function in IMUKalmanFilter_fixpt.c.">
+sMultiWordCmp
+</a>
+</span>
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+16
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+16
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+29
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+34
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+6
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<table style="display: none; border-style: none" width="100%" cellpadding="0" cellspacing="0" name="3" id="3" border="0">
+<tr>
+<td align="left" valign="top">
+<table width="100%" cellpadding="2" border="0">
+<tr style="background-color: #ffffff">
+<td width="37%" align="left" valign="top" style="border-style: none">
+<span style="white-space:nowrap">&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="font-family:monospace">&#160;&#160;</span>&#160;&#160;<a href="IMUKalmanFilter_fixpt_c.html#fcn_sMultiWord2MultiWord" class="code2code" title="sMultiWord2MultiWord is a static function in IMUKalmanFilter_fixpt.c.">
+sMultiWord2MultiWord
+</a>
+</span>
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+12
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+12
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+21
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+28
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+6
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<table style="display: none; border-style: none" width="100%" cellpadding="0" cellspacing="0" name="3" id="3" border="0">
+<tr>
+<td align="left" valign="top">
+<table width="100%" cellpadding="2" border="0">
+<tr style="background-color: #eeeeff">
+<td width="37%" align="left" valign="top" style="border-style: none">
+<span style="white-space:nowrap">&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="font-family:monospace">&#160;&#160;</span>&#160;&#160;<a href="IMUKalmanFilter_fixpt_c.html#fcn_div_repeat_u32" class="code2code" title="div_repeat_u32 is a static function in IMUKalmanFilter_fixpt.c.">
+div_repeat_u32
+</a>
+</span>
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+9
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+9
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+19
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+24
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+4
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<table style="display: none; border-style: none" width="100%" cellpadding="0" cellspacing="0" name="3" id="3" border="0">
+<tr>
+<td align="left" valign="top">
+<table width="100%" cellpadding="2" border="0">
+<tr style="background-color: #ffffff">
+<td width="37%" align="left" valign="top" style="border-style: none">
+<span style="white-space:nowrap">&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="font-family:monospace">&#160;&#160;</span>&#160;&#160;<a href="IMUKalmanFilter_fixpt_c.html#fcn_sLong2MultiWord" class="code2code" title="sLong2MultiWord is a static function in IMUKalmanFilter_fixpt.c.">
+sLong2MultiWord
+</a>
+</span>
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+8
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+8
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+11
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+15
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+3
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<table style="display: none; border-style: none" width="100%" cellpadding="0" cellspacing="0" name="3" id="3" border="0">
+<tr>
+<td align="left" valign="top">
+<table width="100%" cellpadding="2" border="0">
+<tr style="background-color: #eeeeff">
+<td width="37%" align="left" valign="top" style="border-style: none">
+<span style="white-space:nowrap">&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="font-family:monospace">&#160;&#160;</span>&#160;&#160;<a href="IMUKalmanFilter_fixpt_c.html#fcn_uMultiWord2MultiWord" class="code2code" title="uMultiWord2MultiWord is a static function in IMUKalmanFilter_fixpt.c.">
+uMultiWord2MultiWord
+</a>
+</span>
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+8
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+8
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+15
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+21
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+5
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<table style="display: none; border-style: none" width="100%" cellpadding="0" cellspacing="0" name="3" id="3" border="0">
+<tr>
+<td align="left" valign="top">
+<table width="100%" cellpadding="2" border="0">
+<tr style="background-color: #ffffff">
+<td width="37%" align="left" valign="top" style="border-style: none">
+<span style="white-space:nowrap">&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="font-family:monospace">&#160;&#160;</span>&#160;&#160;<a href="IMUKalmanFilter_fixpt_c.html#fcn_uLong2MultiWord" class="code2code" title="uLong2MultiWord is a static function in IMUKalmanFilter_fixpt.c.">
+uLong2MultiWord
+</a>
+</span>
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+4
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+4
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+5
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+8
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+2
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<table style="display: none; border-style: none" width="100%" cellpadding="0" cellspacing="0" name="3" id="3" border="0">
+<tr>
+<td align="left" valign="top">
+<table width="100%" cellpadding="2" border="0">
+<tr style="background-color: #eeeeff">
+<td width="37%" align="left" valign="top" style="border-style: none">
+<span style="white-space:nowrap">&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="font-family:monospace">&#160;&#160;</span>&#160;&#160;<a href="IMUKalmanFilter_fixpt_c.html#fcn_MultiWord2uLong" class="code2code" title="MultiWord2uLong is a static function in IMUKalmanFilter_fixpt.c.">
+MultiWord2uLong
+</a>
+</span>
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+0
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+0
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+1
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+4
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+1
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<table style="display: none; border-style: none" width="100%" cellpadding="0" cellspacing="0" name="3" id="3" border="0">
+<tr>
+<td align="left" valign="top">
+<table width="100%" cellpadding="2" border="0">
+<tr style="background-color: #ffffff">
+<td width="37%" align="left" valign="top" style="border-style: none">
+<span style="white-space:nowrap">&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="font-family:monospace">&#160;&#160;</span>&#160;&#160;<a href="IMUKalmanFilter_fixpt_c.html#fcn_MultiWord2sLong" class="code2code" title="MultiWord2sLong is a static function in IMUKalmanFilter_fixpt.c.">
+MultiWord2sLong
+</a>
+</span>
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+0
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+0
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+1
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+4
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+1
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<table style="border-style: none" width="100%" cellpadding="0" cellspacing="0" name="" id="" border="0">
+<tr>
+<td align="left" valign="top">
+<table width="100%" cellpadding="2" border="0">
+<tr style="background-color: #eeeeff">
+<td width="37%" align="left" valign="top" style="border-style: none">
+<span style="white-space:nowrap"><span name="button_44" id="button_44" title="Click to shrink or expand tree" style="cursor:pointer;font-family:monospace;font-weight:normal;" onclick ="if (top) if (top.rtwTableShrink) top.rtwTableShrink(window.document, this, '44', true)"><span class="shrink-button">[+]</span></span>&#160;<b><a href="IMUKalmanFilter_fixpt_initialize_c.html#fcn_IMUKalmanFilter_fixpt_initialize" class="code2code">
+IMUKalmanFilter_fixpt_initialize
+</a>
+</b></span>
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+48
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+0
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+1
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+4
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+1
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<table style="display: none; border-style: none" width="100%" cellpadding="0" cellspacing="0" name="44" id="44" border="0">
+<tr>
+<td align="left" valign="top">
+<table width="100%" cellpadding="2" border="0">
+<tr style="background-color: #ffffff">
+<td width="37%" align="left" valign="top" style="border-style: none">
+<span style="white-space:nowrap">&#160;&#160;&#160;&#160;&#160;&#160;<span name="button_45" id="button_45" title="Click to shrink or expand tree" style="cursor:pointer;font-family:monospace;font-weight:normal;" onclick ="if (top) if (top.rtwTableShrink) top.rtwTableShrink(window.document, this, '45', true)"><span class="shrink-button">[+]</span></span>&#160;<a href="rt_nonfinite_c.html#fcn_rt_InitInfAndNaN" class="code2code">
+rt_InitInfAndNaN
+</a>
+</span>
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+48
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+0
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+7
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+10
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+1
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<table style="display: none; border-style: none" width="100%" cellpadding="0" cellspacing="0" name="45" id="45" border="0">
+<tr>
+<td align="left" valign="top">
+<table width="100%" cellpadding="2" border="0">
+<tr style="background-color: #eeeeff">
+<td width="37%" align="left" valign="top" style="border-style: none">
+<span style="white-space:nowrap">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span name="button_46" id="button_46" title="Click to shrink or expand tree" style="cursor:pointer;font-family:monospace;font-weight:normal;" onclick ="if (top) if (top.rtwTableShrink) top.rtwTableShrink(window.document, this, '46', true)"><span class="shrink-button">[+]</span></span>&#160;<a href="rtGetNaN_c.html#fcn_rtGetNaN" class="code2code">
+rtGetNaN
+</a>
+</span>
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+48
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+36
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+36
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+43
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+5
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<table style="display: none; border-style: none" width="100%" cellpadding="0" cellspacing="0" name="46" id="46" border="0">
+<tr>
+<td align="left" valign="top">
+<table width="100%" cellpadding="2" border="0">
+<tr style="background-color: #ffffff">
+<td width="37%" align="left" valign="top" style="border-style: none">
+<span style="white-space:nowrap">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="font-family:monospace">&#160;&#160;</span>&#160;&#160;<a href="rtGetNaN_c.html#fcn_rtGetNaNF" class="code2code">
+rtGetNaNF
+</a>
+</span>
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+12
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+12
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+19
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+25
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+4
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<table style="display: none; border-style: none" width="100%" cellpadding="0" cellspacing="0" name="45" id="45" border="0">
+<tr>
+<td align="left" valign="top">
+<table width="100%" cellpadding="2" border="0">
+<tr style="background-color: #eeeeff">
+<td width="37%" align="left" valign="top" style="border-style: none">
+<span style="white-space:nowrap">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span name="button_48" id="button_48" title="Click to shrink or expand tree" style="cursor:pointer;font-family:monospace;font-weight:normal;" onclick ="if (top) if (top.rtwTableShrink) top.rtwTableShrink(window.document, this, '48', true)"><span class="shrink-button">[+]</span></span>&#160;<a href="rtGetInf_c.html#fcn_rtGetInf" class="code2code">
+rtGetInf
+</a>
+</span>
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+40
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+36
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+36
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+43
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+5
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<table style="display: none; border-style: none" width="100%" cellpadding="0" cellspacing="0" name="48" id="48" border="0">
+<tr>
+<td align="left" valign="top">
+<table width="100%" cellpadding="2" border="0">
+<tr style="background-color: #ffffff">
+<td width="37%" align="left" valign="top" style="border-style: none">
+<span style="white-space:nowrap">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="font-family:monospace">&#160;&#160;</span>&#160;&#160;<a href="rtGetInf_c.html#fcn_rtGetInfF" class="code2code">
+rtGetInfF
+</a>
+</span>
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+4
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+4
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+3
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+6
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+1
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<table style="display: none; border-style: none" width="100%" cellpadding="0" cellspacing="0" name="45" id="45" border="0">
+<tr>
+<td align="left" valign="top">
+<table width="100%" cellpadding="2" border="0">
+<tr style="background-color: #eeeeff">
+<td width="37%" align="left" valign="top" style="border-style: none">
+<span style="white-space:nowrap">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span name="button_50" id="button_50" title="Click to shrink or expand tree" style="cursor:pointer;font-family:monospace;font-weight:normal;" onclick ="if (top) if (top.rtwTableShrink) top.rtwTableShrink(window.document, this, '50', true)"><span class="shrink-button">[+]</span></span>&#160;<a href="rtGetInf_c.html#fcn_rtGetMinusInf" class="code2code">
+rtGetMinusInf
+</a>
+</span>
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+40
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+36
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+36
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+43
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+5
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<table style="display: none; border-style: none" width="100%" cellpadding="0" cellspacing="0" name="50" id="50" border="0">
+<tr>
+<td align="left" valign="top">
+<table width="100%" cellpadding="2" border="0">
+<tr style="background-color: #ffffff">
+<td width="37%" align="left" valign="top" style="border-style: none">
+<span style="white-space:nowrap">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="font-family:monospace">&#160;&#160;</span>&#160;&#160;<a href="rtGetInf_c.html#fcn_rtGetMinusInfF" class="code2code">
+rtGetMinusInfF
+</a>
+</span>
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+4
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+4
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+3
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+6
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+1
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<table style="display: none; border-style: none" width="100%" cellpadding="0" cellspacing="0" name="45" id="45" border="0">
+<tr>
+<td align="left" valign="top">
+<table width="100%" cellpadding="2" border="0">
+<tr style="background-color: #eeeeff">
+<td width="37%" align="left" valign="top" style="border-style: none">
+<span style="white-space:nowrap">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="font-family:monospace">&#160;&#160;</span>&#160;&#160;<a href="rtGetNaN_c.html#fcn_rtGetNaNF" class="code2code">
+rtGetNaNF
+</a>
+</span>
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+12
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+12
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+19
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+25
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+4
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<table style="display: none; border-style: none" width="100%" cellpadding="0" cellspacing="0" name="45" id="45" border="0">
+<tr>
+<td align="left" valign="top">
+<table width="100%" cellpadding="2" border="0">
+<tr style="background-color: #ffffff">
+<td width="37%" align="left" valign="top" style="border-style: none">
+<span style="white-space:nowrap">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="font-family:monospace">&#160;&#160;</span>&#160;&#160;<a href="rtGetInf_c.html#fcn_rtGetInfF" class="code2code">
+rtGetInfF
+</a>
+</span>
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+4
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+4
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+3
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+6
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+1
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<table style="display: none; border-style: none" width="100%" cellpadding="0" cellspacing="0" name="45" id="45" border="0">
+<tr>
+<td align="left" valign="top">
+<table width="100%" cellpadding="2" border="0">
+<tr style="background-color: #eeeeff">
+<td width="37%" align="left" valign="top" style="border-style: none">
+<span style="white-space:nowrap">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="font-family:monospace">&#160;&#160;</span>&#160;&#160;<a href="rtGetInf_c.html#fcn_rtGetMinusInfF" class="code2code">
+rtGetMinusInfF
+</a>
+</span>
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+4
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+4
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+3
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+6
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+1
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<table style="border-style: none" width="100%" cellpadding="0" cellspacing="0" name="" id="" border="0">
+<tr>
+<td align="left" valign="top">
+<table width="100%" cellpadding="2" border="0">
+<tr style="background-color: #ffffff">
+<td width="37%" align="left" valign="top" style="border-style: none">
+<span style="white-space:nowrap">&#160;<span style="font-family:monospace">&#160;&#160;</span>&#160;&#160;<b><a href="IMUKalmanFilter_fixpt_terminate_c.html#fcn_IMUKalmanFilter_fixpt_terminate" class="code2code">
+IMUKalmanFilter_fixpt_terminate
+</a>
+</b></span>
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+0
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+0
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+0
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+4
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+1
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<table style="border-style: none" width="100%" cellpadding="0" cellspacing="0" name="" id="" border="0">
+<tr>
+<td align="left" valign="top">
+<table width="100%" cellpadding="2" border="0">
+<tr style="background-color: #eeeeff">
+<td width="37%" align="left" valign="top" style="border-style: none">
+<span style="white-space:nowrap">&#160;<span style="font-family:monospace">&#160;&#160;</span>&#160;&#160;<b><a href="rt_nonfinite_c.html#fcn_rtIsInf" class="code2code">
+rtIsInf
+</a>
+</b></span>
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+0
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+0
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+1
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+4
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+2
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<table style="border-style: none" width="100%" cellpadding="0" cellspacing="0" name="" id="" border="0">
+<tr>
+<td align="left" valign="top">
+<table width="100%" cellpadding="2" border="0">
+<tr style="background-color: #ffffff">
+<td width="37%" align="left" valign="top" style="border-style: none">
+<span style="white-space:nowrap">&#160;<span style="font-family:monospace">&#160;&#160;</span>&#160;&#160;<b><a href="rt_nonfinite_c.html#fcn_rtIsInfF" class="code2code">
+rtIsInfF
+</a>
+</b></span>
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+0
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+0
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+1
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+4
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+2
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<table style="border-style: none" width="100%" cellpadding="0" cellspacing="0" name="" id="" border="0">
+<tr>
+<td align="left" valign="top">
+<table width="100%" cellpadding="2" border="0">
+<tr style="background-color: #eeeeff">
+<td width="37%" align="left" valign="top" style="border-style: none">
+<span style="white-space:nowrap">&#160;<span style="font-family:monospace">&#160;&#160;</span>&#160;&#160;<b><a href="rt_nonfinite_c.html#fcn_rtIsNaN" class="code2code">
+rtIsNaN
+</a>
+</b></span>
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+0
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+0
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+5
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+14
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+2
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<table style="border-style: none" width="100%" cellpadding="0" cellspacing="0" name="" id="" border="0">
+<tr>
+<td align="left" valign="top">
+<table width="100%" cellpadding="2" border="0">
+<tr style="background-color: #ffffff">
+<td width="37%" align="left" valign="top" style="border-style: none">
+<span style="white-space:nowrap">&#160;<span style="font-family:monospace">&#160;&#160;</span>&#160;&#160;<b><a href="rt_nonfinite_c.html#fcn_rtIsNaNF" class="code2code">
+rtIsNaNF
+</a>
+</b></span>
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+0
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+0
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+5
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+14
+</td>
+<td width="12%" align="right" valign="top" style="border-style: none">
+2
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<table width="100%" cellpadding="0" cellspacing="0" name="fcnInfo_table" id="fcnInfo_table" style="display: none" border="0">
+<tr>
+<td align="left" valign="top">
+View: <a href="javascript:if (top) if (top.rtwSwitchView) top.rtwSwitchView(window.document,'fcnInfo_table', 'fcnInfo_calltree')" title="Browse call graph in a call tree format.">
+Call Tree
+</a>
+ | Table
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<table width="100%" cellpadding="2" border="1">
+<tr style="background-color: #eeeeff">
+<td width="22%" align="left" valign="top" style="border-style: none">
+<b>
+<span title="Function name sorted alphabetically">Function Name</span>
+</b>
+
+</td>
+<td width="22%" align="left" valign="top" style="border-style: none">
+<b>
+<span title="List of functions calling the function in the corresponding first column. The number of call sites is included in parentheses. ">Called By (number of call sites)</span>
+</b>
+
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+<b>
+<span title="Estimated stack size of the function plus the maximum of the accumulated stack size of its subroutines.">Accumulated Stack Size (bytes)</span>
+</b>
+
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+<b>
+<span title="Size of local variables in the function.">Self Stack Size (bytes)</span>
+</b>
+
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+<b>
+<span title="Lines of code excluding comments and blank lines.">Lines of Code</span>
+</b>
+
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+<b>
+<span style="white-space:nowrap" title="Lines including source code, comments, and blank lines.">Lines</span>
+</b>
+
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+<b>
+<span style="white-space:nowrap" title="Cyclomatic complexity">Complexity</span>
+</b>
+
+</td>
+
+</tr>
+<tr style="background-color: #ffffff">
+<td width="22%" align="left" valign="top" style="border-style: none">
+<a href="IMUKalmanFilter_fixpt_c.html#fcn_IMUKalmanFilter_fixpt" class="code2code">
+IMUKalmanFilter_fixpt
+</a>
+
+</td>
+<td width="22%" align="left" valign="top" style="border-style: none">
+&#160;
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+1546
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+1452
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+1525
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+1648
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+98
+</td>
+
+</tr>
+<tr style="background-color: #eeeeff">
+<td width="22%" align="left" valign="top" style="border-style: none">
+<a href="IMUKalmanFilter_fixpt_c.html#fcn_MultiWord2Bool" class="code2code" title="MultiWord2Bool is a static function in IMUKalmanFilter_fixpt.c.">
+MultiWord2Bool
+</a>
+
+</td>
+<td width="22%" align="left" valign="top" style="border-style: none">
+<table width="100%" cellpadding="1" cellspacing="0" border="0">
+<tr>
+<td align="left" valign="top">
+<span style="white-space:nowrap" title="IMUKalmanFilter_fixpt.c:sMultiWordDivFloor has one call site of IMUKalmanFilter_fixpt.c:MultiWord2Bool."><a href="IMUKalmanFilter_fixpt_c.html#fcn_sMultiWordDivFloor" class="code2code" title="sMultiWordDivFloor is a static function in IMUKalmanFilter_fixpt.c.">
+sMultiWordDivFloor
+</a>
+</span>
+</td>
+
+</tr>
+
+</table>
+
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+5
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+5
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+11
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+16
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+3
+</td>
+
+</tr>
+<tr style="background-color: #ffffff">
+<td width="22%" align="left" valign="top" style="border-style: none">
+<a href="IMUKalmanFilter_fixpt_c.html#fcn_MultiWord2sLong" class="code2code" title="MultiWord2sLong is a static function in IMUKalmanFilter_fixpt.c.">
+MultiWord2sLong
+</a>
+
+</td>
+<td width="22%" align="left" valign="top" style="border-style: none">
+<table width="100%" cellpadding="1" cellspacing="0" border="0">
+<tr>
+<td align="left" valign="top">
+<span style="white-space:nowrap" title="IMUKalmanFilter_fixpt has 14 call sites of IMUKalmanFilter_fixpt.c:MultiWord2sLong."><a href="IMUKalmanFilter_fixpt_c.html#fcn_IMUKalmanFilter_fixpt" class="code2code">
+IMUKalmanFilter_fixpt
+</a>
+ (14)</span>
+</td>
+
+</tr>
+
+</table>
+
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+0
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+0
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+1
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+4
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+1
+</td>
+
+</tr>
+<tr style="background-color: #eeeeff">
+<td width="22%" align="left" valign="top" style="border-style: none">
+<a href="IMUKalmanFilter_fixpt_c.html#fcn_MultiWord2uLong" class="code2code" title="MultiWord2uLong is a static function in IMUKalmanFilter_fixpt.c.">
+MultiWord2uLong
+</a>
+
+</td>
+<td width="22%" align="left" valign="top" style="border-style: none">
+<table width="100%" cellpadding="1" cellspacing="0" border="0">
+<tr>
+<td align="left" valign="top">
+<span style="white-space:nowrap" title="IMUKalmanFilter_fixpt has 16 call sites of IMUKalmanFilter_fixpt.c:MultiWord2uLong."><a href="IMUKalmanFilter_fixpt_c.html#fcn_IMUKalmanFilter_fixpt" class="code2code">
+IMUKalmanFilter_fixpt
+</a>
+ (16)</span>
+</td>
+
+</tr>
+
+</table>
+
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+0
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+0
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+1
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+4
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+1
+</td>
+
+</tr>
+<tr style="background-color: #ffffff">
+<td width="22%" align="left" valign="top" style="border-style: none">
+<a href="IMUKalmanFilter_fixpt_c.html#fcn_MultiWordAdd" class="code2code" title="MultiWordAdd is a static function in IMUKalmanFilter_fixpt.c.">
+MultiWordAdd
+</a>
+
+</td>
+<td width="22%" align="left" valign="top" style="border-style: none">
+<table width="100%" cellpadding="1" cellspacing="0" border="0">
+<tr>
+<td align="left" valign="top">
+<span style="white-space:nowrap" title="IMUKalmanFilter_fixpt has 58 call sites of IMUKalmanFilter_fixpt.c:MultiWordAdd."><a href="IMUKalmanFilter_fixpt_c.html#fcn_IMUKalmanFilter_fixpt" class="code2code">
+IMUKalmanFilter_fixpt
+</a>
+ (58)</span>
+</td>
+
+</tr>
+
+</table>
+
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+24
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+24
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+18
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+22
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+3
+</td>
+
+</tr>
+<tr style="background-color: #eeeeff">
+<td width="22%" align="left" valign="top" style="border-style: none">
+<a href="IMUKalmanFilter_fixpt_c.html#fcn_MultiWordNeg" class="code2code" title="MultiWordNeg is a static function in IMUKalmanFilter_fixpt.c.">
+MultiWordNeg
+</a>
+
+</td>
+<td width="22%" align="left" valign="top" style="border-style: none">
+<table width="100%" cellpadding="1" cellspacing="0" border="0">
+<tr>
+<td align="left" valign="top">
+<span style="white-space:nowrap" title="IMUKalmanFilter_fixpt.c:sMultiWordDivFloor has 3 call sites of IMUKalmanFilter_fixpt.c:MultiWordNeg."><a href="IMUKalmanFilter_fixpt_c.html#fcn_sMultiWordDivFloor" class="code2code" title="sMultiWordDivFloor is a static function in IMUKalmanFilter_fixpt.c.">
+sMultiWordDivFloor
+</a>
+ (3)</span>
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<span style="white-space:nowrap" title="IMUKalmanFilter_fixpt.c:sMultiWordDivZero has 3 call sites of IMUKalmanFilter_fixpt.c:MultiWordNeg."><a href="IMUKalmanFilter_fixpt_c.html#fcn_sMultiWordDivZero" class="code2code" title="sMultiWordDivZero is a static function in IMUKalmanFilter_fixpt.c.">
+sMultiWordDivZero
+</a>
+ (3)</span>
+</td>
+
+</tr>
+
+</table>
+
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+12
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+12
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+8
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+11
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+2
+</td>
+
+</tr>
+<tr style="background-color: #ffffff">
+<td width="22%" align="left" valign="top" style="border-style: none">
+<a href="IMUKalmanFilter_fixpt_c.html#fcn_MultiWordSetSignedMax" class="code2code" title="MultiWordSetSignedMax is a static function in IMUKalmanFilter_fixpt.c.">
+MultiWordSetSignedMax
+</a>
+
+</td>
+<td width="22%" align="left" valign="top" style="border-style: none">
+<table width="100%" cellpadding="1" cellspacing="0" border="0">
+<tr>
+<td align="left" valign="top">
+<span style="white-space:nowrap" title="IMUKalmanFilter_fixpt.c:sMultiWordDivFloor has one call site of IMUKalmanFilter_fixpt.c:MultiWordSetSignedMax."><a href="IMUKalmanFilter_fixpt_c.html#fcn_sMultiWordDivFloor" class="code2code" title="sMultiWordDivFloor is a static function in IMUKalmanFilter_fixpt.c.">
+sMultiWordDivFloor
+</a>
+</span>
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<span style="white-space:nowrap" title="IMUKalmanFilter_fixpt.c:sMultiWordDivZero has one call site of IMUKalmanFilter_fixpt.c:MultiWordSetSignedMax."><a href="IMUKalmanFilter_fixpt_c.html#fcn_sMultiWordDivZero" class="code2code" title="sMultiWordDivZero is a static function in IMUKalmanFilter_fixpt.c.">
+sMultiWordDivZero
+</a>
+</span>
+</td>
+
+</tr>
+
+</table>
+
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+8
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+8
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+7
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+11
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+2
+</td>
+
+</tr>
+<tr style="background-color: #eeeeff">
+<td width="22%" align="left" valign="top" style="border-style: none">
+<a href="IMUKalmanFilter_fixpt_c.html#fcn_MultiWordSetSignedMin" class="code2code" title="MultiWordSetSignedMin is a static function in IMUKalmanFilter_fixpt.c.">
+MultiWordSetSignedMin
+</a>
+
+</td>
+<td width="22%" align="left" valign="top" style="border-style: none">
+<table width="100%" cellpadding="1" cellspacing="0" border="0">
+<tr>
+<td align="left" valign="top">
+<span style="white-space:nowrap" title="IMUKalmanFilter_fixpt.c:sMultiWordDivFloor has one call site of IMUKalmanFilter_fixpt.c:MultiWordSetSignedMin."><a href="IMUKalmanFilter_fixpt_c.html#fcn_sMultiWordDivFloor" class="code2code" title="sMultiWordDivFloor is a static function in IMUKalmanFilter_fixpt.c.">
+sMultiWordDivFloor
+</a>
+</span>
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<span style="white-space:nowrap" title="IMUKalmanFilter_fixpt.c:sMultiWordDivZero has one call site of IMUKalmanFilter_fixpt.c:MultiWordSetSignedMin."><a href="IMUKalmanFilter_fixpt_c.html#fcn_sMultiWordDivZero" class="code2code" title="sMultiWordDivZero is a static function in IMUKalmanFilter_fixpt.c.">
+sMultiWordDivZero
+</a>
+</span>
+</td>
+
+</tr>
+
+</table>
+
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+8
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+8
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+7
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+11
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+2
+</td>
+
+</tr>
+<tr style="background-color: #ffffff">
+<td width="22%" align="left" valign="top" style="border-style: none">
+<a href="IMUKalmanFilter_fixpt_c.html#fcn_MultiWordSetUnsignedMax" class="code2code" title="MultiWordSetUnsignedMax is a static function in IMUKalmanFilter_fixpt.c.">
+MultiWordSetUnsignedMax
+</a>
+
+</td>
+<td width="22%" align="left" valign="top" style="border-style: none">
+<table width="100%" cellpadding="1" cellspacing="0" border="0">
+<tr>
+<td align="left" valign="top">
+<span style="white-space:nowrap" title="IMUKalmanFilter_fixpt.c:uMultiWordDivZero has one call site of IMUKalmanFilter_fixpt.c:MultiWordSetUnsignedMax."><a href="IMUKalmanFilter_fixpt_c.html#fcn_uMultiWordDivZero" class="code2code" title="uMultiWordDivZero is a static function in IMUKalmanFilter_fixpt.c.">
+uMultiWordDivZero
+</a>
+</span>
+</td>
+
+</tr>
+
+</table>
+
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+4
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+4
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+4
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+7
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+2
+</td>
+
+</tr>
+<tr style="background-color: #eeeeff">
+<td width="22%" align="left" valign="top" style="border-style: none">
+<a href="IMUKalmanFilter_fixpt_c.html#fcn_MultiWordSignedWrap" class="code2code" title="MultiWordSignedWrap is a static function in IMUKalmanFilter_fixpt.c.">
+MultiWordSignedWrap
+</a>
+
+</td>
+<td width="22%" align="left" valign="top" style="border-style: none">
+<table width="100%" cellpadding="1" cellspacing="0" border="0">
+<tr>
+<td align="left" valign="top">
+<span style="white-space:nowrap" title="IMUKalmanFilter_fixpt has 176 call sites of IMUKalmanFilter_fixpt.c:MultiWordSignedWrap."><a href="IMUKalmanFilter_fixpt_c.html#fcn_IMUKalmanFilter_fixpt" class="code2code">
+IMUKalmanFilter_fixpt
+</a>
+ (176)</span>
+</td>
+
+</tr>
+
+</table>
+
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+20
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+20
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+18
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+24
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+3
+</td>
+
+</tr>
+<tr style="background-color: #ffffff">
+<td width="22%" align="left" valign="top" style="border-style: none">
+<a href="IMUKalmanFilter_fixpt_c.html#fcn_MultiWordSub" class="code2code" title="MultiWordSub is a static function in IMUKalmanFilter_fixpt.c.">
+MultiWordSub
+</a>
+
+</td>
+<td width="22%" align="left" valign="top" style="border-style: none">
+<table width="100%" cellpadding="1" cellspacing="0" border="0">
+<tr>
+<td align="left" valign="top">
+<span style="white-space:nowrap" title="IMUKalmanFilter_fixpt has 10 call sites of IMUKalmanFilter_fixpt.c:MultiWordSub."><a href="IMUKalmanFilter_fixpt_c.html#fcn_IMUKalmanFilter_fixpt" class="code2code">
+IMUKalmanFilter_fixpt
+</a>
+ (10)</span>
+</td>
+
+</tr>
+
+</table>
+
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+24
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+24
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+18
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+22
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+3
+</td>
+
+</tr>
+<tr style="background-color: #eeeeff">
+<td width="22%" align="left" valign="top" style="border-style: none">
+<a href="IMUKalmanFilter_fixpt_c.html#fcn_MultiWordUnsignedWrap" class="code2code" title="MultiWordUnsignedWrap is a static function in IMUKalmanFilter_fixpt.c.">
+MultiWordUnsignedWrap
+</a>
+
+</td>
+<td width="22%" align="left" valign="top" style="border-style: none">
+<table width="100%" cellpadding="1" cellspacing="0" border="0">
+<tr>
+<td align="left" valign="top">
+<span style="white-space:nowrap" title="IMUKalmanFilter_fixpt has 31 call sites of IMUKalmanFilter_fixpt.c:MultiWordUnsignedWrap."><a href="IMUKalmanFilter_fixpt_c.html#fcn_IMUKalmanFilter_fixpt" class="code2code">
+IMUKalmanFilter_fixpt
+</a>
+ (31)</span>
+</td>
+
+</tr>
+
+</table>
+
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+16
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+16
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+11
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+16
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+2
+</td>
+
+</tr>
+<tr style="background-color: #ffffff">
+<td width="22%" align="left" valign="top" style="border-style: none">
+<a href="IMUKalmanFilter_fixpt_c.html#fcn_div_repeat_u32" class="code2code" title="div_repeat_u32 is a static function in IMUKalmanFilter_fixpt.c.">
+div_repeat_u32
+</a>
+
+</td>
+<td width="22%" align="left" valign="top" style="border-style: none">
+<table width="100%" cellpadding="1" cellspacing="0" border="0">
+<tr>
+<td align="left" valign="top">
+<span style="white-space:nowrap" title="IMUKalmanFilter_fixpt has 6 call sites of IMUKalmanFilter_fixpt.c:div_repeat_u32."><a href="IMUKalmanFilter_fixpt_c.html#fcn_IMUKalmanFilter_fixpt" class="code2code">
+IMUKalmanFilter_fixpt
+</a>
+ (6)</span>
+</td>
+
+</tr>
+
+</table>
+
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+9
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+9
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+19
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+24
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+4
+</td>
+
+</tr>
+<tr style="background-color: #eeeeff">
+<td width="22%" align="left" valign="top" style="border-style: none">
+<a href="IMUKalmanFilter_fixpt_c.html#fcn_sLong2MultiWord" class="code2code" title="sLong2MultiWord is a static function in IMUKalmanFilter_fixpt.c.">
+sLong2MultiWord
+</a>
+
+</td>
+<td width="22%" align="left" valign="top" style="border-style: none">
+<table width="100%" cellpadding="1" cellspacing="0" border="0">
+<tr>
+<td align="left" valign="top">
+<span style="white-space:nowrap" title="IMUKalmanFilter_fixpt has 25 call sites of IMUKalmanFilter_fixpt.c:sLong2MultiWord."><a href="IMUKalmanFilter_fixpt_c.html#fcn_IMUKalmanFilter_fixpt" class="code2code">
+IMUKalmanFilter_fixpt
+</a>
+ (25)</span>
+</td>
+
+</tr>
+
+</table>
+
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+8
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+8
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+11
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+15
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+3
+</td>
+
+</tr>
+<tr style="background-color: #ffffff">
+<td width="22%" align="left" valign="top" style="border-style: none">
+<a href="IMUKalmanFilter_fixpt_c.html#fcn_sMultiWord2MultiWord" class="code2code" title="sMultiWord2MultiWord is a static function in IMUKalmanFilter_fixpt.c.">
+sMultiWord2MultiWord
+</a>
+
+</td>
+<td width="22%" align="left" valign="top" style="border-style: none">
+<table width="100%" cellpadding="1" cellspacing="0" border="0">
+<tr>
+<td align="left" valign="top">
+<span style="white-space:nowrap" title="IMUKalmanFilter_fixpt.c:sMultiWordDivFloor has 2 call sites of IMUKalmanFilter_fixpt.c:sMultiWord2MultiWord."><a href="IMUKalmanFilter_fixpt_c.html#fcn_sMultiWordDivFloor" class="code2code" title="sMultiWordDivFloor is a static function in IMUKalmanFilter_fixpt.c.">
+sMultiWordDivFloor
+</a>
+ (2)</span>
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<span style="white-space:nowrap" title="IMUKalmanFilter_fixpt.c:sMultiWordDivZero has 2 call sites of IMUKalmanFilter_fixpt.c:sMultiWord2MultiWord."><a href="IMUKalmanFilter_fixpt_c.html#fcn_sMultiWordDivZero" class="code2code" title="sMultiWordDivZero is a static function in IMUKalmanFilter_fixpt.c.">
+sMultiWordDivZero
+</a>
+ (2)</span>
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<span style="white-space:nowrap" title="IMUKalmanFilter_fixpt has 42 call sites of IMUKalmanFilter_fixpt.c:sMultiWord2MultiWord."><a href="IMUKalmanFilter_fixpt_c.html#fcn_IMUKalmanFilter_fixpt" class="code2code">
+IMUKalmanFilter_fixpt
+</a>
+ (42)</span>
+</td>
+
+</tr>
+
+</table>
+
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+12
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+12
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+21
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+28
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+6
+</td>
+
+</tr>
+<tr style="background-color: #eeeeff">
+<td width="22%" align="left" valign="top" style="border-style: none">
+<a href="IMUKalmanFilter_fixpt_c.html#fcn_sMultiWordCmp" class="code2code" title="sMultiWordCmp is a static function in IMUKalmanFilter_fixpt.c.">
+sMultiWordCmp
+</a>
+
+</td>
+<td width="22%" align="left" valign="top" style="border-style: none">
+<table width="100%" cellpadding="1" cellspacing="0" border="0">
+<tr>
+<td align="left" valign="top">
+<span style="white-space:nowrap" title="IMUKalmanFilter_fixpt.c:sMultiWordEq has one call site of IMUKalmanFilter_fixpt.c:sMultiWordCmp."><a href="IMUKalmanFilter_fixpt_c.html#fcn_sMultiWordEq" class="code2code" title="sMultiWordEq is a static function in IMUKalmanFilter_fixpt.c.">
+sMultiWordEq
+</a>
+</span>
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<span style="white-space:nowrap" title="IMUKalmanFilter_fixpt.c:sMultiWordGe has one call site of IMUKalmanFilter_fixpt.c:sMultiWordCmp."><a href="IMUKalmanFilter_fixpt_c.html#fcn_sMultiWordGe" class="code2code" title="sMultiWordGe is a static function in IMUKalmanFilter_fixpt.c.">
+sMultiWordGe
+</a>
+</span>
+</td>
+
+</tr>
+
+</table>
+
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+16
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+16
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+29
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+34
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+6
+</td>
+
+</tr>
+<tr style="background-color: #ffffff">
+<td width="22%" align="left" valign="top" style="border-style: none">
+<a href="IMUKalmanFilter_fixpt_c.html#fcn_sMultiWordDivFloor" class="code2code" title="sMultiWordDivFloor is a static function in IMUKalmanFilter_fixpt.c.">
+sMultiWordDivFloor
+</a>
+
+</td>
+<td width="22%" align="left" valign="top" style="border-style: none">
+<table width="100%" cellpadding="1" cellspacing="0" border="0">
+<tr>
+<td align="left" valign="top">
+<span style="white-space:nowrap" title="IMUKalmanFilter_fixpt has 6 call sites of IMUKalmanFilter_fixpt.c:sMultiWordDivFloor."><a href="IMUKalmanFilter_fixpt_c.html#fcn_IMUKalmanFilter_fixpt" class="code2code">
+IMUKalmanFilter_fixpt
+</a>
+ (6)</span>
+</td>
+
+</tr>
+
+</table>
+
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+94
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+2
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+28
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+36
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+7
+</td>
+
+</tr>
+<tr style="background-color: #eeeeff">
+<td width="22%" align="left" valign="top" style="border-style: none">
+<a href="IMUKalmanFilter_fixpt_c.html#fcn_sMultiWordDivZero" class="code2code" title="sMultiWordDivZero is a static function in IMUKalmanFilter_fixpt.c.">
+sMultiWordDivZero
+</a>
+
+</td>
+<td width="22%" align="left" valign="top" style="border-style: none">
+<table width="100%" cellpadding="1" cellspacing="0" border="0">
+<tr>
+<td align="left" valign="top">
+<span style="white-space:nowrap" title="IMUKalmanFilter_fixpt has 4 call sites of IMUKalmanFilter_fixpt.c:sMultiWordDivZero."><a href="IMUKalmanFilter_fixpt_c.html#fcn_IMUKalmanFilter_fixpt" class="code2code">
+IMUKalmanFilter_fixpt
+</a>
+ (4)</span>
+</td>
+
+</tr>
+
+</table>
+
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+94
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+2
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+25
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+32
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+6
+</td>
+
+</tr>
+<tr style="background-color: #ffffff">
+<td width="22%" align="left" valign="top" style="border-style: none">
+<a href="IMUKalmanFilter_fixpt_c.html#fcn_sMultiWordEq" class="code2code" title="sMultiWordEq is a static function in IMUKalmanFilter_fixpt.c.">
+sMultiWordEq
+</a>
+
+</td>
+<td width="22%" align="left" valign="top" style="border-style: none">
+<table width="100%" cellpadding="1" cellspacing="0" border="0">
+<tr>
+<td align="left" valign="top">
+<span style="white-space:nowrap" title="IMUKalmanFilter_fixpt has 6 call sites of IMUKalmanFilter_fixpt.c:sMultiWordEq."><a href="IMUKalmanFilter_fixpt_c.html#fcn_IMUKalmanFilter_fixpt" class="code2code">
+IMUKalmanFilter_fixpt
+</a>
+ (6)</span>
+</td>
+
+</tr>
+
+</table>
+
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+16
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+0
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+1
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+5
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+1
+</td>
+
+</tr>
+<tr style="background-color: #eeeeff">
+<td width="22%" align="left" valign="top" style="border-style: none">
+<a href="IMUKalmanFilter_fixpt_c.html#fcn_sMultiWordGe" class="code2code" title="sMultiWordGe is a static function in IMUKalmanFilter_fixpt.c.">
+sMultiWordGe
+</a>
+
+</td>
+<td width="22%" align="left" valign="top" style="border-style: none">
+<table width="100%" cellpadding="1" cellspacing="0" border="0">
+<tr>
+<td align="left" valign="top">
+<span style="white-space:nowrap" title="IMUKalmanFilter_fixpt has 6 call sites of IMUKalmanFilter_fixpt.c:sMultiWordGe."><a href="IMUKalmanFilter_fixpt_c.html#fcn_IMUKalmanFilter_fixpt" class="code2code">
+IMUKalmanFilter_fixpt
+</a>
+ (6)</span>
+</td>
+
+</tr>
+
+</table>
+
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+16
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+0
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+1
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+5
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+1
+</td>
+
+</tr>
+<tr style="background-color: #ffffff">
+<td width="22%" align="left" valign="top" style="border-style: none">
+<a href="IMUKalmanFilter_fixpt_c.html#fcn_sMultiWordMul" class="code2code" title="sMultiWordMul is a static function in IMUKalmanFilter_fixpt.c.">
+sMultiWordMul
+</a>
+
+</td>
+<td width="22%" align="left" valign="top" style="border-style: none">
+<table width="100%" cellpadding="1" cellspacing="0" border="0">
+<tr>
+<td align="left" valign="top">
+<span style="white-space:nowrap" title="IMUKalmanFilter_fixpt has 26 call sites of IMUKalmanFilter_fixpt.c:sMultiWordMul."><a href="IMUKalmanFilter_fixpt_c.html#fcn_IMUKalmanFilter_fixpt" class="code2code">
+IMUKalmanFilter_fixpt
+</a>
+ (26)</span>
+</td>
+
+</tr>
+
+</table>
+
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+62
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+62
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+80
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+93
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+10
+</td>
+
+</tr>
+<tr style="background-color: #eeeeff">
+<td width="22%" align="left" valign="top" style="border-style: none">
+<a href="IMUKalmanFilter_fixpt_c.html#fcn_sMultiWordShl" class="code2code" title="sMultiWordShl is a static function in IMUKalmanFilter_fixpt.c.">
+sMultiWordShl
+</a>
+
+</td>
+<td width="22%" align="left" valign="top" style="border-style: none">
+<table width="100%" cellpadding="1" cellspacing="0" border="0">
+<tr>
+<td align="left" valign="top">
+<span style="white-space:nowrap" title="IMUKalmanFilter_fixpt has 43 call sites of IMUKalmanFilter_fixpt.c:sMultiWordShl."><a href="IMUKalmanFilter_fixpt_c.html#fcn_IMUKalmanFilter_fixpt" class="code2code">
+IMUKalmanFilter_fixpt
+</a>
+ (43)</span>
+</td>
+
+</tr>
+
+</table>
+
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+32
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+32
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+53
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+63
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+11
+</td>
+
+</tr>
+<tr style="background-color: #ffffff">
+<td width="22%" align="left" valign="top" style="border-style: none">
+<a href="IMUKalmanFilter_fixpt_c.html#fcn_sMultiWordShr" class="code2code" title="sMultiWordShr is a static function in IMUKalmanFilter_fixpt.c.">
+sMultiWordShr
+</a>
+
+</td>
+<td width="22%" align="left" valign="top" style="border-style: none">
+<table width="100%" cellpadding="1" cellspacing="0" border="0">
+<tr>
+<td align="left" valign="top">
+<span style="white-space:nowrap" title="IMUKalmanFilter_fixpt has 23 call sites of IMUKalmanFilter_fixpt.c:sMultiWordShr."><a href="IMUKalmanFilter_fixpt_c.html#fcn_IMUKalmanFilter_fixpt" class="code2code">
+IMUKalmanFilter_fixpt
+</a>
+ (23)</span>
+</td>
+
+</tr>
+
+</table>
+
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+36
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+36
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+50
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+59
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+9
+</td>
+
+</tr>
+<tr style="background-color: #eeeeff">
+<td width="22%" align="left" valign="top" style="border-style: none">
+<a href="IMUKalmanFilter_fixpt_c.html#fcn_ssuMultiWordMul" class="code2code" title="ssuMultiWordMul is a static function in IMUKalmanFilter_fixpt.c.">
+ssuMultiWordMul
+</a>
+
+</td>
+<td width="22%" align="left" valign="top" style="border-style: none">
+<table width="100%" cellpadding="1" cellspacing="0" border="0">
+<tr>
+<td align="left" valign="top">
+<span style="white-space:nowrap" title="IMUKalmanFilter_fixpt has 37 call sites of IMUKalmanFilter_fixpt.c:ssuMultiWordMul."><a href="IMUKalmanFilter_fixpt_c.html#fcn_IMUKalmanFilter_fixpt" class="code2code">
+IMUKalmanFilter_fixpt
+</a>
+ (37)</span>
+</td>
+
+</tr>
+
+</table>
+
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+57
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+57
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+72
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+84
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+9
+</td>
+
+</tr>
+<tr style="background-color: #ffffff">
+<td width="22%" align="left" valign="top" style="border-style: none">
+<a href="IMUKalmanFilter_fixpt_c.html#fcn_uLong2MultiWord" class="code2code" title="uLong2MultiWord is a static function in IMUKalmanFilter_fixpt.c.">
+uLong2MultiWord
+</a>
+
+</td>
+<td width="22%" align="left" valign="top" style="border-style: none">
+<table width="100%" cellpadding="1" cellspacing="0" border="0">
+<tr>
+<td align="left" valign="top">
+<span style="white-space:nowrap" title="IMUKalmanFilter_fixpt has 23 call sites of IMUKalmanFilter_fixpt.c:uLong2MultiWord."><a href="IMUKalmanFilter_fixpt_c.html#fcn_IMUKalmanFilter_fixpt" class="code2code">
+IMUKalmanFilter_fixpt
+</a>
+ (23)</span>
+</td>
+
+</tr>
+
+</table>
+
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+4
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+4
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+5
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+8
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+2
+</td>
+
+</tr>
+<tr style="background-color: #eeeeff">
+<td width="22%" align="left" valign="top" style="border-style: none">
+<a href="IMUKalmanFilter_fixpt_c.html#fcn_uMultiWord2MultiWord" class="code2code" title="uMultiWord2MultiWord is a static function in IMUKalmanFilter_fixpt.c.">
+uMultiWord2MultiWord
+</a>
+
+</td>
+<td width="22%" align="left" valign="top" style="border-style: none">
+<table width="100%" cellpadding="1" cellspacing="0" border="0">
+<tr>
+<td align="left" valign="top">
+<span style="white-space:nowrap" title="IMUKalmanFilter_fixpt.c:uMultiWordDivZero has 2 call sites of IMUKalmanFilter_fixpt.c:uMultiWord2MultiWord."><a href="IMUKalmanFilter_fixpt_c.html#fcn_uMultiWordDivZero" class="code2code" title="uMultiWordDivZero is a static function in IMUKalmanFilter_fixpt.c.">
+uMultiWordDivZero
+</a>
+ (2)</span>
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<span style="white-space:nowrap" title="IMUKalmanFilter_fixpt has 35 call sites of IMUKalmanFilter_fixpt.c:uMultiWord2MultiWord."><a href="IMUKalmanFilter_fixpt_c.html#fcn_IMUKalmanFilter_fixpt" class="code2code">
+IMUKalmanFilter_fixpt
+</a>
+ (35)</span>
+</td>
+
+</tr>
+
+</table>
+
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+8
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+8
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+15
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+21
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+5
+</td>
+
+</tr>
+<tr style="background-color: #ffffff">
+<td width="22%" align="left" valign="top" style="border-style: none">
+<a href="IMUKalmanFilter_fixpt_c.html#fcn_uMultiWordDiv" class="code2code" title="uMultiWordDiv is a static function in IMUKalmanFilter_fixpt.c.">
+uMultiWordDiv
+</a>
+
+</td>
+<td width="22%" align="left" valign="top" style="border-style: none">
+<table width="100%" cellpadding="1" cellspacing="0" border="0">
+<tr>
+<td align="left" valign="top">
+<span style="white-space:nowrap" title="IMUKalmanFilter_fixpt.c:sMultiWordDivFloor has one call site of IMUKalmanFilter_fixpt.c:uMultiWordDiv."><a href="IMUKalmanFilter_fixpt_c.html#fcn_sMultiWordDivFloor" class="code2code" title="sMultiWordDivFloor is a static function in IMUKalmanFilter_fixpt.c.">
+sMultiWordDivFloor
+</a>
+</span>
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<span style="white-space:nowrap" title="IMUKalmanFilter_fixpt.c:sMultiWordDivZero has one call site of IMUKalmanFilter_fixpt.c:uMultiWordDiv."><a href="IMUKalmanFilter_fixpt_c.html#fcn_sMultiWordDivZero" class="code2code" title="sMultiWordDivZero is a static function in IMUKalmanFilter_fixpt.c.">
+sMultiWordDivZero
+</a>
+</span>
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<span style="white-space:nowrap" title="IMUKalmanFilter_fixpt.c:uMultiWordDivZero has one call site of IMUKalmanFilter_fixpt.c:uMultiWordDiv."><a href="IMUKalmanFilter_fixpt_c.html#fcn_uMultiWordDivZero" class="code2code" title="uMultiWordDivZero is a static function in IMUKalmanFilter_fixpt.c.">
+uMultiWordDivZero
+</a>
+</span>
+</td>
+
+</tr>
+
+</table>
+
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+92
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+92
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+255
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+305
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+43
+</td>
+
+</tr>
+<tr style="background-color: #eeeeff">
+<td width="22%" align="left" valign="top" style="border-style: none">
+<a href="IMUKalmanFilter_fixpt_c.html#fcn_uMultiWordDivZero" class="code2code" title="uMultiWordDivZero is a static function in IMUKalmanFilter_fixpt.c.">
+uMultiWordDivZero
+</a>
+
+</td>
+<td width="22%" align="left" valign="top" style="border-style: none">
+<table width="100%" cellpadding="1" cellspacing="0" border="0">
+<tr>
+<td align="left" valign="top">
+<span style="white-space:nowrap" title="IMUKalmanFilter_fixpt has 8 call sites of IMUKalmanFilter_fixpt.c:uMultiWordDivZero."><a href="IMUKalmanFilter_fixpt_c.html#fcn_IMUKalmanFilter_fixpt" class="code2code">
+IMUKalmanFilter_fixpt
+</a>
+ (8)</span>
+</td>
+
+</tr>
+
+</table>
+
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+92
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+0
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+5
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+10
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+2
+</td>
+
+</tr>
+<tr style="background-color: #ffffff">
+<td width="22%" align="left" valign="top" style="border-style: none">
+<a href="IMUKalmanFilter_fixpt_c.html#fcn_uMultiWordInc" class="code2code" title="uMultiWordInc is a static function in IMUKalmanFilter_fixpt.c.">
+uMultiWordInc
+</a>
+
+</td>
+<td width="22%" align="left" valign="top" style="border-style: none">
+<table width="100%" cellpadding="1" cellspacing="0" border="0">
+<tr>
+<td align="left" valign="top">
+<span style="white-space:nowrap" title="IMUKalmanFilter_fixpt.c:sMultiWordDivFloor has one call site of IMUKalmanFilter_fixpt.c:uMultiWordInc."><a href="IMUKalmanFilter_fixpt_c.html#fcn_sMultiWordDivFloor" class="code2code" title="sMultiWordDivFloor is a static function in IMUKalmanFilter_fixpt.c.">
+sMultiWordDivFloor
+</a>
+</span>
+</td>
+
+</tr>
+
+</table>
+
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+12
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+12
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+8
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+11
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+2
+</td>
+
+</tr>
+<tr style="background-color: #eeeeff">
+<td width="22%" align="left" valign="top" style="border-style: none">
+<a href="IMUKalmanFilter_fixpt_c.html#fcn_uMultiWordMul" class="code2code" title="uMultiWordMul is a static function in IMUKalmanFilter_fixpt.c.">
+uMultiWordMul
+</a>
+
+</td>
+<td width="22%" align="left" valign="top" style="border-style: none">
+<table width="100%" cellpadding="1" cellspacing="0" border="0">
+<tr>
+<td align="left" valign="top">
+<span style="white-space:nowrap" title="IMUKalmanFilter_fixpt has 12 call sites of IMUKalmanFilter_fixpt.c:uMultiWordMul."><a href="IMUKalmanFilter_fixpt_c.html#fcn_IMUKalmanFilter_fixpt" class="code2code">
+IMUKalmanFilter_fixpt
+</a>
+ (12)</span>
+</td>
+
+</tr>
+
+</table>
+
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+52
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+52
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+56
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+65
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+6
+</td>
+
+</tr>
+<tr style="background-color: #ffffff">
+<td width="22%" align="left" valign="top" style="border-style: none">
+<a href="IMUKalmanFilter_fixpt_c.html#fcn_uMultiWordShl" class="code2code" title="uMultiWordShl is a static function in IMUKalmanFilter_fixpt.c.">
+uMultiWordShl
+</a>
+
+</td>
+<td width="22%" align="left" valign="top" style="border-style: none">
+<table width="100%" cellpadding="1" cellspacing="0" border="0">
+<tr>
+<td align="left" valign="top">
+<span style="white-space:nowrap" title="IMUKalmanFilter_fixpt has 26 call sites of IMUKalmanFilter_fixpt.c:uMultiWordShl."><a href="IMUKalmanFilter_fixpt_c.html#fcn_IMUKalmanFilter_fixpt" class="code2code">
+IMUKalmanFilter_fixpt
+</a>
+ (26)</span>
+</td>
+
+</tr>
+
+</table>
+
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+32
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+32
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+53
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+63
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+11
+</td>
+
+</tr>
+<tr style="background-color: #eeeeff">
+<td width="22%" align="left" valign="top" style="border-style: none">
+<a href="IMUKalmanFilter_fixpt_c.html#fcn_uMultiWordShr" class="code2code" title="uMultiWordShr is a static function in IMUKalmanFilter_fixpt.c.">
+uMultiWordShr
+</a>
+
+</td>
+<td width="22%" align="left" valign="top" style="border-style: none">
+<table width="100%" cellpadding="1" cellspacing="0" border="0">
+<tr>
+<td align="left" valign="top">
+<span style="white-space:nowrap" title="IMUKalmanFilter_fixpt has 4 call sites of IMUKalmanFilter_fixpt.c:uMultiWordShr."><a href="IMUKalmanFilter_fixpt_c.html#fcn_IMUKalmanFilter_fixpt" class="code2code">
+IMUKalmanFilter_fixpt
+</a>
+ (4)</span>
+</td>
+
+</tr>
+
+</table>
+
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+32
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+32
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+42
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+50
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+8
+</td>
+
+</tr>
+<tr style="background-color: #ffffff">
+<td width="22%" align="left" valign="top" style="border-style: none">
+<a href="IMUKalmanFilter_fixpt_initialize_c.html#fcn_IMUKalmanFilter_fixpt_initialize" class="code2code">
+IMUKalmanFilter_fixpt_initialize
+</a>
+
+</td>
+<td width="22%" align="left" valign="top" style="border-style: none">
+&#160;
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+48
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+0
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+1
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+4
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+1
+</td>
+
+</tr>
+<tr style="background-color: #eeeeff">
+<td width="22%" align="left" valign="top" style="border-style: none">
+<a href="IMUKalmanFilter_fixpt_terminate_c.html#fcn_IMUKalmanFilter_fixpt_terminate" class="code2code">
+IMUKalmanFilter_fixpt_terminate
+</a>
+
+</td>
+<td width="22%" align="left" valign="top" style="border-style: none">
+&#160;
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+0
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+0
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+0
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+4
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+1
+</td>
+
+</tr>
+<tr style="background-color: #ffffff">
+<td width="22%" align="left" valign="top" style="border-style: none">
+<a href="rtGetInf_c.html#fcn_rtGetInf" class="code2code">
+rtGetInf
+</a>
+
+</td>
+<td width="22%" align="left" valign="top" style="border-style: none">
+<table width="100%" cellpadding="1" cellspacing="0" border="0">
+<tr>
+<td align="left" valign="top">
+<span style="white-space:nowrap" title="rt_InitInfAndNaN has one call site of rtGetInf."><a href="rt_nonfinite_c.html#fcn_rt_InitInfAndNaN" class="code2code">
+rt_InitInfAndNaN
+</a>
+</span>
+</td>
+
+</tr>
+
+</table>
+
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+40
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+36
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+36
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+43
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+5
+</td>
+
+</tr>
+<tr style="background-color: #eeeeff">
+<td width="22%" align="left" valign="top" style="border-style: none">
+<a href="rtGetInf_c.html#fcn_rtGetInfF" class="code2code">
+rtGetInfF
+</a>
+
+</td>
+<td width="22%" align="left" valign="top" style="border-style: none">
+<table width="100%" cellpadding="1" cellspacing="0" border="0">
+<tr>
+<td align="left" valign="top">
+<span style="white-space:nowrap" title="rtGetInf has one call site of rtGetInfF."><a href="rtGetInf_c.html#fcn_rtGetInf" class="code2code">
+rtGetInf
+</a>
+</span>
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<span style="white-space:nowrap" title="rt_InitInfAndNaN has one call site of rtGetInfF."><a href="rt_nonfinite_c.html#fcn_rt_InitInfAndNaN" class="code2code">
+rt_InitInfAndNaN
+</a>
+</span>
+</td>
+
+</tr>
+
+</table>
+
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+4
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+4
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+3
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+6
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+1
+</td>
+
+</tr>
+<tr style="background-color: #ffffff">
+<td width="22%" align="left" valign="top" style="border-style: none">
+<a href="rtGetInf_c.html#fcn_rtGetMinusInf" class="code2code">
+rtGetMinusInf
+</a>
+
+</td>
+<td width="22%" align="left" valign="top" style="border-style: none">
+<table width="100%" cellpadding="1" cellspacing="0" border="0">
+<tr>
+<td align="left" valign="top">
+<span style="white-space:nowrap" title="rt_InitInfAndNaN has one call site of rtGetMinusInf."><a href="rt_nonfinite_c.html#fcn_rt_InitInfAndNaN" class="code2code">
+rt_InitInfAndNaN
+</a>
+</span>
+</td>
+
+</tr>
+
+</table>
+
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+40
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+36
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+36
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+43
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+5
+</td>
+
+</tr>
+<tr style="background-color: #eeeeff">
+<td width="22%" align="left" valign="top" style="border-style: none">
+<a href="rtGetInf_c.html#fcn_rtGetMinusInfF" class="code2code">
+rtGetMinusInfF
+</a>
+
+</td>
+<td width="22%" align="left" valign="top" style="border-style: none">
+<table width="100%" cellpadding="1" cellspacing="0" border="0">
+<tr>
+<td align="left" valign="top">
+<span style="white-space:nowrap" title="rtGetMinusInf has one call site of rtGetMinusInfF."><a href="rtGetInf_c.html#fcn_rtGetMinusInf" class="code2code">
+rtGetMinusInf
+</a>
+</span>
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<span style="white-space:nowrap" title="rt_InitInfAndNaN has one call site of rtGetMinusInfF."><a href="rt_nonfinite_c.html#fcn_rt_InitInfAndNaN" class="code2code">
+rt_InitInfAndNaN
+</a>
+</span>
+</td>
+
+</tr>
+
+</table>
+
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+4
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+4
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+3
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+6
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+1
+</td>
+
+</tr>
+<tr style="background-color: #ffffff">
+<td width="22%" align="left" valign="top" style="border-style: none">
+<a href="rtGetNaN_c.html#fcn_rtGetNaN" class="code2code">
+rtGetNaN
+</a>
+
+</td>
+<td width="22%" align="left" valign="top" style="border-style: none">
+<table width="100%" cellpadding="1" cellspacing="0" border="0">
+<tr>
+<td align="left" valign="top">
+<span style="white-space:nowrap" title="rt_InitInfAndNaN has one call site of rtGetNaN."><a href="rt_nonfinite_c.html#fcn_rt_InitInfAndNaN" class="code2code">
+rt_InitInfAndNaN
+</a>
+</span>
+</td>
+
+</tr>
+
+</table>
+
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+48
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+36
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+36
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+43
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+5
+</td>
+
+</tr>
+<tr style="background-color: #eeeeff">
+<td width="22%" align="left" valign="top" style="border-style: none">
+<a href="rtGetNaN_c.html#fcn_rtGetNaNF" class="code2code">
+rtGetNaNF
+</a>
+
+</td>
+<td width="22%" align="left" valign="top" style="border-style: none">
+<table width="100%" cellpadding="1" cellspacing="0" border="0">
+<tr>
+<td align="left" valign="top">
+<span style="white-space:nowrap" title="rtGetNaN has one call site of rtGetNaNF."><a href="rtGetNaN_c.html#fcn_rtGetNaN" class="code2code">
+rtGetNaN
+</a>
+</span>
+</td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<span style="white-space:nowrap" title="rt_InitInfAndNaN has one call site of rtGetNaNF."><a href="rt_nonfinite_c.html#fcn_rt_InitInfAndNaN" class="code2code">
+rt_InitInfAndNaN
+</a>
+</span>
+</td>
+
+</tr>
+
+</table>
+
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+12
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+12
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+19
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+25
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+4
+</td>
+
+</tr>
+<tr style="background-color: #ffffff">
+<td width="22%" align="left" valign="top" style="border-style: none">
+<a href="rt_nonfinite_c.html#fcn_rtIsInf" class="code2code">
+rtIsInf
+</a>
+
+</td>
+<td width="22%" align="left" valign="top" style="border-style: none">
+&#160;
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+0
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+0
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+1
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+4
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+2
+</td>
+
+</tr>
+<tr style="background-color: #eeeeff">
+<td width="22%" align="left" valign="top" style="border-style: none">
+<a href="rt_nonfinite_c.html#fcn_rtIsInfF" class="code2code">
+rtIsInfF
+</a>
+
+</td>
+<td width="22%" align="left" valign="top" style="border-style: none">
+&#160;
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+0
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+0
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+1
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+4
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+2
+</td>
+
+</tr>
+<tr style="background-color: #ffffff">
+<td width="22%" align="left" valign="top" style="border-style: none">
+<a href="rt_nonfinite_c.html#fcn_rtIsNaN" class="code2code">
+rtIsNaN
+</a>
+
+</td>
+<td width="22%" align="left" valign="top" style="border-style: none">
+&#160;
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+0
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+0
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+5
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+14
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+2
+</td>
+
+</tr>
+<tr style="background-color: #eeeeff">
+<td width="22%" align="left" valign="top" style="border-style: none">
+<a href="rt_nonfinite_c.html#fcn_rtIsNaNF" class="code2code">
+rtIsNaNF
+</a>
+
+</td>
+<td width="22%" align="left" valign="top" style="border-style: none">
+&#160;
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+0
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+0
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+5
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+14
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+2
+</td>
+
+</tr>
+<tr style="background-color: #ffffff">
+<td width="22%" align="left" valign="top" style="border-style: none">
+<a href="rt_nonfinite_c.html#fcn_rt_InitInfAndNaN" class="code2code">
+rt_InitInfAndNaN
+</a>
+
+</td>
+<td width="22%" align="left" valign="top" style="border-style: none">
+<table width="100%" cellpadding="1" cellspacing="0" border="0">
+<tr>
+<td align="left" valign="top">
+<span style="white-space:nowrap" title="IMUKalmanFilter_fixpt_initialize has one call site of rt_InitInfAndNaN."><a href="IMUKalmanFilter_fixpt_initialize_c.html#fcn_IMUKalmanFilter_fixpt_initialize" class="code2code">
+IMUKalmanFilter_fixpt_initialize
+</a>
+</span>
+</td>
+
+</tr>
+
+</table>
+
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+48
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+0
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+7
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+10
+</td>
+<td width="11%" align="right" valign="top" style="border-style: none">
+1
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</body>
+
+</html>

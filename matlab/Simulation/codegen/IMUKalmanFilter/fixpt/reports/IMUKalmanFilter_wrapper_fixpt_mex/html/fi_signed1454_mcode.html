@@ -1,0 +1,17 @@
+<!-- saved from url=(0014)about:internet -->
+<pre class="code">
+<span class="srcline"><span class="lineno"><a href="8,145" id="srcline145">145</a></span><span class="line"></span></span>
+<span class="srcline"><span class="lineno"><a href="8,146" id="srcline146">146</a></span><span class="line"></span></span>
+<span class="srcline"><span class="lineno"><a href="8,147" id="srcline147">147</a></span><span class="line"><span class="keyword">function</span> <span class="var type1" id="S149T158U1978">y</span> = fi_signed(<span class="var type1" id="S150T155U1981">a</span>)</span></span>
+<span class="srcline"><span class="lineno"><a href="8,148" id="srcline148">148</a></span><span class="line">    coder.inline( <span class="string">'always'</span> );</span></span>
+<span class="srcline"><span class="lineno"><a href="8,149" id="srcline149">149</a></span><span class="line">    <span class="keyword">if</span> isfi( <span class="var type1" id="S150T155U1993">a</span> ) &amp;&amp; ~(issigned( <span class="var type1" id="S150T155U1998">a</span> ))</span></span>
+<span class="srcline"><span class="lineno"><a href="8,150" id="srcline150">150</a></span><span class="line">        <span class="mxinfo " id="T156:U5"><span class="var type1" id="S154T520U2001">nt</span> = <span class="mxinfo " id="T156:U7">numerictype( <span class="var type1" id="S150T155U2004">a</span> )</span></span>;</span></span>
+<span class="srcline"><span class="lineno"><a href="8,151" id="srcline151">151</a></span><span class="line">        <span class="mxinfo " id="T157:U9"><span class="var type1" id="S156T555U2007">new_nt</span> = <span class="mxinfo " id="T157:U11">numerictype( 1, <span class="var type1" id="S154T520U2013">nt</span>.WordLength + 1, <span class="var type1" id="S154T520U2017">nt</span>.FractionLength )</span></span>;</span></span>
+<span class="srcline"><span class="lineno"><a href="8,152" id="srcline152">152</a></span><span class="line">        <span class="mxinfo " id="T158:U14"><span class="var type1" id="S149T158U2021">y</span> = <span class="mxinfo " id="T158:U16">fi( <span class="var type1" id="S150T155U2024">a</span>, <span class="var type1" id="S156T555U2025">new_nt</span>, fimath( <span class="var type1" id="S150T155U2028">a</span> ) )</span></span>;</span></span>
+<span class="srcline"><span class="lineno"><a href="8,153" id="srcline153">153</a></span><span class="line">    <span class="keyword">else</span></span></span>
+<span class="srcline"><span class="lineno"><a href="8,154" id="srcline154">154</a></span><span class="line">        <span class="var type0" id="S149T0U2032">y</span> = <span class="var type0" id="S150T0U2033">a</span>;</span></span>
+<span class="srcline"><span class="lineno"><a href="8,155" id="srcline155">155</a></span><span class="line">    <span class="keyword">end</span></span></span>
+<span class="srcline"><span class="lineno"><a href="8,156" id="srcline156">156</a></span><span class="line"><span class="keyword">end</span></span></span>
+<span class="srcline"><span class="lineno"><a href="8,157" id="srcline157">157</a></span><span class="line"></span></span>
+<span class="srcline"><span class="lineno"><a href="8,158" id="srcline158">158</a></span><span class="line"></span></span>
+</pre>

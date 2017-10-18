@@ -53,6 +53,11 @@ void motors_init(void)
 	//ADCSRA =
 }
 
+void motor_set_torque(MOTOR_SIDE side, int32_t value)
+{
+
+}
+
 void motors_set_pwm(MOTOR_SIDE side, int32_t value)
 {
 	if (value <= MAX_PWM && value >= -MAX_PWM)

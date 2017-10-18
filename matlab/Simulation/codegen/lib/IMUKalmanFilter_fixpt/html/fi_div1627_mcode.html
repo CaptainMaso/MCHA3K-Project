@@ -1,0 +1,18 @@
+<!-- saved from url=(0014)about:internet -->
+<pre class="code">
+<span class="srcline"><span class="lineno"><a href="1,132" id="srcline132">132</a></span><span class="line"></span></span>
+<span class="srcline"><span class="lineno"><a href="1,133" id="srcline133">133</a></span><span class="line"></span></span>
+<span class="srcline"><span class="lineno"><a href="1,134" id="srcline134">134</a></span><span class="line"><span class="keyword">function</span> <span class="var type1" id="S134T577U1906">c</span> = fi_div(<span class="var type1" id="S135T577U1909">a</span>,<span class="var type2" id="S136T12V1U1910">b</span>)</span></span>
+<span class="srcline"><span class="lineno"><a href="1,135" id="srcline135">135</a></span><span class="line">    coder.inline( <span class="string">'always'</span> );</span></span>
+<span class="srcline"><span class="lineno"><a href="1,136" id="srcline136">136</a></span><span class="line">    <span class="keyword">if</span> isfi( <span class="var type1" id="S135T577U1923">a</span> ) &amp;&amp; isfi( <span class="var type1" id="S136T12U1926">b</span> ) &amp;&amp; isscalar( <span class="var type0" id="S136T0U1929">b</span> )</span></span>
+<span class="srcline"><span class="lineno"><a href="1,137" id="srcline137">137</a></span><span class="line">        <span class="var type0" id="S140T0U1932">a1</span> = fi( <span class="var type0" id="S135T0U1935">a</span>, <span class="string">'RoundMode'</span>, <span class="string">'fix'</span> );</span></span>
+<span class="srcline"><span class="lineno"><a href="1,138" id="srcline138">138</a></span><span class="line">        <span class="var type0" id="S142T0U1940">b1</span> = fi( <span class="var type0" id="S136T0U1943">b</span>, <span class="string">'RoundMode'</span>, <span class="string">'fix'</span> );</span></span>
+<span class="srcline"><span class="lineno"><a href="1,139" id="srcline139">139</a></span><span class="line">        <span class="var type0" id="S143T0U1948">c1</span> = divide( divideType( <span class="var type0" id="S140T0U1953">a1</span>, <span class="var type0" id="S142T0U1954">b1</span> ), <span class="var type0" id="S140T0U1955">a1</span>, <span class="var type0" id="S142T0U1956">b1</span> );</span></span>
+<span class="srcline"><span class="lineno"><a href="1,140" id="srcline140">140</a></span><span class="line">        <span class="var type0" id="S134T0U1959">c</span> = fi( <span class="var type0" id="S143T0U1962">c1</span>, numerictype( <span class="var type0" id="S143T0U1965">c1</span> ), fimath( <span class="var type0" id="S135T0U1968">a</span> ) );</span></span>
+<span class="srcline"><span class="lineno"><a href="1,141" id="srcline141">141</a></span><span class="line">    <span class="keyword">else</span></span></span>
+<span class="srcline"><span class="lineno"><a href="1,142" id="srcline142">142</a></span><span class="line">        <span class="mxinfo " id="T577:U6"><span class="var type1" id="S134T577U1972">c</span> = <span class="mxinfo " id="T577:U8"><span class="var type1" id="S135T577U1974">a</span>/<span class="var type1" id="S136T12U1975">b</span></span></span>;</span></span>
+<span class="srcline"><span class="lineno"><a href="1,143" id="srcline143">143</a></span><span class="line">    <span class="keyword">end</span></span></span>
+<span class="srcline"><span class="lineno"><a href="1,144" id="srcline144">144</a></span><span class="line"><span class="keyword">end</span></span></span>
+<span class="srcline"><span class="lineno"><a href="1,145" id="srcline145">145</a></span><span class="line"></span></span>
+<span class="srcline"><span class="lineno"><a href="1,146" id="srcline146">146</a></span><span class="line"></span></span>
+</pre>

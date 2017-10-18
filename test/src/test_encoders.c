@@ -1,111 +1,155 @@
-#include <encoders.h>
+#include "encoders.h"
 #include "unity_fixture.h"
 
 #include <stdint.h>
 #include "avr/io.h"
 #include "avr/mock_sfr.h"
 
-TEST_GROUP(Encoder);
+TEST_GROUP(Encoders);
 
-TEST_SETUP(Encoder)
+TEST_SETUP(Encoders)
 {
     encoder_init();
 }
 
-TEST_TEAR_DOWN(Encoder)
+TEST_TEAR_DOWN(Encoders)
 {
 }
 
-TEST(Encoder, DefaultCount)
+TEST(Encoders, DefaultCount)
 {
-    TEST_ASSERT_EQUAL_INT32(0, encoder_get_count());
+    TEST_ASSERT_EQUAL_INT32(0, encoder_get_count(MOTOR_LEFT));
+    TEST_ASSERT_EQUAL_INT32(0, encoder_get_count(MOTOR_RIGHT));
 }
 
-TEST(Encoder, SetCount)
+TEST(Encoders, SetCount)
 {
-    encoder_set_count(42);
-    TEST_ASSERT_EQUAL_INT32(42, encoder_get_count());
+    encoder_set_count(42, MOTOR_LEFT);
+    TEST_ASSERT_EQUAL_INT32(42, encoder_get_count(MOTOR_LEFT));
+    encoder_set_count(86, MOTOR_RIGHT);
+    TEST_ASSERT_EQUAL_INT32(86, encoder_get_count(MOTOR_RIGHT));
 }
 
-static void raise_A(void) { mock_portd |=   1 << 2 ; }  // Raise PD2/INT0/chA
-static void raise_B(void) { mock_portd |=   1 << 3 ; }  // Raise PD3/INT1/chB
-static void lower_A(void) { mock_portd &= ~(1 << 2); }  // Lower PD2/INT0/chA
-static void lower_B(void) { mock_portd &= ~(1 << 3); }  // Lower PD3/INT1/chB
+static void raise_MLA(void) { PORTD |=   _BV(PD3); }  // Raise PD2/INT0/chA
+static void raise_MLB(void) { PORTD |=   _BV(PB1); }  // Raise PD3/INT1/chB
+static void raise_MRA(void) { PORTD |=   _BV(PD3); }  // Raise PD2/INT0/chA
+static void raise_MRB(void) { PORTD |=   _BV(PB1); }  // Raise PD3/INT1/chB
 
-TEST(Encoder, QuadratureIncrement)
+static void lower_MLA(void) { PORTD &=   ~(_BV(PD2)); }  // Lower PD2/INT0/chA
+static void lower_MLB(void) { PORTD &=   ~(_BV(PB0)); }  // Lower PD3/INT1/chB
+static void lower_MRA(void) { PORTD &=   ~(_BV(PD2)); }  // Lower PD2/INT0/chA
+static void lower_MRB(void) { PORTD &=   ~(_BV(PB0)); }  // Lower PD3/INT1/chB
+
+TEST(Encoders, DualIncrement)
 {
+	//Motor Left
     PIND = 0x00;
-    encoder_set_count(0);
+    encoder_set_count(0, MOTOR_LEFT);
 
-    // Transition from state 1 to 2
-    raise_B();
-    encoder_edge_ML_isr();
-    TEST_ASSERT_EQUAL_INT32_MESSAGE(1, encoder_get_count(), "Expected increment for state 1 to 2 transition");
+    for (int i = 0; i < 10; i++)
+    {
+		// Transition from state 1 to 2
+		raise_MLA();
+		encoder_edge_ML_isr();
+		TEST_ASSERT_EQUAL_INT32_MESSAGE(2*i+1, encoder_get_count(MOTOR_LEFT), "Expected increment for state 1 to 2 transition: ML");
 
-    // Transition from state 2 to 3
-    raise_A();
-    encoder_edge_A_isr();
-    TEST_ASSERT_EQUAL_INT32_MESSAGE(2, encoder_get_count(), "Expected increment for state 2 to 3 transition");
+		// Transition from state 2 to 3
+		raise_MLB();
 
-    // Transition from state 3 to 4
-    lower_B();
-    encoder_edge_B_isr();
-    TEST_ASSERT_EQUAL_INT32_MESSAGE(3, encoder_get_count(), "Expected increment for state 3 to 4 transition");
+		// Transition from state 3 to 4
+		lower_MLA();
+		encoder_edge_ML_isr();
+		TEST_ASSERT_EQUAL_INT32_MESSAGE(2*i+2, encoder_get_count(MOTOR_LEFT), "Expected increment for state 3 to 4 transition: ML");
 
-    // Transition from state 4 to 1
-    lower_A();
-    encoder_edge_A_isr();
-    TEST_ASSERT_EQUAL_INT32_MESSAGE(4, encoder_get_count(), "Expected increment for state 4 to 1 transition");
+		// Transition from state 4 to 1
+		lower_MLB();
+    }
 
-    // Transition from state 1 to 2
-    raise_B();
-    encoder_edge_B_isr();
-    TEST_ASSERT_EQUAL_INT32_MESSAGE(5, encoder_get_count(), "Expected increment for state 1 to 2 transition");
+    //Motor Right
+	PIND = 0x00;
+	encoder_set_count(0, MOTOR_RIGHT);
+
+	for (int i = 0; i < 10; i++)
+	{
+		// Transition from state 1 to 2
+		raise_MRA();
+		encoder_edge_MR_isr();
+		TEST_ASSERT_EQUAL_INT32_MESSAGE(2*i+1, encoder_get_count(MOTOR_RIGHT), "Expected increment for state 1 to 2 transition: MR");
+
+		// Transition from state 2 to 3
+		raise_MRB();
+
+		// Transition from state 3 to 4
+		lower_MRA();
+		encoder_edge_MR_isr();
+		TEST_ASSERT_EQUAL_INT32_MESSAGE(2*i+2, encoder_get_count(MOTOR_RIGHT), "Expected increment for state 3 to 4 transition: MR");
+
+		// Transition from state 4 to 1
+		lower_MRB();
+	}
 }
 
-TEST(Encoder, QuadratureDecrement)
+TEST(Encoders, DualDecrement)
 {
-    mock_portd = 0x00;
-    encoder_set_count(0);
+	//Motor Left
+	PIND = 0x00;
+	encoder_set_count(0, MOTOR_LEFT);
 
-    // Transition from state 1 to 4
-    raise_A();
-    encoder_edge_A_isr();
-    TEST_ASSERT_EQUAL_INT32_MESSAGE(-1, encoder_get_count(), "Expected decrement for state 1 to 4 transition");
+	for (int i = 0; i < 10; i++)
+	{
+		// Transition from state 1 to 4
+		lower_MLA();
+		encoder_edge_ML_isr();
+		TEST_ASSERT_EQUAL_INT32_MESSAGE(2*i+1, encoder_get_count(MOTOR_LEFT), "Expected increment for state 1 to 2 transition: ML");
 
-    // Transition from state 4 to 3
-    raise_B();
-    encoder_edge_B_isr();
-    TEST_ASSERT_EQUAL_INT32_MESSAGE(-2, encoder_get_count(), "Expected decrement for state 4 to 3 transition");
+		// Transition from state 2 to 3
+		raise_B();
 
-    // Transition from state 3 to 2
-    lower_A();
-    encoder_edge_A_isr();
-    TEST_ASSERT_EQUAL_INT32_MESSAGE(-3, encoder_get_count(), "Expected decrement for state 3 to 2 transition");
+		// Transition from state 3 to 4
+		lower_MLA();
+		encoder_edge_ML_isr();
+		TEST_ASSERT_EQUAL_INT32_MESSAGE(2*i+2, encoder_get_count(MOTOR_LEFT), "Expected increment for state 3 to 4 transition: ML");
 
-    // Transition from state 2 to 1
-    lower_B();
-    encoder_edge_B_isr();
-    TEST_ASSERT_EQUAL_INT32_MESSAGE(-4, encoder_get_count(), "Expected decrement for state 2 to 1 transition");
+		// Transition from state 4 to 1
+		lower_MLB();
+	}
 
-    // Transition from state 1 to 4
-    raise_A();
-    encoder_edge_A_isr();
-    TEST_ASSERT_EQUAL_INT32_MESSAGE(-5, encoder_get_count(), "Expected decrement for state 1 to 4 transition");
+	//Motor Right
+	PIND = 0x00;
+	encoder_set_count(0, MOTOR_RIGHT);
+
+	for (int i = 0; i < 10; i++)
+	{
+		// Transition from state 1 to 2
+		raise_MRA();
+		encoder_edge_MR_isr();
+		TEST_ASSERT_EQUAL_INT32_MESSAGE(2*i+1, encoder_get_count(MOTOR_RIGHT), "Expected increment for state 1 to 2 transition: MR");
+
+		// Transition from state 2 to 3
+		raise_B();
+
+		// Transition from state 3 to 4
+		lower_MRA();
+		encoder_edge_MR_isr();
+		TEST_ASSERT_EQUAL_INT32_MESSAGE(2*i+2, encoder_get_count(MOTOR_RIGHT), "Expected increment for state 3 to 4 transition: MR");
+
+		// Transition from state 4 to 1
+		lower_MRB();
+	}
 }
 
-TEST(Encoder, PopCount)
+TEST(Encoders, PopCount)
 {
     encoder_set_count(123);
     TEST_ASSERT_EQUAL_INT32(123, encoder_pop_count());
     TEST_ASSERT_EQUAL_INT32(0, encoder_get_count());
 }
 
-TEST_GROUP_RUNNER(Encoder)
+TEST_GROUP_RUNNER(Encoders)
 {
-    RUN_TEST_CASE(Encoder, DefaultCount);
-    RUN_TEST_CASE(Encoder, SetCount);
-    RUN_TEST_CASE(Encoder, QuadratureIncrement);
-    RUN_TEST_CASE(Encoder, QuadratureDecrement);
-    RUN_TEST_CASE(Encoder, PopCount);
+    RUN_TEST_CASE(Encoders, DefaultCount);
+    RUN_TEST_CASE(Encoders, SetCount);
+    RUN_TEST_CASE(Encoders, QuadratureIncrement);
+    RUN_TEST_CASE(Encoders, QuadratureDecrement);
+    RUN_TEST_CASE(Encoders, PopCount);
 }

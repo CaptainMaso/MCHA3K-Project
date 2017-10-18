@@ -93,6 +93,24 @@ CMD_STATUS log_cmd(int argc, const char *argv[])
 				_devices_active[LOG_IMU_GZ] = true;
 				//printf_P(PSTR("Logging IMU\n"));
 			}
+			else if (!strcmp_P(argv[curArg], PSTR("IMU_THETA")))
+			{
+				//IMU device - GZ
+				_devices_active[LOG_IMU_THETA] = true;
+				//printf_P(PSTR("Logging IMU\n"));
+			}
+			else if (!strcmp_P(argv[curArg], PSTR("IMU_DTHETA")))
+			{
+				//IMU device - GZ
+				_devices_active[LOG_IMU_DTHETA] = true;
+				//printf_P(PSTR("Logging IMU\n"));
+			}
+			else if (!strcmp_P(argv[curArg], PSTR("IMU_BIAS")))
+			{
+				//IMU device - GZ
+				_devices_active[LOG_IMU_BIAS] = true;
+				//printf_P(PSTR("Logging IMU\n"));
+			}
 			else if(!strcmp_P(argv[curArg], PSTR("ENC_ML")))
 			{
 				//Encoder devices
@@ -159,6 +177,15 @@ CMD_STATUS log_cmd(int argc, const char *argv[])
 						break;
 					case LOG_IMU_GZ:
 						printf_P(PSTR("gz (d/s)"));
+						break;
+					case LOG_IMU_THETA:
+						printf_P(PSTR("Theta"));
+						break;
+					case LOG_IMU_DTHETA:
+						printf_P(PSTR("dTheta"));
+						break;
+					case LOG_IMU_BIAS:
+						printf_P(PSTR("Bias"));
 						break;
 					case LOG_ENC_ML:
 						printf_P(PSTR("ENCODER_LEFT"));
@@ -227,6 +254,15 @@ void log_task_function(void)
 				break;
 			case LOG_IMU_GZ:
 				printf_P(PSTR("%"PRId16""), imu_get_gz());
+				break;
+			case LOG_IMU_THETA:
+				printf_P(PSTR("%g"), imu_get_Theta());
+				break;
+			case LOG_IMU_DTHETA:
+				printf_P(PSTR("%g"), imu_get_dTheta());
+				break;
+			case LOG_IMU_BIAS:
+				printf_P(PSTR("%g"), imu_get_Bias());
 				break;
 			case LOG_ENC_ML:
 				printf_P(PSTR("%"PRId32""), encoder_get_count(MOTOR_LEFT));

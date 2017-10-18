@@ -3,7 +3,7 @@
 
 #include "cmd_parser.h"
 
-#define MAX_DEVICES 10
+#define MAX_DEVICES 13
 
 typedef enum {
     LOG_CUR_ML	= 0,
@@ -16,6 +16,9 @@ typedef enum {
 	LOG_IMU_GX	= 7,
 	LOG_IMU_GY	= 8,
 	LOG_IMU_GZ	= 9,
+	LOG_IMU_THETA	= 10,
+	LOG_IMU_DTHETA	= 11,
+	LOG_IMU_BIAS	= 12,
 } LOG_DEVICE_T;
 
 CMD_STATUS log_cmd(int, const char *[]);

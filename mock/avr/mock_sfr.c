@@ -44,8 +44,8 @@ uint8_t mock_timsk  = 0;
 
 uint8_t mock_sreg = 0;
 
-//TWI
-uint8_t mock_TWSR = 0;
-uint8_t mock_TWCR = 0;
-uint8_t mock_TWDR = 0;
-//uint8_t TWR = 0;
+uint8_t mock_twsr = 0;
+uint8_t mock_twcr = 0;
+uint8_t mock_twbr = 0;
+uint8_t mock_twar = 0;
+uint8_t mock_twdr = 0;

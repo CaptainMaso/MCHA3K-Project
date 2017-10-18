@@ -238,8 +238,29 @@
 #define SREG_T 6
 #define SREG_I 7
 
-#define TWSR mock_TWSR;
-#define TWCR mock_TWCR;
-#define TWDR mock_TWDR;
+#define TWBR    mock_twbr
+
+#define TWCR	mock_twcr
+#define TWIE    0
+#define TWEN    2
+#define TWWC    3
+#define TWSTO   4
+#define TWSTA   5
+#define TWEA    6
+#define TWINT   7
+
+#define TWSR    mock_twsr
+#define TWPS0   0
+#define TWPS1   1
+#define TWS3    3
+#define TWS4    4
+#define TWS5    5
+#define TWS6    6
+#define TWS7    7
+
+#define TWAR    mock_twar
+
+#define TWDR    mock_twdr
+
 
 #endif

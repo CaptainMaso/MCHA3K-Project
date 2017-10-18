@@ -3,7 +3,7 @@
 static void RunAllTests(void)
 {
     /* Lab 2 */
-    //RUN_TEST_GROUP(Encoder);
+    RUN_TEST_GROUP(Encoders);
 
     /* Lab 3 */
     RUN_TEST_GROUP(CircBuffer);
@@ -15,8 +15,8 @@ static void RunAllTests(void)
 
     /* Lab 4 */
     //RUN_TEST_GROUP(CmdXY);
-    RUN_TEST_GROUP(Ctrl);
-    RUN_TEST_GROUP(CmdCtrl);
+    //RUN_TEST_GROUP(Ctrl);
+    //RUN_TEST_GROUP(CmdCtrl);
 
     /* Lab 5 */
     RUN_TEST_GROUP(Task);

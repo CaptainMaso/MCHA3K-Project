@@ -1,7 +1,7 @@
-function [Theta, dTheta, Bias, P] = IMUKalmanFilter(Theta, dTheta, Bias, P, Gyro, At, Ar, qw, qb, rw, rt)
+function [Theta, dTheta, Bias, P] = IMUKalmanFilter(Theta, dTheta, Bias, P, Gyro, AccTheta, qw, qb, rw, rt)
     [Theta, dTheta, Bias, P] = TimeUpdate(Theta, dTheta, Bias, P, qw, qb);
     [Theta, dTheta, Bias, P] = GyroCorrection(Theta, dTheta, Bias, P, Gyro, rw);
-    [Theta, dTheta, Bias, P] = AccCorrection(Theta, dTheta, Bias, P, At, Ar, rt);
+    [Theta, dTheta, Bias, P] = AccCorrection(Theta, dTheta, Bias, P, AccTheta, rt);
 end
 
 function [Theta, dTheta, Bias, P] = TimeUpdate(Theta_p, dTheta_p, Bias_p, P_p, qw, qb)
@@ -40,10 +40,9 @@ function [Theta, dTheta, Bias, P] = GyroCorrection(Theta_p, dTheta_p, Bias_p, P_
     Pww_p = P_p(1,1);    
 
     %% Kalman Gain Update
-    k = [Pww_p + Pwb_p; Pwt_p + Ptb_p; Pwb_p + Pbb_p]/(Pww_p + 2*Pwb_p + Pbb_p + rw/T);
-    kw = k(1);
-    kt = k(2);
-    kb = k(3);
+    kw = (Pww_p + Pwb_p)/(Pww_p + 2*Pwb_p + Pbb_p + rw/T);
+    kt = (Pwt_p + Ptb_p)/(Pww_p + 2*Pwb_p + Pbb_p + rw/T);
+    kb = (Pwb_p + Pbb_p)/(Pww_p + 2*Pwb_p + Pbb_p + rw/T);
     
     %% State Update
     dTheta = dTheta_p + kw*(yw-dTheta_p-Bias_p);
@@ -61,7 +60,7 @@ function [Theta, dTheta, Bias, P] = GyroCorrection(Theta_p, dTheta_p, Bias_p, P_
     P = [Pww, Pwt, Pwb; Pwt, Ptt, Ptb; Pwb, Ptb, Pbb];
 end
 
-function [Theta, dTheta, Bias, P] = AccCorrection(Theta_p, dTheta_p, Bias_p, P_p, at, ar, rt)
+function [Theta, dTheta, Bias, P] = AccCorrection(Theta_p, dTheta_p, Bias_p, P_p, yt, rt)
     global T;
     Pbb_p = P_p(3,3);
     Ptb_p = P_p(2,3);
@@ -71,13 +70,11 @@ function [Theta, dTheta, Bias, P] = AccCorrection(Theta_p, dTheta_p, Bias_p, P_p
     Pww_p = P_p(1,1);    
 
     %% Kalman Gain Update
-    k = [Pwt_p; Ptt_p; Ptb_p]/(Ptt_p + rt/T);
-    kw = k(1);
-    kt = k(2);
-    kb = k(3);
+    kw = Pwt_p/(Ptt_p + rt/T);
+    kt = Ptt_p/(Ptt_p + rt/T);
+    kb = Ptb_p/(Ptt_p + rt/T);
     
     %% State Update
-    yt = atan2(at, -ar);
     dTheta = dTheta_p + kw*(yt-Theta_p);
     Theta =  Theta_p  + kt*(yt-Theta_p);
     Bias =   Bias_p   + kb*(yt-Theta_p);

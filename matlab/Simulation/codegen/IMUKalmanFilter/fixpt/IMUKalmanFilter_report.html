@@ -1,0 +1,342 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Fixed-Point Report for IMUKalmanFilter</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style>
+	body { font-family: monospace; }
+	h2 { font-family: Arial, Helvetica, sans-serif; color: #990000; margin-top: 50px; }
+	table,th,td { border: 1px solid black; }
+	table { margin-top: 30px; }
+	th { align: center; font-weight: bold; }
+	tr.h { background-color: #99CCFF; }
+	tr.a { background-color: #EEEEFF; }
+	tr.b { background-color: #FFFFFF; }
+	tr.c { background-color: #FFA500; }
+	tr.a td, tr.b td { border-style: none; }
+	td.left { text-align: left; }
+	td.right { text-align: right; }
+	td.center { text-align: center; }
+	td.bold { font-weight: bold; }
+	pre { padding: 0px; margin: 0px; }
+	span { font-style: italic; }
+	.code, .code tr, .code th, .code td { border: none; border-collapse: collapse; }
+	.padd { padding-left: 5px; }
+	td.cov, th.cov { width: 50px; height: 20px; text-align: center; font-weight: bold; border-right: 2px solid black; cell-spacing: 0px; }
+	td.cov { vertical-align: top; }
+	td.black { color: #000000; font-weight: bold; padding-top: 4px; }
+	td.white { color: #FFFFFF; font-weight: bold; padding-top: 4px; }
+	.code th { font-weight: bold; border-bottom: 2px solid black; }
+</style>
+</head>
+<body>
+<h3>Generated on  2017-10-18 15:25:18</h3>
+<p>The following table shows fixed point instrumentation results</p>
+<h2>Fixed-Point Report <span>IMUKalmanFilter<span></h2>
+<TABLE class="code">
+<TR>
+<TH class="cov padd">Simulation Coverage</TH>
+<TH>Code</TH>
+</TR>
+<TR>
+<TD class="cov white" style="background-color: rgb(5,112,9);">100%</TD>
+<TD class="padd"><pre>function [Theta, dTheta, Bias, P] = IMUKalmanFilter(Theta, dTheta, Bias, P, Gyro, AccTheta, qw, qb, rw, rt)
+    [Theta, dTheta, Bias, P] = TimeUpdate(Theta, dTheta, Bias, P, qw, qb);
+    [Theta, dTheta, Bias, P] = GyroCorrection(Theta, dTheta, Bias, P, Gyro, rw);
+    [Theta, dTheta, Bias, P] = AccCorrection(Theta, dTheta, Bias, P, AccTheta, rt);
+end</pre></TD>
+</TR>
+</TABLE>
+<TABLE><TR class="h"><th>Variable Name</th><th>Type</th><th>Sim Min</th><th>Sim Max</th><th>Static Min</th><th>Static Max</th><th>Whole Number</th><th>ProposedType <BR /> (Best For WL = 16)</th></TR><TR class="a">
+<TD class="left bold">AccTheta*</TD><TD class="left">double</TD><TD class="right">-1421.8808984172854</TD><TD class="right">1323.9266428506353</TD><TD class="right">-32768</TD><TD class="right">32767</TD><TD class="left">No</TD><TD class="left">numerictype(1, 16, 0)</TD></TR>
+<TR class="b">
+<TD class="left bold">Bias*</TD><TD class="left">double</TD><TD class="right">-40.51415847730014</TD><TD class="right">49.23867475166276</TD><TD class="right">-8192</TD><TD class="right">8191</TD><TD class="left">No</TD><TD class="left">numerictype(1, 16, 2)</TD></TR>
+<TR class="a">
+<TD class="left bold">Gyro*</TD><TD class="left">double</TD><TD class="right">-1791</TD><TD class="right">1552</TD><TD class="right">-32768</TD><TD class="right">32767</TD><TD class="left">Yes</TD><TD class="left">numerictype(1, 16, 0)</TD></TR>
+<TR class="b">
+<TD class="left bold">P*</TD><TD class="left">double 3 x 3 </TD><TD class="right">-63.042331036719524</TD><TD class="right">549.7122791750438</TD><TD class="right">-134217728</TD><TD class="right">134217727.9375</TD><TD class="left">No</TD><TD class="left">numerictype(1, 32, 4)</TD></TR>
+<TR class="a">
+<TD class="left bold">Theta*</TD><TD class="left">double</TD><TD class="right">-1431.5873220408114</TD><TD class="right">1265.9432077667523</TD><TD class="right">-32768</TD><TD class="right">32767</TD><TD class="left">No</TD><TD class="left">numerictype(1, 16, 0)</TD></TR>
+<TR class="b">
+<TD class="left bold">dTheta*</TD><TD class="left">double</TD><TD class="right">-1766.8025728869625</TD><TD class="right">1539.8970800677375</TD><TD class="right">-32768</TD><TD class="right">32767</TD><TD class="left">No</TD><TD class="left">numerictype(1, 16, 0)</TD></TR>
+<TR class="a">
+<TD class="left bold">qb*</TD><TD class="left">double</TD><TD class="right">1.0418e-07</TD><TD class="right">1.0418e-07</TD><TD class="right">0</TD><TD class="right">15.999755859375</TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 12)</TD></TR>
+<TR class="b">
+<TD class="left bold">qw*</TD><TD class="left">double</TD><TD class="right">26.9927</TD><TD class="right">26.9927</TD><TD class="right">0</TD><TD class="right">8191.875</TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 3)</TD></TR>
+<TR class="a">
+<TD class="left bold">rt*</TD><TD class="left">double</TD><TD class="right">3240.1</TD><TD class="right">3240.1</TD><TD class="right">0</TD><TD class="right">4095.9375</TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 4)</TD></TR>
+<TR class="b">
+<TD class="left bold">rw*</TD><TD class="left">double</TD><TD class="right">5.3907e-05</TD><TD class="right">5.3907e-05</TD><TD class="right">0</TD><TD class="right">15.999755859375</TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 12)</TD></TR>
+</TABLE>
+
+<h2>Fixed-Point Report <span>TimeUpdate<span></h2>
+<TABLE class="code">
+<TR>
+<TH class="cov padd">Simulation Coverage</TH>
+<TH>Code</TH>
+</TR>
+<TR>
+<TD class="cov white" style="background-color: rgb(5,112,9);">100%</TD>
+<TD class="padd"><pre>function [Theta, dTheta, Bias, P] = TimeUpdate(Theta_p, dTheta_p, Bias_p, P_p, qw, qb)
+    global T;
+    
+    % State Update
+    dTheta = dTheta_p;
+    Theta  = T*dTheta_p + Theta_p;
+    Bias = Bias_p;
+    
+    % Covariance Update
+    Pbb_p = P_p(3,3);
+    Ptb_p = P_p(2,3);
+    Ptt_p = P_p(2,2);
+    Pwb_p = P_p(1,3);
+    Pwt_p = P_p(1,2);
+    Pww_p = P_p(1,1);
+    
+    Pbb = Pbb_p + T*qb;
+    Ptb = T*Pwb_p+Ptb_p;
+    Ptt = Ptt_p + T^2*Pww_p + 2*T*Pwt_p + T^3*qw/3;
+    Pwb = Pwb_p;
+    Pwt = T*Pww_p + Pwt_p + 1/2*T^2*qw;
+    Pww = Pww_p + T*qw;
+    
+    P = [Pww, Pwt, Pwb; Pwt, Ptt, Ptb; Pwb, Ptb, Pbb];
+end</pre></TD>
+</TR>
+</TABLE>
+<TABLE><TR class="h"><th>Variable Name</th><th>Type</th><th>Sim Min</th><th>Sim Max</th><th>Static Min</th><th>Static Max</th><th>Whole Number</th><th>ProposedType <BR /> (Best For WL = 16)</th></TR><TR class="a">
+<TD class="left">Bias</TD><TD class="left">double</TD><TD class="right">-40.481959635701585</TD><TD class="right">49.20121888637518</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(1, 16, 9)</TD></TR>
+<TR class="b">
+<TD class="left">Bias_p</TD><TD class="left">double</TD><TD class="right">-40.481959635701585</TD><TD class="right">49.20121888637518</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(1, 16, 9)</TD></TR>
+<TR class="a">
+<TD class="left">P</TD><TD class="left">double 3 x 3 </TD><TD class="right">-63.042331036719524</TD><TD class="right">549.7122791750438</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(1, 16, 5)</TD></TR>
+<TR class="b">
+<TD class="left">P_p</TD><TD class="left">double 3 x 3 </TD><TD class="right">-63.00621464454276</TD><TD class="right">549.0826079804007</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(1, 16, 5)</TD></TR>
+<TR class="a">
+<TD class="left">Pbb</TD><TD class="left">double</TD><TD class="right">0.2348669025053108</TD><TD class="right">7.229854936808952</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 13)</TD></TR>
+<TR class="b">
+<TD class="left">Pbb_p</TD><TD class="left">double</TD><TD class="right">0.23486690198441082</TD><TD class="right">7.229854936288052</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 13)</TD></TR>
+<TR class="a">
+<TD class="left">Ptb</TD><TD class="left">double</TD><TD class="right">-63.042331036719524</TD><TD class="right">0</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(1, 16, 9)</TD></TR>
+<TR class="b">
+<TD class="left">Ptb_p</TD><TD class="left">double</TD><TD class="right">-63.00621464454276</TD><TD class="right">0</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(1, 16, 9)</TD></TR>
+<TR class="a">
+<TD class="left">Ptt</TD><TD class="left">double</TD><TD class="right">4.956062361424357e-05</TD><TD class="right">549.7122791750438</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 6)</TD></TR>
+<TR class="b">
+<TD class="left">Ptt_p</TD><TD class="left">double</TD><TD class="right">2.4430161865404088e-05</TD><TD class="right">549.0826079804007</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 6)</TD></TR>
+<TR class="a">
+<TD class="left">Pwb</TD><TD class="left">double</TD><TD class="right">-7.223278435352895</TD><TD class="right">0</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(1, 16, 12)</TD></TR>
+<TR class="b">
+<TD class="left">Pwb_p</TD><TD class="left">double</TD><TD class="right">-7.223278435352895</TD><TD class="right">0</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(1, 16, 12)</TD></TR>
+<TR class="a">
+<TD class="left">Pwt</TD><TD class="left">double</TD><TD class="right">0.003348780047779604</TD><TD class="right">62.98541126623417</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 10)</TD></TR>
+<TR class="b">
+<TD class="left">Pwt_p</TD><TD class="left">double</TD><TD class="right">0.0017897818853216257</TD><TD class="right">62.94894013197451</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 10)</TD></TR>
+<TR class="a">
+<TD class="left">Pww</TD><TD class="left">double</TD><TD class="right">0.3792813824915956</TD><TD class="right">7.361708601932807</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 13)</TD></TR>
+<TR class="b">
+<TD class="left">Pww_p</TD><TD class="left">double</TD><TD class="right">0.24431788249159564</TD><TD class="right">7.226745101932807</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 13)</TD></TR>
+<TR class="a">
+<TD class="left">T</TD><TD class="left">double</TD><TD class="right">Unknown</TD><TD class="right">Unknown</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">Yes</TD><TD class="left"></TD></TR>
+<TR class="b">
+<TD class="left">Theta</TD><TD class="left">double</TD><TD class="right">-1430.9615415080477</TD><TD class="right">1260.1922783197072</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(1, 16, 4)</TD></TR>
+<TR class="a">
+<TD class="left">Theta_p</TD><TD class="left">double</TD><TD class="right">-1431.5798075698272</TD><TD class="right">1265.7793819918115</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(1, 16, 4)</TD></TR>
+<TR class="b">
+<TD class="left">dTheta</TD><TD class="left">double</TD><TD class="right">-1766.8025728869625</TD><TD class="right">1539.8970800677375</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(1, 16, 4)</TD></TR>
+<TR class="a">
+<TD class="left">dTheta_p</TD><TD class="left">double</TD><TD class="right">-1766.8025728869625</TD><TD class="right">1539.8970800677375</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(1, 16, 4)</TD></TR>
+<TR class="b">
+<TD class="left">qb</TD><TD class="left">double</TD><TD class="right">1.0418e-07</TD><TD class="right">1.0418e-07</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 39)</TD></TR>
+<TR class="a">
+<TD class="left">qw</TD><TD class="left">double</TD><TD class="right">26.9927</TD><TD class="right">26.9927</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 11)</TD></TR>
+</TABLE>
+
+<h2>Fixed-Point Report <span>GyroCorrection<span></h2>
+<TABLE class="code">
+<TR>
+<TH class="cov padd">Simulation Coverage</TH>
+<TH>Code</TH>
+</TR>
+<TR>
+<TD class="cov white" style="background-color: rgb(5,112,9);">100%</TD>
+<TD class="padd"><pre>function [Theta, dTheta, Bias, P] = GyroCorrection(Theta_p, dTheta_p, Bias_p, P_p, yw, rw)
+    global T;
+    Pbb_p = P_p(3,3);
+    Ptb_p = P_p(2,3);
+    Ptt_p = P_p(2,2);
+    Pwb_p = P_p(1,3);
+    Pwt_p = P_p(1,2);
+    Pww_p = P_p(1,1);    
+
+    %% Kalman Gain Update
+    kw = (Pww_p + Pwb_p)/(Pww_p + 2*Pwb_p + Pbb_p + rw/T);
+    kt = (Pwt_p + Ptb_p)/(Pww_p + 2*Pwb_p + Pbb_p + rw/T);
+    kb = (Pwb_p + Pbb_p)/(Pww_p + 2*Pwb_p + Pbb_p + rw/T);
+    
+    %% State Update
+    dTheta = dTheta_p + kw*(yw-dTheta_p-Bias_p);
+    Theta =  Theta_p  + kt*(yw-dTheta_p-Bias_p);
+    Bias =   Bias_p + kb*(yw-dTheta_p-Bias_p);
+    
+    %% Covariance Update
+    Pww = (kw - 1)^2*Pww_p + (2*kw*(kw - 1))*Pwb_p + kw^2*Pbb_p + (kw^2*rw)/T;
+    Pwt = (kt*(kw - 1))*Pww_p + (1 - kw)*Pwt_p + (kt*kw + kt*(kw - 1))*Pwb_p + (-kw)*Ptb_p + (kt*kw)*Pbb_p + (kt*kw*rw)/T;
+    Pwb = (kb*(kw - 1))*Pww_p + (kb*kw + (kb - 1)*(kw - 1))*Pwb_p + (kw*(kb - 1))*Pbb_p + (kb*kw*rw)/T;
+    Ptt = kt^2*Pww_p + (-2*kt)*Pwt_p + (2*kt^2)*Pwb_p + Ptt_p + (-2*kt)*Ptb_p + kt^2*Pbb_p + (kt^2*rw)/T;
+    Ptb = (kb*kt)*Pww_p + (-kb)*Pwt_p + (kb*kt + kt*(kb - 1))*Pwb_p + (1 - kb)*Ptb_p + (kt*(kb - 1))*Pbb_p + (kb*kt*rw)/T;
+    Pbb = kb^2*Pww_p + (2*kb*(kb - 1))*Pwb_p + (kb - 1)^2*Pbb_p + (kb^2*rw)/T;
+    
+    P = [Pww, Pwt, Pwb; Pwt, Ptt, Ptb; Pwb, Ptb, Pbb];
+end</pre></TD>
+</TR>
+</TABLE>
+<TABLE><TR class="h"><th>Variable Name</th><th>Type</th><th>Sim Min</th><th>Sim Max</th><th>Static Min</th><th>Static Max</th><th>Whole Number</th><th>ProposedType <BR /> (Best For WL = 16)</th></TR><TR class="a">
+<TD class="left">Bias</TD><TD class="left">double</TD><TD class="right">-40.51415847730014</TD><TD class="right">49.23867475166276</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(1, 16, 9)</TD></TR>
+<TR class="b">
+<TD class="left">Bias_p</TD><TD class="left">double</TD><TD class="right">-40.481959635701585</TD><TD class="right">49.20121888637518</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(1, 16, 9)</TD></TR>
+<TR class="a">
+<TD class="left">P</TD><TD class="left">double 3 x 3 </TD><TD class="right">-63.03992820216233</TD><TD class="right">549.6914825870064</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(1, 16, 5)</TD></TR>
+<TR class="b">
+<TD class="left">P_p</TD><TD class="left">double 3 x 3 </TD><TD class="right">-63.042331036719524</TD><TD class="right">549.7122791750438</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(1, 16, 5)</TD></TR>
+<TR class="a">
+<TD class="left">Pbb</TD><TD class="left">double</TD><TD class="right">0.234866901958897</TD><TD class="right">7.22957731367679</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 13)</TD></TR>
+<TR class="b">
+<TD class="left">Pbb_p</TD><TD class="left">double</TD><TD class="right">0.2348669025053108</TD><TD class="right">7.229854936808952</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 13)</TD></TR>
+<TR class="a">
+<TD class="left">Ptb</TD><TD class="left">double</TD><TD class="right">-63.03992820216233</TD><TD class="right">-0.0017157875193009112</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(1, 16, 9)</TD></TR>
+<TR class="b">
+<TD class="left">Ptb_p</TD><TD class="left">double</TD><TD class="right">-63.042331036719524</TD><TD class="right">0</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(1, 16, 9)</TD></TR>
+<TR class="a">
+<TD class="left">Ptt</TD><TD class="left">double</TD><TD class="right">2.44301618663251e-05</TD><TD class="right">549.6914825870064</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 6)</TD></TR>
+<TR class="b">
+<TD class="left">Ptt_p</TD><TD class="left">double</TD><TD class="right">4.956062361424357e-05</TD><TD class="right">549.7122791750438</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 6)</TD></TR>
+<TR class="a">
+<TD class="left">Pwb</TD><TD class="left">double</TD><TD class="right">-7.2291221832313575</TD><TD class="right">-0.23421712832815608</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(1, 16, 12)</TD></TR>
+<TR class="b">
+<TD class="left">Pwb_p</TD><TD class="left">double</TD><TD class="right">-7.223278435352895</TD><TD class="right">0</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(1, 16, 12)</TD></TR>
+<TR class="a">
+<TD class="left">Pwt</TD><TD class="left">double</TD><TD class="right">0.0017897818853891</TD><TD class="right">63.03598903774975</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 10)</TD></TR>
+<TR class="b">
+<TD class="left">Pwt_p</TD><TD class="left">double</TD><TD class="right">0.003348780047779604</TD><TD class="right">62.98541126623417</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 10)</TD></TR>
+<TR class="a">
+<TD class="left">Pww</TD><TD class="left">double</TD><TD class="right">0.24431788249653888</TD><TD class="right">7.238702319995235</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 13)</TD></TR>
+<TR class="b">
+<TD class="left">Pww_p</TD><TD class="left">double</TD><TD class="right">0.3792813824915956</TD><TD class="right">7.361708601932807</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 13)</TD></TR>
+<TR class="a">
+<TD class="left">T</TD><TD class="left">double</TD><TD class="right">Unknown</TD><TD class="right">Unknown</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">Yes</TD><TD class="left"></TD></TR>
+<TR class="b">
+<TD class="left">Theta</TD><TD class="left">double</TD><TD class="right">-1431.5873220408114</TD><TD class="right">1265.9432077667523</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(1, 16, 4)</TD></TR>
+<TR class="a">
+<TD class="left">Theta_p</TD><TD class="left">double</TD><TD class="right">-1430.9615415080477</TD><TD class="right">1260.1922783197072</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(1, 16, 4)</TD></TR>
+<TR class="b">
+<TD class="left">dTheta</TD><TD class="left">double</TD><TD class="right">-1766.8022396552844</TD><TD class="right">1539.8949468734302</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(1, 16, 4)</TD></TR>
+<TR class="a">
+<TD class="left">dTheta_p</TD><TD class="left">double</TD><TD class="right">-1766.8025728869625</TD><TD class="right">1539.8970800677375</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(1, 16, 4)</TD></TR>
+<TR class="b">
+<TD class="left">kb</TD><TD class="left">double</TD><TD class="right">5.709057543207429e-09</TD><TD class="right">0.06052146418885039</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 20)</TD></TR>
+<TR class="a">
+<TD class="left">kt</TD><TD class="left">double</TD><TD class="right">-0.36536668823833707</TD><TD class="right">0.006863150062903584</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(1, 16, 16)</TD></TR>
+<TR class="b">
+<TD class="left">kw</TD><TD class="left">double</TD><TD class="right">0.8885800326373561</TD><TD class="right">0.9368685113605652</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 16)</TD></TR>
+<TR class="a">
+<TD class="left">rw</TD><TD class="left">double</TD><TD class="right">5.3907e-05</TD><TD class="right">5.3907e-05</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 30)</TD></TR>
+<TR class="b">
+<TD class="left">yw</TD><TD class="left">double</TD><TD class="right">-1791</TD><TD class="right">1552</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">Yes</TD><TD class="left">numerictype(1, 16, 0)</TD></TR>
+</TABLE>
+
+<h2>Fixed-Point Report <span>AccCorrection<span></h2>
+<TABLE class="code">
+<TR>
+<TH class="cov padd">Simulation Coverage</TH>
+<TH>Code</TH>
+</TR>
+<TR>
+<TD class="cov white" style="background-color: rgb(5,112,9);">100%</TD>
+<TD class="padd"><pre>function [Theta, dTheta, Bias, P] = AccCorrection(Theta_p, dTheta_p, Bias_p, P_p, yt, rt)
+    global T;
+    Pbb_p = P_p(3,3);
+    Ptb_p = P_p(2,3);
+    Ptt_p = P_p(2,2);
+    Pwb_p = P_p(1,3);
+    Pwt_p = P_p(1,2);
+    Pww_p = P_p(1,1);    
+
+    %% Kalman Gain Update
+    kw = Pwt_p/(Ptt_p + rt/T);
+    kt = Ptt_p/(Ptt_p + rt/T);
+    kb = Ptb_p/(Ptt_p + rt/T);
+    
+    %% State Update
+    dTheta = dTheta_p + kw*(yt-Theta_p);
+    Theta =  Theta_p  + kt*(yt-Theta_p);
+    Bias =   Bias_p   + kb*(yt-Theta_p);
+    
+    %% Covariance Update
+    Pww = Pww_p + (-2*kw)*Pwt_p + kw^2*Ptt_p + (kw^2*rt)/T;
+    Pwt = (1 - kt)*Pwt_p + (kw*(kt - 1))*Ptt_p + (kt*kw*rt)/T;
+    Pwb = (-kb)*Pww_p + (kb*kw)*Pwt_p + (1 - kb)*Pwb_p + (kw*(kb - 1))*Ptb_p + (kb*kw*rt)/T;
+    Ptt = (kt - 1)^2*Ptt_p + (kt^2*rt)/T;
+    Ptb = (kb*(kt - 1))*Pwt_p + ((kb - 1)*(kt - 1))*Ptb_p + (kb*kt*rt)/T;
+    Pbb = kb^2*Pww_p + (2*kb*(kb - 1))*Pwb_p + (kb - 1)^2*Pbb_p + (kb^2*rt)/T;
+    
+    P = [Pww, Pwt, Pwb; Pwt, Ptt, Ptb; Pwb, Ptb, Pbb];
+end</pre></TD>
+</TR>
+</TABLE>
+<TABLE><TR class="h"><th>Variable Name</th><th>Type</th><th>Sim Min</th><th>Sim Max</th><th>Static Min</th><th>Static Max</th><th>Whole Number</th><th>ProposedType <BR /> (Best For WL = 16)</th></TR><TR class="a">
+<TD class="left">Bias</TD><TD class="left">double</TD><TD class="right">-40.481959635701585</TD><TD class="right">49.20121888637518</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(1, 16, 9)</TD></TR>
+<TR class="b">
+<TD class="left">Bias_p</TD><TD class="left">double</TD><TD class="right">-40.51415847730014</TD><TD class="right">49.23867475166276</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(1, 16, 9)</TD></TR>
+<TR class="a">
+<TD class="left">P</TD><TD class="left">double 3 x 3 </TD><TD class="right">-63.039883301172424</TD><TD class="right">549.225594757222</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(1, 16, 5)</TD></TR>
+<TR class="b">
+<TD class="left">P_p</TD><TD class="left">double 3 x 3 </TD><TD class="right">-63.03992820216233</TD><TD class="right">549.6914825870064</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(1, 16, 5)</TD></TR>
+<TR class="a">
+<TD class="left">Pbb</TD><TD class="left">double</TD><TD class="right">0.23486690198441082</TD><TD class="right">7.235699588392831</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 13)</TD></TR>
+<TR class="b">
+<TD class="left">Pbb_p</TD><TD class="left">double</TD><TD class="right">0.234866901958897</TD><TD class="right">7.22957731367679</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 13)</TD></TR>
+<TR class="a">
+<TD class="left">Ptb</TD><TD class="left">double</TD><TD class="right">-63.039883301172424</TD><TD class="right">-0.001715787519104993</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(1, 16, 9)</TD></TR>
+<TR class="b">
+<TD class="left">Ptb_p</TD><TD class="left">double</TD><TD class="right">-63.03992820216233</TD><TD class="right">-0.0017157875193009112</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(1, 16, 9)</TD></TR>
+<TR class="a">
+<TD class="left">Ptt</TD><TD class="left">double</TD><TD class="right">2.4430161865404088e-05</TD><TD class="right">549.225594757222</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 6)</TD></TR>
+<TR class="b">
+<TD class="left">Ptt_p</TD><TD class="left">double</TD><TD class="right">2.44301618663251e-05</TD><TD class="right">549.6914825870064</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 6)</TD></TR>
+<TR class="a">
+<TD class="left">Pwb</TD><TD class="left">double</TD><TD class="right">-7.229116059119939</TD><TD class="right">-0.23421712830141192</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(1, 16, 12)</TD></TR>
+<TR class="b">
+<TD class="left">Pwb_p</TD><TD class="left">double</TD><TD class="right">-7.2291221832313575</TD><TD class="right">-0.23421712832815608</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(1, 16, 12)</TD></TR>
+<TR class="a">
+<TD class="left">Pwt</TD><TD class="left">double</TD><TD class="right">0.0017897818853216257</TD><TD class="right">62.98256325062842</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 10)</TD></TR>
+<TR class="b">
+<TD class="left">Pwt_p</TD><TD class="left">double</TD><TD class="right">0.0017897818853891</TD><TD class="right">63.03598903774975</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 10)</TD></TR>
+<TR class="a">
+<TD class="left">Pww</TD><TD class="left">double</TD><TD class="right">0.24431788249159564</TD><TD class="right">7.232575706361958</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 13)</TD></TR>
+<TR class="b">
+<TD class="left">Pww_p</TD><TD class="left">double</TD><TD class="right">0.24431788249653888</TD><TD class="right">7.238702319995235</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 13)</TD></TR>
+<TR class="a">
+<TD class="left">T</TD><TD class="left">double</TD><TD class="right">Unknown</TD><TD class="right">Unknown</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">Yes</TD><TD class="left"></TD></TR>
+<TR class="b">
+<TD class="left">Theta</TD><TD class="left">double</TD><TD class="right">-1431.5798075698272</TD><TD class="right">1265.7793819918115</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(1, 16, 4)</TD></TR>
+<TR class="a">
+<TD class="left">Theta_p</TD><TD class="left">double</TD><TD class="right">-1431.5873220408114</TD><TD class="right">1265.9432077667523</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(1, 16, 4)</TD></TR>
+<TR class="b">
+<TD class="left">dTheta</TD><TD class="left">double</TD><TD class="right">-1766.8025728869625</TD><TD class="right">1539.8970800677375</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(1, 16, 4)</TD></TR>
+<TR class="a">
+<TD class="left">dTheta_p</TD><TD class="left">double</TD><TD class="right">-1766.8022396552844</TD><TD class="right">1539.8949468734302</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(1, 16, 4)</TD></TR>
+<TR class="b">
+<TD class="left">kb</TD><TD class="left">double</TD><TD class="right">-9.719838751338698e-05</TD><TD class="right">-2.6477385254100592e-09</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(1, 16, 28)</TD></TR>
+<TR class="a">
+<TD class="left">kt</TD><TD class="left">double</TD><TD class="right">3.769970350514505e-11</TD><TD class="right">0.0008475442035079504</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 26)</TD></TR>
+<TR class="b">
+<TD class="left">kw</TD><TD class="left">double</TD><TD class="right">2.761923837723567e-09</TD><TD class="right">9.719231389560263e-05</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 29)</TD></TR>
+<TR class="a">
+<TD class="left">rt</TD><TD class="left">double</TD><TD class="right">3240.1</TD><TD class="right">3240.1</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(0, 16, 4)</TD></TR>
+<TR class="b">
+<TD class="left">yt</TD><TD class="left">double</TD><TD class="right">-1421.8808984172854</TD><TD class="right">1323.9266428506353</TD><TD class="right"></TD><TD class="right"></TD><TD class="left">No</TD><TD class="left">numerictype(1, 16, 4)</TD></TR>
+</TABLE>
+
+</body>
+</html>

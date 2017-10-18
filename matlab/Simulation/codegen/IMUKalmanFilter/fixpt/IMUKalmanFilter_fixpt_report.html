@@ -1,0 +1,327 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Fixed-Point Report for IMUKalmanFilter_fixpt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style>
+	body { font-family: monospace; }
+	h2 { font-family: Arial, Helvetica, sans-serif; color: #990000; margin-top: 50px; }
+	table,th,td { border: 1px solid black; }
+	table { margin-top: 30px; }
+	th { align: center; font-weight: bold; }
+	tr.h { background-color: #99CCFF; }
+	tr.a { background-color: #EEEEFF; }
+	tr.b { background-color: #FFFFFF; }
+	tr.c { background-color: #FFA500; }
+	tr.a td, tr.b td { border-style: none; }
+	td.left { text-align: left; }
+	td.right { text-align: right; }
+	td.center { text-align: center; }
+	td.bold { font-weight: bold; }
+	pre { padding: 0px; margin: 0px; }
+	span { font-style: italic; }
+</style>
+</head>
+<body>
+<h3>Generated on  2017-10-18 15:18:59</h3>
+<p>The following table shows fixed point instrumentation results</p>
+<h2>Fixed-Point Report <span>IMUKalmanFilter_fixpt<span></h2>
+<pre>function [Theta, dTheta, Bias, P] = IMUKalmanFilter_fixpt(Theta_1, dTheta_1, Bias_1, P_1, Gyro, AccTheta, qw, qb, rw, rt)
+    fm = get_fimath();
+    Bias = fi(Bias_1, 1, 16, 7, fm);
+    P = fi(P_1, 1, 16, 5, fm);
+    Theta = fi(Theta_1, 1, 16, 0, fm);
+    dTheta = fi(dTheta_1, 1, 16, 0, fm);
+
+    [fmo_1, fmo_2, fmo_3, fmo_4] = TimeUpdate(Theta, dTheta, Bias, P, qw, qb);
+    Theta = fi(fmo_1, 1, 16, 0, fm);
+    dTheta = fi(fmo_2, 1, 16, 0, fm);
+    Bias = fi(fmo_3, 1, 16, 7, fm);
+    P = fi(fmo_4, 1, 16, 5, fm);
+    [Theta(:), dTheta(:), Bias(:), P(:)] = GyroCorrection(Theta, dTheta, Bias, P, Gyro, rw);
+    [Theta(:), dTheta(:), Bias(:), P(:)] = AccCorrection(Theta, dTheta, Bias, P, AccTheta, rt);
+end</pre><TABLE><TR class="h"><th>Variable Name</th><th>Type</th><th>Sim Min</th><th>Sim Max</th></TR><TR class="a">
+<TD class="left">AccTheta</TD><TD class="left">numerictype(1, 16, 0)</TD><TD class="right">-1422</TD><TD class="right">1323</TD></TR>
+<TR class="b">
+<TD class="left">Bias</TD><TD class="left">numerictype(1, 16, 7)</TD><TD class="right">-63.984375</TD><TD class="right">63.9921875</TD></TR>
+<TR class="a">
+<TD class="left">Bias_1</TD><TD class="left">numerictype(1, 16, 7)</TD><TD class="right">-63.984375</TD><TD class="right">63.9921875</TD></TR>
+<TR class="b">
+<TD class="left">Gyro</TD><TD class="left">numerictype(1, 16, 0)</TD><TD class="right">-1791</TD><TD class="right">1552</TD></TR>
+<TR class="a">
+<TD class="left">P</TD><TD class="left">numerictype(1, 16, 5) 3 x 3 </TD><TD class="right">-64</TD><TD class="right">1023.96875</TD></TR>
+<TR class="b">
+<TD class="left">P_1</TD><TD class="left">numerictype(1, 16, 5) 3 x 3 </TD><TD class="right">-63.96875</TD><TD class="right">1023.9375</TD></TR>
+<TR class="a">
+<TD class="left">Theta</TD><TD class="left">numerictype(1, 16, 0)</TD><TD class="right">-2048</TD><TD class="right">2047</TD></TR>
+<TR class="b">
+<TD class="left">Theta_1</TD><TD class="left">numerictype(1, 16, 0)</TD><TD class="right">-2048</TD><TD class="right">2046</TD></TR>
+<TR class="a">
+<TD class="left">dTheta</TD><TD class="left">numerictype(1, 16, 0)</TD><TD class="right">-1797</TD><TD class="right">1524</TD></TR>
+<TR class="b">
+<TD class="left">dTheta_1</TD><TD class="left">numerictype(1, 16, 0)</TD><TD class="right">-1797</TD><TD class="right">1524</TD></TR>
+<TR class="a">
+<TD class="left">fmo_1</TD><TD class="left">numerictype(1, 16, 4)</TD><TD class="right">-2047.9375</TD><TD class="right">2047.9375</TD></TR>
+<TR class="b">
+<TD class="left">fmo_2</TD><TD class="left">numerictype(1, 16, 4)</TD><TD class="right">-1797</TD><TD class="right">1524</TD></TR>
+<TR class="a">
+<TD class="left">fmo_3</TD><TD class="left">numerictype(1, 16, 9)</TD><TD class="right">-63.984375</TD><TD class="right">63.9921875</TD></TR>
+<TR class="b">
+<TD class="left">fmo_4</TD><TD class="left">numerictype(1, 16, 5) 3 x 3 </TD><TD class="right">-64</TD><TD class="right">1023.9375</TD></TR>
+<TR class="a">
+<TD class="left">qb</TD><TD class="left">numerictype(0, 16, 12)</TD><TD class="right">0</TD><TD class="right">0</TD></TR>
+<TR class="b">
+<TD class="left">qw</TD><TD class="left">numerictype(0, 16, 3)</TD><TD class="right">26.875</TD><TD class="right">26.875</TD></TR>
+<TR class="a">
+<TD class="left">rt</TD><TD class="left">numerictype(0, 16, 4)</TD><TD class="right">3240.0625</TD><TD class="right">3240.0625</TD></TR>
+<TR class="b">
+<TD class="left">rw</TD><TD class="left">numerictype(0, 16, 30)</TD><TD class="right">5.390681326389313e-05</TD><TD class="right">5.390681326389313e-05</TD></TR>
+</TABLE>
+
+<h2>Fixed-Point Report <span>GyroCorrection<span></h2>
+<pre>function [Theta, dTheta, Bias, P] = GyroCorrection(Theta_p, dTheta_p, Bias_p, P_p, yw, rw)
+    fm = get_fimath();
+
+    global T;
+    Pbb_p = fi(P_p(3,3), 0, 16, 13, fm);
+    Ptb_p = fi(P_p(2,3), 1, 16, 9, fm);
+    Ptt_p = fi(P_p(2,2), 0, 16, 6, fm);
+    Pwb_p = fi(P_p(1,3), 1, 16, 12, fm);
+    Pwt_p = fi(P_p(1,2), 0, 16, 10, fm);
+    Pww_p = fi(P_p(1,1), 0, 16, 13, fm);    
+
+    %% Kalman Gain Update
+    kw = fi(fi_div((Pww_p + Pwb_p), (Pww_p + fi(2, 0, 8, 0, fm)*Pwb_p + Pbb_p + fi_div(rw, T))), 0, 16, 16, fm);
+    kt = fi(fi_div((Pwt_p + Ptb_p), (Pww_p + fi(2, 0, 8, 0, fm)*Pwb_p + Pbb_p + fi_div(rw, T))), 1, 16, 16, fm);
+    kb = fi(fi_div((Pwb_p + Pbb_p), (Pww_p + fi(2, 0, 8, 0, fm)*Pwb_p + Pbb_p + fi_div(rw, T))), 0, 16, 20, fm);
+    
+    %% State Update
+    dTheta = fi(dTheta_p + kw*(yw-dTheta_p-Bias_p), 1, 16, 4, fm);
+    Theta =  fi(Theta_p  + kt*(yw-dTheta_p-Bias_p), 1, 16, 4, fm);
+    Bias =   fi(Bias_p + kb*(yw-dTheta_p-Bias_p), 1, 16, 9, fm);
+    
+    %% Covariance Update
+    Pww = fi((fi_signed(kw) - fi(1, 0, 8, 0, fm))^2*Pww_p + (fi(2, 0, 8, 0, fm)*kw*(fi_signed(kw) - fi(1, 0, 8, 0, fm)))*Pwb_p + kw^2*Pbb_p + fi_div((kw^2*rw), T), 0, 16, 13, fm);
+    Pwt = fi((kt*(fi_signed(kw) - fi(1, 0, 8, 0, fm)))*Pww_p + (fi(1, 0, 8, 0, fm) - kw)*Pwt_p + (kt*kw + kt*(fi_signed(kw) - fi(1, 0, 8, 0, fm)))*Pwb_p + (fi_uminus(kw))*Ptb_p + (kt*kw)*Pbb_p + fi_div((kt*kw*rw), T), 0, 16, 10, fm);
+    Pwb = fi((kb*(fi_signed(kw) - fi(1, 0, 8, 0, fm)))*Pww_p + (kb*kw + (fi_signed(kb) - fi(1, 0, 8, 0, fm))*(fi_signed(kw) - fi(1, 0, 8, 0, fm)))*Pwb_p + (kw*(fi_signed(kb) - fi(1, 0, 8, 0, fm)))*Pbb_p + fi_div((kb*kw*rw), T), 1, 16, 12, fm);
+    Ptt = fi(kt^2*Pww_p + (fi(-2, 1, 8, 0, fm)*kt)*Pwt_p + (fi(2, 0, 8, 0, fm)*kt^2)*Pwb_p + Ptt_p + (fi(-2, 1, 8, 0, fm)*kt)*Ptb_p + kt^2*Pbb_p + fi_div((kt^2*rw), T), 0, 16, 6, fm);
+    Ptb = fi((kb*kt)*Pww_p + (fi_uminus(kb))*Pwt_p + (kb*kt + kt*(fi_signed(kb) - fi(1, 0, 8, 0, fm)))*Pwb_p + (fi(1, 0, 8, 0, fm) - kb)*Ptb_p + (kt*(fi_signed(kb) - fi(1, 0, 8, 0, fm)))*Pbb_p + fi_div((kb*kt*rw), T), 1, 16, 9, fm);
+    Pbb = fi(kb^2*Pww_p + (fi(2, 0, 8, 0, fm)*kb*(fi_signed(kb) - fi(1, 0, 8, 0, fm)))*Pwb_p + (fi_signed(kb) - fi(1, 0, 8, 0, fm))^2*Pbb_p + fi_div((kb^2*rw), T), 0, 16, 13, fm);
+    
+    P = fi([fi(Pww, 1, 16, 5, fm), Pwt, Pwb; fi(Pwt, 1, 16, 5, fm), Ptt, Ptb; fi(Pwb, 1, 16, 9, fm), Ptb, Pbb], 1, 16, 5, fm);
+end</pre><TABLE><TR class="h"><th>Variable Name</th><th>Type</th><th>Sim Min</th><th>Sim Max</th></TR><TR class="a">
+<TD class="left">Bias</TD><TD class="left">numerictype(1, 16, 9)</TD><TD class="right">-63.974609375</TD><TD class="right">63.9921875</TD></TR>
+<TR class="b">
+<TD class="left">Bias_p</TD><TD class="left">numerictype(1, 16, 7)</TD><TD class="right">-63.984375</TD><TD class="right">63.9921875</TD></TR>
+<TR class="a">
+<TD class="left">P</TD><TD class="left">numerictype(1, 16, 5) 3 x 3 </TD><TD class="right">-63.96875</TD><TD class="right">1023.96875</TD></TR>
+<TR class="b">
+<TD class="left">P_p</TD><TD class="left">numerictype(1, 16, 5) 3 x 3 </TD><TD class="right">-64</TD><TD class="right">1023.9375</TD></TR>
+<TR class="a">
+<TD class="left">Pbb</TD><TD class="left">numerictype(0, 16, 13)</TD><TD class="right">0</TD><TD class="right">7.12451171875</TD></TR>
+<TR class="b">
+<TD class="left">Pbb_p</TD><TD class="left">numerictype(0, 16, 13)</TD><TD class="right">0</TD><TD class="right">7.96875</TD></TR>
+<TR class="a">
+<TD class="left">Ptb</TD><TD class="left">numerictype(1, 16, 9)</TD><TD class="right">-63.96875</TD><TD class="right">63.97265625</TD></TR>
+<TR class="b">
+<TD class="left">Ptb_p</TD><TD class="left">numerictype(1, 16, 9)</TD><TD class="right">-64</TD><TD class="right">63.90625</TD></TR>
+<TR class="a">
+<TD class="left">Ptt</TD><TD class="left">numerictype(0, 16, 6)</TD><TD class="right">0</TD><TD class="right">1023.984375</TD></TR>
+<TR class="b">
+<TD class="left">Ptt_p</TD><TD class="left">numerictype(0, 16, 6)</TD><TD class="right">0</TD><TD class="right">1023.9375</TD></TR>
+<TR class="a">
+<TD class="left">Pwb</TD><TD class="left">numerictype(1, 16, 12)</TD><TD class="right">-1.86474609375</TD><TD class="right">-0.000244140625</TD></TR>
+<TR class="b">
+<TD class="left">Pwb_p</TD><TD class="left">numerictype(1, 16, 12)</TD><TD class="right">-1.875</TD><TD class="right">0</TD></TR>
+<TR class="a">
+<TD class="left">Pwt</TD><TD class="left">numerictype(0, 16, 10)</TD><TD class="right">0</TD><TD class="right">63.9677734375</TD></TR>
+<TR class="b">
+<TD class="left">Pwt_p</TD><TD class="left">numerictype(0, 16, 10)</TD><TD class="right">0</TD><TD class="right">63.84375</TD></TR>
+<TR class="a">
+<TD class="left">Pww</TD><TD class="left">numerictype(0, 16, 13)</TD><TD class="right">0.0001220703125</TD><TD class="right">1.864501953125</TD></TR>
+<TR class="b">
+<TD class="left">Pww_p</TD><TD class="left">numerictype(0, 16, 13)</TD><TD class="right">0.09375</TD><TD class="right">3.84375</TD></TR>
+<TR class="a">
+<TD class="left">T</TD><TD class="left">double</TD><TD class="right">Unknown</TD><TD class="right">Unknown</TD></TR>
+<TR class="b">
+<TD class="left">Theta</TD><TD class="left">numerictype(1, 16, 4)</TD><TD class="right">-2048</TD><TD class="right">2047</TD></TR>
+<TR class="a">
+<TD class="left">Theta_p</TD><TD class="left">numerictype(1, 16, 0)</TD><TD class="right">-2048</TD><TD class="right">2047</TD></TR>
+<TR class="b">
+<TD class="left">dTheta</TD><TD class="left">numerictype(1, 16, 4)</TD><TD class="right">-1796.375</TD><TD class="right">1524.8125</TD></TR>
+<TR class="a">
+<TD class="left">dTheta_p</TD><TD class="left">numerictype(1, 16, 0)</TD><TD class="right">-1797</TD><TD class="right">1524</TD></TR>
+<TR class="b">
+<TD class="left">kb</TD><TD class="left">numerictype(0, 16, 20)</TD><TD class="right">0</TD><TD class="right">0.062462806701660156</TD></TR>
+<TR class="a">
+<TD class="left">kt</TD><TD class="left">numerictype(1, 16, 16)</TD><TD class="right">-0.4999542236328125</TD><TD class="right">0.4546051025390625</TD></TR>
+<TR class="b">
+<TD class="left">kw</TD><TD class="left">numerictype(0, 16, 16)</TD><TD class="right">0.003936767578125</TD><TD class="right">0.99957275390625</TD></TR>
+<TR class="a">
+<TD class="left">rw</TD><TD class="left">numerictype(0, 16, 30)</TD><TD class="right">5.390681326389313e-05</TD><TD class="right">5.390681326389313e-05</TD></TR>
+<TR class="b">
+<TD class="left">yw</TD><TD class="left">numerictype(1, 16, 0)</TD><TD class="right">-1791</TD><TD class="right">1552</TD></TR>
+</TABLE>
+
+<h2>Fixed-Point Report <span>AccCorrection<span></h2>
+<pre>function [Theta, dTheta, Bias, P] = AccCorrection(Theta_p, dTheta_p, Bias_p, P_p, yt, rt)
+    fm = get_fimath();
+
+    global T;
+    Pbb_p = fi(P_p(3,3), 0, 16, 13, fm);
+    Ptb_p = fi(P_p(2,3), 1, 16, 9, fm);
+    Ptt_p = fi(P_p(2,2), 0, 16, 6, fm);
+    Pwb_p = fi(P_p(1,3), 1, 16, 12, fm);
+    Pwt_p = fi(P_p(1,2), 0, 16, 10, fm);
+    Pww_p = fi(P_p(1,1), 0, 16, 13, fm);    
+
+    %% Kalman Gain Update
+    kw = fi(fi_div(Pwt_p, (Ptt_p + fi_div(rt, T))), 0, 16, 29, fm);
+    kt = fi(fi_div(Ptt_p, (Ptt_p + fi_div(rt, T))), 0, 16, 26, fm);
+    kb = fi(fi_div(Ptb_p, (Ptt_p + fi_div(rt, T))), 1, 16, 28, fm);
+    
+    %% State Update
+    dTheta = fi(dTheta_p + kw*(yt-Theta_p), 1, 16, 4, fm);
+    Theta =  fi(Theta_p  + kt*(yt-Theta_p), 1, 16, 4, fm);
+    Bias =   fi(Bias_p   + kb*(yt-Theta_p), 1, 16, 9, fm);
+    
+    %% Covariance Update
+    Pww = fi(Pww_p + (fi(-2, 1, 8, 0, fm)*kw)*Pwt_p + kw^2*Ptt_p + fi_div((kw^2*rt), T), 0, 16, 13, fm);
+    Pwt = fi((fi(1, 0, 8, 0, fm) - kt)*Pwt_p + (kw*(fi_signed(kt) - fi(1, 0, 8, 0, fm)))*Ptt_p + fi_div((kt*kw*rt), T), 0, 16, 10, fm);
+    Pwb = fi((fi_uminus(kb))*Pww_p + (kb*kw)*Pwt_p + (fi(1, 0, 8, 0, fm) - kb)*Pwb_p + (kw*(kb - fi(1, 0, 8, 0, fm)))*Ptb_p + fi_div((kb*kw*rt), T), 1, 16, 12, fm);
+    Ptt = fi((fi_signed(kt) - fi(1, 0, 8, 0, fm))^2*Ptt_p + fi_div((kt^2*rt), T), 0, 16, 6, fm);
+    Ptb = fi((kb*(fi_signed(kt) - fi(1, 0, 8, 0, fm)))*Pwt_p + ((kb - fi(1, 0, 8, 0, fm))*(fi_signed(kt) - fi(1, 0, 8, 0, fm)))*Ptb_p + fi_div((kb*kt*rt), T), 1, 16, 9, fm);
+    Pbb = fi(kb^2*Pww_p + (fi(2, 0, 8, 0, fm)*kb*(kb - fi(1, 0, 8, 0, fm)))*Pwb_p + (kb - fi(1, 0, 8, 0, fm))^2*Pbb_p + fi_div((kb^2*rt), T), 0, 16, 13, fm);
+    
+    P = fi([fi(Pww, 1, 16, 5, fm), Pwt, Pwb; fi(Pwt, 1, 16, 5, fm), Ptt, Ptb; fi(Pwb, 1, 16, 9, fm), Ptb, Pbb], 1, 16, 5, fm);
+end</pre><TABLE><TR class="h"><th>Variable Name</th><th>Type</th><th>Sim Min</th><th>Sim Max</th></TR><TR class="a">
+<TD class="left">Bias</TD><TD class="left">numerictype(1, 16, 9)</TD><TD class="right">-63.98046875</TD><TD class="right">63.99609375</TD></TR>
+<TR class="b">
+<TD class="left">Bias_p</TD><TD class="left">numerictype(1, 16, 7)</TD><TD class="right">-63.9765625</TD><TD class="right">63.9921875</TD></TR>
+<TR class="a">
+<TD class="left">P</TD><TD class="left">numerictype(1, 16, 5) 3 x 3 </TD><TD class="right">-63.96875</TD><TD class="right">1023.9375</TD></TR>
+<TR class="b">
+<TD class="left">P_p</TD><TD class="left">numerictype(1, 16, 5) 3 x 3 </TD><TD class="right">-63.96875</TD><TD class="right">1023.96875</TD></TR>
+<TR class="a">
+<TD class="left">Pbb</TD><TD class="left">numerictype(0, 16, 13)</TD><TD class="right">0</TD><TD class="right">7.9998779296875</TD></TR>
+<TR class="b">
+<TD class="left">Pbb_p</TD><TD class="left">numerictype(0, 16, 13)</TD><TD class="right">0</TD><TD class="right">7.09375</TD></TR>
+<TR class="a">
+<TD class="left">Ptb</TD><TD class="left">numerictype(1, 16, 9)</TD><TD class="right">-63.9453125</TD><TD class="right">63.94921875</TD></TR>
+<TR class="b">
+<TD class="left">Ptb_p</TD><TD class="left">numerictype(1, 16, 9)</TD><TD class="right">-63.96875</TD><TD class="right">63.96875</TD></TR>
+<TR class="a">
+<TD class="left">Ptt</TD><TD class="left">numerictype(0, 16, 6)</TD><TD class="right">0</TD><TD class="right">1023.9375</TD></TR>
+<TR class="b">
+<TD class="left">Ptt_p</TD><TD class="left">numerictype(0, 16, 6)</TD><TD class="right">0</TD><TD class="right">1023.96875</TD></TR>
+<TR class="a">
+<TD class="left">Pwb</TD><TD class="left">numerictype(1, 16, 12)</TD><TD class="right">-1.875</TD><TD class="right">-0.025634765625</TD></TR>
+<TR class="b">
+<TD class="left">Pwb_p</TD><TD class="left">numerictype(1, 16, 12)</TD><TD class="right">-1.875</TD><TD class="right">-0.03125</TD></TR>
+<TR class="a">
+<TD class="left">Pwt</TD><TD class="left">numerictype(0, 16, 10)</TD><TD class="right">0</TD><TD class="right">63.86328125</TD></TR>
+<TR class="b">
+<TD class="left">Pwt_p</TD><TD class="left">numerictype(0, 16, 10)</TD><TD class="right">0</TD><TD class="right">63.9375</TD></TR>
+<TR class="a">
+<TD class="left">Pww</TD><TD class="left">numerictype(0, 16, 13)</TD><TD class="right">0.0172119140625</TD><TD class="right">7.9998779296875</TD></TR>
+<TR class="b">
+<TD class="left">Pww_p</TD><TD class="left">numerictype(0, 16, 13)</TD><TD class="right">0</TD><TD class="right">1.84375</TD></TR>
+<TR class="a">
+<TD class="left">T</TD><TD class="left">double</TD><TD class="right">Unknown</TD><TD class="right">Unknown</TD></TR>
+<TR class="b">
+<TD class="left">Theta</TD><TD class="left">numerictype(1, 16, 4)</TD><TD class="right">-2047.6875</TD><TD class="right">2046.5625</TD></TR>
+<TR class="a">
+<TD class="left">Theta_p</TD><TD class="left">numerictype(1, 16, 0)</TD><TD class="right">-2048</TD><TD class="right">2047</TD></TR>
+<TR class="b">
+<TD class="left">dTheta</TD><TD class="left">numerictype(1, 16, 4)</TD><TD class="right">-1797</TD><TD class="right">1524</TD></TR>
+<TR class="a">
+<TD class="left">dTheta_p</TD><TD class="left">numerictype(1, 16, 0)</TD><TD class="right">-1797</TD><TD class="right">1524</TD></TR>
+<TR class="b">
+<TD class="left">kb</TD><TD class="left">numerictype(1, 16, 28)</TD><TD class="right">-0.0001220703125</TD><TD class="right">0.00012189149856567383</TD></TR>
+<TR class="a">
+<TD class="left">kt</TD><TD class="left">numerictype(0, 16, 26)</TD><TD class="right">0</TD><TD class="right">0.0009762048721313477</TD></TR>
+<TR class="b">
+<TD class="left">kw</TD><TD class="left">numerictype(0, 16, 29)</TD><TD class="right">0</TD><TD class="right">0.00012201070785522461</TD></TR>
+<TR class="a">
+<TD class="left">rt</TD><TD class="left">numerictype(0, 16, 4)</TD><TD class="right">3240.0625</TD><TD class="right">3240.0625</TD></TR>
+<TR class="b">
+<TD class="left">yt</TD><TD class="left">numerictype(1, 16, 0)</TD><TD class="right">-1422</TD><TD class="right">1323</TD></TR>
+</TABLE>
+
+<h2>Fixed-Point Report <span>TimeUpdate<span></h2>
+<pre>function [Theta, dTheta, Bias, P] = TimeUpdate(Theta_p, dTheta_p, Bias_p, P_p, qw, qb)
+    fm = get_fimath();
+
+    global T;
+    
+    % State Update
+    dTheta = fi(dTheta_p, 1, 16, 4, fm);
+    Theta  = fi(T*dTheta_p + Theta_p, 1, 16, 4, fm);
+    Bias = fi(Bias_p, 1, 16, 9, fm);
+    
+    % Covariance Update
+    Pbb_p = fi(P_p(3,3), 0, 16, 13, fm);
+    Ptb_p = fi(P_p(2,3), 1, 16, 9, fm);
+    Ptt_p = fi(P_p(2,2), 0, 16, 6, fm);
+    Pwb_p = fi(P_p(1,3), 1, 16, 12, fm);
+    Pwt_p = fi(P_p(1,2), 0, 16, 10, fm);
+    Pww_p = fi(P_p(1,1), 0, 16, 13, fm);
+    
+    Pbb = fi(Pbb_p + T*qb, 0, 16, 13, fm);
+    Ptb = fi(T*Pwb_p+Ptb_p, 1, 16, 9, fm);
+    Ptt = fi(Ptt_p + T^2*Pww_p + fi(2*T, 0, 16, 22, fm)*Pwt_p + T^3*qw*fi(1/3, 0, 16, 17, fm), 0, 16, 6, fm);
+    Pwb = fi(Pwb_p, 1, 16, 12, fm);
+    Pwt = fi(T*Pww_p + Pwt_p + fi(1/2*T^2, 0, 16, 32, fm)*qw, 0, 16, 10, fm);
+    Pww = fi(Pww_p + T*qw, 0, 16, 13, fm);
+    
+    P = fi([fi(Pww, 1, 16, 5, fm), Pwt, Pwb; fi(Pwt, 1, 16, 5, fm), Ptt, Ptb; fi(Pwb, 1, 16, 9, fm), Ptb, Pbb], 1, 16, 5, fm);
+end</pre><TABLE><TR class="h"><th>Variable Name</th><th>Type</th><th>Sim Min</th><th>Sim Max</th></TR><TR class="a">
+<TD class="left">Bias</TD><TD class="left">numerictype(1, 16, 9)</TD><TD class="right">-63.984375</TD><TD class="right">63.9921875</TD></TR>
+<TR class="b">
+<TD class="left">Bias_p</TD><TD class="left">numerictype(1, 16, 7)</TD><TD class="right">-63.984375</TD><TD class="right">63.9921875</TD></TR>
+<TR class="a">
+<TD class="left">P</TD><TD class="left">numerictype(1, 16, 5) 3 x 3 </TD><TD class="right">-64</TD><TD class="right">1023.9375</TD></TR>
+<TR class="b">
+<TD class="left">P_p</TD><TD class="left">numerictype(1, 16, 5) 3 x 3 </TD><TD class="right">-63.96875</TD><TD class="right">1023.9375</TD></TR>
+<TR class="a">
+<TD class="left">Pbb</TD><TD class="left">numerictype(0, 16, 13)</TD><TD class="right">0</TD><TD class="right">7.96875</TD></TR>
+<TR class="b">
+<TD class="left">Pbb_p</TD><TD class="left">numerictype(0, 16, 13)</TD><TD class="right">0</TD><TD class="right">7.96875</TD></TR>
+<TR class="a">
+<TD class="left">Ptb</TD><TD class="left">numerictype(1, 16, 9)</TD><TD class="right">-63.97265625</TD><TD class="right">63.93359375</TD></TR>
+<TR class="b">
+<TD class="left">Ptb_p</TD><TD class="left">numerictype(1, 16, 9)</TD><TD class="right">-63.96875</TD><TD class="right">63.9375</TD></TR>
+<TR class="a">
+<TD class="left">Ptt</TD><TD class="left">numerictype(0, 16, 6)</TD><TD class="right">0</TD><TD class="right">1023.9375</TD></TR>
+<TR class="b">
+<TD class="left">Ptt_p</TD><TD class="left">numerictype(0, 16, 6)</TD><TD class="right">0</TD><TD class="right">1023.9375</TD></TR>
+<TR class="a">
+<TD class="left">Pwb</TD><TD class="left">numerictype(1, 16, 12)</TD><TD class="right">-1.875</TD><TD class="right">0</TD></TR>
+<TR class="b">
+<TD class="left">Pwb_p</TD><TD class="left">numerictype(1, 16, 12)</TD><TD class="right">-1.875</TD><TD class="right">0</TD></TR>
+<TR class="a">
+<TD class="left">Pwt</TD><TD class="left">numerictype(0, 16, 10)</TD><TD class="right">0.0009765625</TD><TD class="right">63.8466796875</TD></TR>
+<TR class="b">
+<TD class="left">Pwt_p</TD><TD class="left">numerictype(0, 16, 10)</TD><TD class="right">0</TD><TD class="right">63.84375</TD></TR>
+<TR class="a">
+<TD class="left">Pww</TD><TD class="left">numerictype(0, 16, 13)</TD><TD class="right">0.10302734375</TD><TD class="right">3.85302734375</TD></TR>
+<TR class="b">
+<TD class="left">Pww_p</TD><TD class="left">numerictype(0, 16, 13)</TD><TD class="right">0</TD><TD class="right">7.96875</TD></TR>
+<TR class="a">
+<TD class="left">T</TD><TD class="left">double</TD><TD class="right">Unknown</TD><TD class="right">Unknown</TD></TR>
+<TR class="b">
+<TD class="left">Theta</TD><TD class="left">numerictype(1, 16, 4)</TD><TD class="right">-2047.9375</TD><TD class="right">2047.9375</TD></TR>
+<TR class="a">
+<TD class="left">Theta_p</TD><TD class="left">numerictype(1, 16, 0)</TD><TD class="right">-2048</TD><TD class="right">2046</TD></TR>
+<TR class="b">
+<TD class="left">dTheta</TD><TD class="left">numerictype(1, 16, 4)</TD><TD class="right">-1797</TD><TD class="right">1524</TD></TR>
+<TR class="a">
+<TD class="left">dTheta_p</TD><TD class="left">numerictype(1, 16, 0)</TD><TD class="right">-1797</TD><TD class="right">1524</TD></TR>
+<TR class="b">
+<TD class="left">qb</TD><TD class="left">numerictype(0, 16, 12)</TD><TD class="right">0</TD><TD class="right">0</TD></TR>
+<TR class="a">
+<TD class="left">qw</TD><TD class="left">numerictype(0, 16, 3)</TD><TD class="right">26.875</TD><TD class="right">26.875</TD></TR>
+</TABLE>
+
+</body>
+</html>

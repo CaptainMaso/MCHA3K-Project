@@ -1,0 +1,2517 @@
+<deployment-project plugin="plugin.coder" plugin-version="R2016a">
+  <configuration build-checksum="2472037531" file="C:\Users\masom\OneDrive\Documents\Uni\MCHA3000\Project\matlab\Simulation\IMUKalmanFilter.prj" location="C:\Users\masom\OneDrive\Documents\Uni\MCHA3000\Project\matlab\Simulation" name="IMUKalmanFilter" target="target.unifiedcoder" target-name="MATLAB Coder">
+    <profile key="profile.mex">
+      <param.BuiltInstrumentedMex />
+      <param.RanInstrumentedMex>false</param.RanInstrumentedMex>
+      <param.WorkingFolder>option.WorkingFolder.Project</param.WorkingFolder>
+      <param.SpecifiedWorkingFolder />
+      <param.BuildFolder>option.BuildFolder.Project</param.BuildFolder>
+      <param.SpecifiedBuildFolder />
+      <param.SearchPaths />
+      <param.ResponsivenessChecks>true</param.ResponsivenessChecks>
+      <param.ExtrinsicCalls>true</param.ExtrinsicCalls>
+      <param.IntegrityChecks>true</param.IntegrityChecks>
+      <param.SaturateOnIntegerOverflow>true</param.SaturateOnIntegerOverflow>
+      <param.GlobalDataSyncMethod>option.GlobalDataSyncMethod.SyncAlways</param.GlobalDataSyncMethod>
+      <param.EnableVariableSizing>true</param.EnableVariableSizing>
+      <param.DynamicMemoryAllocation>option.DynamicMemoryAllocation.Threshold</param.DynamicMemoryAllocation>
+      <param.DynamicMemoryAllocationThreshold>65536</param.DynamicMemoryAllocationThreshold>
+      <param.StackUsageMax>200000</param.StackUsageMax>
+      <param.FilePartitionMethod>option.FilePartitionMethod.MapMFileToCFile</param.FilePartitionMethod>
+      <param.GenerateComments>true</param.GenerateComments>
+      <param.MATLABSourceComments>false</param.MATLABSourceComments>
+      <param.ReservedNameArray />
+      <param.EnableDebugging>false</param.EnableDebugging>
+      <param.GenerateReport>true</param.GenerateReport>
+      <param.LaunchReport>false</param.LaunchReport>
+      <param.DefaultTestFile />
+      <param.MergeInstrumentationResults>false</param.MergeInstrumentationResults>
+      <param.VerificationMode>option.VerificationMode.None</param.VerificationMode>
+      <param.VerificationStatus>option.VerificationStatus.Passed</param.VerificationStatus>
+      <param.CustomSourceCode />
+      <param.CustomHeaderCode />
+      <param.CustomInitializer />
+      <param.CustomTerminator />
+      <param.CustomInclude />
+      <param.CustomSource />
+      <param.CustomLibrary />
+      <param.PostCodeGenCommand />
+      <param.mex.GenCodeOnly>false</param.mex.GenCodeOnly>
+      <param.ConstantFoldingTimeout>40000</param.ConstantFoldingTimeout>
+      <param.RecursionLimit>100</param.RecursionLimit>
+      <param.PreserveVariableNames>option.PreserveVariableNames.UserNames</param.PreserveVariableNames>
+      <param.TargetLang>option.TargetLang.C</param.TargetLang>
+      <param.EchoExpressions>true</param.EchoExpressions>
+      <param.InlineThreshold>10</param.InlineThreshold>
+      <param.InlineThresholdMax>200</param.InlineThresholdMax>
+      <param.InlineStackLimit>4000</param.InlineStackLimit>
+      <param.EnableMemcpy>true</param.EnableMemcpy>
+      <param.MemcpyThreshold>64</param.MemcpyThreshold>
+      <param.EnableOpenMP>true</param.EnableOpenMP>
+      <param.InitFltsAndDblsToZero>true</param.InitFltsAndDblsToZero>
+      <param.ConstantInputs>option.ConstantInputs.CheckValues</param.ConstantInputs>
+      <param.EnableCRICodeCoverage>true</param.EnableCRICodeCoverage>
+      <unset>
+        <param.BuiltInstrumentedMex />
+        <param.RanInstrumentedMex />
+        <param.WorkingFolder />
+        <param.SpecifiedWorkingFolder />
+        <param.BuildFolder />
+        <param.SpecifiedBuildFolder />
+        <param.SearchPaths />
+        <param.ResponsivenessChecks />
+        <param.ExtrinsicCalls />
+        <param.IntegrityChecks />
+        <param.SaturateOnIntegerOverflow />
+        <param.EnableVariableSizing />
+        <param.DynamicMemoryAllocationThreshold />
+        <param.StackUsageMax />
+        <param.FilePartitionMethod />
+        <param.GenerateComments />
+        <param.MATLABSourceComments />
+        <param.ReservedNameArray />
+        <param.EnableDebugging />
+        <param.GenerateReport />
+        <param.LaunchReport />
+        <param.DefaultTestFile />
+        <param.MergeInstrumentationResults />
+        <param.VerificationMode />
+        <param.CustomSourceCode />
+        <param.CustomHeaderCode />
+        <param.CustomInitializer />
+        <param.CustomTerminator />
+        <param.CustomInclude />
+        <param.CustomSource />
+        <param.CustomLibrary />
+        <param.PostCodeGenCommand />
+        <param.mex.GenCodeOnly />
+        <param.ConstantFoldingTimeout />
+        <param.RecursionLimit />
+        <param.PreserveVariableNames />
+        <param.TargetLang />
+        <param.EchoExpressions />
+        <param.InlineThreshold />
+        <param.InlineThresholdMax />
+        <param.InlineStackLimit />
+        <param.EnableMemcpy />
+        <param.MemcpyThreshold />
+        <param.EnableOpenMP />
+        <param.InitFltsAndDblsToZero />
+        <param.ConstantInputs />
+        <param.EnableCRICodeCoverage />
+      </unset>
+    </profile>
+    <profile key="profile.c">
+      <param.grt.GenCodeOnly>true</param.grt.GenCodeOnly>
+      <param.WorkingFolder>option.WorkingFolder.Project</param.WorkingFolder>
+      <param.SpecifiedWorkingFolder />
+      <param.BuildFolder>option.BuildFolder.Project</param.BuildFolder>
+      <param.SpecifiedBuildFolder />
+      <param.SearchPaths />
+      <param.SaturateOnIntegerOverflow>true</param.SaturateOnIntegerOverflow>
+      <param.PurelyIntegerCode>false</param.PurelyIntegerCode>
+      <param.SupportNonFinite>true</param.SupportNonFinite>
+      <param.EnableVariableSizing>true</param.EnableVariableSizing>
+      <param.DynamicMemoryAllocation>option.DynamicMemoryAllocation.Threshold</param.DynamicMemoryAllocation>
+      <param.DynamicMemoryAllocationThreshold>65536</param.DynamicMemoryAllocationThreshold>
+      <param.StackUsageMax>200000</param.StackUsageMax>
+      <param.MultiInstanceCode>false</param.MultiInstanceCode>
+      <param.FilePartitionMethod>option.FilePartitionMethod.MapMFileToCFile</param.FilePartitionMethod>
+      <param.GenerateComments>true</param.GenerateComments>
+      <param.CommentStyle>option.CommentStyle.Auto</param.CommentStyle>
+      <param.MATLABSourceComments>false</param.MATLABSourceComments>
+      <param.MATLABFcnDesc>true</param.MATLABFcnDesc>
+      <param.DataTypeReplacement>option.DataTypeReplacement.CBuiltIn</param.DataTypeReplacement>
+      <param.ConvertIfToSwitch>false</param.ConvertIfToSwitch>
+      <param.PreserveExternInFcnDecls>true</param.PreserveExternInFcnDecls>
+      <param.EnableSignedLeftShifts>true</param.EnableSignedLeftShifts>
+      <param.EnableSignedRightShifts>true</param.EnableSignedRightShifts>
+      <param.ParenthesesLevel>option.ParenthesesLevel.Nominal</param.ParenthesesLevel>
+      <param.MaxIdLength>31</param.MaxIdLength>
+      <param.CustomSymbolStrGlobalVar>$M$N</param.CustomSymbolStrGlobalVar>
+      <param.CustomSymbolStrType>$M$N</param.CustomSymbolStrType>
+      <param.CustomSymbolStrField>$M$N</param.CustomSymbolStrField>
+      <param.CustomSymbolStrFcn>$M$N</param.CustomSymbolStrFcn>
+      <param.CustomSymbolStrTmpVar>$M$N</param.CustomSymbolStrTmpVar>
+      <param.CustomSymbolStrMacro>$M$N</param.CustomSymbolStrMacro>
+      <param.CustomSymbolStrEMXArray>emxArray_$M$N</param.CustomSymbolStrEMXArray>
+      <param.CustomSymbolStrEMXArrayFcn>emx$M$N</param.CustomSymbolStrEMXArrayFcn>
+      <param.ReservedNameArray />
+      <param.RuntimeChecks>false</param.RuntimeChecks>
+      <param.Verbose>false</param.Verbose>
+      <param.GenerateReport>true</param.GenerateReport>
+      <param.GenerateCodeMetricsReport>true</param.GenerateCodeMetricsReport>
+      <param.GenerateCodeReplacementReport>false</param.GenerateCodeReplacementReport>
+      <param.HighlightPotentialDataTypeIssues>false</param.HighlightPotentialDataTypeIssues>
+      <param.LaunchReport>false</param.LaunchReport>
+      <param.SILDebugging>false</param.SILDebugging>
+      <param.CodeExecutionProfiling>false</param.CodeExecutionProfiling>
+      <param.DefaultTestFile />
+      <param.MergeInstrumentationResults>false</param.MergeInstrumentationResults>
+      <param.RanPilSilVerification>false</param.RanPilSilVerification>
+      <param.VerificationMode>option.VerificationMode.None</param.VerificationMode>
+      <param.VerificationStatus>option.VerificationStatus.Inactive</param.VerificationStatus>
+      <param.CustomSourceCode />
+      <param.CustomHeaderCode />
+      <param.CustomInitializer />
+      <param.CustomTerminator />
+      <param.CustomInclude />
+      <param.CustomSource />
+      <param.CustomLibrary />
+      <param.PostCodeGenCommand />
+      <param.TargetLangStandard>C89/C90 (ANSI)</param.TargetLangStandard>
+      <param.CodeReplacementLibrary>None</param.CodeReplacementLibrary>
+      <param.DeprecatedCRLFlag>false</param.DeprecatedCRLFlag>
+      <param.SameHardware>true</param.SameHardware>
+      <param.Toolchain>Arduino AVR v1.6.1</param.Toolchain>
+      <param.BuildConfiguration>Faster Builds</param.BuildConfiguration>
+      <param.CustomToolchainOptions />
+      <var.ToolchainSettingsVisible>true</var.ToolchainSettingsVisible>
+      <param.target.Data>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;ctdata&gt;&lt;configuredHardware/&gt;&lt;/ctdata&gt;</param.target.Data>
+      <param.target.ActiveType>option.target.TargetType.Custom</param.target.ActiveType>
+      <param.target.ActiveTarget />
+      <param.HardwareVendor.Production>Atmel</param.HardwareVendor.Production>
+      <param.HardwareType.Production>AVR (8-bit)</param.HardwareType.Production>
+      <param.HWDeviceType.Production />
+      <var.instance.enabled.Production>true</var.instance.enabled.Production>
+      <param.HardwareSizeChar.Production>8</param.HardwareSizeChar.Production>
+      <param.HardwareSizeShort.Production>16</param.HardwareSizeShort.Production>
+      <param.HardwareSizeInt.Production>16</param.HardwareSizeInt.Production>
+      <param.HardwareSizeLong.Production>32</param.HardwareSizeLong.Production>
+      <param.HardwareSizeLongLong.Production>64</param.HardwareSizeLongLong.Production>
+      <param.HardwareSizeFloat.Production>32</param.HardwareSizeFloat.Production>
+      <param.HardwareSizeDouble.Production>64</param.HardwareSizeDouble.Production>
+      <param.HardwareSizeWord.Production>16</param.HardwareSizeWord.Production>
+      <param.HardwareSizePointer.Production>16</param.HardwareSizePointer.Production>
+      <param.HardwareEndianness.Production>option.HardwareEndianness.Little</param.HardwareEndianness.Production>
+      <param.HardwareArithmeticRightShift.Production>true</param.HardwareArithmeticRightShift.Production>
+      <param.HardwareLongLongMode.Production>false</param.HardwareLongLongMode.Production>
+      <param.HardwareAtomicIntegerSize.Production>option.HardwareAtomicIntegerSize.Char</param.HardwareAtomicIntegerSize.Production>
+      <param.HardwareAtomicFloatSize.Production>option.HardwareAtomicFloatSize.None</param.HardwareAtomicFloatSize.Production>
+      <param.HardwareDivisionRounding.Production>option.HardwareDivisionRounding.Zero</param.HardwareDivisionRounding.Production>
+      <param.HardwareVendor.Target>Atmel</param.HardwareVendor.Target>
+      <param.HardwareType.Target>AVR (8-bit)</param.HardwareType.Target>
+      <param.HWDeviceType.Target />
+      <var.instance.enabled.Target>false</var.instance.enabled.Target>
+      <param.HardwareSizeChar.Target>8</param.HardwareSizeChar.Target>
+      <param.HardwareSizeShort.Target>16</param.HardwareSizeShort.Target>
+      <param.HardwareSizeInt.Target>16</param.HardwareSizeInt.Target>
+      <param.HardwareSizeLong.Target>32</param.HardwareSizeLong.Target>
+      <param.HardwareSizeLongLong.Target>64</param.HardwareSizeLongLong.Target>
+      <param.HardwareSizeFloat.Target>32</param.HardwareSizeFloat.Target>
+      <param.HardwareSizeDouble.Target>64</param.HardwareSizeDouble.Target>
+      <param.HardwareSizeWord.Target>16</param.HardwareSizeWord.Target>
+      <param.HardwareSizePointer.Target>16</param.HardwareSizePointer.Target>
+      <param.HardwareEndianness.Target>option.HardwareEndianness.Little</param.HardwareEndianness.Target>
+      <param.HardwareArithmeticRightShift.Target>true</param.HardwareArithmeticRightShift.Target>
+      <param.HardwareLongLongMode.Target>false</param.HardwareLongLongMode.Target>
+      <param.HardwareAtomicIntegerSize.Target>option.HardwareAtomicIntegerSize.Char</param.HardwareAtomicIntegerSize.Target>
+      <param.HardwareAtomicFloatSize.Target>option.HardwareAtomicFloatSize.None</param.HardwareAtomicFloatSize.Target>
+      <param.HardwareDivisionRounding.Target>option.HardwareDivisionRounding.Zero</param.HardwareDivisionRounding.Target>
+      <param.CastingMode>option.CastingMode.Nominal</param.CastingMode>
+      <param.IndentStyle>option.IndentStyle.K&amp;R</param.IndentStyle>
+      <param.IndentSize>2</param.IndentSize>
+      <param.ConstantFoldingTimeout>40000</param.ConstantFoldingTimeout>
+      <param.RecursionLimit>100</param.RecursionLimit>
+      <param.IncludeTerminateFcn>true</param.IncludeTerminateFcn>
+      <param.GenerateExampleMain>option.GenerateExampleMain.GenerateCodeOnly</param.GenerateExampleMain>
+      <param.PreserveVariableNames>option.PreserveVariableNames.UserNames</param.PreserveVariableNames>
+      <param.TargetLang>option.TargetLang.C</param.TargetLang>
+      <param.CCompilerOptimization>option.CCompilerOptimization.Off</param.CCompilerOptimization>
+      <param.CCompilerCustomOptimizations />
+      <param.GenerateMakefile>true</param.GenerateMakefile>
+      <param.BuildToolEnable>false</param.BuildToolEnable>
+      <param.MakeCommand>make_rtw</param.MakeCommand>
+      <param.TemplateMakefile>default_tmf</param.TemplateMakefile>
+      <param.BuildToolConfiguration />
+      <param.InlineThreshold>10</param.InlineThreshold>
+      <param.InlineThresholdMax>200</param.InlineThresholdMax>
+      <param.InlineStackLimit>4000</param.InlineStackLimit>
+      <param.EnableMemcpy>true</param.EnableMemcpy>
+      <param.MemcpyThreshold>64</param.MemcpyThreshold>
+      <param.EnableOpenMP>true</param.EnableOpenMP>
+      <param.InitFltsAndDblsToZero>true</param.InitFltsAndDblsToZero>
+      <param.PassStructByReference>true</param.PassStructByReference>
+      <param.CustomLAPACKCallback />
+      <param.UseECoderFeatures>true</param.UseECoderFeatures>
+      <unset>
+        <param.WorkingFolder />
+        <param.SpecifiedWorkingFolder />
+        <param.BuildFolder />
+        <param.SpecifiedBuildFolder />
+        <param.SearchPaths />
+        <param.SaturateOnIntegerOverflow />
+        <param.PurelyIntegerCode />
+        <param.SupportNonFinite />
+        <param.EnableVariableSizing />
+        <param.DynamicMemoryAllocationThreshold />
+        <param.StackUsageMax />
+        <param.MultiInstanceCode />
+        <param.FilePartitionMethod />
+        <param.GenerateComments />
+        <param.CommentStyle />
+        <param.MATLABSourceComments />
+        <param.MATLABFcnDesc />
+        <param.DataTypeReplacement />
+        <param.ConvertIfToSwitch />
+        <param.PreserveExternInFcnDecls />
+        <param.EnableSignedLeftShifts />
+        <param.EnableSignedRightShifts />
+        <param.MaxIdLength />
+        <param.ReservedNameArray />
+        <param.RuntimeChecks />
+        <param.Verbose />
+        <param.GenerateReport />
+        <param.GenerateCodeMetricsReport />
+        <param.GenerateCodeReplacementReport />
+        <param.HighlightPotentialDataTypeIssues />
+        <param.LaunchReport />
+        <param.SILDebugging />
+        <param.CodeExecutionProfiling />
+        <param.DefaultTestFile />
+        <param.MergeInstrumentationResults />
+        <param.RanPilSilVerification />
+        <param.VerificationStatus />
+        <param.CustomSourceCode />
+        <param.CustomHeaderCode />
+        <param.CustomInitializer />
+        <param.CustomTerminator />
+        <param.CustomInclude />
+        <param.CustomSource />
+        <param.CustomLibrary />
+        <param.PostCodeGenCommand />
+        <param.TargetLangStandard />
+        <param.CodeReplacementLibrary />
+        <param.DeprecatedCRLFlag />
+        <param.SameHardware />
+        <param.BuildConfiguration />
+        <param.CustomToolchainOptions />
+        <var.ToolchainSettingsVisible />
+        <param.target.ActiveTarget />
+        <param.HWDeviceType.Production />
+        <var.instance.enabled.Production />
+        <param.HWDeviceType.Target />
+        <var.instance.enabled.Target />
+        <param.CastingMode />
+        <param.IndentStyle />
+        <param.IndentSize />
+        <param.ConstantFoldingTimeout />
+        <param.RecursionLimit />
+        <param.IncludeTerminateFcn />
+        <param.GenerateExampleMain />
+        <param.PreserveVariableNames />
+        <param.TargetLang />
+        <param.CCompilerOptimization />
+        <param.CCompilerCustomOptimizations />
+        <param.GenerateMakefile />
+        <param.BuildToolEnable />
+        <param.MakeCommand />
+        <param.TemplateMakefile />
+        <param.BuildToolConfiguration />
+        <param.InlineThreshold />
+        <param.InlineThresholdMax />
+        <param.InlineStackLimit />
+        <param.EnableMemcpy />
+        <param.MemcpyThreshold />
+        <param.EnableOpenMP />
+        <param.InitFltsAndDblsToZero />
+        <param.PassStructByReference />
+        <param.CustomLAPACKCallback />
+        <param.UseECoderFeatures />
+      </unset>
+    </profile>
+    <profile key="profile.hdl">
+      <param.hdl.Workflow />
+      <param.hdl.TargetLanguage />
+      <param.hdl.TargetPlatform />
+      <param.hdl.SynthesisTool />
+      <param.hdl.InputFrequency />
+      <param.hdl.TargetFrequency />
+      <param.hdl.IPCoreName />
+      <param.hdl.IPCoreVersion />
+      <param.hdl.AdditionalIPFiles />
+      <param.hdl.ExecutionMode />
+      <param.hdl.SynthesisToolChipFamily />
+      <param.hdl.SynthesisToolDeviceName />
+      <param.hdl.SynthesisToolPackageName />
+      <param.hdl.SynthesisToolSpeedValue />
+      <param.hdl.TargetInterface />
+      <param.hdl.CheckConformance />
+      <param.hdl.LaunchConformanceReport />
+      <param.hdl.GenerateEDAScripts />
+      <param.hdl.GenerateHDLCode />
+      <param.hdl.AdditionalSynthesisProjectFiles />
+      <param.hdl.CriticalPathSource />
+      <param.hdl.EmbeddedSystemTool />
+      <param.hdl.EmbeddedSystemProjectFolder />
+      <param.hdl.BitstreamBuildMode />
+      <param.hdl.ReferenceDesign />
+      <param.hdl.ReferenceDesignPath />
+      <param.hdl.LegacyDefaultTestFile />
+      <param.WorkingFolder>option.WorkingFolder.Project</param.WorkingFolder>
+      <param.SpecifiedWorkingFolder />
+      <param.BuildFolder>option.BuildFolder.Project</param.BuildFolder>
+      <param.SpecifiedBuildFolder />
+      <param.SearchPaths />
+      <param.hdl.MapPersistentVarsToRAM />
+      <param.hdl.RAMThreshold />
+      <param.hdl.MapPipelineDelaysToRAM />
+      <param.hdl.RAMVariableNames />
+      <param.hdl.RegisterInputs />
+      <param.hdl.RegisterOutputs />
+      <param.hdl.DistributedPipelining />
+      <param.hdl.DistributedPipeliningPriority />
+      <param.hdl.PreserveDesignDelays />
+      <param.hdl.InputPipeline />
+      <param.hdl.OutputPipeline />
+      <param.hdl.PipelineVariables />
+      <param.hdl.ResourceSharing />
+      <param.hdl.ConstantMultiplierOptimization />
+      <param.hdl.LoopOptimization />
+      <param.GenerateComments>true</param.GenerateComments>
+      <param.MATLABSourceComments>false</param.MATLABSourceComments>
+      <param.hdl.VHDLFileExt />
+      <param.hdl.VerilogFileExt />
+      <param.hdl.DateComment />
+      <param.hdl.UserComment />
+      <param.hdl.ModulePrefix />
+      <param.hdl.PackagePostfix />
+      <param.hdl.EntityConflictPostfix />
+      <param.hdl.ReservedWordPostfix />
+      <param.hdl.ClockProcessPostfix />
+      <param.hdl.ComplexRealPostfix />
+      <param.hdl.ComplexImagPostfix />
+      <param.hdl.PipelinePostfix />
+      <param.hdl.EnablePrefix />
+      <param.hdl.InlineConfigurations />
+      <param.hdl.UseRisingEdge />
+      <param.hdl.UseMatrixTypesInHDL />
+      <param.hdl.HDLCompileFilePostfix />
+      <param.hdl.HDLCompileInit />
+      <param.hdl.HDLCompileVHDLCmd />
+      <param.hdl.HDLCompileVerilogCmd />
+      <param.hdl.HDLCompileTerm />
+      <param.hdl.HDLSimFilePostfix />
+      <param.hdl.HDLSimInit />
+      <param.hdl.HDLSimCmd />
+      <param.hdl.HDLSimViewWaveCmd />
+      <param.hdl.HDLSimTerm />
+      <param.hdl.HDLSynthTool />
+      <var.hasSynthesisToolScript />
+      <var.toolSpecificEDAScript />
+      <param.hdl.HDLSynthFilePostfix />
+      <param.hdl.HDLSynthInit />
+      <param.hdl.HDLSynthCmd />
+      <param.hdl.HDLSynthTerm />
+      <param.hdl.HDLLintTool />
+      <var.LintToolScript />
+      <var.hasHDLLintTool />
+      <param.hdl.HDLLintInit />
+      <param.hdl.HDLLintCmd />
+      <param.hdl.HDLLintTerm />
+      <param.hdl.ResetType />
+      <param.hdl.ResetAssertedLevel />
+      <param.hdl.ResetInputPort />
+      <param.hdl.ClockInputPort />
+      <param.hdl.ClockEdge />
+      <param.hdl.ClockEnableInputPort />
+      <param.hdl.Oversampling />
+      <param.hdl.EnableRate />
+      <param.hdl.InputType />
+      <param.hdl.OutputType />
+      <param.hdl.ClockEnableOutputPort />
+      <param.hdl.ScalarizePorts />
+      <param.hdl.HDLCodingStandard />
+      <var.HDLCodingStandard_FilterPassingRules_enable />
+      <var.HDLCodingStandard_DetectDuplicateNamesCheck_enable />
+      <var.HDLCodingStandard_HDLKeywords_enable />
+      <var.HDLCodingStandard_ModuleInstanceEntityNameLength_enable />
+      <var.HDLCodingStandard_ModuleInstanceEntityNameLength_min />
+      <var.HDLCodingStandard_ModuleInstanceEntityNameLength_max />
+      <var.HDLCodingStandard_SignalPortParamNameLength_enable />
+      <var.HDLCodingStandard_SignalPortParamNameLength_min />
+      <var.HDLCodingStandard_SignalPortParamNameLength_max />
+      <var.HDLCodingStandard_MinimizeVariableUsage_enable />
+      <var.HDLCodingStandard_InitialStatements_enable />
+      <var.HDLCodingStandard_IfElseChain_enable />
+      <var.HDLCodingStandard_IfElseChain_length />
+      <var.HDLCodingStandard_IfElseNesting_enable />
+      <var.HDLCodingStandard_IfElseNesting_depth />
+      <var.HDLCodingStandard_MultiplierBitWidth_enable />
+      <var.HDLCodingStandard_MultiplierBitWidth_width />
+      <var.HDLCodingStandard_NonIntegerTypes_enable />
+      <var.HDLCodingStandard_LineLength_enable />
+      <var.HDLCodingStandard_LineLength_length />
+      <param.hdl.GenerateCosimTestBench />
+      <param.hdl.CosimLogOutputs />
+      <param.hdl.CosimTool />
+      <param.hdl.CosimRunMode />
+      <param.hdl.SimulateCosimTestBench />
+      <param.hdl.CosimClockHighTime />
+      <param.hdl.CosimClockLowTime />
+      <param.hdl.CosimHoldTime />
+      <param.hdl.CosimClockEnableDelay />
+      <param.hdl.CosimResetLength />
+      <param.hdl.GenerateFILTestBench />
+      <param.hdl.FILLogOutputs />
+      <param.hdl.FILBoardName />
+      <param.hdl.FILConnection />
+      <param.hdl.FILBoardIPAddress />
+      <param.hdl.FILBoardMACAddress />
+      <param.hdl.FILAdditionalFiles />
+      <param.hdl.SimulateFILTestBench />
+      <var.hasTestBench />
+      <param.hdl.GenerateHDLTestBench />
+      <param.hdl.SimulateGeneratedCode />
+      <param.hdl.SimulationTool />
+      <param.hdl.TestBenchPostfix />
+      <param.hdl.ForceClock />
+      <param.hdl.ClockHighTime />
+      <param.hdl.ClockLowTime />
+      <param.hdl.HoldTime />
+      <param.hdl.ForceClockEnable />
+      <param.hdl.TestBenchClockEnableDelay />
+      <param.hdl.ForceReset />
+      <param.hdl.ResetLength />
+      <param.hdl.HoldInputDataBetweenSamples />
+      <param.hdl.InputDataInterval />
+      <param.hdl.InitializeTestBenchInputs />
+      <param.hdl.MultifileTestBench />
+      <param.hdl.TestBenchDataPostfix />
+      <param.hdl.TestReferencePostfix />
+      <param.hdl.UseFileIOInTestBench />
+      <param.hdl.IgnoreDataChecking />
+      <param.hdl.SimulationIterationLimit />
+      <param.hdl.UseFiAccelForTestBench />
+      <param.hdl.hdlVariables />
+      <param.hdl.hdlComputedVariables />
+      <param.hdl.InitializeBlockRAM />
+      <param.hdl.RAMArchitecture />
+      <param.hdl.PartitionFunctions />
+      <param.hdl.GenerateMLFcnBlock />
+      <param.hdl.GenerateXSGBlock />
+      <unset>
+        <param.hdl.Workflow />
+        <param.hdl.TargetLanguage />
+        <param.hdl.TargetPlatform />
+        <param.hdl.SynthesisTool />
+        <param.hdl.InputFrequency />
+        <param.hdl.TargetFrequency />
+        <param.hdl.IPCoreName />
+        <param.hdl.IPCoreVersion />
+        <param.hdl.AdditionalIPFiles />
+        <param.hdl.ExecutionMode />
+        <param.hdl.SynthesisToolChipFamily />
+        <param.hdl.SynthesisToolDeviceName />
+        <param.hdl.SynthesisToolPackageName />
+        <param.hdl.SynthesisToolSpeedValue />
+        <param.hdl.TargetInterface />
+        <param.hdl.CheckConformance />
+        <param.hdl.LaunchConformanceReport />
+        <param.hdl.GenerateEDAScripts />
+        <param.hdl.GenerateHDLCode />
+        <param.hdl.AdditionalSynthesisProjectFiles />
+        <param.hdl.CriticalPathSource />
+        <param.hdl.EmbeddedSystemTool />
+        <param.hdl.EmbeddedSystemProjectFolder />
+        <param.hdl.BitstreamBuildMode />
+        <param.hdl.ReferenceDesign />
+        <param.hdl.ReferenceDesignPath />
+        <param.hdl.LegacyDefaultTestFile />
+        <param.WorkingFolder />
+        <param.SpecifiedWorkingFolder />
+        <param.BuildFolder />
+        <param.SpecifiedBuildFolder />
+        <param.SearchPaths />
+        <param.hdl.MapPersistentVarsToRAM />
+        <param.hdl.RAMThreshold />
+        <param.hdl.MapPipelineDelaysToRAM />
+        <param.hdl.RAMVariableNames />
+        <param.hdl.RegisterInputs />
+        <param.hdl.RegisterOutputs />
+        <param.hdl.DistributedPipelining />
+        <param.hdl.DistributedPipeliningPriority />
+        <param.hdl.PreserveDesignDelays />
+        <param.hdl.InputPipeline />
+        <param.hdl.OutputPipeline />
+        <param.hdl.PipelineVariables />
+        <param.hdl.ResourceSharing />
+        <param.hdl.ConstantMultiplierOptimization />
+        <param.hdl.LoopOptimization />
+        <param.GenerateComments />
+        <param.MATLABSourceComments />
+        <param.hdl.VHDLFileExt />
+        <param.hdl.VerilogFileExt />
+        <param.hdl.DateComment />
+        <param.hdl.UserComment />
+        <param.hdl.ModulePrefix />
+        <param.hdl.PackagePostfix />
+        <param.hdl.EntityConflictPostfix />
+        <param.hdl.ReservedWordPostfix />
+        <param.hdl.ClockProcessPostfix />
+        <param.hdl.ComplexRealPostfix />
+        <param.hdl.ComplexImagPostfix />
+        <param.hdl.PipelinePostfix />
+        <param.hdl.EnablePrefix />
+        <param.hdl.InlineConfigurations />
+        <param.hdl.UseRisingEdge />
+        <param.hdl.UseMatrixTypesInHDL />
+        <param.hdl.HDLCompileFilePostfix />
+        <param.hdl.HDLCompileInit />
+        <param.hdl.HDLCompileVHDLCmd />
+        <param.hdl.HDLCompileVerilogCmd />
+        <param.hdl.HDLCompileTerm />
+        <param.hdl.HDLSimFilePostfix />
+        <param.hdl.HDLSimInit />
+        <param.hdl.HDLSimCmd />
+        <param.hdl.HDLSimViewWaveCmd />
+        <param.hdl.HDLSimTerm />
+        <param.hdl.HDLSynthTool />
+        <var.hasSynthesisToolScript />
+        <var.toolSpecificEDAScript />
+        <param.hdl.HDLSynthFilePostfix />
+        <param.hdl.HDLSynthInit />
+        <param.hdl.HDLSynthCmd />
+        <param.hdl.HDLSynthTerm />
+        <param.hdl.HDLLintTool />
+        <var.LintToolScript />
+        <var.hasHDLLintTool />
+        <param.hdl.HDLLintInit />
+        <param.hdl.HDLLintCmd />
+        <param.hdl.HDLLintTerm />
+        <param.hdl.ResetType />
+        <param.hdl.ResetAssertedLevel />
+        <param.hdl.ResetInputPort />
+        <param.hdl.ClockInputPort />
+        <param.hdl.ClockEdge />
+        <param.hdl.ClockEnableInputPort />
+        <param.hdl.Oversampling />
+        <param.hdl.EnableRate />
+        <param.hdl.InputType />
+        <param.hdl.OutputType />
+        <param.hdl.ClockEnableOutputPort />
+        <param.hdl.ScalarizePorts />
+        <param.hdl.HDLCodingStandard />
+        <var.HDLCodingStandard_FilterPassingRules_enable />
+        <var.HDLCodingStandard_DetectDuplicateNamesCheck_enable />
+        <var.HDLCodingStandard_HDLKeywords_enable />
+        <var.HDLCodingStandard_ModuleInstanceEntityNameLength_enable />
+        <var.HDLCodingStandard_ModuleInstanceEntityNameLength_min />
+        <var.HDLCodingStandard_ModuleInstanceEntityNameLength_max />
+        <var.HDLCodingStandard_SignalPortParamNameLength_enable />
+        <var.HDLCodingStandard_SignalPortParamNameLength_min />
+        <var.HDLCodingStandard_SignalPortParamNameLength_max />
+        <var.HDLCodingStandard_MinimizeVariableUsage_enable />
+        <var.HDLCodingStandard_InitialStatements_enable />
+        <var.HDLCodingStandard_IfElseChain_enable />
+        <var.HDLCodingStandard_IfElseChain_length />
+        <var.HDLCodingStandard_IfElseNesting_enable />
+        <var.HDLCodingStandard_IfElseNesting_depth />
+        <var.HDLCodingStandard_MultiplierBitWidth_enable />
+        <var.HDLCodingStandard_MultiplierBitWidth_width />
+        <var.HDLCodingStandard_NonIntegerTypes_enable />
+        <var.HDLCodingStandard_LineLength_enable />
+        <var.HDLCodingStandard_LineLength_length />
+        <param.hdl.GenerateCosimTestBench />
+        <param.hdl.CosimLogOutputs />
+        <param.hdl.CosimTool />
+        <param.hdl.CosimRunMode />
+        <param.hdl.SimulateCosimTestBench />
+        <param.hdl.CosimClockHighTime />
+        <param.hdl.CosimClockLowTime />
+        <param.hdl.CosimHoldTime />
+        <param.hdl.CosimClockEnableDelay />
+        <param.hdl.CosimResetLength />
+        <param.hdl.GenerateFILTestBench />
+        <param.hdl.FILLogOutputs />
+        <param.hdl.FILBoardName />
+        <param.hdl.FILConnection />
+        <param.hdl.FILBoardIPAddress />
+        <param.hdl.FILBoardMACAddress />
+        <param.hdl.FILAdditionalFiles />
+        <param.hdl.SimulateFILTestBench />
+        <var.hasTestBench />
+        <param.hdl.GenerateHDLTestBench />
+        <param.hdl.SimulateGeneratedCode />
+        <param.hdl.SimulationTool />
+        <param.hdl.TestBenchPostfix />
+        <param.hdl.ForceClock />
+        <param.hdl.ClockHighTime />
+        <param.hdl.ClockLowTime />
+        <param.hdl.HoldTime />
+        <param.hdl.ForceClockEnable />
+        <param.hdl.TestBenchClockEnableDelay />
+        <param.hdl.ForceReset />
+        <param.hdl.ResetLength />
+        <param.hdl.HoldInputDataBetweenSamples />
+        <param.hdl.InputDataInterval />
+        <param.hdl.InitializeTestBenchInputs />
+        <param.hdl.MultifileTestBench />
+        <param.hdl.TestBenchDataPostfix />
+        <param.hdl.TestReferencePostfix />
+        <param.hdl.UseFileIOInTestBench />
+        <param.hdl.IgnoreDataChecking />
+        <param.hdl.SimulationIterationLimit />
+        <param.hdl.UseFiAccelForTestBench />
+        <param.hdl.hdlVariables />
+        <param.hdl.hdlComputedVariables />
+        <param.hdl.InitializeBlockRAM />
+        <param.hdl.RAMArchitecture />
+        <param.hdl.PartitionFunctions />
+        <param.hdl.GenerateMLFcnBlock />
+        <param.hdl.GenerateXSGBlock />
+      </unset>
+    </profile>
+    <param.objective>option.objective.c</param.objective>
+    <param.WorkflowStep>generateCode</param.WorkflowStep>
+    <param.TestSnippets>
+      <item>KalmanCoder</item>
+    </param.TestSnippets>
+    <param.DefaultImportExportVariable>config</param.DefaultImportExportVariable>
+    <param.UseGlobals>option.UseGlobals.Yes</param.UseGlobals>
+    <param.outputfile>${PROJECT_ROOT}\codegen\lib\IMUKalmanFilter_fixpt\IMUKalmanFilter.lib</param.outputfile>
+    <param.version>R2012a</param.version>
+    <param.HasECoderFeatures>true</param.HasECoderFeatures>
+    <param.newGlobals>
+      <Globals>
+        <Input Name="T" typeId="0" />
+        <idpTable>
+          <type typeId="0">
+            <Class>double</Class>
+            <Size>1 x 1</Size>
+            <Value>0.005</Value>
+            <InitialValue />
+            <UserDefined>true</UserDefined>
+            <Complex>false</Complex>
+            <Constant>true</Constant>
+          </type>
+        </idpTable>
+      </Globals>
+    </param.newGlobals>
+    <param.mex.mainhtml />
+    <param.grt.mainhtml />
+    <param.CallGeneratedCodeFromTest>true</param.CallGeneratedCodeFromTest>
+    <param.AutoInferDefaultFile />
+    <param.AutoInferUseVariableSize>false</param.AutoInferUseVariableSize>
+    <param.AutoInferUseUnboundedSize>false</param.AutoInferUseUnboundedSize>
+    <param.AutoInferVariableSizeThreshold>1024</param.AutoInferVariableSizeThreshold>
+    <param.AutoInferUnboundedSizeThreshold>2048</param.AutoInferUnboundedSizeThreshold>
+    <param.EnableFixedPointStep>true</param.EnableFixedPointStep>
+    <param.EnableScreener>true</param.EnableScreener>
+    <param.AnnotationChecksum>2797787267</param.AnnotationChecksum>
+    <var.LegacyTarget />
+    <var.MirrorOnOpen>false</var.MirrorOnOpen>
+    <param.FixedPointEnabled>true</param.FixedPointEnabled>
+    <var.redirectedInputTypeData />
+    <var.DismissScreener>true</var.DismissScreener>
+    <param.unifiedParamStorage />
+    <var.gc.lastOutputRoot>codegen\lib\IMUKalmanFilter_fixpt</var.gc.lastOutputRoot>
+    <var.gc.preBuildChecksum>2308626805</var.gc.preBuildChecksum>
+    <var.cfi.lastOutputRoot />
+    <var.cfi.preBuildChecksum />
+    <var.lastCfiTestSnippet>KalmanCoder</var.lastCfiTestSnippet>
+    <var.outdatedOnRestore>false</var.outdatedOnRestore>
+    <var.lastUserSourceChecksum>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;checksum&gt;&lt;includedFiles&gt;&lt;file&gt;C:\Users\masom\OneDrive\Documents\Uni\MCHA3000\Project\matlab\Simulation\codegen\IMUKalmanFilter\fixpt\IMUKalmanFilter_fixpt.m&lt;/file&gt;&lt;/includedFiles&gt;&lt;value&gt;4227578560&lt;/value&gt;&lt;/checksum&gt;</var.lastUserSourceChecksum>
+    <var.sourceSetState>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;sourceModel&gt;&lt;primarySourceFiles&gt;&lt;file&gt;C:\Users\masom\OneDrive\Documents\Uni\MCHA3000\Project\matlab\Simulation\IMUKalmanFilter.m&lt;/file&gt;&lt;/primarySourceFiles&gt;&lt;fixedPointSourceFiles&gt;&lt;file&gt;C:\Users\masom\OneDrive\Documents\Uni\MCHA3000\Project\matlab\Simulation\codegen\IMUKalmanFilter\fixpt\IMUKalmanFilter_fixpt.m&lt;/file&gt;&lt;/fixedPointSourceFiles&gt;&lt;fixedPointSourceRegistered&gt;true&lt;/fixedPointSourceRegistered&gt;&lt;fixedPointSourceSelected&gt;true&lt;/fixedPointSourceSelected&gt;&lt;/sourceModel&gt;</var.sourceSetState>
+    <param.forceMexBuild>false</param.forceMexBuild>
+    <param.configImportActive>false</param.configImportActive>
+    <var.boundToGui>true</var.boundToGui>
+    <param.mex.outputfile>IMUKalmanFilter_mex</param.mex.outputfile>
+    <param.grt.outputfile>IMUKalmanFilter</param.grt.outputfile>
+    <param.artifact>option.target.artifact.lib</param.artifact>
+    <param.outputfile>${PROJECT_ROOT}\codegen\lib\IMUKalmanFilter_fixpt\IMUKalmanFilter.lib</param.outputfile>
+    <param.EnableAutoExtrinsicCalls>true</param.EnableAutoExtrinsicCalls>
+    <param.UsePreconditions>false</param.UsePreconditions>
+    <param.FeatureFlags />
+    <param.FixedPointMode>option.FixedPointMode.Automatic</param.FixedPointMode>
+    <param.AutoScaleLoopIndexVariables>false</param.AutoScaleLoopIndexVariables>
+    <param.ComputedFixedPointData>
+      <ComputedEntities>
+        <Function file="$(PROJECTDIR)\IMUKalmanFilter.m" name="IMUKalmanFilter" specialization="IMUKalmanFilter" specializationId="-1" uniqueId="IMUKalmanFilter">
+          <Variable name="Theta" specid="-1">
+            <Column property="Kind" type="String" value="input_output" />
+            <Column property="SimMin" type="Double" value="-1431.5873220408114" />
+            <Column property="SimMax" type="Double" value="1265.9432077667523" />
+            <Column property="DerivedMin" type="Double" value="-32768.0" />
+            <Column property="DerivedMax" type="Double" value="32767.0" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="true" />
+            <Column property="ProposedType" type="String" value="numerictype(1, 16, 0)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="dTheta" specid="-1">
+            <Column property="Kind" type="String" value="input_output" />
+            <Column property="SimMin" type="Double" value="-1766.8025728869625" />
+            <Column property="SimMax" type="Double" value="1539.8970800677375" />
+            <Column property="DerivedMin" type="Double" value="-32768.0" />
+            <Column property="DerivedMax" type="Double" value="32767.0" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="true" />
+            <Column property="ProposedType" type="String" value="numerictype(1, 16, 0)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="Bias" specid="-1">
+            <Column property="Kind" type="String" value="input_output" />
+            <Column property="SimMin" type="Double" value="-40.51415847730014" />
+            <Column property="SimMax" type="Double" value="49.23867475166276" />
+            <Column property="DerivedMin" type="Double" value="-8192.0" />
+            <Column property="DerivedMax" type="Double" value="8191.0" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(1, 16, 2)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="P" specid="-1">
+            <Column property="Kind" type="String" value="input_output" />
+            <Column property="SimMin" type="Double" value="-63.042331036719524" />
+            <Column property="SimMax" type="Double" value="549.7122791750438" />
+            <Column property="DerivedMin" type="Double" value="-1.34217728E8" />
+            <Column property="DerivedMax" type="Double" value="1.342177279375E8" />
+            <MATLABType class="double" complex="false">
+              <size>3</size>
+              <size>3</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(1, 16, -13)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="Gyro" specid="-1">
+            <Column property="Kind" type="String" value="input" />
+            <Column property="SimMin" type="Double" value="-1791.0" />
+            <Column property="SimMax" type="Double" value="1552.0" />
+            <Column property="DerivedMin" type="Double" value="-32768.0" />
+            <Column property="DerivedMax" type="Double" value="32767.0" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="true" />
+            <Column property="ProposedType" type="String" value="numerictype(1, 16, 0)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="AccTheta" specid="-1">
+            <Column property="Kind" type="String" value="input" />
+            <Column property="SimMin" type="Double" value="-1421.8808984172854" />
+            <Column property="SimMax" type="Double" value="1323.9266428506353" />
+            <Column property="DerivedMin" type="Double" value="-32768.0" />
+            <Column property="DerivedMax" type="Double" value="32767.0" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="true" />
+            <Column property="ProposedType" type="String" value="numerictype(1, 16, 0)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="qw" specid="-1">
+            <Column property="Kind" type="String" value="input" />
+            <Column property="SimMin" type="Double" value="26.9927" />
+            <Column property="SimMax" type="Double" value="26.9927" />
+            <Column property="DerivedMin" type="Double" value="0.0" />
+            <Column property="DerivedMax" type="Double" value="8191.875" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(0, 16, 3)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="qb" specid="-1">
+            <Column property="Kind" type="String" value="input" />
+            <Column property="SimMin" type="Double" value="1.0418E-7" />
+            <Column property="SimMax" type="Double" value="1.0418E-7" />
+            <Column property="DerivedMin" type="Double" value="0.0" />
+            <Column property="DerivedMax" type="Double" value="15.999755859375" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(0, 16, 12)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="rw" specid="-1">
+            <Column property="Kind" type="String" value="input" />
+            <Column property="SimMin" type="Double" value="5.3907E-5" />
+            <Column property="SimMax" type="Double" value="5.3907E-5" />
+            <Column property="DerivedMin" type="Double" value="0.0" />
+            <Column property="DerivedMax" type="Double" value="15.999755859375" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(0, 16, 12)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="rt" specid="-1">
+            <Column property="Kind" type="String" value="input" />
+            <Column property="SimMin" type="Double" value="3240.1" />
+            <Column property="SimMax" type="Double" value="3240.1" />
+            <Column property="DerivedMin" type="Double" value="0.0" />
+            <Column property="DerivedMax" type="Double" value="4095.9375" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(0, 16, 4)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+        </Function>
+        <Function file="$(PROJECTDIR)\IMUKalmanFilter.m" name="TimeUpdate" specialization="TimeUpdate" specializationId="-1" uniqueId="f44_TimeUpdate">
+          <Variable name="Theta" specid="-1">
+            <Column property="Kind" type="String" value="output" />
+            <Column property="SimMin" type="Double" value="-1430.9615415080477" />
+            <Column property="SimMax" type="Double" value="1260.1922783197072" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(1, 16, 4)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="dTheta" specid="-1">
+            <Column property="Kind" type="String" value="output" />
+            <Column property="SimMin" type="Double" value="-1766.8025728869625" />
+            <Column property="SimMax" type="Double" value="1539.8970800677375" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(1, 16, 4)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="Bias" specid="-1">
+            <Column property="Kind" type="String" value="output" />
+            <Column property="SimMin" type="Double" value="-40.481959635701585" />
+            <Column property="SimMax" type="Double" value="49.20121888637518" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(1, 16, 9)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="P" specid="-1">
+            <Column property="Kind" type="String" value="output" />
+            <Column property="SimMin" type="Double" value="-63.042331036719524" />
+            <Column property="SimMax" type="Double" value="549.7122791750438" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>3</size>
+              <size>3</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(1, 16, 5)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="Theta_p" specid="-1">
+            <Column property="Kind" type="String" value="input" />
+            <Column property="SimMin" type="Double" value="-1431.5798075698272" />
+            <Column property="SimMax" type="Double" value="1265.7793819918115" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(1, 16, 4)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="dTheta_p" specid="-1">
+            <Column property="Kind" type="String" value="input" />
+            <Column property="SimMin" type="Double" value="-1766.8025728869625" />
+            <Column property="SimMax" type="Double" value="1539.8970800677375" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(1, 16, 4)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="Bias_p" specid="-1">
+            <Column property="Kind" type="String" value="input" />
+            <Column property="SimMin" type="Double" value="-40.481959635701585" />
+            <Column property="SimMax" type="Double" value="49.20121888637518" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(1, 16, 9)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="P_p" specid="-1">
+            <Column property="Kind" type="String" value="input" />
+            <Column property="SimMin" type="Double" value="-63.00621464454276" />
+            <Column property="SimMax" type="Double" value="549.0826079804007" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>3</size>
+              <size>3</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(1, 16, 5)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="qw" specid="-1">
+            <Column property="Kind" type="String" value="input" />
+            <Column property="SimMin" type="Double" value="26.9927" />
+            <Column property="SimMax" type="Double" value="26.9927" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(0, 16, 11)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="qb" specid="-1">
+            <Column property="Kind" type="String" value="input" />
+            <Column property="SimMin" type="Double" value="1.0418E-7" />
+            <Column property="SimMax" type="Double" value="1.0418E-7" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(0, 16, 39)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="T" specid="-1">
+            <Column property="Kind" type="String" value="global" />
+            <Column property="SimMin" type="Double" value="NaN" />
+            <Column property="SimMax" type="Double" value="NaN" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="true" />
+            <Column property="ProposedType" type="String" value="" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="Pbb_p" specid="-1">
+            <Column property="Kind" type="String" value="local" />
+            <Column property="SimMin" type="Double" value="0.23486690198441082" />
+            <Column property="SimMax" type="Double" value="7.229854936288052" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(0, 16, 13)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="Ptb_p" specid="-1">
+            <Column property="Kind" type="String" value="local" />
+            <Column property="SimMin" type="Double" value="-63.00621464454276" />
+            <Column property="SimMax" type="Double" value="0.0" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(1, 16, 9)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="Ptt_p" specid="-1">
+            <Column property="Kind" type="String" value="local" />
+            <Column property="SimMin" type="Double" value="2.4430161865404088E-5" />
+            <Column property="SimMax" type="Double" value="549.0826079804007" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(0, 16, 6)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="Pwb_p" specid="-1">
+            <Column property="Kind" type="String" value="local" />
+            <Column property="SimMin" type="Double" value="-7.223278435352895" />
+            <Column property="SimMax" type="Double" value="0.0" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(1, 16, 12)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="Pwt_p" specid="-1">
+            <Column property="Kind" type="String" value="local" />
+            <Column property="SimMin" type="Double" value="0.0017897818853216257" />
+            <Column property="SimMax" type="Double" value="62.94894013197451" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(0, 16, 10)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="Pww_p" specid="-1">
+            <Column property="Kind" type="String" value="local" />
+            <Column property="SimMin" type="Double" value="0.24431788249159564" />
+            <Column property="SimMax" type="Double" value="7.226745101932807" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(0, 16, 13)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="Pbb" specid="-1">
+            <Column property="Kind" type="String" value="local" />
+            <Column property="SimMin" type="Double" value="0.2348669025053108" />
+            <Column property="SimMax" type="Double" value="7.229854936808952" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(0, 16, 13)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="Ptb" specid="-1">
+            <Column property="Kind" type="String" value="local" />
+            <Column property="SimMin" type="Double" value="-63.042331036719524" />
+            <Column property="SimMax" type="Double" value="0.0" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(1, 16, 9)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="Ptt" specid="-1">
+            <Column property="Kind" type="String" value="local" />
+            <Column property="SimMin" type="Double" value="4.956062361424357E-5" />
+            <Column property="SimMax" type="Double" value="549.7122791750438" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(0, 16, 6)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="Pwb" specid="-1">
+            <Column property="Kind" type="String" value="local" />
+            <Column property="SimMin" type="Double" value="-7.223278435352895" />
+            <Column property="SimMax" type="Double" value="0.0" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(1, 16, 12)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="Pwt" specid="-1">
+            <Column property="Kind" type="String" value="local" />
+            <Column property="SimMin" type="Double" value="0.003348780047779604" />
+            <Column property="SimMax" type="Double" value="62.98541126623417" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(0, 16, 10)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="Pww" specid="-1">
+            <Column property="Kind" type="String" value="local" />
+            <Column property="SimMin" type="Double" value="0.3792813824915956" />
+            <Column property="SimMax" type="Double" value="7.361708601932807" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(0, 16, 13)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+        </Function>
+        <Function file="$(PROJECTDIR)\IMUKalmanFilter.m" name="GyroCorrection" specialization="GyroCorrection" specializationId="-1" uniqueId="f45_GyroCorrection">
+          <Variable name="Theta" specid="-1">
+            <Column property="Kind" type="String" value="output" />
+            <Column property="SimMin" type="Double" value="-1431.5873220408114" />
+            <Column property="SimMax" type="Double" value="1265.9432077667523" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(1, 16, 4)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="dTheta" specid="-1">
+            <Column property="Kind" type="String" value="output" />
+            <Column property="SimMin" type="Double" value="-1766.8022396552844" />
+            <Column property="SimMax" type="Double" value="1539.8949468734302" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(1, 16, 4)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="Bias" specid="-1">
+            <Column property="Kind" type="String" value="output" />
+            <Column property="SimMin" type="Double" value="-40.51415847730014" />
+            <Column property="SimMax" type="Double" value="49.23867475166276" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(1, 16, 9)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="P" specid="-1">
+            <Column property="Kind" type="String" value="output" />
+            <Column property="SimMin" type="Double" value="-63.03992820216233" />
+            <Column property="SimMax" type="Double" value="549.6914825870064" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>3</size>
+              <size>3</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(1, 16, 5)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="Theta_p" specid="-1">
+            <Column property="Kind" type="String" value="input" />
+            <Column property="SimMin" type="Double" value="-1430.9615415080477" />
+            <Column property="SimMax" type="Double" value="1260.1922783197072" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(1, 16, 4)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="dTheta_p" specid="-1">
+            <Column property="Kind" type="String" value="input" />
+            <Column property="SimMin" type="Double" value="-1766.8025728869625" />
+            <Column property="SimMax" type="Double" value="1539.8970800677375" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(1, 16, 4)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="Bias_p" specid="-1">
+            <Column property="Kind" type="String" value="input" />
+            <Column property="SimMin" type="Double" value="-40.481959635701585" />
+            <Column property="SimMax" type="Double" value="49.20121888637518" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(1, 16, 9)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="P_p" specid="-1">
+            <Column property="Kind" type="String" value="input" />
+            <Column property="SimMin" type="Double" value="-63.042331036719524" />
+            <Column property="SimMax" type="Double" value="549.7122791750438" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>3</size>
+              <size>3</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(1, 16, 5)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="yw" specid="-1">
+            <Column property="Kind" type="String" value="input" />
+            <Column property="SimMin" type="Double" value="-1791.0" />
+            <Column property="SimMax" type="Double" value="1552.0" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="true" />
+            <Column property="ProposedType" type="String" value="numerictype(1, 16, 0)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="rw" specid="-1">
+            <Column property="Kind" type="String" value="input" />
+            <Column property="SimMin" type="Double" value="5.3907E-5" />
+            <Column property="SimMax" type="Double" value="5.3907E-5" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(0, 16, 30)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="Pbb_p" specid="-1">
+            <Column property="Kind" type="String" value="local" />
+            <Column property="SimMin" type="Double" value="0.2348669025053108" />
+            <Column property="SimMax" type="Double" value="7.229854936808952" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(0, 16, 13)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="Ptb_p" specid="-1">
+            <Column property="Kind" type="String" value="local" />
+            <Column property="SimMin" type="Double" value="-63.042331036719524" />
+            <Column property="SimMax" type="Double" value="0.0" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(1, 16, 9)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="Ptt_p" specid="-1">
+            <Column property="Kind" type="String" value="local" />
+            <Column property="SimMin" type="Double" value="4.956062361424357E-5" />
+            <Column property="SimMax" type="Double" value="549.7122791750438" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(0, 16, 6)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="Pwb_p" specid="-1">
+            <Column property="Kind" type="String" value="local" />
+            <Column property="SimMin" type="Double" value="-7.223278435352895" />
+            <Column property="SimMax" type="Double" value="0.0" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(1, 16, 12)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="Pwt_p" specid="-1">
+            <Column property="Kind" type="String" value="local" />
+            <Column property="SimMin" type="Double" value="0.003348780047779604" />
+            <Column property="SimMax" type="Double" value="62.98541126623417" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(0, 16, 10)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="Pww_p" specid="-1">
+            <Column property="Kind" type="String" value="local" />
+            <Column property="SimMin" type="Double" value="0.3792813824915956" />
+            <Column property="SimMax" type="Double" value="7.361708601932807" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(0, 16, 13)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="kw" specid="-1">
+            <Column property="Kind" type="String" value="local" />
+            <Column property="SimMin" type="Double" value="0.8885800326373561" />
+            <Column property="SimMax" type="Double" value="0.9368685113605651" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(0, 16, 16)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="T" specid="-1">
+            <Column property="Kind" type="String" value="global" />
+            <Column property="SimMin" type="Double" value="NaN" />
+            <Column property="SimMax" type="Double" value="NaN" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="true" />
+            <Column property="ProposedType" type="String" value="" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="kt" specid="-1">
+            <Column property="Kind" type="String" value="local" />
+            <Column property="SimMin" type="Double" value="-0.36536668823833707" />
+            <Column property="SimMax" type="Double" value="0.006863150062903584" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(1, 16, 16)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="kb" specid="-1">
+            <Column property="Kind" type="String" value="local" />
+            <Column property="SimMin" type="Double" value="5.709057543207429E-9" />
+            <Column property="SimMax" type="Double" value="0.06052146418885039" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(0, 16, 20)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="Pww" specid="-1">
+            <Column property="Kind" type="String" value="local" />
+            <Column property="SimMin" type="Double" value="0.24431788249653888" />
+            <Column property="SimMax" type="Double" value="7.238702319995235" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(0, 16, 13)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="Pwt" specid="-1">
+            <Column property="Kind" type="String" value="local" />
+            <Column property="SimMin" type="Double" value="0.0017897818853891" />
+            <Column property="SimMax" type="Double" value="63.03598903774975" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(0, 16, 10)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="Pwb" specid="-1">
+            <Column property="Kind" type="String" value="local" />
+            <Column property="SimMin" type="Double" value="-7.2291221832313575" />
+            <Column property="SimMax" type="Double" value="-0.23421712832815608" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(1, 16, 12)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="Ptt" specid="-1">
+            <Column property="Kind" type="String" value="local" />
+            <Column property="SimMin" type="Double" value="2.44301618663251E-5" />
+            <Column property="SimMax" type="Double" value="549.6914825870064" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(0, 16, 6)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="Ptb" specid="-1">
+            <Column property="Kind" type="String" value="local" />
+            <Column property="SimMin" type="Double" value="-63.03992820216233" />
+            <Column property="SimMax" type="Double" value="-0.0017157875193009112" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(1, 16, 9)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="Pbb" specid="-1">
+            <Column property="Kind" type="String" value="local" />
+            <Column property="SimMin" type="Double" value="0.234866901958897" />
+            <Column property="SimMax" type="Double" value="7.22957731367679" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(0, 16, 13)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+        </Function>
+        <Function file="$(PROJECTDIR)\IMUKalmanFilter.m" name="AccCorrection" specialization="AccCorrection" specializationId="-1" uniqueId="f46_AccCorrection">
+          <Variable name="Theta" specid="-1">
+            <Column property="Kind" type="String" value="output" />
+            <Column property="SimMin" type="Double" value="-1431.5798075698272" />
+            <Column property="SimMax" type="Double" value="1265.7793819918115" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(1, 16, 4)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="dTheta" specid="-1">
+            <Column property="Kind" type="String" value="output" />
+            <Column property="SimMin" type="Double" value="-1766.8025728869625" />
+            <Column property="SimMax" type="Double" value="1539.8970800677375" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(1, 16, 4)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="Bias" specid="-1">
+            <Column property="Kind" type="String" value="output" />
+            <Column property="SimMin" type="Double" value="-40.481959635701585" />
+            <Column property="SimMax" type="Double" value="49.20121888637518" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(1, 16, 9)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="P" specid="-1">
+            <Column property="Kind" type="String" value="output" />
+            <Column property="SimMin" type="Double" value="-63.039883301172424" />
+            <Column property="SimMax" type="Double" value="549.225594757222" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>3</size>
+              <size>3</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(1, 16, 5)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="Theta_p" specid="-1">
+            <Column property="Kind" type="String" value="input" />
+            <Column property="SimMin" type="Double" value="-1431.5873220408114" />
+            <Column property="SimMax" type="Double" value="1265.9432077667523" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(1, 16, 4)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="dTheta_p" specid="-1">
+            <Column property="Kind" type="String" value="input" />
+            <Column property="SimMin" type="Double" value="-1766.8022396552844" />
+            <Column property="SimMax" type="Double" value="1539.8949468734302" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(1, 16, 4)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="Bias_p" specid="-1">
+            <Column property="Kind" type="String" value="input" />
+            <Column property="SimMin" type="Double" value="-40.51415847730014" />
+            <Column property="SimMax" type="Double" value="49.23867475166276" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(1, 16, 9)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="P_p" specid="-1">
+            <Column property="Kind" type="String" value="input" />
+            <Column property="SimMin" type="Double" value="-63.03992820216233" />
+            <Column property="SimMax" type="Double" value="549.6914825870064" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>3</size>
+              <size>3</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(1, 16, 5)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="yt" specid="-1">
+            <Column property="Kind" type="String" value="input" />
+            <Column property="SimMin" type="Double" value="-1421.8808984172854" />
+            <Column property="SimMax" type="Double" value="1323.9266428506353" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(1, 16, 4)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="rt" specid="-1">
+            <Column property="Kind" type="String" value="input" />
+            <Column property="SimMin" type="Double" value="3240.1" />
+            <Column property="SimMax" type="Double" value="3240.1" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(0, 16, 4)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="Pbb_p" specid="-1">
+            <Column property="Kind" type="String" value="local" />
+            <Column property="SimMin" type="Double" value="0.234866901958897" />
+            <Column property="SimMax" type="Double" value="7.22957731367679" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(0, 16, 13)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="Ptb_p" specid="-1">
+            <Column property="Kind" type="String" value="local" />
+            <Column property="SimMin" type="Double" value="-63.03992820216233" />
+            <Column property="SimMax" type="Double" value="-0.0017157875193009112" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(1, 16, 9)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="Ptt_p" specid="-1">
+            <Column property="Kind" type="String" value="local" />
+            <Column property="SimMin" type="Double" value="2.44301618663251E-5" />
+            <Column property="SimMax" type="Double" value="549.6914825870064" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(0, 16, 6)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="Pwb_p" specid="-1">
+            <Column property="Kind" type="String" value="local" />
+            <Column property="SimMin" type="Double" value="-7.2291221832313575" />
+            <Column property="SimMax" type="Double" value="-0.23421712832815608" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(1, 16, 12)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="Pwt_p" specid="-1">
+            <Column property="Kind" type="String" value="local" />
+            <Column property="SimMin" type="Double" value="0.0017897818853891" />
+            <Column property="SimMax" type="Double" value="63.03598903774975" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(0, 16, 10)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="Pww_p" specid="-1">
+            <Column property="Kind" type="String" value="local" />
+            <Column property="SimMin" type="Double" value="0.24431788249653888" />
+            <Column property="SimMax" type="Double" value="7.238702319995235" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(0, 16, 13)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="kw" specid="-1">
+            <Column property="Kind" type="String" value="local" />
+            <Column property="SimMin" type="Double" value="2.761923837723567E-9" />
+            <Column property="SimMax" type="Double" value="9.719231389560263E-5" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(0, 16, 29)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="T" specid="-1">
+            <Column property="Kind" type="String" value="global" />
+            <Column property="SimMin" type="Double" value="NaN" />
+            <Column property="SimMax" type="Double" value="NaN" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="true" />
+            <Column property="ProposedType" type="String" value="" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="kt" specid="-1">
+            <Column property="Kind" type="String" value="local" />
+            <Column property="SimMin" type="Double" value="3.769970350514505E-11" />
+            <Column property="SimMax" type="Double" value="8.475442035079504E-4" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(0, 16, 26)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="kb" specid="-1">
+            <Column property="Kind" type="String" value="local" />
+            <Column property="SimMin" type="Double" value="-9.719838751338698E-5" />
+            <Column property="SimMax" type="Double" value="-2.6477385254100592E-9" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(1, 16, 28)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="Pww" specid="-1">
+            <Column property="Kind" type="String" value="local" />
+            <Column property="SimMin" type="Double" value="0.24431788249159564" />
+            <Column property="SimMax" type="Double" value="7.232575706361958" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(0, 16, 13)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="Pwt" specid="-1">
+            <Column property="Kind" type="String" value="local" />
+            <Column property="SimMin" type="Double" value="0.0017897818853216257" />
+            <Column property="SimMax" type="Double" value="62.98256325062842" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(0, 16, 10)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="Pwb" specid="-1">
+            <Column property="Kind" type="String" value="local" />
+            <Column property="SimMin" type="Double" value="-7.229116059119939" />
+            <Column property="SimMax" type="Double" value="-0.23421712830141192" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(1, 16, 12)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="Ptt" specid="-1">
+            <Column property="Kind" type="String" value="local" />
+            <Column property="SimMin" type="Double" value="2.4430161865404088E-5" />
+            <Column property="SimMax" type="Double" value="549.225594757222" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(0, 16, 6)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="Ptb" specid="-1">
+            <Column property="Kind" type="String" value="local" />
+            <Column property="SimMin" type="Double" value="-63.039883301172424" />
+            <Column property="SimMax" type="Double" value="-0.001715787519104993" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(1, 16, 9)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+          <Variable name="Pbb" specid="-1">
+            <Column property="Kind" type="String" value="local" />
+            <Column property="SimMin" type="Double" value="0.23486690198441082" />
+            <Column property="SimMax" type="Double" value="7.235699588392831" />
+            <Column property="DerivedMin" type="Double" value="NaN" />
+            <Column property="DerivedMax" type="Double" value="NaN" />
+            <MATLABType class="double" complex="false">
+              <size>1</size>
+              <size>1</size>
+            </MATLABType>
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(0, 16, 13)" />
+            <Column property="RoundMode" type="String" value="Floor" />
+            <Column property="OverflowMode" type="String" value="Wrap" />
+            <Column property="ProductMode" type="String" value="FullPrecision" />
+            <Column property="SumMode" type="String" value="FullPrecision" />
+          </Variable>
+        </Function>
+      </ComputedEntities>
+    </param.ComputedFixedPointData>
+    <param.UserFixedPointData>
+      <UserEntities>
+        <Function file="$(PROJECTDIR)\IMUKalmanFilter.m" name="IMUKalmanFilter" specialization="IMUKalmanFilter" specializationId="-1" uniqueId="IMUKalmanFilter">
+          <Variable name="Theta" specid="-1">
+            <Column property="DesignRangeIsAutoDefined" type="Boolean" value="false" />
+            <Column property="DesignMin" type="Double" value="-32768.0" />
+            <Column property="DesignMax" type="Double" value="32767.0" />
+            <Column property="IsInteger" type="Boolean" value="true" />
+            <Column property="ProposedType" type="String" value="numerictype(1, 16, 0)" />
+          </Variable>
+          <Variable name="dTheta" specid="-1">
+            <Column property="DesignRangeIsAutoDefined" type="Boolean" value="false" />
+            <Column property="DesignMin" type="Double" value="-32768.0" />
+            <Column property="DesignMax" type="Double" value="32767.0" />
+            <Column property="IsInteger" type="Boolean" value="true" />
+            <Column property="ProposedType" type="String" value="numerictype(1, 16, 0)" />
+          </Variable>
+          <Variable name="Bias" specid="-1">
+            <Column property="DesignRangeIsAutoDefined" type="Boolean" value="false" />
+            <Column property="DesignMin" type="Double" value="-8192.0" />
+            <Column property="DesignMax" type="Double" value="8191.0" />
+            <Column property="ProposedType" type="String" value="numerictype(1, 16, 2)" />
+          </Variable>
+          <Variable name="P" specid="-1">
+            <Column property="DesignRangeIsAutoDefined" type="Boolean" value="true" />
+            <Column property="DesignMin" type="Double" value="-1.34217728E8" />
+            <Column property="DesignMax" type="Double" value="1.342177279375E8" />
+            <Column property="IsInteger" type="Boolean" value="false" />
+            <Column property="ProposedType" type="String" value="numerictype(1, 32, 4)" />
+          </Variable>
+          <Variable name="Gyro" specid="-1">
+            <Column property="DesignRangeIsAutoDefined" type="Boolean" value="false" />
+            <Column property="DesignMin" type="Double" value="-32768.0" />
+            <Column property="DesignMax" type="Double" value="32767.0" />
+            <Column property="ProposedType" type="String" value="numerictype(1, 16, 0)" />
+          </Variable>
+          <Variable name="AccTheta" specid="-1">
+            <Column property="DesignRangeIsAutoDefined" type="Boolean" value="false" />
+            <Column property="DesignMin" type="Double" value="-32768.0" />
+            <Column property="DesignMax" type="Double" value="32767.0" />
+            <Column property="IsInteger" type="Boolean" value="true" />
+            <Column property="ProposedType" type="String" value="numerictype(1, 16, 0)" />
+          </Variable>
+          <Variable name="qw" specid="-1">
+            <Column property="DesignRangeIsAutoDefined" type="Boolean" value="true" />
+            <Column property="DesignMin" type="Double" value="0.0" />
+            <Column property="DesignMax" type="Double" value="8191.875" />
+            <Column property="ProposedType" type="String" value="numerictype(0, 16, 3)" />
+          </Variable>
+          <Variable name="qb" specid="-1">
+            <Column property="DesignRangeIsAutoDefined" type="Boolean" value="true" />
+            <Column property="DesignMin" type="Double" value="0.0" />
+            <Column property="DesignMax" type="Double" value="15.999755859375" />
+            <Column property="ProposedType" type="String" value="numerictype(0, 16, 12)" />
+          </Variable>
+          <Variable name="rw" specid="-1">
+            <Column property="DesignRangeIsAutoDefined" type="Boolean" value="true" />
+            <Column property="DesignMin" type="Double" value="0.0" />
+            <Column property="DesignMax" type="Double" value="15.999755859375" />
+            <Column property="ProposedType" type="String" value="numerictype(0, 16, 12)" />
+          </Variable>
+          <Variable name="rt" specid="-1">
+            <Column property="DesignRangeIsAutoDefined" type="Boolean" value="true" />
+            <Column property="DesignMin" type="Double" value="0.0" />
+            <Column property="DesignMax" type="Double" value="4095.9375" />
+            <Column property="ProposedType" type="String" value="numerictype(0, 16, 4)" />
+          </Variable>
+        </Function>
+        <Function file="$(PROJECTDIR)\IMUKalmanFilter.m" name="TimeUpdate" specialization="TimeUpdate" specializationId="-1" uniqueId="f44_TimeUpdate">
+          <Variable name="Theta" specid="-1" />
+          <Variable name="dTheta" specid="-1" />
+          <Variable name="Bias" specid="-1" />
+          <Variable name="P" specid="-1" />
+          <Variable name="Theta_p" specid="-1" />
+          <Variable name="dTheta_p" specid="-1" />
+          <Variable name="Bias_p" specid="-1" />
+          <Variable name="P_p" specid="-1">
+            <Column property="DesignRangeIsAutoDefined" type="Boolean" value="false" />
+          </Variable>
+          <Variable name="qw" specid="-1" />
+          <Variable name="qb" specid="-1" />
+          <Variable name="T" specid="-1" />
+          <Variable name="Pbb_p" specid="-1" />
+          <Variable name="Ptb_p" specid="-1" />
+          <Variable name="Ptt_p" specid="-1" />
+          <Variable name="Pwb_p" specid="-1" />
+          <Variable name="Pwt_p" specid="-1" />
+          <Variable name="Pww_p" specid="-1" />
+          <Variable name="Pbb" specid="-1" />
+          <Variable name="Ptb" specid="-1" />
+          <Variable name="Ptt" specid="-1" />
+          <Variable name="Pwb" specid="-1" />
+          <Variable name="Pwt" specid="-1" />
+          <Variable name="Pww" specid="-1" />
+        </Function>
+        <Function file="$(PROJECTDIR)\IMUKalmanFilter.m" name="GyroCorrection" specialization="GyroCorrection" specializationId="-1" uniqueId="f45_GyroCorrection">
+          <Variable name="Theta" specid="-1" />
+          <Variable name="dTheta" specid="-1" />
+          <Variable name="Bias" specid="-1" />
+          <Variable name="P" specid="-1" />
+          <Variable name="Theta_p" specid="-1" />
+          <Variable name="dTheta_p" specid="-1" />
+          <Variable name="Bias_p" specid="-1" />
+          <Variable name="P_p" specid="-1" />
+          <Variable name="yw" specid="-1" />
+          <Variable name="rw" specid="-1" />
+          <Variable name="Pbb_p" specid="-1" />
+          <Variable name="Ptb_p" specid="-1" />
+          <Variable name="Ptt_p" specid="-1" />
+          <Variable name="Pwb_p" specid="-1" />
+          <Variable name="Pwt_p" specid="-1" />
+          <Variable name="Pww_p" specid="-1" />
+          <Variable name="kw" specid="-1" />
+          <Variable name="T" specid="-1" />
+          <Variable name="kt" specid="-1" />
+          <Variable name="kb" specid="-1" />
+          <Variable name="Pww" specid="-1" />
+          <Variable name="Pwt" specid="-1" />
+          <Variable name="Pwb" specid="-1" />
+          <Variable name="Ptt" specid="-1" />
+          <Variable name="Ptb" specid="-1" />
+          <Variable name="Pbb" specid="-1" />
+        </Function>
+        <Function file="$(PROJECTDIR)\IMUKalmanFilter.m" name="AccCorrection" specialization="AccCorrection" specializationId="-1" uniqueId="f46_AccCorrection">
+          <Variable name="Theta" specid="-1" />
+          <Variable name="dTheta" specid="-1" />
+          <Variable name="Bias" specid="-1" />
+          <Variable name="P" specid="-1" />
+          <Variable name="Theta_p" specid="-1" />
+          <Variable name="dTheta_p" specid="-1" />
+          <Variable name="Bias_p" specid="-1" />
+          <Variable name="P_p" specid="-1" />
+          <Variable name="yt" specid="-1" />
+          <Variable name="rt" specid="-1" />
+          <Variable name="Pbb_p" specid="-1" />
+          <Variable name="Ptb_p" specid="-1" />
+          <Variable name="Ptt_p" specid="-1" />
+          <Variable name="Pwb_p" specid="-1" />
+          <Variable name="Pwt_p" specid="-1" />
+          <Variable name="Pww_p" specid="-1" />
+          <Variable name="kw" specid="-1" />
+          <Variable name="T" specid="-1" />
+          <Variable name="kt" specid="-1" />
+          <Variable name="kb" specid="-1" />
+          <Variable name="Pww" specid="-1" />
+          <Variable name="Pwt" specid="-1" />
+          <Variable name="Pwb" specid="-1" />
+          <Variable name="Ptt" specid="-1" />
+          <Variable name="Ptb" specid="-1" />
+          <Variable name="Pbb" specid="-1" />
+        </Function>
+      </UserEntities>
+    </param.UserFixedPointData>
+    <param.DefaultWordLength>16</param.DefaultWordLength>
+    <param.DefaultFractionLength>4</param.DefaultFractionLength>
+    <param.FixedPointSafetyMargin>0</param.FixedPointSafetyMargin>
+    <param.FixedPointFimath>fimath('RoundingMethod', 'Floor', 'OverflowAction', 'Wrap', 'ProductMode', 'FullPrecision', 'MaxProductWordLength', 128, 'SumMode', 'FullPrecision', 'MaxSumWordLength', 128)</param.FixedPointFimath>
+    <param.FixedPointTypeSource>option.FixedPointTypeSource.SimAndDerived</param.FixedPointTypeSource>
+    <param.StaticAnalysisTimeout />
+    <param.StaticAnalysisGlobalRangesOnly>true</param.StaticAnalysisGlobalRangesOnly>
+    <param.LogAllIOValues>true</param.LogAllIOValues>
+    <param.DetectOverflows>false</param.DetectOverflows>
+    <param.LogHistogram>false</param.LogHistogram>
+    <param.ShowCoverage>true</param.ShowCoverage>
+    <param.ExcludedFixedPointVerificationFiles />
+    <param.ExcludedFixedPointSimulationFiles />
+    <param.InstrumentedBuildChecksum>476357371</param.InstrumentedBuildChecksum>
+    <param.FixedPointStaticAnalysisChecksum>1309673149</param.FixedPointStaticAnalysisChecksum>
+    <param.InstrumentedMexFile>${PROJECT_ROOT}\codegen\IMUKalmanFilter\fixpt\IMUKalmanFilter_float_mex.mexw64</param.InstrumentedMexFile>
+    <param.FixedPointValidationChecksum>2804978822</param.FixedPointValidationChecksum>
+    <param.FixedPointSourceCodeChecksum>1469435340</param.FixedPointSourceCodeChecksum>
+    <param.FixedPointFunctionReplacements>
+      <FunctionReplacements>
+        <Replacement keyType="function" strategyType="USER_DEFINED">
+          <Key functionName="atan2" />
+          <Strategy replacement="atan2_fp" />
+        </Replacement>
+        <Function name="atan2" replacement="atan2_fp" />
+      </FunctionReplacements>
+    </param.FixedPointFunctionReplacements>
+    <param.OptimizeWholeNumbers>true</param.OptimizeWholeNumbers>
+    <param.ContainerTypes>true</param.ContainerTypes>
+    <param.GeneratedFixedPointFileSuffix>_fixpt</param.GeneratedFixedPointFileSuffix>
+    <param.PlotFunction />
+    <param.SDIPlot>false</param.SDIPlot>
+    <param.EnableCodeEfficiencyChecks>true</param.EnableCodeEfficiencyChecks>
+    <param.DefaultFixedPointSignedness>option.DefaultFixedPointSignedness.Automatic</param.DefaultFixedPointSignedness>
+    <param.FixedPointTypeProposalMode>option.FixedPointTypeProposalMode.ProposeFractionLengths</param.FixedPointTypeProposalMode>
+    <param.EnableFixedPointStep>true</param.EnableFixedPointStep>
+    <var.lastFixedPointAction>option.fixedPointAction.verify</var.lastFixedPointAction>
+    <var.lastSimContext>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;SimulationContext&gt;&lt;testFiles&gt;&lt;file&gt;C:\Users\masom\OneDrive\Documents\Uni\MCHA3000\Project\matlab\Simulation\KalmanCoder.m&lt;/file&gt;&lt;/testFiles&gt;&lt;synthetic&gt;false&lt;/synthetic&gt;&lt;/SimulationContext&gt;</var.lastSimContext>
+    <var.lastVerifyContext>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;SimulationContext&gt;&lt;testFiles&gt;&lt;file&gt;C:\Users\masom\OneDrive\Documents\Uni\MCHA3000\Project\matlab\Simulation\KalmanCoder.m&lt;/file&gt;&lt;/testFiles&gt;&lt;syntheticCode&gt;&lt;/syntheticCode&gt;&lt;synthetic&gt;false&lt;/synthetic&gt;&lt;/SimulationContext&gt;</var.lastVerifyContext>
+    <param.fpDataRoot>C:\Users\masom\OneDrive\Documents\Uni\MCHA3000\Project\matlab\Simulation\codegen\IMUKalmanFilter\fixpt/guiFpReport.mat</param.fpDataRoot>
+    <param.fpUserFileChecksum>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;checksum&gt;&lt;includedFiles&gt;&lt;file&gt;C:\Users\masom\OneDrive\Documents\Uni\MCHA3000\Project\matlab\Simulation\IMUKalmanFilter.m&lt;/file&gt;&lt;/includedFiles&gt;&lt;value&gt;487192030&lt;/value&gt;&lt;/checksum&gt;</param.fpUserFileChecksum>
+    <var.snapshotChecksum>1552889437</var.snapshotChecksum>
+    <var.functionBlockSid />
+    <param.fptSignedness>false</param.fptSignedness>
+    <unset>
+      <param.DefaultImportExportVariable />
+      <param.outputfile />
+      <param.version />
+      <param.HasECoderFeatures />
+      <param.mex.mainhtml />
+      <param.grt.mainhtml />
+      <param.CallGeneratedCodeFromTest />
+      <param.AutoInferDefaultFile />
+      <param.AutoInferUseVariableSize />
+      <param.AutoInferUseUnboundedSize />
+      <param.AutoInferVariableSizeThreshold />
+      <param.AutoInferUnboundedSizeThreshold />
+      <param.EnableFixedPointStep />
+      <param.EnableScreener />
+      <var.LegacyTarget />
+      <var.MirrorOnOpen />
+      <var.redirectedInputTypeData />
+      <param.unifiedParamStorage />
+      <var.cfi.lastOutputRoot />
+      <var.cfi.preBuildChecksum />
+      <var.outdatedOnRestore />
+      <param.configImportActive />
+      <param.mex.outputfile />
+      <param.grt.outputfile />
+      <param.EnableAutoExtrinsicCalls />
+      <param.UsePreconditions />
+      <param.FeatureFlags />
+      <param.AutoScaleLoopIndexVariables />
+      <param.DefaultFractionLength />
+      <param.FixedPointSafetyMargin />
+      <param.FixedPointFimath />
+      <param.StaticAnalysisTimeout />
+      <param.DetectOverflows />
+      <param.LogHistogram />
+      <param.ExcludedFixedPointVerificationFiles />
+      <param.ExcludedFixedPointSimulationFiles />
+      <param.OptimizeWholeNumbers />
+      <param.GeneratedFixedPointFileSuffix />
+      <param.PlotFunction />
+      <param.SDIPlot />
+      <var.functionBlockSid />
+      <param.fptSignedness />
+    </unset>
+    <fileset.entrypoints>
+      <file custom-data-expanded="false" value="${PROJECT_ROOT}\IMUKalmanFilter.m">
+        <Marker>1508298833878</Marker>
+      </file>
+    </fileset.entrypoints>
+    <fileset.testbench>
+      <file>${PROJECT_ROOT}\KalmanCoder.m</file>
+    </fileset.testbench>
+    <fileset.inputtypes>
+      <file custom-data-expanded="false" value="${PROJECT_ROOT}\IMUKalmanFilter.m">
+        <Inputs fileName="IMUKalmanFilter.m" functionName="IMUKalmanFilter">
+          <Input Name="Theta" typeId="0" />
+          <Input Name="dTheta" typeId="0" />
+          <Input Name="Bias" typeId="0" />
+          <Input Name="P" typeId="1" />
+          <Input Name="Gyro" typeId="0" />
+          <Input Name="AccTheta" typeId="0" />
+          <Input Name="qw" typeId="0" />
+          <Input Name="qb" typeId="0" />
+          <Input Name="rw" typeId="0" />
+          <Input Name="rt" typeId="0" />
+          <idpTable>
+            <type typeId="0">
+              <Class>double</Class>
+              <Size>1 x 1</Size>
+              <Value />
+              <InitialValue />
+              <UserDefined>false</UserDefined>
+              <Complex>false</Complex>
+            </type>
+            <type typeId="1">
+              <Class>double</Class>
+              <Size>3 x 3</Size>
+              <Value />
+              <InitialValue />
+              <UserDefined>false</UserDefined>
+              <Complex>false</Complex>
+            </type>
+          </idpTable>
+        </Inputs>
+      </file>
+    </fileset.inputtypes>
+    <build-deliverables>
+      <file location="${PROJECT_ROOT}\codegen\lib\IMUKalmanFilter_fixpt" name="IMUKalmanFilter.lib" optional="false">C:\Users\masom\OneDrive\Documents\Uni\MCHA3000\Project\matlab\Simulation\codegen\lib\IMUKalmanFilter_fixpt\IMUKalmanFilter.lib</file>
+    </build-deliverables>
+    <workflow />
+    <matlab>
+      <root>C:\Program Files\MATLAB\R2016a</root>
+      <toolboxes>
+        <toolbox name="fixedpoint" />
+        <toolbox name="matlabcoder" />
+        <toolbox name="matlabhdlcoder" />
+        <toolbox name="embeddedcoder" />
+      </toolboxes>
+      <toolbox>
+        <fixedpoint>
+          <enabled>true</enabled>
+        </fixedpoint>
+      </toolbox>
+      <toolbox>
+        <matlabcoder>
+          <enabled>true</enabled>
+        </matlabcoder>
+      </toolbox>
+      <toolbox>
+        <matlabhdlcoder>
+          <enabled>true</enabled>
+        </matlabhdlcoder>
+      </toolbox>
+      <toolbox>
+        <embeddedcoder>
+          <enabled>true</enabled>
+        </embeddedcoder>
+      </toolbox>
+    </matlab>
+    <platform>
+      <unix>false</unix>
+      <mac>false</mac>
+      <windows>true</windows>
+      <win2k>false</win2k>
+      <winxp>false</winxp>
+      <vista>false</vista>
+      <linux>false</linux>
+      <solaris>false</solaris>
+      <osver>6.2</osver>
+      <os32>false</os32>
+      <os64>true</os64>
+      <arch>win64</arch>
+      <matlab>true</matlab>
+    </platform>
+  </configuration>
+</deployment-project>
