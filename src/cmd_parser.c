@@ -141,27 +141,24 @@ static CMD_STATUS set_cmd(int argc, const char* argv[])
 {
 	if (argc == 2)
 	{
-		if (!strcmp_P(argv[0], PSTR("IMU")))
-		{
-			//IMU device
-			printf_P(PSTR("IMU not implemented yet\n"));
-		}
-		else if(!strcmp_P(argv[0], PSTR("ENC_ML")))
-		{
-			//Encoder devices
-		}
-		else if(!strcmp_P(argv[0], PSTR("ENC_MR")))
-		{
-			//Encoder devices
-		}
-		else if (!strcmp_P(argv[0], PSTR("ML")))
+		if (!strcmp_P(argv[0], PSTR("ML_V")))
 		{
 			int32_t tmp = atol(argv[1]);
 			motors_set_pwm(MOTOR_LEFT, tmp);
 		}
-		else if (!strcmp_P(argv[0], PSTR("MR")))
+		else if (!strcmp_P(argv[0], PSTR("MR_V")))
 		{
 			int32_t tmp = atol(argv[1]);
+			motors_set_pwm(MOTOR_RIGHT, tmp);
+		}
+		if (!strcmp_P(argv[0], PSTR("ML_T")))
+		{
+			float tmp = atof(argv[1]);
+			motors_set_pwm(MOTOR_LEFT, tmp);
+		}
+		else if (!strcmp_P(argv[0], PSTR("MR_T")))
+		{
+			float tmp = atol(argv[1]);
 			motors_set_pwm(MOTOR_RIGHT, tmp);
 		}
 		//Other items
