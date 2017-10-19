@@ -55,9 +55,9 @@ int main(void)
 
     DDRA |= _BV(PA7);
     _led_task.interval = tasks_time_interval_to_task_interval(0.5);
-    //_kalman_task.interval = tasks_time_interval_to_task_interval(0.1);
+    _kalman_task.interval = tasks_time_interval_to_task_interval(0.1);
     tasks_add(&_led_task);
-    //tasks_add(&_kalman_task);
+    tasks_add(&_kalman_task);
 
 	if (_led_task.id != 255)
 		tasks_enable();
@@ -93,6 +93,6 @@ void led_task_callback(void)
 void kalman_task_callback(void)
 {
 	imu_timestep(0.1);
-	printf_P(PSTR("T:%.4g, mT:%.4g, dT:%.4g, mdT:%.4g, B:%g, WW: %.4g, TT: %.4g, BB: %.4g\n"), imu_get_Theta()*RADTODEG, imu_get_atanTheta()*RADTODEG, imu_get_dTheta()*RADTODEG, (float)imu_get_gy()*THETAGAIN*RADTODEG, imu_get_Bias()*RADTODEG,
+	printf_P(PSTR("T:%.4g, mT:%.4g, dT:%.4g, mdT:%.4g, B:%g, WW: %.4g, TT: %.4g, BB: %.4g\n"), imu_get_Theta()*RADTODEG*THETAGAIN, imu_get_atanTheta()*RADTODEG, imu_get_dTheta()*RADTODEG*THETAGAIN, (float)imu_get_gy()*THETAGAIN*RADTODEG, imu_get_Bias()*THETAGAIN*RADTODEG,
 																			imu_get_PWW(), imu_get_PTT(), imu_get_PBB());
 }

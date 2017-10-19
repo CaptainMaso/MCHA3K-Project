@@ -1,6 +1,12 @@
 #include <stddef.h>
 #include "controller.h"
 
+
+
+
+
+
+
 static float _ctrl_state[CTRL_N_STATE];
 static float _ctrl_output[CTRL_N_OUTPUT];
 
@@ -33,7 +39,7 @@ void ctrl_init(void)
     for (size_t i = 0; i < CTRL_N_STATE; ++i)
         _ctrl_state[i] = 0.0f;
 }
-    
+
 void ctrl_set_state(const float state[CTRL_N_STATE])
 {
     for (size_t i = 0; i < CTRL_N_STATE; ++i)

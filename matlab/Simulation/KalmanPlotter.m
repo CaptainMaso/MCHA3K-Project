@@ -163,9 +163,9 @@ if(~isempty(dat) && isfloat(dat)) %Make sure Data Type is Correct
         axis([time(count)-scrollWidth time(count) min max]);
         
         subplot(3,3,3);
-        axis([time(count)-scrollWidth time(count) 0 5]);
+        axis([time(count)-scrollWidth time(count) 0 50]);
         subplot(3,3,6);
-        axis([time(count)-scrollWidth time(count) 0 5]);
+        axis([time(count)-scrollWidth time(count) 0 50]);
         subplot(3,3,9);
         axis([time(count)-scrollWidth time(count) 0 50]);
     else

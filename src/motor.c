@@ -10,12 +10,22 @@
 #include <util/atomic.h>
 
 #include "motor.h"
+#include "MotorAllocGains.def"
 
 uint8_t currentADC = 0;
 uint8_t adc_channel = 0;
 
-int16_t adc_left = 0;
-int16_t adc_right = 0;
+int16_t ML_ADC = 0;
+int16_t MR_ADC = 0;
+
+float ML_integrator;
+float MR_integrator;
+
+float ML_req_torque;
+float MR_req_torque;
+
+float ML_Voltage;
+float MR_Voltage;
 
 void motors_init(void)
 {
@@ -49,13 +59,52 @@ void motors_init(void)
 
 	DDRB |= _BV(PB2) | _BV(PB3);
 	DDRD |= _BV(PD4) | _BV(PD5);
-
-	//ADCSRA =
 }
 
-void motor_set_torque(MOTOR_SIDE side, int32_t value)
-{
 
+void motor_set_torque(MOTOR_SIDE side, float value)
+{
+	switch (side)
+	{
+	case MOTOR_LEFT:
+		ML_req_torque = value;
+		break;
+	case MOTOR_RIGHT:
+		MR_req_torque = value;
+		break;
+	default:
+	}
+}
+
+void motor_ctrl_alloc(void)
+{
+	/*
+	 * Motor Left Allocation Function
+	 */
+
+	// Update Controller State
+	ML_integrator = ML_A * ML_integrator + ML_B * ML_Voltage;
+
+	// Update Controller Output
+	float ML_Current = ML_ADC;
+	ML_Voltage = ML_HFG*(ML_T2C*ML_req_torque + ML_C*ML_integrator - ML_Current/ML_T2C);
+	ML_Voltage = (ML_Voltage > 12) ? 12 : ((ML_Voltage < -12) ? -12 : ML_Voltage);
+
+	motors_set_pwm(MOTOR_LEFT, (int32_t)(ML_Voltage*MAX_PWM/MAX_VOLTAGE));
+
+	/*
+	 * Motor Right Allocation Function
+	 */
+
+	// Update Controller State
+	MR_integrator = MR_A * MR_integrator + MR_B * MR_Voltage;
+
+	// Update Controller Output
+	float MR_Current = MR_ADC;
+	MR_Voltage = MR_HFG*(MR_T2C*MR_req_torque + MR_C*MR_integrator - MR_Current/MR_T2C);
+	MR_Voltage = (MR_Voltage > 12) ? 12 : ((MR_Voltage < -12) ? -12 : MR_Voltage);
+
+	motors_set_pwm(MOTOR_RIGHT, (int32_t)(MR_Voltage*MAX_PWM/MAX_VOLTAGE));
 }
 
 void motors_set_pwm(MOTOR_SIDE side, int32_t value)
@@ -119,14 +168,14 @@ int16_t motors_get_adc_reading(MOTOR_SIDE side)
 	{
 		ATOMIC_BLOCK(ATOMIC_FORCEON)
 		{
-			temp = adc_left;
+			temp = ML_ADC;
 		}
 	}
 	else if (side == MOTOR_RIGHT)
 	{
 		ATOMIC_BLOCK(ATOMIC_FORCEON)
 		{
-			temp = adc_right;
+			temp = MR_ADC;
 		}
 	}
 	return temp;
@@ -151,9 +200,9 @@ void motor_adc_isr(void)
 	ADCSRA &= ~(_BV(ADEN));
 	if (adc_channel == 0)
 	{
-		adc_left = ((int16_t)ADCW) >> 6;
-		if (adc_left > 512)
-			adc_left = 0;
+		ML_ADC = ((int16_t)ADCW) >> 6;
+		if (ML_ADC > 512)
+			ML_ADC = 0;
 		/*
 		 * This is done because the sense resistor is the output to the L298,
 		 * so we only get the magnitude of the current, not the direction.
@@ -161,15 +210,15 @@ void motor_adc_isr(void)
 		 * that the voltage is being applied (which will almost always be the case)
 		 */
 		if (!!(PORTB &_BV(PB3)))
-			adc_left *= -1;
+			ML_ADC *= -1;
 	}
 	else if (adc_channel == 1)
 	{
-		adc_right = ((int16_t)ADCW) >> 6;
-		if (adc_right > 512)
-			adc_right = 0;
+		MR_ADC = ((int16_t)ADCW) >> 6;
+		if (MR_ADC > 512)
+			MR_ADC = 0;
 		if (!!(PORTB &_BV(PB2)))
-			adc_right *= -1;
+			MR_ADC *= -1;
 	}
 	_adc_toggle();
 	ADCSRA |= (_BV(ADEN));

@@ -123,6 +123,8 @@ Kp = 2*ML_L/ML_Tau - ML_R;
 Ti = ML_L/ML_Tau^2;
 
 motor_ctrl = tf(-Ti, [Kp^2, Kp*Ti]);
+motor_ctrl_ss = ss(motor_ctrl);
+motor_ctrl_dss = c2d(motor_ctrl_ss, T_motor);
 
 %% Simulation
 sim('model_sf');
