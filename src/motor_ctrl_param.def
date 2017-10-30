@@ -1,0 +1,19 @@
+
+/*
+ *	MOTOR LEFT DATA
+*/
+static const float K_ML_int = 0.000193;
+static const float K_ML_V = 0.018708;
+static const float K_ML_OUT = -54.347826;
+static const float ML_HFG = 0.983333;
+static const float ML_T2C = 4.368720;
+
+
+/*
+ *	MOTOR RIGHT DATA
+*/
+static const float K_MR_int = 0.000193;
+static const float K_MR_V = 0.018708;
+static const float K_MR_OUT = -54.347826;
+static const float MR_HFG = 0.983333;
+static const float MR_T2C = 3.174603;

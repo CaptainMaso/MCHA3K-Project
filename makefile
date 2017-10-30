@@ -80,9 +80,11 @@ SRC_COMMON = \
 	src/log_data.c \
 	src/encoders.c \
 	src/sysid.c \
-	src/imu.c \
+	src/kf.c \
 	src/mpu6050.c \
 	src/twimaster.c \
+	src/controller.c \
+	src/pend_ctrl.c \
 	src/motor.c
 	
 SRC_TEST = \
@@ -108,6 +110,7 @@ SRC_AVR = \
 	src/uart_isr.c\
 	src/task_isr.c \
 	src/encoders_isr.c \
+	src/controller_isr.c \
 	src/motor_isr.c 
 
 INC_COMMON = \
@@ -149,7 +152,7 @@ program: reboot
 	avrdude -p atmega32 -c avr109 -P $(PORT) -b 115200 -u -U flash:w:$(TARGET_HEX)
 	
 reboot:
-	./$(DTREXE) $(PORT) LOW 10
+	./$(DTREXE) $(PORT) LOW 8
 
 test: clean_test
 	gcc $(CFLAGS) $(INC_TEST) $(SYMBOLS) $(SRC_TEST) -o $(TARGET_TEST) $(MISC_TEST)

@@ -35,7 +35,6 @@ Aeq = eye(6) *-1;
 IC = [1000, 1000, 1000, 1, 1000, 1];
 [res, cost] = fmincon(@(x) KalmanTuningTest(x(1), x(2), x(3), x(4), x(5), x(6), theta, dtheta, az, ax, gy), IC, Aeq, [0;0;0;0;0;0]);
 
-
 pw = res(1)
 pb = res(2)
 qw = res(3)
@@ -56,8 +55,8 @@ global Tinv;
 Tinv = 200;
 
 Theta_k = zeros(size(theta, 1), 1);
-dTheta_k = zeros(size(dtheta, 1), 1);
-Bias_k = zeros(size(dtheta, 1), 1);
+dTheta_k = zeros(size(theta, 1), 1);
+Bias_k = zeros(size(theta, 1), 1);
 P_k = zeros(3, 3, size(dtheta, 1));
 P_k(:,:,1) = [T*pw_hat, 0.5*T^2*pw_hat, 0; 0.5*T^2*pw_hat, T^3*pw_hat/3, 0; 0, 0, T*pb_hat];
 
@@ -68,15 +67,23 @@ end
 
 %%
 figure;
-subplot(3,1,1);
+subplot(3,2,1);
 plot(t, theta*180/pi, 'b', t, Theta_k*1.065264436e-3*180/pi, 'r');
 grid on;
-subplot(3,1,2);
+subplot(3,2,3);
 plot(t, dtheta*180/pi, 'b', t, dTheta_k*1.065264436e-3*180/pi, 'r');
 grid on;
-subplot(3,1,3);
+subplot(3,2,5);
 plot(t, Bias_k*180/pi, 'b');
 grid on;
 
+subplot(3,2,2);
+semilogy(t, squeeze(P_k(1,1,:)));
+grid on;
+subplot(3,2,4);
+semilogy(t, squeeze(P_k(2,2,:)));
+grid on;
+subplot(3,2,6);
+semilogy(t, squeeze(P_k(3,3,:)));
+grid on;
 
-max(max(max(P_k, [], 3), [], 2), [], 1)

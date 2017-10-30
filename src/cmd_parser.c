@@ -11,7 +11,7 @@
 #include "motor.h"
 #include "cmd_line_buffer.h"
 #include "cmd_parser.h"
-//#include "controller.h"
+#include "controller.h"
 #include "log_data.h"
 #include "mpu6050.h"
 #include "sysid.h"
@@ -19,19 +19,19 @@
 #define UNUSED(x) (void)(x)
 
 //static CMD_STATUS _cmd_help(int argc, const char* argv[]);
-static CMD_STATUS _print_chip_pinout(int argc, const char* argv[]);
-static CMD_STATUS set_cmd(int argc, const char* argv[]);
-static CMD_STATUS get_cmd(int argc, const char* argv[]);
+//static CMD_STATUS _print_chip_pinout(int argc, const char* argv[]);
+//static CMD_STATUS set_cmd(int argc, const char* argv[]);
+//static CMD_STATUS get_cmd(int argc, const char* argv[]);
 //static CMD_STATUS ctrl_cmd(int argc, const char* argv[]);
 float vref, theta, v = 0.0f;
 
 static const command_s command_list[] =
 {
 		//{"help", _cmd_help},//"help [cmd]		Prints the help string of [cmd], else all functions and help string"},
-		{"pinout", _print_chip_pinout}, //"pinout [pin]		Prints the pinout of the ATMEGA32P, [pin] prints the specific functions of each pin"},
-		{"set", set_cmd},//"set <CUR_ML|CUR_MR|ENC_ML|ENC_MR|IMU|ML|MR>"},
-		{"get", get_cmd},//"get <CUR_ML|CUR_MR|ENC_ML|ENC_MR|IMU|ML|MR>"},
-		//{"ctrl", ctrl_cmd, "ctrl TODO"},
+		//{"pinout", _print_chip_pinout}, //"pinout [pin]		Prints the pinout of the ATMEGA32P, [pin] prints the specific functions of each pin"},
+		//{"set", set_cmd},//"set <CUR_ML|CUR_MR|ENC_ML|ENC_MR|IMU|ML|MR>"},
+		//{"get", get_cmd},//"get <CUR_ML|CUR_MR|ENC_ML|ENC_MR|IMU|ML|MR>"},
+		{"ctrl", ctrl_cmd},
 		{"log", log_cmd},//"log <samples> <frequency> [CUR_ML|CUR_MR|ENC_ML|ENC_MR|IMU_AX|IMU_AY|IMU_AZ|IMU_GX|IMU_GY|IMU_GZ]"},
 		//{"motsysid_free", sysid_motor_free_cmd,"smf"},// "motsysid_free <side> <sample frequency> <time (s)>  <sin freq> <sin gain> <sin bias>"},
 		//{"motsysid_load", sysid_motor_load_cmd, "sm"}//"motsysid_load <side> <sample frequency> <length (m)> <radius (m)> <voltage>"}
@@ -104,7 +104,7 @@ void cmd_parse(int argc, const char* argv[])
 
 }*/
 
-CMD_STATUS _print_chip_pinout(int argc, const char* argv[])
+/*CMD_STATUS _print_chip_pinout(int argc, const char* argv[])
 {
 	UNUSED(argc);
 	UNUSED(argv);
@@ -135,48 +135,13 @@ CMD_STATUS _print_chip_pinout(int argc, const char* argv[])
         "                               `-----------'\n"
     ));
     return CMD_OK;
-}
+}*/
 
-static CMD_STATUS set_cmd(int argc, const char* argv[])
+/*static CMD_STATUS set_cmd(int argc, const char* argv[])
 {
 	if (argc == 2)
 	{
-		if (!strcmp_P(argv[0], PSTR("ML_V")))
-		{
-			int32_t tmp = atol(argv[1]);
-			motors_set_pwm(MOTOR_LEFT, tmp);
-		}
-		else if (!strcmp_P(argv[0], PSTR("MR_V")))
-		{
-			int32_t tmp = atol(argv[1]);
-			motors_set_pwm(MOTOR_RIGHT, tmp);
-		}
-		if (!strcmp_P(argv[0], PSTR("ML_T")))
-		{
-			float tmp = atof(argv[1]);
-			motors_set_pwm(MOTOR_LEFT, tmp);
-		}
-		else if (!strcmp_P(argv[0], PSTR("MR_T")))
-		{
-			float tmp = atol(argv[1]);
-			motors_set_pwm(MOTOR_RIGHT, tmp);
-		}
-		//Other items
-		else if (!strcmp_P(argv[0], PSTR("vref")))
-		{
-			vref = atof(argv[1]);
-		}
-		else if (!strcmp_P(argv[0], PSTR("v")))
-		{
-			v = atof(argv[1]);
-		}
-		else if (!strcmp_P(argv[0], PSTR("theta")))
-		{
-			theta = atof(argv[1]);
-		}
-		else
-			return CMD_INVALIDPARAM;
-		return CMD_OK;
+		return CMD_INVALIDPARAM;
 	}
 	else
 		return CMD_INVALIDPARAM;
@@ -186,61 +151,9 @@ static CMD_STATUS get_cmd(int argc, const char* argv[])
 {
 	if (argc == 1)
 	{
-		if (!strcmp_P(argv[0], PSTR("IMU")))
-		{
-			//IMU device
-			printf_P(PSTR("IMU not implemented yet\n"));
-		}
-		else if(!strcmp_P(argv[0], PSTR("ENC_ML")))
-		{
-			//Encoder devices
-			printf_P(PSTR("ENC_ML: %"PRId32"\n"), encoder_get_count(MOTOR_LEFT));
-		}
-		else if(!strcmp_P(argv[0], PSTR("ENC_MR")))
-		{
-			//Encoder devices
-			printf_P(PSTR("ENC_MR: %"PRId32"\n"), encoder_get_count(MOTOR_RIGHT));
-		}
-		else if (!strcmp_P(argv[0], PSTR("CUR_ML")))
-		{
-			//Current Sensing devices
-			printf_P(PSTR("CUR_ML: %"PRId16"\n"), motors_get_adc_reading(MOTOR_LEFT));
-		}
-		else if (!strcmp_P(argv[0], PSTR("CUR_MR")))
-		{
-			//Current Sensing devices
-			printf_P(PSTR("CUR_MR: %"PRId16"\n"), motors_get_adc_reading(MOTOR_LEFT));
-		}
-		//Other items
-		else if (!strcmp_P(argv[0], PSTR("vref")))
-		{
-			printf_P(PSTR("vref is %g\n"), vref);
-		}
-		else if (!strcmp_P(argv[0], PSTR("v")))
-		{
-			printf_P(PSTR("v is %g\n"), v);
-		}
-		else if (!strcmp_P(argv[0], PSTR("theta")))
-		{
-			printf_P(PSTR("theta is %g\n"), theta);
-		}
-		else
-			return CMD_INVALIDPARAM;
-		return CMD_OK;
-	}
-	else
-		return CMD_INVALIDPARAM;
-}
 
-/*static CMD_STATUS ctrl_cmd(int argc, const char* argv[])
-{
-	UNUSED(argv);
-	if (argc == 0)
-	{
-		const float input[] = {vref, v, theta};
-		float* y = ctrl_run(input);
-		printf_P(PSTR("%g\n"), y[0]);
-		return CMD_OK;
+		return CMD_INVALIDPARAM;
+		//return CMD_OK;
 	}
 	else
 		return CMD_INVALIDPARAM;

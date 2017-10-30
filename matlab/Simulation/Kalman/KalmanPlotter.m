@@ -29,7 +29,6 @@ plotGraph_THETA = plot(time,data(1,:),'-r',...
             'LineWidth',2,...
             'MarkerFaceColor','w',...
             'MarkerSize',2);      
-title(plotTitle,'FontSize',25);
 xlabel(xLabel1,'FontSize',15);
 ylabel(yLabel1,'FontSize',15);
 axis([0 10 min max]);
@@ -84,11 +83,10 @@ grid(plotGrid);
 
 hold on;
 subplot(3,3,3);
-plotGraph_PWW = plot(time,data(6,:),'-r',...
+plotGraph_PWW = semilogy(time,data(6,:),'-r',...
             'LineWidth',2,...
             'MarkerFaceColor','w',...
             'MarkerSize',2);
-title(plotTitle,'FontSize',25);
 xlabel('Time (s)','FontSize',15);
 ylabel('P_{WW}','FontSize',15);
 axis([0 10 -1 1]);
@@ -96,7 +94,7 @@ grid(plotGrid);
 
 hold on
 subplot(3,3,6);
-plotGraph_PTT = plot(time,data(7,:),'-m',...
+plotGraph_PTT = semilogy(time,data(7,:),'-m',...
             'LineWidth',1,...
             'MarkerFaceColor','w',...
             'MarkerSize',2);
@@ -107,7 +105,7 @@ grid(plotGrid);
 
 hold on
 subplot(3,3,9);
-plotGraph_PBB = plot(time,data(8,:),'-m',...
+plotGraph_PBB = semilogy(time,data(8,:),'-m',...
             'LineWidth',1,...
             'MarkerFaceColor','w',...
             'MarkerSize',2);
@@ -163,11 +161,11 @@ if(~isempty(dat) && isfloat(dat)) %Make sure Data Type is Correct
         axis([time(count)-scrollWidth time(count) min max]);
         
         subplot(3,3,3);
-        axis([time(count)-scrollWidth time(count) 0 50]);
+        xlim([time(count)-scrollWidth time(count)]);
         subplot(3,3,6);
-        axis([time(count)-scrollWidth time(count) 0 50]);
+        xlim([time(count)-scrollWidth time(count)]);
         subplot(3,3,9);
-        axis([time(count)-scrollWidth time(count) 0 50]);
+        xlim([time(count)-scrollWidth time(count)]);
     else
         set(plotGraph_THETA,'XData',time,'YData',data(1,:));
         set(plotGraph_DTHETA,'XData',time,'YData',data(2,:));

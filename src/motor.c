@@ -6,26 +6,28 @@
 #include <stdio.h>
 #include <avr/pgmspace.h>
 #include <avr/io.h>
-
 #include <util/atomic.h>
 
+#include "controller.h"
+#include "ctrl_param.def"
+#include "motor_ctrl_param.def"
 #include "motor.h"
-#include "MotorAllocGains.def"
 
-uint8_t currentADC = 0;
-uint8_t adc_channel = 0;
+static uint8_t adc_channel = 0;
 
-int16_t ML_ADC = 0;
-int16_t MR_ADC = 0;
+static int16_t ML_ADC = 0;
+static int16_t MR_ADC = 0;
 
-float ML_integrator;
-float MR_integrator;
+static float ML_integrator;
+static float MR_integrator;
 
-float ML_req_torque;
-float MR_req_torque;
+static float ML_req_current;
+static float MR_req_current;
 
-float ML_Voltage;
-float MR_Voltage;
+static float ML_Voltage;
+static float MR_Voltage;
+
+static uint32_t motor_last_run = 0;
 
 void motors_init(void)
 {
@@ -41,7 +43,7 @@ void motors_init(void)
 	ADTS: 			Timer 1 overflow trigger ADC
 	*/
 	ADMUX 	 = (_BV(ADLAR)) | (_BV(REFS0)) | (_BV(MUX3))   | (_BV(MUX2)) 	| (_BV(MUX0));
-	ADCSRA 	 = (_BV(ADEN)) 	| (_BV(ADATE)) 	| (_BV(ADIE)) 	| (_BV(ADPS1));
+	ADCSRA 	 = (_BV(ADEN)) 	| (_BV(ADATE)) | (_BV(ADIE))   | (_BV(ADPS1));
 	SFIOR 	|= (_BV(ADTS2)) | (_BV(ADTS1));
 	adc_channel = 0;
 
@@ -67,44 +69,69 @@ void motor_set_torque(MOTOR_SIDE side, float value)
 	switch (side)
 	{
 	case MOTOR_LEFT:
-		ML_req_torque = value;
+		ML_req_current = value;
 		break;
 	case MOTOR_RIGHT:
-		MR_req_torque = value;
+		MR_req_current = value;
 		break;
 	default:
+		printf_P("ERROR: Unknown Side\n");
 	}
 }
 
-void motor_ctrl_alloc(void)
+void motor_ctrl_run(uint32_t ctrl_count, states *ctrl_states)
 {
-	/*
-	 * Motor Left Allocation Function
-	 */
+	if (ctrl_count == 0)
+		motor_last_run = 0;
+	if ((ctrl_count % motor_interval) == 0 && ctrl_count != motor_last_run)
+	{
+		if (ctrl_count - motor_last_run <= motor_interval*1.1)
+		{
+			motors_set_pwm(MOTOR_LEFT, motor_ctrl_alloc(MOTOR_LEFT, ctrl_states));
+			motors_set_pwm(MOTOR_RIGHT, motor_ctrl_alloc(MOTOR_RIGHT, ctrl_states));
+		}
+		else
+		{
+			printf_P(PSTR("ERROR: Motor ctrl lagging, disabling control (LAG: %"PRIu32" counts)\n"), ctrl_count - motor_last_run - motor_interval);
+			ctrl_set_mode(CTRL_OFF);
+		}
+	}
+}
 
-	// Update Controller State
-	ML_integrator = ML_A * ML_integrator + ML_B * ML_Voltage;
+int32_t motor_ctrl_alloc(MOTOR_SIDE side, states *ctrl_states)
+{
+	switch (side)
+	{
+	case MOTOR_LEFT:
+	{
+		// Update Controller State
+		ML_integrator = K_ML_int * ML_integrator + K_ML_V * ML_Voltage;
 
-	// Update Controller Output
-	float ML_Current = ML_ADC;
-	ML_Voltage = ML_HFG*(ML_T2C*ML_req_torque + ML_C*ML_integrator - ML_Current/ML_T2C);
-	ML_Voltage = (ML_Voltage > 12) ? 12 : ((ML_Voltage < -12) ? -12 : ML_Voltage);
+		// Update Controller Output
+		ML_Voltage = ML_HFG*(ML_req_current + K_ML_OUT*ML_integrator - ctrl_states->Current_ML);
+		ML_Voltage = (ML_Voltage > MAX_VOLTAGE) ? MAX_VOLTAGE : ((ML_Voltage < -MAX_VOLTAGE) ? -MAX_VOLTAGE : ML_Voltage);
 
-	motors_set_pwm(MOTOR_LEFT, (int32_t)(ML_Voltage*MAX_PWM/MAX_VOLTAGE));
+		return (int32_t)(ML_Voltage*MAX_PWM/MAX_VOLTAGE);
+	} break;
+	case MOTOR_RIGHT:
+	{
+		/*
+		 * Motor Right Allocation Function
+		 */
 
-	/*
-	 * Motor Right Allocation Function
-	 */
+		// Update Controller State
+		MR_integrator = K_MR_int * MR_integrator + K_MR_V * MR_Voltage;
 
-	// Update Controller State
-	MR_integrator = MR_A * MR_integrator + MR_B * MR_Voltage;
+		// Update Controller Output
+		MR_Voltage = MR_HFG*(MR_req_current + K_MR_OUT*MR_integrator - ctrl_states->Current_ML);
+		MR_Voltage = (MR_Voltage > MAX_VOLTAGE) ? MAX_VOLTAGE : ((MR_Voltage < -MAX_VOLTAGE) ? -MAX_VOLTAGE : MR_Voltage);
 
-	// Update Controller Output
-	float MR_Current = MR_ADC;
-	MR_Voltage = MR_HFG*(MR_T2C*MR_req_torque + MR_C*MR_integrator - MR_Current/MR_T2C);
-	MR_Voltage = (MR_Voltage > 12) ? 12 : ((MR_Voltage < -12) ? -12 : MR_Voltage);
-
-	motors_set_pwm(MOTOR_RIGHT, (int32_t)(MR_Voltage*MAX_PWM/MAX_VOLTAGE));
+		return (int32_t)(MR_Voltage*MAX_PWM/MAX_VOLTAGE);
+	}break;
+	default:
+		printf_P(PSTR("ERROR: Incorrect Side\n"));
+		return 0;
+	}
 }
 
 void motors_set_pwm(MOTOR_SIDE side, int32_t value)
@@ -217,7 +244,7 @@ void motor_adc_isr(void)
 		MR_ADC = ((int16_t)ADCW) >> 6;
 		if (MR_ADC > 512)
 			MR_ADC = 0;
-		if (!!(PORTB &_BV(PB2)))
+		if (!(PORTB &_BV(PB2)))
 			MR_ADC *= -1;
 	}
 	_adc_toggle();

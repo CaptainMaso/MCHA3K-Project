@@ -11,6 +11,7 @@ typedef struct _task_s
 	uint16_t interval;
 	void (*callback)(void);
 	uint8_t id;
+	bool enabled;
 } task_s;
 
 void            tasks_init(double);

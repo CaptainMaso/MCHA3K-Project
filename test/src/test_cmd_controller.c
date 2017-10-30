@@ -74,7 +74,7 @@ TEST(CmdCtrl, CtrlReturnsValue)
 TEST(CmdCtrl, OneStep)
 {
     float x0[CTRL_N_STATE] = {0.1};
-    ctrl_set_state(x0);
+    ctrl_set_mode(x0);
 
     float u[CTRL_N_INPUT] = {1, -2, 0};
     _given("vref", u[0]);

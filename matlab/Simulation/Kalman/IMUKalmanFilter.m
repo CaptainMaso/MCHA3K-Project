@@ -1,11 +1,11 @@
-function [Theta, dTheta, Bias, P] = IMUKalmanFilter(Theta, dTheta, Bias, P, Gyro, AccTheta, qw, qb, rw, rt)
+function [Theta, dTheta, Bias, P] = IMUKalmanFilter(Theta, dTheta, Bias, P, Gyro, AccTheta)
     [Theta, dTheta, Bias, P] = TimeUpdate(Theta, dTheta, Bias, P, qw, qb);
     [Theta, dTheta, Bias, P] = GyroCorrection(Theta, dTheta, Bias, P, Gyro, rw);
     [Theta, dTheta, Bias, P] = AccCorrection(Theta, dTheta, Bias, P, AccTheta, rt);
 end
 
 function [Theta, dTheta, Bias, P] = TimeUpdate(Theta_p, dTheta_p, Bias_p, P_p, qw, qb)
-    global T;
+    global T qw qb;
     
     % State Update
     dTheta = dTheta_p;
@@ -30,8 +30,8 @@ function [Theta, dTheta, Bias, P] = TimeUpdate(Theta_p, dTheta_p, Bias_p, P_p, q
     P = [Pww, Pwt, Pwb; Pwt, Ptt, Ptb; Pwb, Ptb, Pbb];
 end
 
-function [Theta, dTheta, Bias, P] = GyroCorrection(Theta_p, dTheta_p, Bias_p, P_p, yw, rw)
-    global T;
+function [Theta, dTheta, Bias, P] = GyroCorrection(Theta_p, dTheta_p, Bias_p, P_p, yw)
+    global T rw;
     Pbb_p = P_p(3,3);
     Ptb_p = P_p(2,3);
     Ptt_p = P_p(2,2);
@@ -60,8 +60,8 @@ function [Theta, dTheta, Bias, P] = GyroCorrection(Theta_p, dTheta_p, Bias_p, P_
     P = [Pww, Pwt, Pwb; Pwt, Ptt, Ptb; Pwb, Ptb, Pbb];
 end
 
-function [Theta, dTheta, Bias, P] = AccCorrection(Theta_p, dTheta_p, Bias_p, P_p, yt, rt)
-    global T;
+function [Theta, dTheta, Bias, P] = AccCorrection(Theta_p, dTheta_p, Bias_p, P_p, yt)
+    global T rt;
     Pbb_p = P_p(3,3);
     Ptb_p = P_p(2,3);
     Ptt_p = P_p(2,2);

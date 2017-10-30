@@ -160,7 +160,7 @@ void tasks_run(void)
     	{
     		for(uint8_t i = 0; i < _task_count; i++)
     		{
-    			if (_task_trigger_count_tmp % _tasks[i]->interval == 0)
+    			if (_task_trigger_count_tmp % _tasks[i]->interval == 0 && _tasks[i]->enabled)
     				_tasks[i]->callback();
     		}
 

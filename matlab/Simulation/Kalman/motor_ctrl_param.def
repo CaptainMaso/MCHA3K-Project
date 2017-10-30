@@ -1,0 +1,24 @@
+#ifndef MOTOR_CTRL_DEF
+#define MOTOR_CTRL_DEF
+
+//Common Params
+const float T_motors = 0.005000;
+
+/*
+ *	MOTOR LEFT DATA
+*/
+const float K_ML_int = 0.538237;
+const float K_ML_V = 0.029817;
+const float K_ML_OUT = -7.674511;
+const float ML_HFG = 2.017900;
+
+
+/*
+ *	MOTOR RIGHT DATA
+*/
+const float K_ML_int = 0.538237;
+const float K_ML_V = 0.029817;
+const float K_ML_OUT = -7.674511;
+const float ML_HFG = 2.017900;
+
+#endif

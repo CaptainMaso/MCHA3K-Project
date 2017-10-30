@@ -13,5 +13,5 @@ function cost = KalmanTuningTest(pw, pb, qw, qb, rt, rw, Theta, dTheta, ar, at, 
         [Theta_k(i), dTheta_k(i), Bias_k(i), P_k] = IMUKalmanFilter(Theta_k(i-1), dTheta_k(i-1), Bias_k(i-1), P_k, gy(i - 1), yt, qw, qb, rw, rt);
     end
     
-    cost = meansqr([Theta-Theta_k*(1.065264436e-3)]);
+    cost = meansqr(Theta-Theta_k*(1.065264436e-3));
 end

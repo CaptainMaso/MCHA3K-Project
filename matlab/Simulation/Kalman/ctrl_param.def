@@ -1,0 +1,14 @@
+#ifndef CHASSIS_CTRL_DEF
+#define CHASSIS_CTRL_DEF
+const float Kerr_int = 1.000000;
+const float Kerr_dTheta = -0.000406;
+const float Kerr_dPhi = -0.000406;
+const float Kerr_Vref = 0.010000;
+
+const float K_int = -1.000000;
+const float K_Theta = 1.444856;
+const float K_dTheta = 0.185095;
+const float K_dPhi = 0.024969;
+
+const float T_ctrl = 0.010000;
+#endif

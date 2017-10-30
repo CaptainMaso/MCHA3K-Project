@@ -5,13 +5,14 @@
 #include <string.h>
 #include <stdio.h>
 #include <avr/pgmspace.h>
+#include <kf.h>
 #include <util/atomic.h>
 #include "task.h"
 #include "motor.h"
 #include "encoders.h"
-#include "imu.h"
 #include "log_data.h"
 #include "cmd_line_buffer.h"
+#include "controller.h"
 
 void log_task_function(void);
 
@@ -23,7 +24,8 @@ static float _time;
 static task_s _log_task = {
 		.interval = 10,
 		.callback = &log_task_function,
-		.id = 255
+		.id = 255,
+		.enabled = true
 };
 
 CMD_STATUS log_cmd(int argc, const char *argv[])
@@ -256,13 +258,13 @@ void log_task_function(void)
 				printf_P(PSTR("%"PRId16""), imu_get_gz());
 				break;
 			case LOG_IMU_THETA:
-				printf_P(PSTR("%g"), imu_get_Theta());
+				printf_P(PSTR("%g"), ctrl_get_states()->Theta);
 				break;
 			case LOG_IMU_DTHETA:
-				printf_P(PSTR("%g"), imu_get_dTheta());
+				printf_P(PSTR("%g"), ctrl_get_states()->dTheta);
 				break;
 			case LOG_IMU_BIAS:
-				printf_P(PSTR("%g"), imu_get_Bias());
+				printf_P(PSTR("%g"), ctrl_get_states()->Bias);
 				break;
 			case LOG_ENC_ML:
 				printf_P(PSTR("%"PRId32""), encoder_get_count(MOTOR_LEFT));

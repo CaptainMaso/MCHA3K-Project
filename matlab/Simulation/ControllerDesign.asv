@@ -4,9 +4,8 @@ T_pend = 1/200;
 
 T_main = 1/lcm(1/T_pend, 1/T_motor);
 
-T_kfcorr = 1/100;
+T_kfcorr = 1/50;
 
-CPR = 660;
 Vmax = 12;
 
 %% Controllability
@@ -98,4 +97,4 @@ MR_ctrl = tf(-MR_Ti, [MR_Kp^2, MR_Kp*MR_Ti]);
 MR_ctrl_ss = ss(MR_ctrl);
 MR_ctrl_dss = c2d(MR_ctrl_ss, T_motor);
 
-ExportController(T_main, T_kfcorr, Chassis_ctrl_dss, ML_ctrl_dss, ML_Kp, 1/(ML_K*ML_N*ML_Eta), MR_ctrl_dss, MR_Kp, 1/(MR_K*MR_N*MR_Eta));
+ExportController(T_main, Chassis_ctrl_dss, ML_ctrl_dss, ML_Kp, 1/(ML_K*ML_N*ML_Eta), MR_ctrl_dss, MR_Kp, 1/(MR_K*MR_N*MR_Eta));

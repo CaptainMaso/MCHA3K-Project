@@ -25,7 +25,7 @@ TEST(Ctrl, SetState)
     for (size_t i = 0; i < CTRL_N_STATE; ++i)
         state_expected[i] = 1.2f*i;
 
-    ctrl_set_state(state_expected);
+    ctrl_set_mode(state_expected);
     TEST_ASSERT_EQUAL_FLOAT_ARRAY(state_expected, ctrl_get_state(), CTRL_N_STATE);
 }
 
@@ -34,7 +34,7 @@ TEST(Ctrl, OneStepAx)
     float x0[CTRL_N_STATE] = {0.1};
     float u[CTRL_N_INPUT] = {0, 0, 0};
 
-    ctrl_set_state(x0);
+    ctrl_set_mode(x0);
     ctrl_run(u);
     float * x_actual = ctrl_get_state();
 
@@ -47,7 +47,7 @@ TEST(Ctrl, OneStepBu)
     float x0[CTRL_N_STATE] = {0};
     float u[CTRL_N_INPUT] = {1, -2, 0};
 
-    ctrl_set_state(x0);
+    ctrl_set_mode(x0);
     ctrl_run(u);
     float * x_actual = ctrl_get_state();
 
@@ -60,7 +60,7 @@ TEST(Ctrl, OutputCx)
     float x0[CTRL_N_STATE] = {0.1};
     float u[CTRL_N_INPUT] = {0, 0, 0};
 
-    ctrl_set_state(x0);
+    ctrl_set_mode(x0);
 
     float y_expected[CTRL_N_OUTPUT] = {3.719};
     float * y_actual = ctrl_run(u);
@@ -72,7 +72,7 @@ TEST(Ctrl, OutputDu)
     float x0[CTRL_N_STATE] = {0};
     float u[CTRL_N_INPUT] = {1, -2, 0};
 
-    ctrl_set_state(x0);
+    ctrl_set_mode(x0);
 
     float y_expected[CTRL_N_OUTPUT] = {-14.352};
     float * y_actual = ctrl_run(u);
@@ -93,7 +93,7 @@ TEST(Ctrl, RunSteps)
 
     float u[CTRL_N_INPUT];
 
-    ctrl_set_state(x0);
+    ctrl_set_mode(x0);
 
     for (size_t i = 0; i < N_DATA; ++i)
     {
