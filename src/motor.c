@@ -10,14 +10,25 @@
 
 #include "controller.h"
 #include "ctrl_param.def"
-#include "motor_ctrl_param.def"
 #include "motor.h"
+
+#include "motor_ctrl_param.def"
 
 static uint8_t adc_channel = 0;
 
 static int16_t ML_ADC = 0;
 static int16_t MR_ADC = 0;
 
+#ifdef FIXEDPOINT_MOTORCTRL
+static int32_t ML_integrator;
+static int32_t MR_integrator;
+
+static int32_t ML_req_current;
+static int32_t MR_req_current;
+
+static int32_t ML_Voltage;
+static int32_t MR_Voltage;
+#else
 static float ML_integrator;
 static float MR_integrator;
 
@@ -26,6 +37,7 @@ static float MR_req_current;
 
 static float ML_Voltage;
 static float MR_Voltage;
+#endif
 
 static uint32_t motor_last_run = 0;
 
@@ -63,38 +75,65 @@ void motors_init(void)
 	DDRD |= _BV(PD4) | _BV(PD5);
 }
 
-
-void motor_set_torque(MOTOR_SIDE side, float value)
-{
-	switch (side)
-	{
-	case MOTOR_LEFT:
-		ML_req_current = value;
-		break;
-	case MOTOR_RIGHT:
-		MR_req_current = value;
-		break;
-	default:
-		printf_P("ERROR: Unknown Side\n");
-	}
-}
-
 void motor_ctrl_run(uint32_t ctrl_count, states *ctrl_states)
 {
 	if (ctrl_count == 0)
 		motor_last_run = 0;
 	if ((ctrl_count % motor_interval) == 0 && ctrl_count != motor_last_run)
 	{
-		if (ctrl_count - motor_last_run <= motor_interval*1.1)
+		PORTA |= _BV(PA4);
+		if (ctrl_count - motor_last_run <= motor_interval)
 		{
 			motors_set_pwm(MOTOR_LEFT, motor_ctrl_alloc(MOTOR_LEFT, ctrl_states));
 			motors_set_pwm(MOTOR_RIGHT, motor_ctrl_alloc(MOTOR_RIGHT, ctrl_states));
 		}
 		else
 		{
-			printf_P(PSTR("ERROR: Motor ctrl lagging, disabling control (LAG: %"PRIu32" counts)\n"), ctrl_count - motor_last_run - motor_interval);
-			ctrl_set_mode(CTRL_OFF);
+			//printf_P(PSTR("ERROR: Motor ctrl lagging, disabling control (LAG: %"PRIu32" counts)\n"), ctrl_count - motor_last_run - motor_interval);
+			//ctrl_set_mode(CTRL_OFF);
 		}
+		PORTA &= ~_BV(PA4);
+	}
+}
+
+#ifdef FIXEDPOINT_MOTORCTRL
+void motor_set_torque(MOTOR_SIDE side, int32_t value)
+{
+	switch (side)
+	{
+	case MOTOR_LEFT:
+		value *= ML_T2C;
+		if (value > ML_OFFS_POS)
+		{
+			ML_req_current = value + ML_OFFS_POS;
+		}
+		else if (value < -ML_OFFS_NEG)
+		{
+			ML_req_current = value - ML_OFFS_NEG;
+		}
+		else
+		{
+			ML_req_current = 0;
+		}
+
+		break;
+	case MOTOR_RIGHT:
+		value *= MR_T2C;
+		if (value > MR_OFFS_POS)
+		{
+			MR_req_current = value + MR_OFFS_POS;
+		}
+		else if (value < -MR_OFFS_NEG)
+		{
+			MR_req_current = value - MR_OFFS_NEG;
+		}
+		else
+		{
+			MR_req_current = 0;
+		}
+		break;
+	default:
+		printf_P("ERROR: Unknown Side\n");
 	}
 }
 
@@ -108,10 +147,10 @@ int32_t motor_ctrl_alloc(MOTOR_SIDE side, states *ctrl_states)
 		ML_integrator = K_ML_int * ML_integrator + K_ML_V * ML_Voltage;
 
 		// Update Controller Output
-		ML_Voltage = ML_HFG*(ML_req_current + K_ML_OUT*ML_integrator - ctrl_states->Current_ML);
-		ML_Voltage = (ML_Voltage > MAX_VOLTAGE) ? MAX_VOLTAGE : ((ML_Voltage < -MAX_VOLTAGE) ? -MAX_VOLTAGE : ML_Voltage);
+		ML_Voltage = ML_HFG*(ML_req_current - K_ML_OUT*ML_integrator/K_FP_GAIN - ctrl_states->Current_ML)/K_FP_GAIN;
+		ML_Voltage = (ML_Voltage > MAX_VOLTAGE*K_FP_GAIN) ? MAX_VOLTAGE*K_FP_GAIN : ((ML_Voltage < -MAX_VOLTAGE*K_FP_GAIN) ? -MAX_VOLTAGE*K_FP_GAIN : ML_Voltage);
 
-		return (int32_t)(ML_Voltage*MAX_PWM/MAX_VOLTAGE);
+		return (int32_t)(ML_Voltage*MAX_PWM/K_FP_GAIN/MAX_VOLTAGE);
 	} break;
 	case MOTOR_RIGHT:
 	{
@@ -123,8 +162,88 @@ int32_t motor_ctrl_alloc(MOTOR_SIDE side, states *ctrl_states)
 		MR_integrator = K_MR_int * MR_integrator + K_MR_V * MR_Voltage;
 
 		// Update Controller Output
-		MR_Voltage = MR_HFG*(MR_req_current + K_MR_OUT*MR_integrator - ctrl_states->Current_ML);
-		MR_Voltage = (MR_Voltage > MAX_VOLTAGE) ? MAX_VOLTAGE : ((MR_Voltage < -MAX_VOLTAGE) ? -MAX_VOLTAGE : MR_Voltage);
+		MR_Voltage = MR_HFG*(MR_req_current - K_MR_OUT*MR_integrator/K_FP_GAIN - ctrl_states->Current_MR)/K_FP_GAIN;
+		MR_Voltage = (MR_Voltage > MAX_VOLTAGE*K_FP_GAIN) ? MAX_VOLTAGE*K_FP_GAIN : ((MR_Voltage < -MAX_VOLTAGE*K_FP_GAIN) ? -MAX_VOLTAGE*K_FP_GAIN : MR_Voltage);
+
+		return (int32_t)(MR_Voltage/MAX_VOLTAGE);
+	}break;
+	default:
+		printf_P(PSTR("ERROR: Incorrect Side\n"));
+		return 0;
+	}
+}
+#else
+void motor_set_torque(MOTOR_SIDE side, float value)
+{
+	switch (side)
+	{
+	case MOTOR_LEFT:
+		value *= ML_T2C;
+		if (value > ML_OFFS_POS)
+		{
+			ML_req_current = value + ML_OFFS_POS;
+		}
+		else if (value < -ML_OFFS_NEG)
+		{
+			ML_req_current = value - ML_OFFS_NEG;
+		}
+		else
+		{
+			ML_req_current = 0.0f;
+		}
+
+		break;
+	case MOTOR_RIGHT:
+		value *= MR_T2C;
+		if (value > ML_OFFS_POS)
+		{
+			MR_req_current = value + MR_OFFS_POS;
+		}
+		else if (value < -ML_OFFS_NEG)
+		{
+			MR_req_current = value - MR_OFFS_NEG;
+		}
+		else
+		{
+			MR_req_current = 0.0f;
+		}
+		break;
+	default:
+		printf_P("ERROR: Unknown Side\n");
+	}
+}
+
+int32_t motor_ctrl_alloc(MOTOR_SIDE side, states *ctrl_states)
+{
+	switch (side)
+	{
+	case MOTOR_LEFT:
+	{
+		// Update Controller State
+		//ML_integrator = K_ML_int * ML_integrator + K_ML_V * ML_Voltage;
+
+		// Update Controller Output
+		//ML_Voltage = ML_HFG*(ML_req_current - K_ML_OUT*ML_integrator - ctrl_states->Current_ML);
+		//ML_Voltage = (ML_Voltage > MAX_VOLTAGE) ? MAX_VOLTAGE : ((ML_Voltage < -MAX_VOLTAGE) ? -MAX_VOLTAGE : ML_Voltage);
+
+		ML_Voltage = ML_R*ML_req_current + ML_KN*ctrl_states->dPhi_ML;
+
+		return (int32_t)(ML_Voltage*MAX_PWM/MAX_VOLTAGE);
+	} break;
+	case MOTOR_RIGHT:
+	{
+		/*
+		 * Motor Right Allocation Function
+		 */
+
+		// Update Controller State
+		//MR_integrator = K_MR_int * MR_integrator + K_MR_V * MR_Voltage;
+
+		// Update Controller Output
+		//MR_Voltage = MR_HFG*(MR_req_current - K_MR_OUT*MR_integrator - ctrl_states->Current_MR);
+		//MR_Voltage = (MR_Voltage > MAX_VOLTAGE) ? MAX_VOLTAGE : ((MR_Voltage < -MAX_VOLTAGE) ? -MAX_VOLTAGE : MR_Voltage);
+
+		MR_Voltage = MR_R*MR_req_current + MR_KN*ctrl_states->dPhi_MR;
 
 		return (int32_t)(MR_Voltage*MAX_PWM/MAX_VOLTAGE);
 	}break;
@@ -133,58 +252,56 @@ int32_t motor_ctrl_alloc(MOTOR_SIDE side, states *ctrl_states)
 		return 0;
 	}
 }
+#endif
 
 void motors_set_pwm(MOTOR_SIDE side, int32_t value)
 {
-	if (value <= MAX_PWM && value >= -MAX_PWM)
+	value = (value > MAX_PWM) ? MAX_PWM : ((value < -MAX_PWM) ?  -MAX_PWM : value);
+	uint16_t tmp = 0;
+	bool direction = false;
+	if (value > 0)
 	{
-		uint16_t tmp = 0;
-		bool direction = false;
-		if (value > 0)
+		tmp = (uint16_t)value;
+		direction = true;
+	}
+	else
+	{
+		tmp = (uint16_t)(-1*value);
+	}
+	if (side == MOTOR_LEFT)
+	{
+
+		if (direction)
 		{
-			tmp = (uint16_t)value;
-			direction = true;
+			PORTB |= _BV(PB3);
 		}
 		else
 		{
-			tmp = (uint16_t)(-1*value);
+			PORTB &= ~(_BV(PB3));
 		}
-		if (side == MOTOR_LEFT)
+
+		ATOMIC_BLOCK(ATOMIC_FORCEON)
 		{
-
-			if (direction)
-			{
-
-				PORTB &= ~(_BV(PB3));
-			}
-			else
-			{
-				PORTB |= _BV(PB3);
-			}
-
-			ATOMIC_BLOCK(ATOMIC_FORCEON)
-			{
-				OCR1A = tmp;
-			}
-			//printf_P(PSTR("SET ML to %"PRIu16"\n"), OCR1A);
+			OCR1A = tmp;
 		}
-		else if (side == MOTOR_RIGHT)
+		//printf_P(PSTR("SET ML to %"PRIu16"\n"), OCR1A);
+	}
+	else if (side == MOTOR_RIGHT)
+	{
+		if (direction)
 		{
-			if (direction)
-			{
-				PORTB |= _BV(PB2);
-			}
-			else
-			{
-				PORTB &= ~(_BV(PB2));
-			}
-
-			ATOMIC_BLOCK(ATOMIC_FORCEON)
-			{
-				OCR1B = tmp;
-			}
-			//printf_P(PSTR("SET MR to %"PRIu16"\n"), OCR1B);
+			PORTB |= _BV(PB2);
 		}
+		else
+		{
+			PORTB &= ~(_BV(PB2));
+		}
+
+		ATOMIC_BLOCK(ATOMIC_FORCEON)
+		{
+			OCR1B = tmp;
+		}
+		//printf_P(PSTR("SET MR to %"PRIu16"\n"), OCR1B);
 	}
 }
 

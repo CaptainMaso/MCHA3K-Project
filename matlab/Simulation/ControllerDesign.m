@@ -1,6 +1,6 @@
 % Programmable Parameters
-T_motor = 1/200;
-T_pend = 1/200;
+T_motor = 1/100;
+T_pend = 1/100;
 
 T_main = 1/lcm(1/T_pend, 1/T_motor);
 
@@ -89,6 +89,13 @@ ML_ctrl = tf(-ML_Ti, [ML_Kp^2, ML_Kp*ML_Ti]);
 ML_ctrl_ss = ss(ML_ctrl);
 ML_ctrl_dss = c2d(ML_ctrl_ss, T_motor);
 
+ML_T2C = 1/(ML_K*ML_N*ML_Eta);
+ML_HFG = ML_Kp;
+ML_OFFS_POS = ML_Tm_pos/ML_K;
+ML_OFFS_NEG = ML_Tm_neg/ML_K;
+
+ML_PARAM = struct('T2C', ML_T2C, 'HFG', ML_HFG, 'OFFS_POS', ML_OFFS_POS, 'OFFS_NEG', ML_OFFS_NEG, 'R', ML_R, 'K', ML_K, 'N', ML_N);
+
 % Motor Right
 MR_Tau = MR_L/MR_R*1.5;
 MR_Kp = 2*MR_L/MR_Tau - MR_R;
@@ -98,4 +105,12 @@ MR_ctrl = tf(-MR_Ti, [MR_Kp^2, MR_Kp*MR_Ti]);
 MR_ctrl_ss = ss(MR_ctrl);
 MR_ctrl_dss = c2d(MR_ctrl_ss, T_motor);
 
-ExportController(T_main, T_kfcorr, Chassis_ctrl_dss, ML_ctrl_dss, ML_Kp, 1/(ML_K*ML_N*ML_Eta), MR_ctrl_dss, MR_Kp, 1/(MR_K*MR_N*MR_Eta));
+MR_T2C = 1/(MR_K*MR_N*MR_Eta);
+MR_HFG = MR_Kp;
+MR_OFFS_POS = MR_Tm_pos/MR_K;
+MR_OFFS_NEG = MR_Tm_neg/MR_K;
+
+MR_PARAM = struct('T2C', MR_T2C, 'HFG', MR_HFG, 'OFFS_POS', MR_OFFS_POS, 'OFFS_NEG', MR_OFFS_NEG, 'R', MR_R, 'K', MR_K, 'N', MR_N);
+K_BITSHIFT = 15;
+ExportController(T_main, T_kfcorr, K_BITSHIFT, Chassis_ctrl_dss, ML_ctrl_dss, ML_PARAM, MR_ctrl_dss, MR_PARAM);
+KalmanExport(T_kfcorr, T_motor, K_BITSHIFT);

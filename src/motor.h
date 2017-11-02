@@ -8,10 +8,12 @@
 
 #include "controller.h"
 
-#define MAX_VOLTAGE 12
-#define MAX_PWM 65535
+#define MAX_VOLTAGE 12.0f
+#define MAX_PWM 0xFFFF
 
 #define ADC2CUR (512.0/5)
+
+//#define FIXEDPOINT_MOTORCTRL
 
 /*	Motor Control Pinout
  *  	PB2 = MR direction
@@ -33,7 +35,11 @@ void motor_ctrl_run(uint32_t, states*);
 
 int32_t motor_ctrl_alloc(MOTOR_SIDE, states*);
 
+#ifdef FIXEDPOINT_MOTORCTRL
+void motor_set_torque(MOTOR_SIDE, int32_t);
+#else
 void motor_set_torque(MOTOR_SIDE, float);
+#endif
 
 void motors_set_pwm(MOTOR_SIDE, int32_t);
 int32_t motors_get_pwm(MOTOR_SIDE);

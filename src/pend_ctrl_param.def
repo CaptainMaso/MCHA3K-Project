@@ -1,25 +1,24 @@
 
-#ifdef FIXEDPOINT
+#ifdef FIXEDPOINT_PENDCTRL
 static const int32_t Kerr_int = 32768;
-static const int32_t Kerr_dTheta = -7;
-static const int32_t Kerr_dPhi = -7;
-static const int32_t Kerr_Vref = 164;
+static const int32_t Kerr_dTheta = -13;
+static const int32_t Kerr_dPhi = -13;
+static const int32_t Kerr_Vref = 328;
 
 static const int32_t K_int = -32768;
-static const int32_t K_Theta = 47864;
-static const int32_t K_dTheta = 6127;
-static const int32_t K_dPhi = 824;
-static const uint16_t K_FP_GAIN = 32768;
+static const int32_t K_Theta = 43304;
+static const int32_t K_dTheta = 5513;
+static const int32_t K_dPhi = 726;
 
 #else
 static const float Kerr_int = 1.000000;
-static const float Kerr_dTheta = -0.000203;
-static const float Kerr_dPhi = -0.000203;
-static const float Kerr_Vref = 0.005000;
+static const float Kerr_dTheta = -0.000406;
+static const float Kerr_dPhi = -0.000406;
+static const float Kerr_Vref = 0.010000;
 
 static const float K_int = -1.000000;
-static const float K_Theta = 1.460705;
-static const float K_dTheta = 0.186989;
-static const float K_dPhi = 0.025155;
+static const float K_Theta = 1.321535;
+static const float K_dTheta = 0.168231;
+static const float K_dPhi = 0.022155;
 
 #endif

@@ -42,6 +42,9 @@ int main(void)
 
     ctrl_init();
 
+    //motors_init();
+    //OCR1A = 0xFFFF;
+
     // Enable global interrupts
 	sei();
 
@@ -54,7 +57,8 @@ int main(void)
 		printf_P(PSTR("I AM NOT THE MPU6050\n"));*/
     //motors_set_pwm(MOTOR_RIGHT, 30000);
 
-    DDRA |= _BV(PA7);
+    DDRA |= _BV(PA7) | _BV(PA6) | _BV(PA5) | _BV(PA4);
+
     _led_task.interval = tasks_time_interval_to_task_interval(0.5);
     //_kalman_task.interval = tasks_time_interval_to_task_interval(0.1);
     tasks_add(&_led_task);

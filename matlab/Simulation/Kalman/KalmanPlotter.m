@@ -18,7 +18,7 @@ delay = .0000001;                    % make sure sample faster than resolution
 
 %Define Function Variables
 time = 0;
-data = zeros(8,1);
+data = zeros(5,1);
 count = 0;
 
 %Set up Plot
@@ -43,7 +43,7 @@ plotGraph_THETAM = plot(time,data(2,:),'-r',...
             'MarkerSize',2);        
 title(plotTitle,'FontSize',25);
 xlabel(xLabel1,'FontSize',15);
-ylabel('Meas. Theta','FontSize',15);
+ylabel('Phi','FontSize',15);
 axis([0 10 min max]);
 grid(plotGrid);
 hold off;
@@ -66,7 +66,7 @@ plotGraph_DTHETAM = plot(time,data(4,:),'-m',...
     'MarkerFaceColor','w',...
     'MarkerSize',2);
 xlabel(xLabel2,'FontSize',15);
-ylabel('Meas. dTheta','FontSize',15);
+ylabel('dPhi','FontSize',15);
 axis([0 10 min max]);
 grid(plotGrid);
 
@@ -76,54 +76,55 @@ plotGraph_BIAS = plot(time,data(5,:),'-m',...
             'LineWidth',1,...
             'MarkerFaceColor','w',...
             'MarkerSize',2);
-xlabel(xLabel3,'FontSize',15);
-ylabel(yLabel3,'FontSize',15);
+xlabel('Time (s)','FontSize',15);
+ylabel('Bias','FontSize',15);
 axis([0 10 min max]);
 grid(plotGrid);
 
-hold on;
-subplot(3,3,3);
-plotGraph_PWW = semilogy(time,data(6,:),'-r',...
-            'LineWidth',2,...
-            'MarkerFaceColor','w',...
-            'MarkerSize',2);
-xlabel('Time (s)','FontSize',15);
-ylabel('P_{WW}','FontSize',15);
-axis([0 10 -1 1]);
-grid(plotGrid);
+% hold on;
+% subplot(3,3,3);
+% plotGraph_PWW = semilogy(time,data(6,:),'-r',...
+%             'LineWidth',2,...
+%             'MarkerFaceColor','w',...
+%             'MarkerSize',2);
+% xlabel('Time (s)','FontSize',15);
+% ylabel('P_{WW}','FontSize',15);
+% axis([0 10 -1 1]);
+% grid(plotGrid);
+% 
+% hold on
+% subplot(3,3,6);
+% plotGraph_PTT = semilogy(time,data(7,:),'-m',...
+%             'LineWidth',1,...
+%             'MarkerFaceColor','w',...
+%             'MarkerSize',2);
+% xlabel('Time (s)','FontSize',15);
+% ylabel('P_{TT}','FontSize',15);
+% axis([0 10 -1 1]);
+% grid(plotGrid);
+% 
+% hold on
+% subplot(3,3,9);
+% plotGraph_PBB = semilogy(time,data(8,:),'-m',...
+%             'LineWidth',1,...
+%             'MarkerFaceColor','w',...
+%             'MarkerSize',2);
+% xlabel('Time (s)','FontSize',15);
+% ylabel('P_{BB}','FontSize',15);
+% axis([0 10 -1 1]);
+% grid(plotGrid);
 
-hold on
-subplot(3,3,6);
-plotGraph_PTT = semilogy(time,data(7,:),'-m',...
-            'LineWidth',1,...
-            'MarkerFaceColor','w',...
-            'MarkerSize',2);
-xlabel('Time (s)','FontSize',15);
-ylabel('P_{TT}','FontSize',15);
-axis([0 10 -1 1]);
-grid(plotGrid);
-
-hold on
-subplot(3,3,9);
-plotGraph_PBB = semilogy(time,data(8,:),'-m',...
-            'LineWidth',1,...
-            'MarkerFaceColor','w',...
-            'MarkerSize',2);
-xlabel('Time (s)','FontSize',15);
-ylabel('P_{BB}','FontSize',15);
-axis([0 10 -1 1]);
-grid(plotGrid);
-
+hold off;
 %Open Serial COM Port
 s = serial(serialPort, 'BaudRate', 115200)
 disp('Close Plot to End Session');
 fopen(s);
-
+fprintf(s, 'ctrl mode IMUONLY\n');
 tic
 
 while ishandle(plotGraph_BIAS)  %Loop when Plot is Active
 
-dat = fscanf(s,'T:%f, mT:%f, dT:%f, mdT:%f, B:%f, WW: %f, TT: %f, BB: %f\n'); %Read Data from Serial as Float
+dat = fscanf(s,'T:%f, dT:%f, B:%f, P: %f, dP: %f\n'); %Read Data from Serial as Float
 
 if(~isempty(dat) && isfloat(dat)) %Make sure Data Type is Correct        
     count = count + 1;    
@@ -134,20 +135,20 @@ if(~isempty(dat) && isfloat(dat)) %Make sure Data Type is Correct
     if(scrollWidth > 0)
         set(plotGraph_THETA,'XData',time(time > time(count)-scrollWidth),...
             'YData', data(1,time > time(count)-scrollWidth));
-        set(plotGraph_THETAM,'XData',time(time > time(count)-scrollWidth),...
-            'YData', data(2,time > time(count)-scrollWidth));
         set(plotGraph_DTHETA,'XData',time(time > time(count)-scrollWidth),...
-            'YData', data(3,time > time(count)-scrollWidth));
-        set(plotGraph_DTHETAM,'XData',time(time > time(count)-scrollWidth),...
-            'YData', data(4,time > time(count)-scrollWidth));
+            'YData', data(2,time > time(count)-scrollWidth));
         set(plotGraph_BIAS,'XData',time(time > time(count)-scrollWidth),...
+            'YData', data(3,time > time(count)-scrollWidth));
+        set(plotGraph_THETAM,'XData',time(time > time(count)-scrollWidth),...
+            'YData', data(4,time > time(count)-scrollWidth));
+        set(plotGraph_DTHETAM,'XData',time(time > time(count)-scrollWidth),...
             'YData', data(5,time > time(count)-scrollWidth));
-        set(plotGraph_PWW,'XData',time(time > time(count)-scrollWidth),...
-            'YData', data(6,time > time(count)-scrollWidth));
-        set(plotGraph_PTT,'XData',time(time > time(count)-scrollWidth),...
-            'YData', data(7,time > time(count)-scrollWidth));
-        set(plotGraph_PBB,'XData',time(time > time(count)-scrollWidth),...
-            'YData', data(8,time > time(count)-scrollWidth));
+%         set(plotGraph_PWW,'XData',time(time > time(count)-scrollWidth),...
+%             'YData', data(6,time > time(count)-scrollWidth));
+%         set(plotGraph_PTT,'XData',time(time > time(count)-scrollWidth),...
+%             'YData', data(7,time > time(count)-scrollWidth));
+%         set(plotGraph_PBB,'XData',time(time > time(count)-scrollWidth),...
+%             'YData', data(8,time > time(count)-scrollWidth));
         
         subplot(3,3,1);
         axis([time(count)-scrollWidth time(count) min max]);
@@ -160,19 +161,19 @@ if(~isempty(dat) && isfloat(dat)) %Make sure Data Type is Correct
         subplot(3,3,7);
         axis([time(count)-scrollWidth time(count) min max]);
         
-        subplot(3,3,3);
-        xlim([time(count)-scrollWidth time(count)]);
-        subplot(3,3,6);
-        xlim([time(count)-scrollWidth time(count)]);
-        subplot(3,3,9);
-        xlim([time(count)-scrollWidth time(count)]);
+%         subplot(3,3,3);
+%         xlim([time(count)-scrollWidth time(count)]);
+%         subplot(3,3,6);
+%         xlim([time(count)-scrollWidth time(count)]);
+%         subplot(3,3,9);
+%         xlim([time(count)-scrollWidth time(count)]);
     else
         set(plotGraph_THETA,'XData',time,'YData',data(1,:));
         set(plotGraph_DTHETA,'XData',time,'YData',data(2,:));
         set(plotGraph_BIAS,'XData',time,'YData',data(3,:));
-        set(plotGraph_PWW,'XData',time,'YData',data(4,:));
-        set(plotGraph_PTT,'XData',time,'YData',data(5,:));
-        set(plotGraph_PBB,'XData',time,'YData',data(6,:));
+%         set(plotGraph_PWW,'XData',time,'YData',data(4,:));
+%         set(plotGraph_PTT,'XData',time,'YData',data(5,:));
+%         set(plotGraph_PBB,'XData',time,'YData',data(6,:));
 end
 
     %Allow MATLAB to Update Plot

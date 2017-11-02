@@ -8,6 +8,7 @@
 #include <stdbool.h>
 #include <util/atomic.h>
 
+#include "pend_ctrl.h"
 #include "controller.h"
 #include "encoders.h"
 
@@ -16,7 +17,8 @@
 
 
 static uint32_t ctrl_last_run = 0;
-#ifdef FIXEDPOINT
+
+#ifdef FIXEDPOINT_PENDCTRL
 static int32_t err_int;
 #else
 static float err_int;
@@ -26,7 +28,8 @@ void pend_ctrl_init(void)
 {
 	err_int = 0;
 }
-#ifdef FIXEDPOINT
+
+#ifdef FIXEDPOINT_PENDCTRL
 int32_t pend_ctrl_alloc(states *ctrl_states)
 {
 	int32_t dPhi = (ctrl_states->dPhi_ML + ctrl_states->dPhi_MR)/2;
@@ -54,9 +57,9 @@ void pend_ctrl_run(uint32_t ctrl_count, states *ctrl_states)
 		ctrl_last_run = 0;
 	if ((ctrl_count % pend_interval) == 0 && ctrl_count != ctrl_last_run)
 	{
-		if (ctrl_count - ctrl_last_run <= pend_interval*1.1)
+		PORTA |= _BV(PA5);
+		if (ctrl_count - ctrl_last_run <= pend_interval)
 		{
-			kf_timestep(T_pend, ctrl_states);
 			float Torque = pend_ctrl_alloc(ctrl_states);
 
 			motor_set_torque(MOTOR_LEFT, Torque/2.0);
@@ -65,8 +68,9 @@ void pend_ctrl_run(uint32_t ctrl_count, states *ctrl_states)
 		}
 		else
 		{
-			printf_P(PSTR("ERROR: Pend ctrl lagging, disabling control (LAG: %"PRIu32" counts)\n"), ctrl_count - ctrl_last_run - pend_interval);
-			ctrl_set_mode(CTRL_OFF);
+			//printf_P(PSTR("ERROR: Pend ctrl lagging, disabling control (LAG: %"PRIu32" counts)\n"), ctrl_count - ctrl_last_run - pend_interval);
+			//ctrl_set_mode(CTRL_OFF);
 		}
+		PORTA &= ~_BV(PA5);
 	}
 }

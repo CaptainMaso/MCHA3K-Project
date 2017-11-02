@@ -3,12 +3,12 @@
 
 #include "cmd_parser.h"
 
-//#define FIXEDPOINT
+//#define FIXEDPOINT_STATES
 
 
 typedef struct _states
 {
-#ifdef FIXEDPOINT
+#ifdef FIXEDPOINT_STATES
 	// Pendulum States
 	int32_t Theta;
 	int32_t dTheta;
@@ -20,8 +20,8 @@ typedef struct _states
 	int32_t dPhi_ML;
 	int32_t dPhi_MR;
 
-	float Current_ML;
-	float Current_MR;
+	int16_t Current_ML;
+	int16_t Current_MR;
 
 	// Internal States
 	int32_t Bias;

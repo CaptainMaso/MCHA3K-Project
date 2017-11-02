@@ -1,11 +1,12 @@
 
-static const float T_main = 0.005000;
-static const uint32_t Main_loop_reset = 200;
+static const float T_main = 0.010000;
+static const uint32_t Main_loop_reset = 100;
 
 static const uint32_t pend_interval = 1;
-static const float T_pend = 0.005000;
+static const float T_pend = 0.010000;
 
 static const uint32_t motor_interval = 1;
-static const float T_motor = 0.005000;
-static const uint32_t FP_KALMAN_GAIN = 65536;
+static const float T_motor = 0.010000;
+static const uint16_t K_FP_GAIN = 32768;
+static const int8_t K_FP_BITSHIFT = 15;
 static const float T_KF = 0.010000;

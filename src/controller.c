@@ -55,13 +55,13 @@ void ctrl_init(void)
 	 * 	COM0 0:1 	= Toggle OC0 on CTC match
 	 *	CS 			= Defined by <CSVAL>
 	 */
-	TCCR0 |= _BV(COM00);
+	//TCCR0 |= _BV(COM00);
 	TIMSK |= _BV(OCIE0);
 	ctrl_set_freq(T_main);
 
 	// Parameter Initialisation
 	ctrl_count = 0;
-	ctrl_cur_mode = CTRL_HIL;
+	ctrl_cur_mode = CTRL_OFF;
 
 	motors_init();
 	encoder_init();
@@ -74,10 +74,11 @@ void ctrl_init(void)
 
 	tasks_add(&_state_update_task);
 
-
-	ctrl_set_mode(CTRL_HIL);
+	ctrl_set_mode(CTRL_NORMAL);
+	//motors_set_pwm(MOTOR_LEFT, MAX_PWM/2);
+	//motors_set_pwm(MOTOR_RIGHT, MAX_PWM/2);
 }
-
+static uint16_t last_kalman_run = 0;
 void ctrl_run(void)
 {
 	uint32_t ctrl_count_tmp;
@@ -94,15 +95,41 @@ void ctrl_run(void)
 	{
 	case CTRL_NORMAL:
 	{
-		pend_ctrl_run(ctrl_count_tmp, &ctrl_states);
+		if (ctrl_count_tmp % motor_interval == 0 && ctrl_count_tmp != last_kalman_run)
+		{
 
-		motor_ctrl_run(ctrl_count_tmp, &ctrl_states);
+			kf_timestep(&ctrl_states);
+			last_kalman_run = ctrl_count_tmp;
+			if (ctrl_states.Theta > M_PI/4)
+			{
+				motors_set_pwm(MOTOR_LEFT, 7.0*MAX_PWM/MAX_VOLTAGE);
+				motors_set_pwm(MOTOR_RIGHT, 7.0*MAX_PWM/MAX_VOLTAGE);
+			}
+			else if (ctrl_states.Theta < -M_PI/4)
+			{
+				motors_set_pwm(MOTOR_LEFT, -7.0*MAX_PWM/MAX_VOLTAGE);
+				motors_set_pwm(MOTOR_RIGHT, -7.0*MAX_PWM/MAX_VOLTAGE);
+			}
+			else
+			{
+				motors_set_pwm(MOTOR_LEFT, 0);
+				motors_set_pwm(MOTOR_RIGHT, 0);
+			}
+			//printf_P(PSTR("%"PRIu16"\n"), ctrl_count_tmp);
+		}
+
+		//pend_ctrl_run(ctrl_count_tmp, &ctrl_states);
+		//motor_ctrl_run(ctrl_count_tmp, &ctrl_states);
+
 	} break;
 	case CTRL_HIL:
 		break;
 	case CTRL_IMUONLY:
-		if ((ctrl_count_tmp % pend_interval) == 0)
-			kf_timestep(T_pend, &ctrl_states);
+		if (ctrl_count_tmp % motor_interval == 0)
+			kf_timestep(&ctrl_states);
+		if (ctrl_count % 50 == 0)
+			printf_P(PSTR("T:%.4g, dT:%.4g, B:%g, P: %.4g, dP: %.4g\n"), (float)(ctrl_states.Theta * RAD2DEG), ctrl_states.dTheta*RAD2DEG, ctrl_states.Bias*RAD2DEG,
+																		(ctrl_states.Phi_ML+ctrl_states.Phi_MR)/2.0*RAD2DEG, (ctrl_states.dPhi_ML+ctrl_states.dPhi_MR)/2.0*RAD2DEG);
 		break;
 	case CTRL_OFF:
 	default:
@@ -126,8 +153,11 @@ void ctrl_set_mode(CTRL_MODE state)
 		motors_set_pwm(MOTOR_RIGHT, 0);
 		//No break deliberate
 	case CTRL_NORMAL:
-		_state_update_task.enabled = true;
 		TCCR0 |= CSVAL;
+		kf_init();
+		ctrl_states.Theta = imu_get_atanTheta();
+		_state_update_task.enabled = true;
+		ctrl_count = 0;
 		break;
 	case CTRL_HIL:
 		TCCR0 &= ~CSVAL;
@@ -214,7 +244,7 @@ CMD_STATUS ctrl_cmd(int argc, const char *argv[])
 			return CMD_OK;
 		}
 	}
-#ifdef FIXEDPOINT
+#ifdef FIXEDPOINT_STATES
 	else if (!strcmp_P(argv[0], PSTR("run")) && argc == 2)
 	{
 		if (!strcmp_P(argv[1], PSTR("ML")))
@@ -231,7 +261,7 @@ CMD_STATUS ctrl_cmd(int argc, const char *argv[])
 		}
 		else if (!strcmp_P(argv[1], PSTR("PEND")))
 		{
-			kf_timestep(T_pend, &ctrl_states);
+			kf_timestep(&ctrl_states);
 			float tmp = pend_ctrl_alloc(&ctrl_states);
 			printf_P(PSTR("%g\n"), (float)tmp);
 			return CMD_OK;
@@ -264,31 +294,31 @@ CMD_STATUS ctrl_cmd(int argc, const char *argv[])
 		if (!strcmp_P(argv[1], PSTR("vref")))
 		{
 			float tmp = atof(argv[2]);
-			ctrl_states.Vref = (int32_t)(tmp * FP_KALMAN_GAIN);
+			ctrl_states.Vref = (int16_t)(tmp * K_FP_GAIN);
 			return CMD_OK;
 		}
 		else if (!strcmp_P(argv[1], PSTR("theta")))
 		{
 			float tmp = atof(argv[2]);
-			ctrl_states.Theta = (int32_t)(tmp * FP_KALMAN_GAIN);
+			ctrl_states.Theta = (int32_t)(tmp *K_FP_GAIN);
 			return CMD_OK;
 		}
 		else if (!strcmp_P(argv[1], PSTR("dtheta")))
 		{
 			float tmp = atof(argv[2]);
-			ctrl_states.dTheta = (int32_t)(tmp * FP_KALMAN_GAIN);
+			ctrl_states.dTheta = (int32_t)(tmp *K_FP_GAIN);
 			return CMD_OK;
 		}
 		else if (!strcmp_P(argv[1], PSTR("phi")))
 		{
 			float tmp = atof(argv[2]);
-			ctrl_states.Phi_ML = ctrl_states.Phi_MR = (int32_t)(tmp * FP_KALMAN_GAIN);
+			ctrl_states.Phi_ML = ctrl_states.Phi_MR = (int32_t)(tmp *K_FP_GAIN);
 			return CMD_OK;
 		}
 		else if (!strcmp_P(argv[1], PSTR("dphi")))
 		{
 			float tmp = atof(argv[2]);
-			ctrl_states.dPhi_ML = ctrl_states.dPhi_MR = (int32_t)(tmp * FP_KALMAN_GAIN);
+			ctrl_states.dPhi_ML = ctrl_states.dPhi_MR = (int32_t)(tmp *K_FP_GAIN);
 			return CMD_OK;
 		}
 	}
@@ -296,37 +326,37 @@ CMD_STATUS ctrl_cmd(int argc, const char *argv[])
 	{
 		if (!strcmp_P(argv[1], PSTR("vref")))
 		{
-			printf_P(PSTR("vref: %g\n"), (float)ctrl_states.Vref/FP_KALMAN_GAIN);
+			printf_P(PSTR("vref: %g\n"), (float)ctrl_states.Vref/(float)K_FP_GAIN);
 			return CMD_OK;
 		}
 		else if (!strcmp_P(argv[1], PSTR("theta")))
 		{
-			printf_P(PSTR("theta: %g\n"), (float)ctrl_states.dTheta/FP_KALMAN_GAIN);
+			printf_P(PSTR("theta: %g\n"), (float)ctrl_states.dTheta/(float)K_FP_GAIN);
 			return CMD_OK;
 		}
 		else if (!strcmp_P(argv[1], PSTR("dtheta")))
 		{
-			printf_P(PSTR("dtheta: %g\n"), (float)ctrl_states.dTheta/FP_KALMAN_GAIN);
+			printf_P(PSTR("dtheta: %g\n"), (float)ctrl_states.dTheta/(float)K_FP_GAIN);
 			return CMD_OK;
 		}
 		else if (!strcmp_P(argv[1], PSTR("phi")))
 		{
-			printf_P(PSTR("phi: %g\n"), (float)(ctrl_states.Phi_ML + ctrl_states.Phi_MR)/2.0/FP_KALMAN_GAIN);
+			printf_P(PSTR("phi: %g\n"), (float)(ctrl_states.Phi_ML + ctrl_states.Phi_MR)/2.0/(float)K_FP_GAIN);
 			return CMD_OK;
 		}
 		else if (!strcmp_P(argv[1], PSTR("dphi")))
 		{
-			printf_P(PSTR("dphi: %g\n"), (float)(ctrl_states.dPhi_ML + ctrl_states.dPhi_MR)/2.0/FP_KALMAN_GAIN);
+			printf_P(PSTR("dphi: %g\n"), (float)(ctrl_states.dPhi_ML + ctrl_states.dPhi_MR)/2.0/(float)K_FP_GAIN);
 			return CMD_OK;
 		}
 		else if (!strcmp_P(argv[1], PSTR("current")))
 		{
-			printf_P(PSTR("Current: %g\n"), (float)(ctrl_states.Current_ML + ctrl_states.Current_MR)/2.0/FP_KALMAN_GAIN);
+			printf_P(PSTR("Current: %g\n"), (float)(ctrl_states.Current_ML + ctrl_states.Current_MR)/2.0/(float)K_FP_GAIN);
 			return CMD_OK;
 		}
 		else if (!strcmp_P(argv[1], PSTR("bias")))
 		{
-			printf_P(PSTR("bias: %g\n"), (float)ctrl_states.Bias/FP_KALMAN_GAIN);
+			printf_P(PSTR("bias: %g\n"), (float)ctrl_states.Bias/(float)K_FP_GAIN);
 			return CMD_OK;
 		}
 		else if (!strcmp_P(argv[1], PSTR("states")))
@@ -342,45 +372,68 @@ CMD_STATUS ctrl_cmd(int argc, const char *argv[])
 		{
 			int32_t tmp = motor_ctrl_alloc(MOTOR_LEFT, &ctrl_states);
 			printf_P(PSTR("%g\n"), (float)tmp*MAX_VOLTAGE/MAX_PWM);
+			motors_set_pwm(MOTOR_LEFT, tmp);
 			return CMD_OK;
 		}
 		else if (!strcmp_P(argv[1], PSTR("MR")))
 		{
 			int32_t tmp = motor_ctrl_alloc(MOTOR_RIGHT, &ctrl_states);
 			printf_P(PSTR("%g\n"), (float)tmp*MAX_VOLTAGE/MAX_PWM);
+			motors_set_pwm(MOTOR_RIGHT, tmp);
 			return CMD_OK;
 		}
 		else if (!strcmp_P(argv[1], PSTR("PEND")))
 		{
 			float tmp = pend_ctrl_alloc(&ctrl_states);
 			printf_P(PSTR("%g\n"), (float)tmp);
+#ifdef FIXEDPOINT_MOTORCTRL
+			motor_set_torque(MOTOR_LEFT, tmp/2 * K_FP_GAIN);
+			motor_set_torque(MOTOR_RIGHT, tmp/2 * K_FP_GAIN);
+#else
+			motor_set_torque(MOTOR_LEFT, tmp/2);
+			motor_set_torque(MOTOR_RIGHT, tmp/2);
+#endif
 			return CMD_OK;
 		}
 		else if (!strcmp_P(argv[1], PSTR("KFTIME")))
 		{
-			kf_timestep(T_pend, &ctrl_states);
+			kf_timestep(&ctrl_states);
+			printf_P(PSTR("%g\n"), ctrl_states.Theta);
 			return CMD_OK;
 		}
 	}
 	else if (!strcmp_P(argv[0], PSTR("correct")) && argc == 3)
 	{
-		if (!strcmp_P(argv[1], PSTR("theta")))
+		if (!strcmp_P(argv[1], PSTR ("theta")))
 		{
 			float tmp = atof(argv[2]);
+#ifndef FIXEDPOINT_KALMAN
 			kf_acccorrection(tmp, &ctrl_states);
+#else
+			kf_acccorrection((int32_t)tmp*K_FP_GAIN, &ctrl_states);
+#endif
 			return CMD_OK;
 		}
 		else if (!strcmp_P(argv[1], PSTR("dtheta")))
 		{
 			float tmp = atof(argv[2]);
+#ifndef FIXEDPOINT_KALMAN
 			kf_gyrocorrection(tmp, &ctrl_states);
+#else
+			kf_gyrocorrection((int32_t)tmp*K_FP_GAIN, &ctrl_states);
+#endif
 			return CMD_OK;
 		}
 		else if (!strcmp_P(argv[1], PSTR("phi")))
 		{
 			float tmp = atof(argv[2]);
+#ifndef FIXEDPOINT_KALMAN
 			kf_enccorrection(MOTOR_LEFT, tmp, &ctrl_states);
 			kf_enccorrection(MOTOR_RIGHT, tmp, &ctrl_states);
+#else
+			kf_enccorrection(MOTOR_LEFT, (int32_t)tmp*K_FP_GAIN, &ctrl_states);
+			kf_enccorrection(MOTOR_RIGHT, (int32_t)tmp*K_FP_GAIN, &ctrl_states);
+#endif
 			return CMD_OK;
 		}
 	}
@@ -414,6 +467,18 @@ CMD_STATUS ctrl_cmd(int argc, const char *argv[])
 		{
 			float tmp = atof(argv[2]);
 			ctrl_states.dPhi_ML = ctrl_states.dPhi_MR = tmp;
+			return CMD_OK;
+		}
+		else if (!strcmp_P(argv[1], PSTR("cur_ML")))
+		{
+			float tmp = atof(argv[2]);
+			ctrl_states.Current_ML = tmp;
+			return CMD_OK;
+		}
+		else if (!strcmp_P(argv[1], PSTR("cur_MR")))
+		{
+			float tmp = atof(argv[2]);
+			ctrl_states.Current_MR = tmp;
 			return CMD_OK;
 		}
 	}
