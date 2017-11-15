@@ -9,9 +9,9 @@
 #include "controller.h"
 
 #define MAX_VOLTAGE 12.0f
-#define MAX_PWM 0xFFFF
+#define MAX_PWM 65535
 
-#define ADC2CUR (512.0/5)
+#define ADC2CUR (0.5/255)
 
 //#define FIXEDPOINT_MOTORCTRL
 
@@ -33,7 +33,7 @@ void motor_adc_isr(void);
 
 void motor_ctrl_run(uint32_t, states*);
 
-int32_t motor_ctrl_alloc(MOTOR_SIDE, states*);
+float motor_ctrl_alloc(MOTOR_SIDE, states*);
 
 #ifdef FIXEDPOINT_MOTORCTRL
 void motor_set_torque(MOTOR_SIDE, int32_t);
@@ -41,9 +41,10 @@ void motor_set_torque(MOTOR_SIDE, int32_t);
 void motor_set_torque(MOTOR_SIDE, float);
 #endif
 
+void motors_set_voltage(MOTOR_SIDE, float);
 void motors_set_pwm(MOTOR_SIDE, int32_t);
 int32_t motors_get_pwm(MOTOR_SIDE);
 
-int16_t motors_get_adc_reading(MOTOR_SIDE);
+float motors_get_adc_reading(MOTOR_SIDE);
 
 #endif /* SRC_MOTORS_H_ */

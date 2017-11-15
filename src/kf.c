@@ -296,17 +296,20 @@ void kf_init(void)
 void kf_correct(states *curState)
 {
 	mpu6050_getRawData(&_ax, &_ay, &_az, &_gx, &_gy, &_gz);
-	_gy += 2621;
+	//mpu6050_readBytes(MPU6050_RA_GYRO_YOUT_H, 2, (uint8_t *)(&_gy));
+	//mpu6050_readBytes(MPU6050_RA_ACCEL_XOUT_H, 2, (uint8_t *)(&_ax));
+	//mpu6050_readBytes(MPU6050_RA_ACCEL_ZOUT_H, 2, (uint8_t *)(&_az));
+
 	kf_gyrocorrection((float)-_gy*GY2RAD, curState);
 	kf_acccorrection(imu_get_atanTheta(), curState);
 	kf_enccorrection(MOTOR_LEFT, encoder_get_count(MOTOR_LEFT)*2*M_PI/CPR, curState);
-	kf_enccorrection(MOTOR_RIGHT, -encoder_get_count(MOTOR_RIGHT)*2*M_PI/CPR,curState);
+	kf_enccorrection(MOTOR_RIGHT, encoder_get_count(MOTOR_RIGHT)*2*M_PI/CPR,curState);
 }
 
 void kf_timestep(states *curState)
 {
 	//State Update
-	PORTA |= _BV(PA6);
+
 	curState->Theta 	= T_TS*curState->dTheta + curState->Theta;
 	//curState->dTheta 	= curState->dTheta;
 	//curState->Bias 		= curState->Bias;
@@ -335,7 +338,7 @@ void kf_timestep(states *curState)
 	P_n.SS_R = P.SS_R + T_TS * K_qs;
 
 	P = P_n;
-	PORTA &= ~(_BV(PA6));
+	//PORTA &= ~(_BV(PA6));
 }
 
 void kf_gyrocorrection(float yw, states *curState)

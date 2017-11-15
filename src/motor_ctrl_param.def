@@ -4,51 +4,51 @@
  *	MOTOR LEFT DATA
 */
 static const int32_t K_ML_int = 0;
-static const int32_t K_ML_V = 613;
-static const int32_t K_ML_OUT = -1780870;
-static const int32_t ML_HFG = 32222;
-static const int32_t ML_T2C = 143154;
-static const int32_t ML_OFFS_POS = 4509;
-static const int32_t ML_OFFS_NEG = 4509;
+static const int32_t K_ML_V = 140;
+static const int32_t K_ML_OUT = -1854352;
+static const int32_t ML_HFG = 135441;
+static const int32_t ML_T2C = 198531;
+static const int32_t ML_OFFS_POS = 2165;
+static const int32_t ML_OFFS_NEG = 2034;
 
 
 /*
  *	MOTOR RIGHT DATA
 */
 static const int32_t K_MR_int = 0;
-static const int32_t K_MR_V = 613;
-static const int32_t K_MR_OUT = -1780870;
-static const int32_t MR_HFG = 32222;
-static const int32_t MR_T2C = 104025;
-static const int32_t MR_OFFS_POS = 3277;
-static const int32_t MR_OFFS_NEG = 3277;
+static const int32_t K_MR_V = 130;
+static const int32_t K_MR_OUT = -1854352;
+static const int32_t MR_HFG = 146364;
+static const int32_t MR_T2C = 177588;
+static const int32_t MR_OFFS_POS = 1939;
+static const int32_t MR_OFFS_NEG = 2000;
 
 #else
 /*
  *	MOTOR LEFT DATA
 */
 static const float K_ML_int = 0.000000;
-static const float K_ML_V = 0.018712;
-static const float K_ML_OUT = -54.347826;
-static const float ML_HFG = 0.983333;
-static const float ML_T2C = 4.368720;
-static const float ML_OFFS_POS = 0.137615;
-static const float ML_OFFS_NEG = 0.137615;
-static const float ML_KN = 0.327000;
-static const float ML_R = 2.950000;
+static const float K_ML_V = 0.004275;
+static const float K_ML_OUT = -56.590339;
+static const float ML_HFG = 4.133333;
+static const float ML_T2C = 6.058681;
+static const float ML_OFFS_POS = 0.066072;
+static const float ML_OFFS_NEG = 0.062086;
+static const float ML_KN = 0.281732;
+static const float ML_R = 6.200000;
 
 
 /*
  *	MOTOR RIGHT DATA
 */
 static const float K_MR_int = 0.000000;
-static const float K_MR_V = 0.018712;
-static const float K_MR_OUT = -54.347826;
-static const float MR_HFG = 0.983333;
-static const float MR_T2C = 3.174603;
-static const float MR_OFFS_POS = 0.100000;
-static const float MR_OFFS_NEG = 0.100000;
-static const float MR_KN = 0.450000;
-static const float MR_R = 2.950000;
+static const float K_MR_V = 0.003956;
+static const float K_MR_OUT = -56.590339;
+static const float MR_HFG = 4.466667;
+static const float MR_T2C = 5.419560;
+static const float MR_OFFS_POS = 0.059169;
+static const float MR_OFFS_NEG = 0.061037;
+static const float MR_KN = 0.277129;
+static const float MR_R = 6.700000;
 
 #endif

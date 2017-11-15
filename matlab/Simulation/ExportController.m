@@ -70,15 +70,15 @@ function ExportChassisCtrl(Chassis_ctrl, K_BITSHIFT)
         fprintf(FID, 'static const int32_t K_dTheta = %d;\n', round(K_dTheta*K_FP_GAIN));
         fprintf(FID, 'static const int32_t K_dPhi = %d;\n', round(K_dPhi*K_FP_GAIN));
         fprintf(FID, '\n#else');
-        fprintf(FID, '\nstatic const float Kerr_int = %f;\n', round(Kerr_int, 6));
-        fprintf(FID, 'static const float Kerr_dTheta = %f;\n', round(Kerr_dTheta, 6));
-        fprintf(FID, 'static const float Kerr_dPhi = %f;\n', round(Kerr_dPhi, 6));
-        fprintf(FID, 'static const float Kerr_Vref = %f;\n\n', round(Kerr_Vref, 6));
+        fprintf(FID, '\nstatic const float Kerr_int = %f;\n', round(Kerr_int, 8));
+        fprintf(FID, 'static const float Kerr_dTheta = %f;\n', round(Kerr_dTheta, 8));
+        fprintf(FID, 'static const float Kerr_dPhi = %f;\n', round(Kerr_dPhi, 8));
+        fprintf(FID, 'static const float Kerr_Vref = %f;\n\n', round(Kerr_Vref, 8));
         
-        fprintf(FID, 'static const float K_int = %f;\n', round(K_int, 6));
-        fprintf(FID, 'static const float K_Theta = %f;\n', round(K_Theta, 6));
-        fprintf(FID, 'static const float K_dTheta = %f;\n', round(K_dTheta, 6));
-        fprintf(FID, 'static const float K_dPhi = %f;\n', round(K_dPhi, 6));
+        fprintf(FID, 'static const float K_int = %f;\n', round(K_int, 8));
+        fprintf(FID, 'static const float K_Theta = %f;\n', round(K_Theta, 8));
+        fprintf(FID, 'static const float K_dTheta = %f;\n', round(K_dTheta, 8));
+        fprintf(FID, 'static const float K_dPhi = %f;\n', round(K_dPhi, 8));
         fprintf(FID, '\n#endif');
         fclose(FID);
     else
@@ -129,7 +129,7 @@ function ExportMotorCtrl(K_BITSHIFT, ML_ctrl, ML_PARAM, MR_ctrl, MR_PARAM)
             % MOTOR LEFT
             fprintf(FID, '\n/*\n *\tMOTOR LEFT DATA\n*/\n');
 
-            fprintf(FID, 'static const float K_ML_int = %.6f;\n', K_ML_int);
+            fprintf(FID, 'static const float K_ML_int = %f;\n', K_ML_int);
             fprintf(FID, 'static const float K_ML_V = %.6f;\n', K_ML_V);
             fprintf(FID, 'static const float K_ML_OUT = %.6f;\n', K_ML_OUT);
             fprintf(FID, 'static const float ML_HFG = %.6f;\n', ML_PARAM.HFG);
@@ -143,7 +143,7 @@ function ExportMotorCtrl(K_BITSHIFT, ML_ctrl, ML_PARAM, MR_ctrl, MR_PARAM)
             % MOTOR LEFT
             fprintf(FID, '\n\n/*\n *\tMOTOR RIGHT DATA\n*/\n');
 
-            fprintf(FID, 'static const float K_MR_int = %.6f;\n', K_MR_int);
+            fprintf(FID, 'static const float K_MR_int = %f;\n', K_MR_int);
             fprintf(FID, 'static const float K_MR_V = %.6f;\n', K_MR_V);
             fprintf(FID, 'static const float K_MR_OUT = %.6f;\n', K_MR_OUT);
             fprintf(FID, 'static const float MR_HFG = %.6f;\n', MR_PARAM.HFG);

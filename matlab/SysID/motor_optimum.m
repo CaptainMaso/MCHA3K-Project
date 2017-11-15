@@ -13,16 +13,12 @@ ADC_RESISTOR = 0.1;
 GearRatio = 30;
 
 %% Free Test
-ML_free =  {'Motor - Free Run/LEFT_1.csv'; 'Motor - Free Run/LEFT_2.csv'};
-MR_free = {'Motor - Free Run/RIGHT_1.csv'; 'Motor - Free Run/RIGHT_2.csv'};
 
-[ML_R0, ML_L0, ML_K0] = motor_freerun(ML_free);
-[MR_R0, MR_L0, MR_K0] = motor_freerun(MR_free);
 
+
+ML_R0 = 6.3;
 %% Load Test
-ML_load_150g = {'Motor - Load Run/150g/LEFT_3V.csv';'Motor - Load Run/150g/LEFT_4.5V.csv';'Motor - Load Run/150g/LEFT_6V.csv';'Motor - Load Run/150g/LEFT_8V.csv'};
-ML_load_250g = {'Motor - Load Run/250g/LEFT_5V.csv';'Motor - Load Run/250g/LEFT_6V.csv';'Motor - Load Run/250g/LEFT_7V.csv';'Motor - Load Run/250g/LEFT_8V.csv'};
-ML_load_300g = {'Motor - Load Run/300g/LEFT_5V.csv';'Motor - Load Run/300g/LEFT_6V.csv';'Motor - Load Run/300g/LEFT_8V.csv';'Motor - Load Run/300g/LEFT_10V.csv'};
+ML_load_150g = {'L_8V_50g_FORWARD.csv', 'L_8V_100g_FORWARD.csv', 'L_8V_150g_FORWARD.csv', 'L_8V_200g_FORWARD.csv','L_8V_250g_FORWARD.csv', 'L_8V_300g_FORWARD.csv'};
 
 [ML_Eta_lsqf(1), ML_Tm_lsqf(1)] = motor_loadrun(ML_load_150g, ML_K0, 0.150);
 [ML_Eta_lsqf(2), ML_Tm_lsqf(2)] = motor_loadrun(ML_load_250g, ML_K0, 0.250);

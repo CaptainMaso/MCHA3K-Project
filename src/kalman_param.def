@@ -3,27 +3,27 @@
 
 static const uint32_t GY2RAD = 9;
 
-static const uint32_t K_pw = 1638400;
+static const uint32_t K_pw = 3276800;
 
-static const uint32_t K_pb = 163840000;
+static const uint32_t K_pb = 327680000;
 
-static const uint32_t K_qw = 163840;
+static const uint32_t K_qw = 9830400;
 
-static const uint32_t K_qb = 3;
+static const uint32_t K_qb = 16;
 
-static const uint32_t K_RT_T = 3277;
+static const uint32_t K_RT_T = 6554;
 
-static const uint32_t K_RW_T = 328;
+static const uint32_t K_RW_T = 655;
 
 static const uint32_t K_ps = 32768000;
 
 static const uint32_t K_qs = 163840000;
 
-static const uint32_t K_RP_T = 33;
+static const uint32_t K_RP_T = 66;
 
-static const uint32_t T_KF_FP = 328;
+static const uint32_t T_KF_FP = 164;
 
-static const uint32_t T_TS = 328;
+static const uint32_t T_TS = 164;
 
 static const uint8_t atan_table_len = 10;
 static const uint32_t atan_table[] = {0, 3626, 7165, 10543, 13704, 16617, 19268, 21661, 23811, 25736};
@@ -31,25 +31,25 @@ static const uint32_t atan_table[] = {0, 3626, 7165, 10543, 13704, 16617, 19268,
 
 static const float GY2RAD = 0.000266;
 
-static const float K_pw = 50.000000;
+static const float K_pw = 100.000000;
 
-static const float K_pb = 5000.000000;
+static const float K_pb = 10000.000000;
 
-static const float K_qw = 5.000000;
+static const float K_qw = 300.000000;
 
-static const float K_qb = 0.000100;
+static const float K_qb = 0.000500;
 
-static const float K_RT_T = 0.100000;
+static const float K_RT_T = 0.200000;
 
-static const float K_RW_T = 0.010000;
+static const float K_RW_T = 0.020000;
 
 static const float K_ps = 1000.000000;
 
 static const float K_qs = 5000.000000;
 
-static const float K_RP_T = 0.001000;
+static const float K_RP_T = 0.002000;
 
-static const float T_TS = 0.010000;
+static const float T_TS = 0.005000;
 
 static const uint8_t atan_table_len = 10;
 static const float atan_table[] = {0.000000, 0.110657, 0.218669, 0.321751, 0.418224, 0.507099, 0.588003, 0.661043, 0.726642, 0.785398};

@@ -1,10 +1,11 @@
+run('Chassis_ss.m')
 % Programmable Parameters
-T_motor = 1/100;
-T_pend = 1/100;
+T_motor = 1/200;
+T_pend = 1/200;
 
 T_main = 1/lcm(1/T_pend, 1/T_motor);
 
-T_kfcorr = 1/100;
+T_kfcorr = 1/200;
 
 CPR = 660;
 Vmax = 12;
@@ -28,10 +29,12 @@ chassis_co = ctrb(chassis_sys);
 chassis_controllability = rank(chassis_co);
 
 Chassis_Q = Chassis_Cc.'*Chassis_Cc;
+Chassis_Q(1,1) = 10;
 
-Chassis_R = 2;
+Chassis_R = 10;
 
-Chassis_Kc = lqrd(Chassis_Ac, Chassis_Bc, Chassis_Q, Chassis_R, T_pend);
+%Chassis_Kc = lqrd(Chassis_Ac, Chassis_Bc, Chassis_Q, Chassis_R, T_pend);
+Chassis_Kc = acker(Chassis_Ac, Chassis_Bc, [-10, -8+10i, -8-10i]);
 
 K_Theta = Chassis_Kc(1);
 K_dTheta = Chassis_Kc(2);
@@ -42,6 +45,7 @@ Chassis_Acl = (Chassis_Ac-Chassis_Bc*Chassis_Kc);
 Chassis_Bcl = Chassis_Bc;
 Chassis_Ccl = Chassis_Cc;
 Chassis_Dcl = Chassis_Dc;
+eig(Chassis_Acl)
 
 % States = integrator
 % Inputs = [Theta, dTheta, dPhi, Vref]
@@ -63,25 +67,25 @@ Chassis_ctrl_dss = c2d(Chassis_ctrl_ss, T_pend, 'zoh');
 
 %% DC motor control
 % Motor Left Parameters
-ML_R       = 2.95;        % Armature Resistance (Ohms)
-ML_L       = 2.3e-3;           % Inductance of DC Motor (H)
-ML_K       = 0.0109;        % Motor Constant (N.m/A)
+ML_R       = 6.2;        % Armature Resistance (Ohms)
+ML_L       = 8.62835e-4;           % Inductance of DC Motor (H)
+ML_K       = 0.009391068653512;        % Motor Constant (N.m/A)
 ML_N       = 30;            % Gearbox Ratio
-ML_Eta    = 0.7;  %0.588;   % Gearbox Efficiency (%/100)
-ML_Tm_pos      = 1.5e-3;      % Friction Torque w+ (N.m)
-ML_Tm_neg      = -1.5e-3;      % Friction Torque w- (N.m)
+ML_Eta    = 0.585848927300825;  %0.588;   % Gearbox Efficiency (%/100)
+ML_Tm_pos      = 6.204835339180699e-04;      % Friction Torque w+ (N.m)
+ML_Tm_neg      = -5.830537234675133e-04;      % Friction Torque w- (N.m)
 
 % Motor Right Parameters
-MR_R       = 2.95;        % Armature Resistance (Ohms)
-MR_L       = 2.3e-3;           % Inductance of DC Motor (H)
-MR_K       = 0.015;        % Motor Constant (N.m/A)
+MR_R       = 6.7;        % Armature Resistance (Ohms)
+MR_L       = 8.62835e-4;           % Inductance of DC Motor (H)
+MR_K       = 0.009237618864813;        % Motor Constant (N.m/A)
 MR_N       = 30;            % Gearbox Ratio
-MR_Eta    = 0.7;            % Gearbox Efficiency (%/100)
-MR_Tm_pos      = 1.5e-3;      % Friction Torque w+ (N.m)
-MR_Tm_neg      = -1.5e-3;      % Friction Torque w- (N.m)
+MR_Eta    = 0.665816712746634;            % Gearbox Efficiency (%/100)
+MR_Tm_pos      = 5.465789021845875e-04;      % Friction Torque w+ (N.m)
+MR_Tm_neg      = -5.638334681626818e-04;      % Friction Torque w- (N.m)
 
 % Motor Left
-ML_Tau = ML_L/ML_R*1.5;
+ML_Tau = ML_L/ML_R*1.2;
 ML_Kp = 2*ML_L/ML_Tau - ML_R;
 ML_Ti = ML_L/ML_Tau^2;
 
@@ -97,7 +101,7 @@ ML_OFFS_NEG = ML_Tm_neg/ML_K;
 ML_PARAM = struct('T2C', ML_T2C, 'HFG', ML_HFG, 'OFFS_POS', ML_OFFS_POS, 'OFFS_NEG', ML_OFFS_NEG, 'R', ML_R, 'K', ML_K, 'N', ML_N);
 
 % Motor Right
-MR_Tau = MR_L/MR_R*1.5;
+MR_Tau = MR_L/MR_R*1.2;
 MR_Kp = 2*MR_L/MR_Tau - MR_R;
 MR_Ti = MR_L/MR_Tau^2;
 

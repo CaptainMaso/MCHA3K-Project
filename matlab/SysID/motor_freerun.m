@@ -1,118 +1,166 @@
-function [R, L, K] = motor_freerun(data)
-    %% Params
-    global T CPR ADC_GAIN ADC_MAX ADC_VREF ADC_RESISTOR Vmax;
-    
-    N = 17;
+%% Params
+global ADC_GAIN ADC_MAX ADC_VREF ADC_RESISTOR;
+CPR = 660;
+LOWDATA = 100;
+HIGHDATA = 400;
 
-    LOWDATA = 100;
-    HIGHDATA = 4000;
+T = 1/100;
 
-    t = zeros(HIGHDATA - LOWDATA - 2*N + 1, size(data,1));
-    
-    V = zeros(HIGHDATA - LOWDATA - 2*N + 1, size(data,1));
-    
-    THETA = zeros(HIGHDATA - LOWDATA - 2*N + 1, size(data,1));
-    DTHETA = zeros(HIGHDATA - LOWDATA - 2*N + 1, size(data,1));
-    DDTHETA = zeros(HIGHDATA - LOWDATA - 2*N + 1, size(data,1));
+%%
+ML_R = 6.2;
+ML_N = 30;
 
-    CURRENT = zeros(HIGHDATA - LOWDATA - 2*N + 1, size(data,1));
-    DCURRENT = zeros(HIGHDATA - LOWDATA - 2*N + 1, size(data,1));
-    
-    for i = 1:size(data,1)
-        %% Get Data
-        [t_tmp,v_tmp,ENC,ADC] = import_motor_free(data{i}, LOWDATA, HIGHDATA);
+[~,Encoder,ADC] = load_freerun('Motor - Free Run/LEFT_FORWARD.csv', LOWDATA, HIGHDATA);
 
-        %% Format Data
-        theta_tmp = ENC * 2 * pi/CPR;
-        cur_tmp = ADC*ADC_VREF/ADC_GAIN/ADC_MAX/ADC_RESISTOR/2;
-        v_tmp = Vmax.*sqrt(abs(v_tmp/Vmax)).*sign(v_tmp);
+phi = abs(Encoder/CPR * 2 * pi);
 
-        %% Get Derivatives
-        [theta_tmp, dtheta_tmp, ddtheta_tmp] = quadraticSavitzkyGolay(theta_tmp',T,N);  
-        V(:, i) = v_tmp(N+1:end-N);
-        THETA(:, i) = theta_tmp(N+1:end-N)';
-        DTHETA(:, i) = dtheta_tmp(N+1:end-N)';
-        DDTHETA(:, i) = ddtheta_tmp(N+1:end-N)';
+[~, DTHETA, ~] = quadraticSavitzkyGolay(phi',T,17);  
+DTHETA = DTHETA(17+1:end-17)';
+CURRENT = abs(ADC(17+1:end-17));
 
-        [cur_tmp,dcur_tmp, ~] = quadraticSavitzkyGolay(cur_tmp',T,N);  
-        CURRENT(:, i) = cur_tmp(N+1:end-N)';
-        DCURRENT(:, i) = dcur_tmp(N+1:end-N)';
+w = mean(DTHETA);
+i = mean(CURRENT);
 
-        t(:, i) = t_tmp(N+1:end-N);
-        t(:, i) = t(:, i) - t(1, i);
-    end
+ML_K_F = (8-ML_R*i)/(ML_N*w);
+ML_Tm_pos = i*ML_K_F;
 
-    %% Parameter Estimation
-    for i = 1:size(data, 1)
-        [Rlsq(i), Llsq(i), Klsq(i)] = motor_free_lsqf(V(:, i), CURRENT(:, i), DCURRENT(:, i), DTHETA(:, i));
-    end
-    
-    L = mean(Llsq);
-    R = mean(Rlsq);
-    K = mean(Klsq);
-    
-    if (L < 0 && R < 0 && K < 0)
-        L = L*-1;
-        R = R*-1;
-        K = K*-1;
-    end
-%     %% Save Data
-%     figure;
-%     subplot(6,1,1);
-%     plot(t, V);
-%     title([Title, ': V_{RMS}']);
-%     ylabel('Voltage (V)');
-%     xlim([0 max(t(:))]);
-%     grid on;
-% 
-% %     subplot(6, 1,2);
-% %     plot(t, THETA);
-% %     title([Title, ': Position']);
-% %     ylabel('Position (rads)');
-% %     xlim([0 max(t(:))]);
-% %     grid on;
-% 
-%     subplot(5,1,2);
-%     plot(t, DTHETA);
-%     title([Title, ': Velocity']);
-%     ylabel('Velocity (rads/s)');
-%     xlim([0 max(t(:))]);
-%     grid on;
-%     
-%     subplot(5,1,3);
-%     plot(t, DDTHETA);
-%     title([Title, ': Acceleration']);
-%     ylabel('Acceleration (rads/s^2)');
-%     xlim([0 max(t(:))]);
-%     grid on;
-% 
-%     subplot(5,1,4);
-%     plot(t, CURRENT*10^3);
-%     title([Title, ': Current']);
-%     ylabel('Current (mA)');
-%     xlim([0 max(t(:))]);
-%     grid on;
-% 
-%     subplot(5,1,5);
-%     plot(t, DCURRENT);
-%     title([Title, ': Current/s']);
-%     ylabel('Current (A/s)');
-%     xlim([0 max(t(:))]);
-%     grid on;
+%%
+[~,Encoder,ADC] = load_freerun('Motor - Free Run/LEFT_BACKWARD.csv', LOWDATA, HIGHDATA);
+
+phi = abs(Encoder/CPR * 2 * pi);
+
+[~, DTHETA, ~] = quadraticSavitzkyGolay(phi',T,17);  
+DTHETA = DTHETA(17+1:end-17)';
+CURRENT = abs(ADC(17+1:end-17));
+
+w = mean(DTHETA);
+i = mean(CURRENT);
+
+ML_K_B = (8-ML_R*i)/(ML_N*w);
+
+ML_Tm_neg = i*ML_K_B;
+
+ML_K = (ML_K_F+ML_K_B)/2;
+
+%%
+LOWDATA = 100;
+HIGHDATA = 400;
+
+data = {'Motor - Load Run/L_8V_50g_FORWARD.csv', 'Motor - Load Run/L_8V_100g_FORWARD.csv', 'Motor - Load Run/L_8V_150g_FORWARD.csv','Motor - Load Run/L_8V_200g_FORWARD.csv', 'Motor - Load Run/L_8V_250g_FORWARD.csv', 'Motor - Load Run/L_8V_300g_FORWARD.csv'};
+m = [50, 100, 150, 200, 250, 300]*10^-3;
+
+for j = 1:6
+    [~, ~,~,~,ADC] = import_motor_load(data{j}, LOWDATA, HIGHDATA);
+    To = m(j)*9.81*(25.5e-3);
+    i = mean(abs(ADC/10));
+    Eta(j) = To/(ML_N*(ML_K*i + ML_Tm_pos));
 end
 
-function [R, L, K] = motor_free_lsqf(V, i, di, w, d)
-    global GearRatio;
-    %% KVL equation LSQR
-    % V = R*i + L *di + K*N*w
-    % di = (V - R*i -K*N*w)/L
+ML_Eta_f = mean(Eta);
 
-    Y = V;
-    Phi = [i, di, GearRatio*w];
-    % Theta = [1/L; R/L; K/L]
+%%
+LOWDATA = 100;
+HIGHDATA = 400;
 
-    Theta = lsqr(Phi, Y);
-    R = Theta(1);
-    L = Theta(2);
-    K = Theta(3);
+data = {'Motor - Load Run/L_8V_50g_BACK.csv', 'Motor - Load Run/L_8V_100g_BACK.csv', 'Motor - Load Run/L_8V_150g_BACK.csv','Motor - Load Run/L_8V_200g_BACK.csv', 'Motor - Load Run/L_8V_250g_BACK.csv', 'Motor - Load Run/L_8V_300g_BACK.csv'};
+m = [50, 100, 150, 200, 250, 300]*10^-3;
+
+for j = 1:6
+    [~, ~,~,~,ADC] = import_motor_load(data{j}, LOWDATA, HIGHDATA);
+    To = m(j)*9.81*(25.5e-3);
+    i = mean(abs(ADC/10));
+    Eta(j) = To/(ML_N*(ML_K*i + ML_Tm_neg));
 end
+
+ML_Eta_b = mean(Eta);
+ML_Eta = (ML_Eta_f+ML_Eta_b)/2;
+
+%%
+MR_R = 6.7;
+MR_N = 30;
+
+[~,Encoder,ADC] = load_freerun('Motor - Free Run/RIGHT_FORWARD.csv', LOWDATA, HIGHDATA);
+
+phi = abs(Encoder/CPR * 2 * pi);
+
+[~, DTHETA, ~] = quadraticSavitzkyGolay(phi',T,17);  
+DTHETA = DTHETA(17+1:end-17)';
+CURRENT = abs(ADC(17+1:end-17));
+
+w = mean(DTHETA);
+i = mean(CURRENT);
+
+MR_K_F = (8-MR_R*i)/(MR_N*w);
+MR_Tm_pos = i*MR_K_F;
+
+%%
+[~,Encoder,ADC] = load_freerun('Motor - Free Run/RIGHT_BACKWARD.csv', LOWDATA, HIGHDATA);
+
+phi = abs(Encoder/CPR * 2 * pi);
+
+[~, DTHETA, ~] = quadraticSavitzkyGolay(phi',T,17);  
+DTHETA = DTHETA(17+1:end-17)';
+CURRENT = abs(ADC(17+1:end-17));
+
+w = mean(DTHETA);
+i = mean(CURRENT);
+
+MR_K_B = (8-MR_R*i)/(MR_N*w);
+
+MR_Tm_neg = i*MR_K_B;
+
+MR_K = (MR_K_F+MR_K_B)/2;
+
+%%
+LOWDATA = 100;
+HIGHDATA = 400;
+
+data = {'Motor - Load Run/R_8V_50g_FORWARD.csv', 'Motor - Load Run/R_8V_100g_FORWARD.csv', 'Motor - Load Run/R_8V_150g_FORWARD.csv','Motor - Load Run/R_8V_200g_FORWARD.csv', 'Motor - Load Run/R_8V_250g_FORWARD.csv', 'Motor - Load Run/R_8V_300g_FORWARD.csv'};
+m = [50, 100, 150, 200, 250, 300]*10^-3;
+
+for j = 1:6
+    [~, ~,~,~,ADC] = import_motor_load(data{j}, LOWDATA, HIGHDATA);
+    To = m(j)*9.81*(25.5e-3);
+    i = mean(abs(ADC/10));
+    Eta(j) = To/(MR_N*(MR_K*i + MR_Tm_pos));
+end
+
+MR_Eta_f = mean(Eta);
+
+%%
+LOWDATA = 100;
+HIGHDATA = 400;
+
+data = {'Motor - Load Run/R_8V_50g_BACK.csv', 'Motor - Load Run/R_8V_100g_BACK.csv', 'Motor - Load Run/R_8V_150g_BACK.csv','Motor - Load Run/R_8V_200g_BACK.csv', 'Motor - Load Run/R_8V_250g_BACK.csv', 'Motor - Load Run/R_8V_300g_BACK.csv'};
+m = [50, 100, 150, 200, 250, 300]*10^-3;
+
+for j = 1:6
+    [~, ~,~,~,ADC] = import_motor_load(data{j}, LOWDATA, HIGHDATA);
+    To = m(j)*9.81*(25.5e-3);
+    i = mean(abs(ADC/10));
+    Eta(j) = To/(MR_N*(MR_K*i + MR_Tm_neg));
+end
+
+MR_Eta_b = mean(Eta);
+
+MR_Eta = (MR_Eta_f+MR_Eta_b)/2;
+%%
+ML_R
+ML_K
+ML_N
+ML_Eta
+ML_Tm_pos
+ML_Tm_neg
+
+MR_R
+MR_K
+MR_N
+MR_Eta
+MR_Tm_pos
+MR_Tm_neg
+
+
+
+
+
+

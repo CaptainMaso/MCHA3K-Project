@@ -148,11 +148,14 @@ avr: clean_avr
 	avr-size $(TARGET_ELF)
 	avr-objcopy -j .text -j .data -O ihex $(TARGET_ELF) $(TARGET_HEX)
 	
+reboot:
+	./$(DTREXE) $(PORT) LOW 8
+	
 program: reboot
 	avrdude -p atmega32 -c avr109 -P $(PORT) -b 115200 -u -U flash:w:$(TARGET_HEX)
 	
-reboot:
-	./$(DTREXE) $(PORT) LOW 8
+	
+avr_only: avr program
 
 test: clean_test
 	gcc $(CFLAGS) $(INC_TEST) $(SYMBOLS) $(SRC_TEST) -o $(TARGET_TEST) $(MISC_TEST)

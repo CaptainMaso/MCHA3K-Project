@@ -1,16 +1,11 @@
 %% Get Parameters
-% Physical World Parameters
-g = 9.81;           % Acceleration due to gravity (m/s/s)
-alpha = 0*pi/180;   % Ground slope (rad = deg*pi/180)
-
 % Initial Conditions & other sim params
-theta0 = 10 * pi/180;    % Initial Theta
+theta0 = 2 * pi/180;    % Initial Theta
 
-tsim = 30;              % Simulation Time (s)
+tsim = 20;              % Simulation Time (s)
 vref_step_point = 500e-3;  % Set point of vref (m/s)
-inpdist_step_point = 50e-3;
+inpdist_step_point = 100e-3;
 
-run('Chassis_ss.m')
 run('ControllerDesign.m')
 
 %% Simulation
@@ -21,8 +16,9 @@ fopen(port);
 
 if port ~= -1
     fprintf(port, 'ctrl mode HIL\n');
-    fprintf(port, 'ctrl set theta %f\n', theta0 + (rand(1)-0.5)*0.02);
+    fprintf(port, 'ctrl set theta %f\n', theta0 + (rand(1)-0.5)*0.002);
     sim('model_hil');
+    %fprintf(port, 'ctrl mode OFF\n');
     fprintf('Closed Port\n');
     fclose(port);
 end
@@ -43,7 +39,7 @@ plot(theta.Time, theta.Data*180/pi, 'b-', thetactrl.Time, thetactrl.Data*180/pi,
 xlabel('Time (s)', 'FontSize', 11);
 ylabel('\theta (\circ)', 'FontSize', 14);
 legend('Actual', 'Estimated');
-ylim([-90 90]);
+%ylim([-90 90]);
 grid on;
 
 subplot(4,1,2);
@@ -51,7 +47,7 @@ plot(dtheta.Time, dtheta.Data*180/pi, 'b-', dthetactrl.Time, dthetactrl.Data*180
 xlabel('Time (s)', 'FontSize', 11);
 ylabel('d\theta/dt (\circ)', 'FontSize', 14);
 legend('Actual', 'Estimated', 'Bias');
-ylim([-500 500]);
+%ylim([-500 500]);
 grid on;
 
 subplot(4,1,3);

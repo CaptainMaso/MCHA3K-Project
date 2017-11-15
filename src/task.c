@@ -44,7 +44,7 @@ void tasks_init(double time_interval_sec)
 	 * COM2: 	Set OC2 on match
 	 * OCR: 	(INT rate desired OCR2 = f_clk/(prescale*f_desired) - 1)
 	 */
-	TCCR2 = _BV(FOC2) | _BV(WGM21)  | _BV(COM21) | _BV(COM20);
+	TCCR2 = _BV(WGM21)  | _BV(COM21) | _BV(COM20);
 	DDRD |= _BV(PD7);
 
 	if (tasks_calculate_counter(&_timer_value, &_timer_clock_source, time_interval_sec) != 255)

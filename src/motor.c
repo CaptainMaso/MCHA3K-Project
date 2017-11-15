@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <avr/pgmspace.h>
 #include <avr/io.h>
+#include <math.h>
 #include <util/atomic.h>
 
 #include "controller.h"
@@ -16,8 +17,14 @@
 
 static uint8_t adc_channel = 0;
 
-static int16_t ML_ADC = 0;
-static int16_t MR_ADC = 0;
+static int32_t 	ML_SUM = 0;
+static uint8_t 	ML_COUNT = 0;
+static int32_t 	MR_SUM = 0;
+static uint8_t 	MR_COUNT = 0;
+static float	ML_CURRENT = 0;
+static float	MR_CURRENT = 0;
+
+#define LPF 0.5
 
 #ifdef FIXEDPOINT_MOTORCTRL
 static int32_t ML_integrator;
@@ -84,13 +91,17 @@ void motor_ctrl_run(uint32_t ctrl_count, states *ctrl_states)
 		PORTA |= _BV(PA4);
 		if (ctrl_count - motor_last_run <= motor_interval)
 		{
+			ctrl_states->Current_ML = motors_get_adc_reading(MOTOR_LEFT);// + LPF*ML_ADC_LAST);
+			//ML_ADC_LAST = ML_ADC;
+			ctrl_states->Current_MR = motors_get_adc_reading(MOTOR_LEFT); //- LPF*ML_ADC_LAST);
+			//MR_ADC_LAST = MR_ADC;
 			motors_set_pwm(MOTOR_LEFT, motor_ctrl_alloc(MOTOR_LEFT, ctrl_states));
 			motors_set_pwm(MOTOR_RIGHT, motor_ctrl_alloc(MOTOR_RIGHT, ctrl_states));
 		}
 		else
 		{
-			//printf_P(PSTR("ERROR: Motor ctrl lagging, disabling control (LAG: %"PRIu32" counts)\n"), ctrl_count - motor_last_run - motor_interval);
-			//ctrl_set_mode(CTRL_OFF);
+			printf_P(PSTR("ERROR: Motor ctrl lagging, disabling control (LAG: %"PRIu32" counts)\n"), ctrl_count - motor_last_run - motor_interval);
+			ctrl_set_mode(CTRL_OFF);
 		}
 		PORTA &= ~_BV(PA4);
 	}
@@ -179,56 +190,57 @@ void motor_set_torque(MOTOR_SIDE side, float value)
 	{
 	case MOTOR_LEFT:
 		value *= ML_T2C;
-		if (value > ML_OFFS_POS)
+		if (value > 0)
 		{
 			ML_req_current = value + ML_OFFS_POS;
 		}
-		else if (value < -ML_OFFS_NEG)
+		else if (value < 0)
 		{
 			ML_req_current = value - ML_OFFS_NEG;
 		}
 		else
 		{
-			ML_req_current = 0.0f;
+			ML_req_current = 0;
 		}
-
+		//ML_req_current = value;
 		break;
 	case MOTOR_RIGHT:
 		value *= MR_T2C;
-		if (value > ML_OFFS_POS)
+		if (value > 0)
 		{
 			MR_req_current = value + MR_OFFS_POS;
 		}
-		else if (value < -ML_OFFS_NEG)
+		else if (value < 0)
 		{
 			MR_req_current = value - MR_OFFS_NEG;
 		}
 		else
 		{
-			MR_req_current = 0.0f;
+			MR_req_current = 0;
 		}
+		//MR_req_current = value;
 		break;
 	default:
 		printf_P("ERROR: Unknown Side\n");
 	}
 }
 
-int32_t motor_ctrl_alloc(MOTOR_SIDE side, states *ctrl_states)
+float motor_ctrl_alloc(MOTOR_SIDE side, states *ctrl_states)
 {
 	switch (side)
 	{
 	case MOTOR_LEFT:
 	{
 		// Update Controller State
-		//ML_integrator = K_ML_int * ML_integrator + K_ML_V * ML_Voltage;
+		ML_integrator = K_ML_int * ML_integrator + K_ML_V * ML_Voltage;
 
 		// Update Controller Output
-		//ML_Voltage = ML_HFG*(ML_req_current - K_ML_OUT*ML_integrator - ctrl_states->Current_ML);
-		//ML_Voltage = (ML_Voltage > MAX_VOLTAGE) ? MAX_VOLTAGE : ((ML_Voltage < -MAX_VOLTAGE) ? -MAX_VOLTAGE : ML_Voltage);
+		ML_Voltage = ML_HFG*(ML_req_current - K_ML_OUT*ML_integrator - motors_get_adc_reading(side));
 
-		ML_Voltage = ML_R*ML_req_current + ML_KN*ctrl_states->dPhi_ML;
+		//ML_Voltage = ML_R*ML_req_current + ML_KN*ctrl_states->dPhi_ML;
 
-		return (int32_t)(ML_Voltage*MAX_PWM/MAX_VOLTAGE);
+		ML_Voltage = (ML_Voltage > MAX_VOLTAGE) ? MAX_VOLTAGE : ((ML_Voltage < -MAX_VOLTAGE) ? -MAX_VOLTAGE : ML_Voltage);
+		return ML_Voltage;
 	} break;
 	case MOTOR_RIGHT:
 	{
@@ -237,15 +249,15 @@ int32_t motor_ctrl_alloc(MOTOR_SIDE side, states *ctrl_states)
 		 */
 
 		// Update Controller State
-		//MR_integrator = K_MR_int * MR_integrator + K_MR_V * MR_Voltage;
+		 //MR_integrator = K_MR_int * MR_integrator + K_MR_V * MR_Voltage;
 
 		// Update Controller Output
-		//MR_Voltage = MR_HFG*(MR_req_current - K_MR_OUT*MR_integrator - ctrl_states->Current_MR);
-		//MR_Voltage = (MR_Voltage > MAX_VOLTAGE) ? MAX_VOLTAGE : ((MR_Voltage < -MAX_VOLTAGE) ? -MAX_VOLTAGE : MR_Voltage);
+		//MR_Voltage = MR_HFG*(MR_req_current - K_MR_OUT*MR_integrator - motors_get_adc_reading(side));
 
 		MR_Voltage = MR_R*MR_req_current + MR_KN*ctrl_states->dPhi_MR;
+		MR_Voltage = (MR_Voltage > MAX_VOLTAGE) ? MAX_VOLTAGE : ((MR_Voltage < -MAX_VOLTAGE) ? -MAX_VOLTAGE : MR_Voltage);
 
-		return (int32_t)(MR_Voltage*MAX_PWM/MAX_VOLTAGE);
+		return MR_Voltage;
 	}break;
 	default:
 		printf_P(PSTR("ERROR: Incorrect Side\n"));
@@ -253,6 +265,13 @@ int32_t motor_ctrl_alloc(MOTOR_SIDE side, states *ctrl_states)
 	}
 }
 #endif
+
+void motors_set_voltage(MOTOR_SIDE side, float value)
+{
+	value = (value > MAX_VOLTAGE) ? MAX_VOLTAGE : ((value < -MAX_VOLTAGE) ? -MAX_VOLTAGE : value);
+	motors_set_pwm(side, MAX_PWM*(value*fabs(value)/(MAX_VOLTAGE*MAX_VOLTAGE)));
+	//motors_set_pwm(side, MAX_PWM*value/MAX_VOLTAGE);
+}
 
 void motors_set_pwm(MOTOR_SIDE side, int32_t value)
 {
@@ -267,6 +286,7 @@ void motors_set_pwm(MOTOR_SIDE side, int32_t value)
 	else
 	{
 		tmp = (uint16_t)(-1*value);
+
 	}
 	if (side == MOTOR_LEFT)
 	{
@@ -305,24 +325,35 @@ void motors_set_pwm(MOTOR_SIDE side, int32_t value)
 	}
 }
 
-int16_t motors_get_adc_reading(MOTOR_SIDE side)
+float motors_get_adc_reading(MOTOR_SIDE side)
 {
-	int16_t temp = 0;
 	if (side == MOTOR_LEFT)
 	{
-		ATOMIC_BLOCK(ATOMIC_FORCEON)
+		if (ML_COUNT > 5)
 		{
-			temp = ML_ADC;
+			ATOMIC_BLOCK(ATOMIC_FORCEON)
+			{
+				ML_CURRENT = (float)ML_SUM/ML_COUNT *  ADC2CUR;
+				ML_SUM = 0;
+				ML_COUNT = 0;
+			}
 		}
+		return ML_CURRENT;
 	}
 	else if (side == MOTOR_RIGHT)
 	{
-		ATOMIC_BLOCK(ATOMIC_FORCEON)
+		if (MR_COUNT > 5)
 		{
-			temp = MR_ADC;
+			ATOMIC_BLOCK(ATOMIC_FORCEON)
+			{
+				MR_CURRENT = (float)MR_SUM/MR_COUNT *  ADC2CUR;
+				MR_SUM = 0;
+				MR_COUNT = 0;
+			}
 		}
+		return MR_CURRENT;
 	}
-	return temp;
+	return 0;
 }
 
 void _adc_toggle(void)
@@ -342,27 +373,29 @@ void _adc_toggle(void)
 void motor_adc_isr(void)
 {
 	ADCSRA &= ~(_BV(ADEN));
-	if (adc_channel == 0)
+	int32_t tmp = ((int16_t)ADCW) >> 6;
+	if (tmp > 512)
+		tmp = 0;
+	if (adc_channel == 0 && ML_COUNT < 255)
 	{
-		ML_ADC = ((int16_t)ADCW) >> 6;
-		if (ML_ADC > 512)
-			ML_ADC = 0;
+		if (!(PORTB &_BV(PB3)))
+			tmp *= -1;
+		ML_SUM += tmp;
+		ML_COUNT++;
 		/*
 		 * This is done because the sense resistor is the output to the L298,
 		 * so we only get the magnitude of the current, not the direction.
 		 * As such, we assume that the current measured is flowing in the direction
 		 * that the voltage is being applied (which will almost always be the case)
 		 */
-		if (!!(PORTB &_BV(PB3)))
-			ML_ADC *= -1;
+
 	}
-	else if (adc_channel == 1)
+	else if (adc_channel == 1 && MR_COUNT < 255)
 	{
-		MR_ADC = ((int16_t)ADCW) >> 6;
-		if (MR_ADC > 512)
-			MR_ADC = 0;
 		if (!(PORTB &_BV(PB2)))
-			MR_ADC *= -1;
+					tmp *= -1;
+		MR_SUM += tmp;
+		MR_COUNT++;
 	}
 	_adc_toggle();
 	ADCSRA |= (_BV(ADEN));

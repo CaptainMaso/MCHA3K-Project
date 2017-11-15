@@ -5,14 +5,14 @@ g = 9.81;           % Acceleration due to gravity (m/s/s)
 alpha = 0*pi/180;   % Ground slope (rad = deg*pi/180)
 
 % Initial Conditions & other sim params
-theta0 = 25 * pi/180;    % Initial Theta
+theta0 = 5 * pi/180;    % Initial Theta
 
-tsim = 40;              % Simulation Time (s)
+tsim = 10;              % Simulation Time (s)
 vref_step_point = 500e-3;  % Set point of vref (m/s)
 inpdist_step_point = 0.05;
 
 
-run('Chassis_ss.m')
+%run('Chassis_ss.m')
 run('ControllerDesign.m')
 
 %% Simulation
@@ -48,7 +48,7 @@ plot(time, (dphi + dtheta) .* r, 'b-', time, vref, 'r--');
 xlabel('Time (s)', 'FontSize', 11);
 ylabel('dx/dt (m/s)', 'FontSize', 14);
 legend('Actual', 'Demanded');
-grid on;
+grid on; 
 
 subplot(4,2,2);
 plot(Torque.Time, Torque.Data*10, 'b-', DesiredTorque.Time, DesiredTorque.Data*10, 'r--');

@@ -20,7 +20,7 @@
 
 //static CMD_STATUS _cmd_help(int argc, const char* argv[]);
 //static CMD_STATUS _print_chip_pinout(int argc, const char* argv[]);
-//static CMD_STATUS set_cmd(int argc, const char* argv[]);
+static CMD_STATUS set_cmd(int argc, const char* argv[]);
 //static CMD_STATUS get_cmd(int argc, const char* argv[]);
 //static CMD_STATUS ctrl_cmd(int argc, const char* argv[]);
 float vref, theta, v = 0.0f;
@@ -29,12 +29,12 @@ static const command_s command_list[] =
 {
 		//{"help", _cmd_help},//"help [cmd]		Prints the help string of [cmd], else all functions and help string"},
 		//{"pinout", _print_chip_pinout}, //"pinout [pin]		Prints the pinout of the ATMEGA32P, [pin] prints the specific functions of each pin"},
-		//{"set", set_cmd},//"set <CUR_ML|CUR_MR|ENC_ML|ENC_MR|IMU|ML|MR>"},
+		{"set", set_cmd},//"set <CUR_ML|CUR_MR|ENC_ML|ENC_MR|IMU|ML|MR>"},
 		//{"get", get_cmd},//"get <CUR_ML|CUR_MR|ENC_ML|ENC_MR|IMU|ML|MR>"},
 		{"ctrl", ctrl_cmd},
 		{"log", log_cmd},//"log <samples> <frequency> [CUR_ML|CUR_MR|ENC_ML|ENC_MR|IMU_AX|IMU_AY|IMU_AZ|IMU_GX|IMU_GY|IMU_GZ]"},
-		//{"motsysid_free", sysid_motor_free_cmd,"smf"},// "motsysid_free <side> <sample frequency> <time (s)>  <sin freq> <sin gain> <sin bias>"},
-		//{"motsysid_load", sysid_motor_load_cmd, "sm"}//"motsysid_load <side> <sample frequency> <length (m)> <radius (m)> <voltage>"}
+		{"motsysid_free", sysid_motor_free_cmd},// "motsysid_free <side> <sample frequency> <time (s)>  <sin freq> <sin gain> <sin bias>"},
+		{"motsysid_load", sysid_motor_load_cmd}//"motsysid_load <side> <sample frequency> <length (m)> <radius (m)> <voltage>"}
 };
 
 #ifdef NO_LD_WRAP
@@ -137,16 +137,28 @@ void cmd_parse(int argc, const char* argv[])
     return CMD_OK;
 }*/
 
-/*static CMD_STATUS set_cmd(int argc, const char* argv[])
+static CMD_STATUS set_cmd(int argc, const char* argv[])
 {
 	if (argc == 2)
 	{
+		if (!strcmp_P(argv[0], PSTR("MLPWM")))
+		{
+			float tmp = atof(argv[1]);
+			motors_set_pwm(MOTOR_LEFT, (int32_t) tmp);
+			return CMD_OK;
+		}
+		else if (!strcmp_P(argv[0], PSTR("MRPWM")))
+		{
+			float tmp = atof(argv[1]);
+			motors_set_pwm(MOTOR_RIGHT, (int32_t) tmp);
+			return CMD_OK;
+		}
 		return CMD_INVALIDPARAM;
 	}
 	else
 		return CMD_INVALIDPARAM;
 }
-
+/*
 static CMD_STATUS get_cmd(int argc, const char* argv[])
 {
 	if (argc == 1)

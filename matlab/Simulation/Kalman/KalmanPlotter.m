@@ -118,8 +118,9 @@ hold off;
 %Open Serial COM Port
 s = serial(serialPort, 'BaudRate', 115200)
 disp('Close Plot to End Session');
+set(s, 'DataTerminalReady', 'off');
 fopen(s);
-fprintf(s, 'ctrl mode IMUONLY\n');
+%fprintf(s, 'ctrl mode IMUONLY\n');
 tic
 
 while ishandle(plotGraph_BIAS)  %Loop when Plot is Active
@@ -182,6 +183,7 @@ end
 end
 
 %Close Serial COM Port and Delete useless Variables
+%fprintf(s, 'ctrl mode OFF\n');
 fclose(s);
 
 clear count dat delay max min plotGraph plotGraph1 plotGraph2 plotGrid...

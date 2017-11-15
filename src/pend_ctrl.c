@@ -68,8 +68,8 @@ void pend_ctrl_run(uint32_t ctrl_count, states *ctrl_states)
 		}
 		else
 		{
-			//printf_P(PSTR("ERROR: Pend ctrl lagging, disabling control (LAG: %"PRIu32" counts)\n"), ctrl_count - ctrl_last_run - pend_interval);
-			//ctrl_set_mode(CTRL_OFF);
+			printf_P(PSTR("ERROR: Pend ctrl lagging, disabling control (LAG: %"PRIu32" counts)\n"), ctrl_count - ctrl_last_run - pend_interval);
+			ctrl_set_mode(CTRL_OFF);
 		}
 		PORTA &= ~_BV(PA5);
 	}

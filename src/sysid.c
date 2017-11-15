@@ -43,7 +43,7 @@ CMD_STATUS sysid_motor_free_cmd(int argc, const char *argv[])
 {
 	if (_sysid_task.id == 255)
 	{
-		if (argc == 6)
+		if (argc == 4)
 		{
 			// Select Side
 			if (!strcmp_P(argv[0], PSTR("LEFT")))
@@ -75,32 +75,37 @@ CMD_STATUS sysid_motor_free_cmd(int argc, const char *argv[])
 				return CMD_REPORTEDERR;
 			}
 
-			// Setup sin frequency
-			if ((_sin_freq = atof(argv[3])) <= 0.0)
+			if((_voltage = atof(argv[3])) > MAX_VOLTAGE || _voltage < -MAX_VOLTAGE)
 			{
-				printf_P(PSTR("sysid: expected frequency\n"));
+				printf_P(PSTR("sysid: expected voltage\n"));
 				return CMD_REPORTEDERR;
 			}
+			// Setup sin frequency
+//			if ((_sin_freq = atof(argv[3])) <= 0.0)
+//			{
+//				printf_P(PSTR("sysid: expected frequency\n"));
+//				return CMD_REPORTEDERR;
+//			}
 
 			// Setup sin gain
-			if ((_sin_gain = atof(argv[4])) <  -MAX_VOLTAGE || _sin_gain > MAX_VOLTAGE)
-			{
-				printf_P(PSTR("sysid: expected gain to be with +- 12V\n"));
-				return CMD_REPORTEDERR;
-			}
-
-			// Setup sin bias
-			if ((_sin_bias = atof(argv[5])) < -MAX_VOLTAGE + 1 || _sin_bias > MAX_VOLTAGE - 1)
-			{
-				printf_P(PSTR("sysid: expected bias to be with +-12V -+ 1\n"));
-				return CMD_REPORTEDERR;
-			}
-
-			if (_sin_bias + _sin_gain > MAX_VOLTAGE || _sin_bias - _sin_gain < -MAX_VOLTAGE)
-			{
-				printf_P(PSTR("sysid: bias & gain must be within max voltage\n"));
-				return CMD_REPORTEDERR;
-			}
+//			if ((_sin_gain = atof(argv[4])) <  -MAX_VOLTAGE || _sin_gain > MAX_VOLTAGE)
+//			{
+//				printf_P(PSTR("sysid: expected gain to be with +- 12V\n"));
+//				return CMD_REPORTEDERR;
+//			}
+//
+//			// Setup sin bias
+//			if ((_sin_bias = atof(argv[5])) < -MAX_VOLTAGE + 1 || _sin_bias > MAX_VOLTAGE - 1)
+//			{
+//				printf_P(PSTR("sysid: expected bias to be with +-12V -+ 1\n"));
+//				return CMD_REPORTEDERR;
+//			}
+//
+//			if (_sin_bias + _sin_gain > MAX_VOLTAGE || _sin_bias - _sin_gain < -MAX_VOLTAGE)
+//			{
+//				printf_P(PSTR("sysid: bias & gain must be within max voltage\n"));
+//				return CMD_REPORTEDERR;
+//			}
 
 			//Setup tasks
 			_sysid_task.callback = sysid_motor_free_callback;
@@ -109,10 +114,13 @@ CMD_STATUS sysid_motor_free_cmd(int argc, const char *argv[])
 			if (_sysid_task.id != 255)
 			{
 				clb_disable();
+				_sysid_task.enabled = true;
 				_time = 0;
+
+				motors_set_pwm(active_side, MAX_PWM * _voltage*fabs(_voltage)/(MAX_VOLTAGE*MAX_VOLTAGE));
 				encoder_set_count(0, MOTOR_LEFT);
 				encoder_set_count(0, MOTOR_RIGHT);
-				printf_P(PSTR("Time(s), V(V),Encoder,ADC\n"));
+				printf_P(PSTR("Time(s),Encoder,ADC\n"));
 				return CMD_OK;
 			}
 			else
@@ -135,19 +143,14 @@ CMD_STATUS sysid_motor_free_cmd(int argc, const char *argv[])
 
 void sysid_motor_free_callback(void)
 {
-	float voltage = (sin(2*3.1415*_sin_freq*_time) >= 0 ? 1 : -1) * _sin_gain + _sin_bias;
-
-	int32_t duty_cycle = MAX_PWM*voltage/MAX_VOLTAGE;
-
-	motors_set_pwm(active_side, duty_cycle);
-
-	printf_P(PSTR("%.5g,%.5g,%"PRId32",%"PRId16"\n"), _time, voltage, encoder_get_count(active_side), motors_get_adc_reading(active_side));
+	printf_P(PSTR("%.5g,%"PRId32",%g\n"), _time, encoder_get_count(active_side), motors_get_adc_reading(active_side));
 
 	_time += _time_interval;
 	if (_time >= _time_total)
 	{
 		tasks_remove(&_sysid_task);
 		clb_enable();
+		_sysid_task.enabled = false;
 		motors_set_pwm(active_side, 0);
 	}
 }
@@ -214,9 +217,9 @@ CMD_STATUS sysid_motor_load_cmd(int argc, const char *argv[])
 				encoder_set_count(0, MOTOR_LEFT);
 				encoder_set_count(0, MOTOR_RIGHT);
 
-				int32_t duty_cycle = MAX_PWM*_voltage/MAX_VOLTAGE;
+				int32_t duty_cycle = MAX_PWM*_voltage*fabs(_voltage)/(MAX_VOLTAGE*MAX_VOLTAGE);
 				motors_set_pwm(active_side, duty_cycle);
-
+				_sysid_task.enabled = true;
 				printf_P(PSTR("Time(s),h(m),V(V),Encoder,ADC\n"));
 				return CMD_OK;
 			}
@@ -242,11 +245,12 @@ void sysid_motor_load_callback(void)
 {
 	int32_t encoder_position = encoder_get_count(active_side);
 	float h = _wheel_diameter * encoder_position * 3.141592f / CPR;
-	printf_P(PSTR("%.5g,%.5g,%.5g,%"PRId32",%"PRId16"\n"), _time, h, _voltage, encoder_position, motors_get_adc_reading(active_side));
+	printf_P(PSTR("%.5g,%.5g,%.5g,%"PRId32",%g\n"), _time, h, _voltage, encoder_position, motors_get_adc_reading(active_side));
 
 	_time += _time_interval;
 	if (h >= _max_length || h <= -_max_length)
 	{
+		_sysid_task.enabled = false;
 		tasks_remove(&_sysid_task);
 		clb_enable();
 		motors_set_pwm(active_side, 0);

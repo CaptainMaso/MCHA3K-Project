@@ -49,12 +49,12 @@ void encoder_edge_MR_isr(void)
     // Implement B edge logic to increment or decrement _count--
 	if (ENC_MR_A == ENC_MR_B)
 	{
-		_MR_count++;
+		_MR_count--;
 		//printf_P(PSTR("R^"));
 	}
 	else
 	{
-		_MR_count--;
+		_MR_count++;
 		//printf_P(PSTR("Rv"));
 	}
 	//printf_P(PSTR("%"PRIu8"%"PRIu8"\n"), ENC_MR_A, ENC_MR_B);

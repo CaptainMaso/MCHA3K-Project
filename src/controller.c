@@ -52,12 +52,13 @@ void ctrl_init(void)
 {
 	/*
 	 * Timer 0 Initialisation
-	 * 	COM0 0:1 	= Toggle OC0 on CTC match
+	 * 	COM0 0:1 	=
 	 *	CS 			= Defined by <CSVAL>
 	 */
-	//TCCR0 |= _BV(COM00);
+	TCCR0 |= _BV(WGM01);
 	TIMSK |= _BV(OCIE0);
 	ctrl_set_freq(T_main);
+
 
 	// Parameter Initialisation
 	ctrl_count = 0;
@@ -70,13 +71,13 @@ void ctrl_init(void)
 	ctrl_states.Theta = imu_get_atanTheta();///THETAGAIN;
 
 	//Set up IMU task regularly update data
-	_state_update_task.interval = tasks_time_interval_to_task_interval(T_KF);
+	//_state_update_task.interval = tasks_time_interval_to_task_interval(T_KF);
 
-	tasks_add(&_state_update_task);
+	//tasks_add(&_state_update_task);
 
 	ctrl_set_mode(CTRL_NORMAL);
-	//motors_set_pwm(MOTOR_LEFT, MAX_PWM/2);
-	//motors_set_pwm(MOTOR_RIGHT, MAX_PWM/2);
+	//motors_set_pwm(MOTOR_LEFT, -MAX_PWM/2);
+	//motors_set_pwm(MOTOR_RIGHT, -MAX_PWM/2);
 }
 static uint16_t last_kalman_run = 0;
 void ctrl_run(void)
@@ -95,41 +96,53 @@ void ctrl_run(void)
 	{
 	case CTRL_NORMAL:
 	{
-		if (ctrl_count_tmp % motor_interval == 0 && ctrl_count_tmp != last_kalman_run)
+		if (ctrl_count_tmp - last_kalman_run >= motor_interval)
 		{
-
-			kf_timestep(&ctrl_states);
-			last_kalman_run = ctrl_count_tmp;
-			if (ctrl_states.Theta > M_PI/4)
+			if(bit_is_set(PORTA, PA6))
 			{
-				motors_set_pwm(MOTOR_LEFT, 7.0*MAX_PWM/MAX_VOLTAGE);
-				motors_set_pwm(MOTOR_RIGHT, 7.0*MAX_PWM/MAX_VOLTAGE);
-			}
-			else if (ctrl_states.Theta < -M_PI/4)
-			{
-				motors_set_pwm(MOTOR_LEFT, -7.0*MAX_PWM/MAX_VOLTAGE);
-				motors_set_pwm(MOTOR_RIGHT, -7.0*MAX_PWM/MAX_VOLTAGE);
+				PORTA &= ~(_BV(PA6));
 			}
 			else
 			{
-				motors_set_pwm(MOTOR_LEFT, 0);
-				motors_set_pwm(MOTOR_RIGHT, 0);
+				PORTA |= _BV(PA6);
 			}
-			//printf_P(PSTR("%"PRIu16"\n"), ctrl_count_tmp);
-		}
 
-		//pend_ctrl_run(ctrl_count_tmp, &ctrl_states);
-		//motor_ctrl_run(ctrl_count_tmp, &ctrl_states);
+			kf_correct(&ctrl_states);
+			kf_timestep(&ctrl_states);
+			printf_P(PSTR("T:%g, dT:%g, B:%g, P: %g, dP: %g\n"), ctrl_states.Theta*RAD2DEG, ctrl_states.dTheta*RAD2DEG, ctrl_states.Bias*RAD2DEG, ctrl_states.dPhi_ML*RAD2DEG, ctrl_states.dPhi_MR*RAD2DEG);
+			if (fabs(ctrl_states.Theta) <= M_PI/4)
+			{
+				PORTA |= _BV(PA5);
+				float Torque = pend_ctrl_alloc(&ctrl_states);
+				PORTA &= ~_BV(PA5);
+
+				PORTA |= _BV(PA4);
+				motor_set_torque(MOTOR_LEFT,Torque/2.0);
+				motor_set_torque(MOTOR_RIGHT,Torque/2.0);
+				motors_set_voltage(MOTOR_LEFT, motor_ctrl_alloc(MOTOR_LEFT, &ctrl_states));
+				motors_set_voltage(MOTOR_RIGHT, motor_ctrl_alloc(MOTOR_RIGHT, &ctrl_states));
+				PORTA &= ~_BV(PA4);
+			}
+			else
+			{
+				motors_set_voltage(MOTOR_LEFT, 0);
+				motors_set_voltage(MOTOR_RIGHT, 0);
+			}
+			last_kalman_run = ctrl_count_tmp;
+		}
 
 	} break;
 	case CTRL_HIL:
 		break;
 	case CTRL_IMUONLY:
-		if (ctrl_count_tmp % motor_interval == 0)
+		if (ctrl_count_tmp - last_kalman_run >= motor_interval)
+		{
+			kf_correct(&ctrl_states);
 			kf_timestep(&ctrl_states);
-		if (ctrl_count % 50 == 0)
-			printf_P(PSTR("T:%.4g, dT:%.4g, B:%g, P: %.4g, dP: %.4g\n"), (float)(ctrl_states.Theta * RAD2DEG), ctrl_states.dTheta*RAD2DEG, ctrl_states.Bias*RAD2DEG,
-																		(ctrl_states.Phi_ML+ctrl_states.Phi_MR)/2.0*RAD2DEG, (ctrl_states.dPhi_ML+ctrl_states.dPhi_MR)/2.0*RAD2DEG);
+			printf_P(PSTR("T:%g, dT:%g, B:%g, P: %g, dP: %g\n"), ctrl_states.Theta*RAD2DEG, ctrl_states.dTheta*RAD2DEG, ctrl_states.Bias*RAD2DEG, ctrl_states.dPhi_ML*RAD2DEG, ctrl_states.dPhi_MR*RAD2DEG);
+			last_kalman_run = ctrl_count_tmp;
+		}
+
 		break;
 	case CTRL_OFF:
 	default:
@@ -156,7 +169,7 @@ void ctrl_set_mode(CTRL_MODE state)
 		TCCR0 |= CSVAL;
 		kf_init();
 		ctrl_states.Theta = imu_get_atanTheta();
-		_state_update_task.enabled = true;
+		//_state_update_task.enabled = true;
 		ctrl_count = 0;
 		break;
 	case CTRL_HIL:
@@ -189,7 +202,7 @@ void ctrl_set_freq(float interval)
 	for (uint8_t i = 0; i < 5; i++)
 	{
 		uint16_t tmp_val;
-		tmp_val = (uint16_t)round(F_CPU*interval/(2*prescaler_values[i]))-1;
+		tmp_val = (uint16_t)round(F_CPU*interval/(prescaler_values[i]))-1;
 		if (tmp_val < 255)
 		{
 			OCR0 = OCR0_val = tmp_val & 0x00FF;
@@ -370,16 +383,16 @@ CMD_STATUS ctrl_cmd(int argc, const char *argv[])
 	{
 		if (!strcmp_P(argv[1], PSTR("ML")))
 		{
-			int32_t tmp = motor_ctrl_alloc(MOTOR_LEFT, &ctrl_states);
-			printf_P(PSTR("%g\n"), (float)tmp*MAX_VOLTAGE/MAX_PWM);
-			motors_set_pwm(MOTOR_LEFT, tmp);
+			float tmp = motor_ctrl_alloc(MOTOR_LEFT, &ctrl_states);
+			printf_P(PSTR("%g\n"), tmp);
+			motors_set_voltage(MOTOR_LEFT, tmp);
 			return CMD_OK;
 		}
 		else if (!strcmp_P(argv[1], PSTR("MR")))
 		{
-			int32_t tmp = motor_ctrl_alloc(MOTOR_RIGHT, &ctrl_states);
-			printf_P(PSTR("%g\n"), (float)tmp*MAX_VOLTAGE/MAX_PWM);
-			motors_set_pwm(MOTOR_RIGHT, tmp);
+			float tmp = motor_ctrl_alloc(MOTOR_RIGHT, &ctrl_states);
+			printf_P(PSTR("%g\n"), tmp);
+			motors_set_voltage(MOTOR_RIGHT, tmp);
 			return CMD_OK;
 		}
 		else if (!strcmp_P(argv[1], PSTR("PEND")))
@@ -390,8 +403,8 @@ CMD_STATUS ctrl_cmd(int argc, const char *argv[])
 			motor_set_torque(MOTOR_LEFT, tmp/2 * K_FP_GAIN);
 			motor_set_torque(MOTOR_RIGHT, tmp/2 * K_FP_GAIN);
 #else
-			motor_set_torque(MOTOR_LEFT, tmp/2);
-			motor_set_torque(MOTOR_RIGHT, tmp/2);
+			motor_set_torque(MOTOR_LEFT, tmp);
+			motor_set_torque(MOTOR_RIGHT, tmp);
 #endif
 			return CMD_OK;
 		}

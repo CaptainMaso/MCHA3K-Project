@@ -196,7 +196,7 @@ CMD_STATUS log_cmd(int argc, const char *argv[])
 						printf_P(PSTR("ENCODER_RIGHT"));
 						break;
 					case LOG_CUR_ML:
-						printf_P(PSTR("CURRENT_LEFT"));
+						printf_P(PSTR(""));
 						break;
 					case LOG_CUR_MR:
 						printf_P(PSTR("CURRENT_RIGHT"));
@@ -273,10 +273,10 @@ void log_task_function(void)
 				printf_P(PSTR("%"PRId32""), encoder_get_count(MOTOR_RIGHT));
 				break;
 			case LOG_CUR_ML:
-				printf_P(PSTR("%"PRId16""), motors_get_adc_reading(MOTOR_LEFT));
+				printf_P(PSTR("%g"), motors_get_adc_reading(MOTOR_LEFT));
 				break;
 			case LOG_CUR_MR:
-				printf_P(PSTR("%"PRId16""), motors_get_adc_reading(MOTOR_RIGHT));
+				printf_P(PSTR("%g"), motors_get_adc_reading(MOTOR_RIGHT));
 				break;
 			default:
 				break;

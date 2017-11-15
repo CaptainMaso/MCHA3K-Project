@@ -1,3 +1,6 @@
+% Physical World Parameters
+g = 9.81;           % Acceleration due to gravity (m/s/s)
+alpha = 0*pi/180;   % Ground slope (rad = deg*pi/180)
 %% Model Parameters
 % Chassis Parameters
 M = 552e-3;              % Mass of chassis (kg)

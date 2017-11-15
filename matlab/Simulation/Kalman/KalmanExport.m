@@ -2,10 +2,10 @@ function KalmanExport(T_kf, T_ts, K_BITSHIFT)
 FID = fopen('C:\Users\masom\OneDrive\Documents\Uni\MCHA3000\Project\src\kalman_param.def', 'w+');
 format long;
 if FID ~= -1
-    pw = 50.0;
-    pb = 5000.0;
-    qw = 5.0;
-    qb = 0.0001;
+    pw = 100.0;
+    pb = 10000.0;
+    qw = 300.0;
+    qb = 0.0005;
     rt = 0.001;
     rw = 0.0001;
 
